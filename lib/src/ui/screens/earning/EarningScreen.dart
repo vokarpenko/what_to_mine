@@ -19,6 +19,7 @@ class EarningScreenState extends State<EarningScreen> {
   void initState() {
     super.initState();
     _viewModel.onViewInitState();
+    _viewModel.usedGpuUpdate.listen((_) => _viewModel.onViewInitState());
   }
 
   @override
@@ -31,7 +32,7 @@ class EarningScreenState extends State<EarningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Доходы от ваших видеокарт"),
+        title: Text("Доходность"),
       ),
       body: Center(
           child: StreamBuilder<List<Earnings>>(

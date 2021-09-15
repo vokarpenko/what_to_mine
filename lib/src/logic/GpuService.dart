@@ -24,8 +24,17 @@ class GpuService {
     return _gateway.addUsedGpu(usedGpu);
   }
 
+  // Удалить используемую в расчетах видеокарту
+  Future<void> deleteUsedGpu(String id) async {
+    return _gateway.deleteUsedGpu(id);
+  }
+
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   Future<Algos?> getUsedHashrates() async {
     return _gateway.getUsedHashrates();
+  }
+
+  Stream<bool> onUsedGpuChanged() {
+    return _gateway.onUsedGpuChanged();
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:what_to_mine/src/constants.dart';
 import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
 import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
@@ -26,6 +28,11 @@ class Gateway implements IGateway {
         _jsonReader = jsonReader,
         _cache = cache,
         _appDatabase = database;
+
+  final StreamController<bool> _onUsedGpuChanged = StreamController<bool>.broadcast();
+
+  @override
+  Stream<bool> onUsedGpuChanged() => _onUsedGpuChanged.stream;
 
   // Получить список криптовалют
   @override
@@ -66,18 +73,32 @@ class Gateway implements IGateway {
     });
     print(result);
     return result;
-/*    List<Gpu>? list = await getGPUList();
-    UsedGpu gpu = (UsedGpuBuilder()
-          ..gpu = list!.first.toBuilder()
-          ..quantity = 7)
-        .build();
-    return [gpu];*/
   }
 
   // Добавить используемую в расчетах видеокарту
   @override
   Future<void> addUsedGpu(UsedGpu usedGpu) async {
-    return _appDatabase.usedGpuDao.insert(UsedGpuEntity(usedGpu));
+    // Проверяем, если такая видеокарта уже есть, то суммируем их количество
+    UsedGpuEntity? usedGpuEntity = await _appDatabase.usedGpuDao.selectById(usedGpu.gpu.id);
+    if (usedGpuEntity != null) {
+      int oldQuantity = usedGpuEntity.usedGpu.quantity;
+      UsedGpu newUsedGpu = (UsedGpuBuilder()
+            ..quantity = oldQuantity + usedGpu.quantity
+            ..gpu = usedGpu.gpu.toBuilder())
+          .build();
+      await _appDatabase.usedGpuDao.insert(UsedGpuEntity(newUsedGpu));
+      _onUsedGpuChanged.add(true);
+    } else {
+      await _appDatabase.usedGpuDao.insert(UsedGpuEntity(usedGpu));
+      _onUsedGpuChanged.add(true);
+    }
+  }
+
+  // Удалить используемую в расчетах видеокарту
+  @override
+  Future<void> deleteUsedGpu(String id) async {
+    await _appDatabase.usedGpuDao.deleteById(id);
+    _onUsedGpuChanged.add(true);
   }
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
@@ -186,6 +207,7 @@ class Gateway implements IGateway {
     return result;
   }
 
+  // Создать экзепляр класса "Earnings"
   Earnings _buildEarning(CryptoCurrency currency, double hashrate, int hashratePrefix) {
     return Earnings(
       cryptoCurrency: currency,

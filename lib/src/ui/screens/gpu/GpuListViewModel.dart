@@ -4,23 +4,29 @@ import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 
-class GPUListViewModel {
+class GpuListViewModel {
   final StreamController<bool> _isLoading = StreamController<bool>();
   final StreamController<String> _errorMessage = StreamController<String>();
   final StreamController<bool> _addGPU = StreamController<bool>();
   final StreamController<List<Gpu>> _gpus = StreamController<List<Gpu>>();
   final StreamController<List<UsedGpu>> _usedGpus = StreamController<List<UsedGpu>>();
+  final StreamController<bool> _usedGpuUpdate = StreamController<bool>();
 
   Stream<bool> get isLoading => _isLoading.stream;
   Stream<String> get errorMessage => _errorMessage.stream;
   Stream<bool> get addGPU => _addGPU.stream;
   Stream<List<Gpu>> get gpus => _gpus.stream;
   Stream<List<UsedGpu>> get usedGpus => _usedGpus.stream;
+  Stream<bool> get usedGpuUpdate => _usedGpuUpdate.stream;
 
   // Состояние viewModel
   List<Gpu>? _listGPU;
 
   void onViewInitState() async {
+    Services.gpuService.onUsedGpuChanged().listen((_) {
+      _usedGpuUpdate.add(true);
+    });
+
     Services.gpuService.getGPUList().then((gpuList) {
       if (gpuList != null) {
         _listGPU = gpuList;
@@ -61,6 +67,12 @@ class GPUListViewModel {
         .build();
     Services.gpuService.addUsedGpu(newUsedGpu).then((value) => null).catchError((Object error) {
       _errorMessage.add("Ошибка добавления видеокарты: " + error.toString());
+    });
+  }
+
+  void deleteUsedGpu(String id) async {
+    Services.gpuService.deleteUsedGpu(id).then((value) => null).catchError((Object error) {
+      _errorMessage.add("Ошибка удаления видеокарты: " + error.toString());
     });
   }
 }

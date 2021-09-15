@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 import 'package:what_to_mine/src/ui/contstants.dart';
@@ -6,49 +7,65 @@ import 'package:what_to_mine/src/ui/widgets/UsedGPUWidget.dart';
 
 import 'GpuListViewModel.dart';
 
-class GPUListScreen extends StatefulWidget {
-  final GPUListViewModel _viewModel = GPUListViewModel();
+class GpuListScreen extends StatefulWidget {
+  final GpuListViewModel _viewModel = GpuListViewModel();
 
   @override
   State<StatefulWidget> createState() {
-    return GPUListScreenState(_viewModel);
+    return GpuListScreenState(_viewModel);
   }
 }
 
-class GPUListScreenState extends State<GPUListScreen> {
-  final GPUListViewModel _viewModel;
-  //List<GPU>? _gpus;
+class GpuListScreenState extends State<GpuListScreen> {
+  final GpuListViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
     _viewModel.onViewInitState();
-    //_viewModel.gpus.listen((gpus) => _gpus = gpus);
     _viewModel.addGPU.listen((_) => _showAddGPUDialog());
+    _viewModel.usedGpuUpdate.listen((_) => _viewModel.onViewInitState());
   }
 
-  GPUListScreenState(this._viewModel);
+  GpuListScreenState(this._viewModel);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ваши видеокарты"),
+        title: Text("Видеокарты"),
       ),
       body: Center(
         child: StreamBuilder<List<UsedGpu>>(
           stream: _viewModel.usedGpus,
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
-              if (snapshot.data!.isNotEmpty)
-                return ListView.builder(
-                  padding: EdgeInsets.only(top: 15, bottom: 15),
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return UsedGPUWidget(snapshot.data![index]);
-                  },
-                );
-              else
-                return (Text("Список видеокарт пуст, добавьте ваши первые видеокарты"));
+              List<UsedGpu> items = [];
+              items = snapshot.data!;
+              if (snapshot.data!.isNotEmpty) {
+                int itemsCount = snapshot.data!.length;
+                if (itemsCount > 0)
+                  return ListView.builder(
+                    padding: EdgeInsets.only(top: 15, bottom: 15),
+                    itemCount: itemsCount,
+                    itemBuilder: (context, index) {
+                      final item = items[index];
+                      return Dismissible(
+                        onDismissed: (direction) {
+                          _viewModel.deleteUsedGpu(items[index].gpu.id);
+                          setState(() {
+                            items.removeAt(index);
+                            itemsCount = items.length;
+                          });
+                        },
+                        key: Key(item.gpu.id),
+                        child: UsedGPUWidget(items[index]),
+                      );
+                    },
+                  );
+                else
+                  return _buildEmptyGpuListLabel();
+              } else
+                return _buildEmptyGpuListLabel();
             } else
               return CircularProgressIndicator();
           },
@@ -75,6 +92,7 @@ class GPUListScreenState extends State<GPUListScreen> {
     Gpu selectedGpu = _gpus.first;
 
     new Future.delayed(Duration.zero, () {
+      TextEditingController controller = TextEditingController(text: "1");
       showDialog(
         context: context,
         builder: (context) {
@@ -133,6 +151,11 @@ class GPUListScreenState extends State<GPUListScreen> {
                         );
                       }).toList(),
                     ),
+                    TextField(
+                        decoration: new InputDecoration(hintText: "Количество"),
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                        keyboardType: TextInputType.number,
+                        controller: controller)
                   ],
                 ),
                 actions: [
@@ -144,7 +167,7 @@ class GPUListScreenState extends State<GPUListScreen> {
                   TextButton(
                       onPressed: () async {
                         Navigator.pop(context);
-                        _viewModel.onAddGPU(selectedGpu, 1);
+                        _viewModel.onAddGPU(selectedGpu, int.parse(controller.value.text));
                       },
                       child: Text("OK"))
                 ],
@@ -154,5 +177,12 @@ class GPUListScreenState extends State<GPUListScreen> {
         },
       );
     });
+  }
+
+  Text _buildEmptyGpuListLabel() {
+    return Text(
+      "Список видеокарт пуст, добавьте ваши первые видеокарты",
+      textAlign: TextAlign.center,
+    );
   }
 }

@@ -18,9 +18,15 @@ abstract class IGateway {
   // Добавить используемую в расчетах видеокарту
   Future<void> addUsedGpu(UsedGpu usedGpu);
 
+  // Удалить используемую в расчетах видеокарту
+  Future<void> deleteUsedGpu(String id);
+
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   Future<Algos?> getUsedHashrates();
 
   // Получить доход по всем криптовалютам
   Future<List<Earnings>> getEarningsList();
+
+  // Подписка на изменение списка использованных в расчетах видеокарт
+  Stream<bool> onUsedGpuChanged();
 }

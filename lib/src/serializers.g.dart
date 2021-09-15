@@ -7,6 +7,8 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Algorithm.serializer)
+      ..add(AlgorithmHashrate.serializer)
       ..add(Algos.serializer)
       ..add(Gpu.serializer)
       ..add(UsedGpu.serializer))
