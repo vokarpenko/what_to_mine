@@ -1,23 +1,28 @@
 import 'dart:async';
 
-import 'package:what_to_mine/src/domain/algorithms/Algos.dart';
+import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 
 class HashrateViewModel {
-  final StreamController<Algos> _hashrate = StreamController<Algos>();
+  final StreamController<List<HashAlgorithm>> _hashrate = StreamController<List<HashAlgorithm>>();
   final StreamController<bool> _isLoading = StreamController<bool>();
   final StreamController<String> _errorMessage = StreamController<String>();
+  final StreamController<bool> _usedGpuUpdate = StreamController<bool>();
 
-  Stream<Algos> get hashrate => _hashrate.stream;
+  Stream<List<HashAlgorithm>> get hashrate => _hashrate.stream;
   Stream<bool> get isLoading => _isLoading.stream;
   Stream<String> get errorMessage => _errorMessage.stream;
+  Stream<bool> get usedGpuUpdate => _usedGpuUpdate.stream;
 
   HashrateViewModel();
 
   void onViewInitState() async {
     _isLoading.add(true);
-    Services.gpuService.getUsedHashrates().then((algos) {
-      if (algos != null) _hashrate.add(algos);
+    Services.gpuService.onUsedGpuChanged().listen((_) {
+      _usedGpuUpdate.add(true);
+    });
+    Services.gpuService.getHashratesUsedInCalc().then((hashrates) {
+      _hashrate.add(hashrates);
     }).catchError((Object errorObject) {
       _isLoading.add(false);
       print(errorObject.toString());

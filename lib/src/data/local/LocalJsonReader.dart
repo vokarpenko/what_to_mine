@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/data/local/ILocalJsonReader.dart';
+import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/serializers.dart';
 
@@ -9,11 +10,10 @@ class LocalJsonReader implements ILocalJsonReader {
   // Получить список видеокарт
   @override
   Future<List<Gpu>?> getGPUList() async {
-    final String response = await rootBundle.loadString('assets/json/GPUs.json');
+    String jsonGpus = await rootBundle.loadString('assets/json/gpu.json');
 
     try {
-      List<dynamic> json = jsonDecode(response);
-      //List<Map<String, dynamic>> json = jsonDecode(response);
+      List<dynamic> json = jsonDecode(jsonGpus);
       List<Gpu> result = [];
       result = json.map<Gpu>((e) => serializers.deserializeWith<Gpu>(Gpu.serializer, e)!).toList();
       return result;
@@ -21,5 +21,22 @@ class LocalJsonReader implements ILocalJsonReader {
       print(exception.toString());
       return null;
     }
+  }
+
+  @override
+  Future<Map<String, dynamic>> getHashrateCoefficients() async {
+    final String jsonCoefficient = await rootBundle.loadString('assets/json/hashrate_algorithms_coefficient.json');
+    Map<String, dynamic> coefficient = jsonDecode(jsonCoefficient);
+    return coefficient;
+  }
+
+  Future<List<HashAlgorithm>> getHashAlgorithmsWithZeroValues() async {
+    String jsonGpus = await rootBundle.loadString('assets/json/algos.json');
+    List<dynamic> json = jsonDecode(jsonGpus);
+    List<HashAlgorithm> result = [];
+    result = json
+        .map<HashAlgorithm>((e) => serializers.deserializeWith<HashAlgorithm>(HashAlgorithm.serializer, e)!)
+        .toList();
+    return result;
   }
 }

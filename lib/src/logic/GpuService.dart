@@ -1,7 +1,7 @@
+import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 
-import '../domain/algorithms/Algos.dart';
 import 'gateway/IGateway.dart';
 
 class GpuService {
@@ -16,7 +16,7 @@ class GpuService {
 
   // Получить список используемых в расчетах видеокарт
   Future<List<UsedGpu>?> getUsedGPUList() async {
-    return _gateway.getUsedGPUList();
+    return _gateway.getGpusUsedInCalc();
   }
 
   // Добавить используемую в расчетах видеокарту
@@ -30,8 +30,8 @@ class GpuService {
   }
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
-  Future<Algos?> getUsedHashrates() async {
-    return _gateway.getUsedHashrates();
+  Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
+    return _gateway.getHashratesUsedInCalc();
   }
 
   Stream<bool> onUsedGpuChanged() {

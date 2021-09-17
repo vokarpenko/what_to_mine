@@ -1,5 +1,7 @@
 import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart';
 
+import '../../constants.dart';
+
 class Earnings {
   final double dayEarningInCrypto;
   final double weekEarningInCrypto;
@@ -11,7 +13,7 @@ class Earnings {
 
   final CryptoCurrency cryptoCurrency;
 
-  Earnings(
+  Earnings._(
       {required double dayEarningInCrypto,
       required double weekEarningInCrypto,
       required double monthEarningInCrypto,
@@ -26,4 +28,19 @@ class Earnings {
         weekEarningInCurrency = weekEarningInCurrency,
         monthEarningInCurrency = monthEarningInCurrency,
         cryptoCurrency = cryptoCurrency;
+
+  static Earnings calc(CryptoCurrency currency, double hashrate, int hashrateCoefficient) {
+    return Earnings._(
+      cryptoCurrency: currency,
+      dayEarningInCurrency:
+          currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInDay) * currency.price,
+      dayEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInDay),
+      weekEarningInCurrency:
+          currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInWeek) * currency.price,
+      weekEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInWeek),
+      monthEarningInCurrency:
+          currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInMonth) * currency.price,
+      monthEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInMonth),
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
@@ -17,7 +18,7 @@ class MinerStatClient implements IMinerStatClient {
     //var url = Uri.parse('https://api.minerstat.com/v2/coins?list=BTC,LTC,DOGE,ERG,XMR,ETH,ETC,RVN');
 
     var url = Uri.parse(
-        'https://api.minerstat.com/v2/coins?algo=Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,CuckooCortex,Equihash,Equihash,Equihash,BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2');
+        'https://api.minerstat.com/v2/coins?algo=Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,Cortex,Equihash,BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2');
     var response = await client.post(url);
     print('getCryptoCurrenciesList Response status: ${response.statusCode}');
     if (response.statusCode == 200) {
@@ -25,6 +26,7 @@ class MinerStatClient implements IMinerStatClient {
 
       List<dynamic> parsedListJson = jsonDecode(response.body);
       List<CryptoCurrency> result = List<CryptoCurrency>.from(parsedListJson.map((i) => CryptoCurrency.fromJson(i)));
+      log(parsedListJson.toString());
       client.close();
       return result;
     } else {

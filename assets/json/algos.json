@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Cuckarood29",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "Cuckatoo31",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "Cuckatoo32",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "CuckooCycle",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "Cortex",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "Equihash",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "Equihash(125,4)",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "Equihash(144,5)",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "BeamHash",
+    "value": 0,
+    "coefficient": 1
+  },
+  {
+    "name": "Ethash",
+    "value": 0,
+    "coefficient": 1000000
+  },
+  {
+    "name": "Etchash",
+    "value": 0,
+    "coefficient": 1000000
+  },
+  {
+    "name": "MTP",
+    "value": 0,
+    "coefficient": 1000000
+  },
+  {
+    "name": "KAWPOW",
+    "value": 0,
+    "coefficient": 1000000
+  },
+  {
+    "name": "RandomX",
+    "value": 0,
+    "coefficient": 1000
+  },
+  {
+    "name": "Eaglesong",
+    "value": 0,
+    "coefficient": 1000000
+  },
+  {
+    "name": "Autolykos2",
+    "value": 0,
+    "coefficient": 1000000
+  }
+]

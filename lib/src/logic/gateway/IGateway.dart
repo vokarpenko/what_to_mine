@@ -1,8 +1,8 @@
+import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 
-import '../../domain/algorithms/Algos.dart';
 import '../../domain/currency/CryptoCurrency.dart';
 
 abstract class IGateway {
@@ -13,7 +13,7 @@ abstract class IGateway {
   Future<List<Gpu>?> getGPUList();
 
   // Получить список используемых в расчетах видеокарт
-  Future<List<UsedGpu>?> getUsedGPUList();
+  Future<List<UsedGpu>?> getGpusUsedInCalc();
 
   // Добавить используемую в расчетах видеокарту
   Future<void> addUsedGpu(UsedGpu usedGpu);
@@ -22,7 +22,7 @@ abstract class IGateway {
   Future<void> deleteUsedGpu(String id);
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
-  Future<Algos?> getUsedHashrates();
+  Future<List<HashAlgorithm>> getHashratesUsedInCalc();
 
   // Получить доход по всем криптовалютам
   Future<List<Earnings>> getEarningsList();

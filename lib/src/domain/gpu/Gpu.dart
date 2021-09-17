@@ -1,8 +1,8 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/serializers.dart';
-
-import '../algorithms/Algos.dart';
 
 part 'Gpu.g.dart';
 
@@ -14,7 +14,8 @@ abstract class Gpu implements Built<Gpu, GpuBuilder> {
   //List<int> get  ramSize;
   int get price;
   bool get secondHand;
-  Algos get algos;
+  @BuiltValueField(wireName: "algos")
+  BuiltList<HashAlgorithm> get hashAlgorithms;
 
   Gpu._();
 

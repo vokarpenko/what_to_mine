@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:what_to_mine/src/domain/algorithms/Algos.dart';
+import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/ui/screens/hashrate/HashrateViewModel.dart';
 
 class HashrateScreen extends StatefulWidget {
   final HashrateViewModel _viewModel = HashrateViewModel();
-
   @override
   State<StatefulWidget> createState() {
     return HashrateScreenState(_viewModel);
@@ -13,12 +12,13 @@ class HashrateScreen extends StatefulWidget {
 
 class HashrateScreenState extends State<HashrateScreen> {
   final HashrateViewModel _viewModel;
-
   HashrateScreenState(this._viewModel);
 
   @override
   void initState() {
     super.initState();
+    _viewModel.usedGpuUpdate.listen((_) => _viewModel.onViewInitState());
+
     _viewModel.onViewInitState();
 /*    _viewModel.errorMessage.listen((message) {
       new Future.delayed(Duration.zero, () {
@@ -53,48 +53,45 @@ class HashrateScreenState extends State<HashrateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Курсы криптовалют"),
+        title: Text("123"),
       ),
       body: Center(
-        child: StreamBuilder<Algos>(
+        child: StreamBuilder<List<HashAlgorithm>>(
           stream: _viewModel.hashrate,
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
-              return ListView(
-                children: [
-                  _buildListTile(snapshot.data!.Etchash!, "Etchash"),
-                  _buildListTile(snapshot.data!.KAWPOW!, "KAWPOW")
-                ],
-
-                /*itemCount: 3,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(snapshot.data!.Etchash.toString()),
+              List<HashAlgorithm> items = [];
+              items = snapshot.data!;
+              if (snapshot.data!.isNotEmpty) {
+                int itemsCount = snapshot.data!.length;
+                if (itemsCount > 0)
+                  return ListView.builder(
+                    padding: EdgeInsets.only(top: 15, bottom: 15),
+                    itemCount: itemsCount,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(items[index].name),
+                        subtitle:
+                            Text(items[index].hashrate.toString() + " " + items[index].hashrateCoefficient.toString()),
+                      );
+                    },
                   );
-                },*/
-              );
+                else
+                  return _buildEmptyHashrateListLabel();
+              } else
+                return _buildEmptyHashrateListLabel();
             } else
               return CircularProgressIndicator();
           },
         ),
       ),
-      /*StreamBuilder<bool>(
-          initialData: true,
-          stream: widget._viewModel.isLoading,
-          builder: (context, loadingSnapShot) {
-            if (loadingSnapShot.hasData && loadingSnapShot.data!)
-              return CircularProgressIndicator();
-            else
-              return Container();
-          },
-        ),*/
     );
   }
 
-  Widget _buildListTile(double hashrate, String name) {
-    return ListTile(
-      title: Text(name),
-      subtitle: Text(hashrate.toString()),
+  Widget _buildEmptyHashrateListLabel() {
+    return Text(
+      "Список хэшрейтов пуст, добавьте свои первые видеокарты",
+      textAlign: TextAlign.center,
     );
   }
 }

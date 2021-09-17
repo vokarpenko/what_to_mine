@@ -1,0 +1,3829 @@
+[
+  {
+    "id": "474",
+    "name": "474",
+    "marketingName": "AMD Radeon RX 470 4GB",
+    "vendor": "amd",
+    "ramSize": 4096,
+    "price": 100,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 1.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 300,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 13,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 24,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 8,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 27,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 10,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 63,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "478",
+    "name": "478",
+    "marketingName": "AMD Radeon RX 470 8GB",
+    "vendor": "amd",
+    "ramSize": 8192,
+    "price": 100,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 1.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 300,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 13,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 24,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 8,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 27,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 27,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 10,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 63,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "484",
+    "name": "484",
+    "marketingName": "AMD Radeon RX 480 4GB",
+    "vendor": "amd",
+    "ramSize": 4096,
+    "price": 221,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 2,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 300,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 14,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 28,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 11,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 29,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 11,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 360,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 63.5,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "488",
+    "name": "488",
+    "marketingName": "AMD Radeon RX 480 8GB",
+    "vendor": "amd",
+    "ramSize": 8192,
+    "price": 221,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 2,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 300,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 14,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 28,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 11,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 29,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 29,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 11,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 360,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 63.5,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "574",
+    "name": "574",
+    "marketingName": "AMD Radeon RX 570 4GB",
+    "vendor": "amd",
+    "ramSize": 4096,
+    "price": 160,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.67,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.18,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 1.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 300,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 14,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 24,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 9,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 30,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 11,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 324,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 63.5,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "578",
+    "name": "578",
+    "marketingName": "AMD Radeon RX 570 8GB",
+    "vendor": "amd",
+    "ramSize": 8192,
+    "price": 160,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.67,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.18,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 1.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 300,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 14,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 24,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 9,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 30,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 30,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 11,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 324,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 63.5,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "584",
+    "name": "584",
+    "marketingName": "AMD Radeon RX 580 4GB",
+    "vendor": "amd",
+    "ramSize": 4096,
+    "price": 180,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.23,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 2,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 17,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 27,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 11.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 30,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 12,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 300,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 66,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "588",
+    "name": "588",
+    "marketingName": "AMD Radeon RX 580 8GB",
+    "vendor": "amd",
+    "ramSize": 8192,
+    "price": 180,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.23,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 2,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 17,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 27,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 11.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 30,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 30,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 12,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 300,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 66,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "590",
+    "name": "590",
+    "marketingName": "AMD Radeon RX 590",
+    "vendor": "amd",
+    "ramSize": 8192,
+    "price": 200,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 2.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 2.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 18,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 31,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 12,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 34,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 34,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 12,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": null,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "Vega56",
+    "name": "Vega56",
+    "marketingName": "AMD Radeon Vega 56",
+    "vendor": "amd",
+    "ramSize": 8192,
+    "price": 350,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 3.2,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.15,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.42,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 3.2,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 450,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 24,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 34,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 14,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 43,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 43,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 3,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 21,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 170.5,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "Vega64",
+    "name": "Vega64",
+    "marketingName": "AMD Radeon Vega 64",
+    "vendor": "amd",
+    "ramSize": 8192,
+    "price": 450,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 4,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.37,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.49,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 4.4,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 500,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 28.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 43,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 15,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 44,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 44,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 3.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 23,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 185,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "VII",
+    "name": "VII",
+    "marketingName": "AMD Radeon VII",
+    "vendor": "amd",
+    "ramSize": 16384,
+    "price": 1000,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 2.05,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.77,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 500,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 36,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 49,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 19,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 90,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 90,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 4.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 24,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 245,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "5600XT",
+    "name": "5600XT",
+    "marketingName": "AMD Radeon RX 5600XT",
+    "vendor": "amd",
+    "ramSize": 6144,
+    "price": 279,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 3.75,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.24,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 30.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 54.8,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 18.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 43,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 44,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 15.06,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 80,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "5700",
+    "name": "5700",
+    "marketingName": "AMD Radeon RX 5700",
+    "vendor": "amd",
+    "ramSize": 8192,
+    "price": 400,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 3.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.12,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.4,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 24,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 54,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 55,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 24.8,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 108,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "6700XT",
+    "name": "6700XT",
+    "marketingName": "AMD Radeon RX 6700XT",
+    "vendor": "amd",
+    "ramSize": 12288,
+    "price": 479,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 65,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 49,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 64,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 44,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 44.6,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 22.7,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 86.4,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "6800",
+    "name": "6800",
+    "marketingName": "AMD Radeon RX 6800",
+    "vendor": "amd",
+    "ramSize": 16384,
+    "price": 850,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 8.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 67.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 110,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 63,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 63,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 32.7,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 115,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "6800XT",
+    "name": "6800XT",
+    "marketingName": "AMD Radeon RX 6800XT",
+    "vendor": "amd",
+    "ramSize": 16384,
+    "price": 900,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 8.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 67.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 110,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 63,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 63,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 32.7,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": null,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "6900XT",
+    "name": "6900XT",
+    "marketingName": "AMD Radeon RX 6900XT",
+    "vendor": "amd",
+    "ramSize": 16384,
+    "price": 999,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 8.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 67.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 110,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 63,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 63,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 6.32,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 32.7,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": null,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1050Ti",
+    "name": "1050Ti",
+    "marketingName": "Nvidia GeForce GTX 1050 Ti",
+    "vendor": "nvidia",
+    "ramSize": 4096,
+    "price": 160,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 2.12,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 170,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 22,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 6.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 14,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 7,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 0.181,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 32,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1063",
+    "name": "1063",
+    "marketingName": "Nvidia GeForce GTX 1060 3GB",
+    "vendor": "nvidia",
+    "ramSize": 3072,
+    "price": 100,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 3.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 3.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 236,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 16.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 35,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 10,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 23,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 0.28,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 330,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 52,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1066",
+    "name": "1066",
+    "marketingName": "Nvidia GeForce GTX 1060 6GB",
+    "vendor": "nvidia",
+    "ramSize": 6144,
+    "price": 100,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 3.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 3.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 236,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 16.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 35,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 10,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 22,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 23,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 1,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 10,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 0.28,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 330,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 52,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1070",
+    "name": "1070",
+    "marketingName": "Nvidia GeForce GTX 1070",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 180,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 4.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.86,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.04,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 500,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 32.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 55.5,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 17.4,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 26,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 27,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2.6,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 14,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 0.609,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 65,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1070Ti",
+    "name": "1070Ti",
+    "marketingName": "Nvidia GeForce GTX 1070 Ti",
+    "vendor": "nvidia",
+    "ramSize": [
+      8192
+    ],
+    "price": 200,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 6.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.86,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.27,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 6.2,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.04,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 460,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 40.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 65,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 19.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 28,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 29,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2.65,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 15,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 0.769,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 778,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 65,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "P104-100",
+    "name": "P104-100",
+    "marketingName": "Nvidia P104-100",
+    "vendor": "nvidia",
+    "ramSize": [
+      4096,
+      8192
+    ],
+    "price": 300,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 6.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.93,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.27,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 5.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.04,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 37,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 60,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 16,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 37,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 41,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2.05,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 14,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 592,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 70,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1080",
+    "name": "1080",
+    "marketingName": "Nvidia GeForce GTX 1080",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 230,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 6.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.33,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.04,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 650,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 42.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 62,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 19,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 35,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 35,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 3,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 17,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 0.73,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 780,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 67,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1080Ti",
+    "name": "1080Ti",
+    "marketingName": "Nvidia GeForce GTX 1080 Ti",
+    "vendor": "nvidia",
+    "ramSize": 11264,
+    "price": 300,
+    "secondHand": true,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 8.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.62,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.56,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 8,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.04,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 750,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 56.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 82,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 28.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 45,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 50,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 3.9,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 25,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 1.136,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 1150,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 105,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1650",
+    "name": "1650",
+    "marketingName": "Nvidia GeForce GTX 1650",
+    "vendor": "nvidia",
+    "ramSize": 4192,
+    "price": 499,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 18.1,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 8.1,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 36,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1660",
+    "name": "1660",
+    "marketingName": "Nvidia GeForce GTX 1660",
+    "vendor": "nvidia",
+    "ramSize": 6144,
+    "price": 215,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 4.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 3.7,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 280,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 20.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 25.1,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 12.4,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 21,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 21,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 10.7,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 0.58,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 486,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 47,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1660S",
+    "name": "1660S",
+    "marketingName": "Nvidia GeForce GTX 1660 Super",
+    "vendor": "nvidia",
+    "ramSize": 6144,
+    "price": 229,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 5.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.26,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 15,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 31,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 31,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2.2,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 14.2,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 63,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "1660Ti",
+    "name": "1660Ti",
+    "marketingName": "Nvidia GeForce GTX 1660 Ti",
+    "vendor": "nvidia",
+    "ramSize": 6144,
+    "price": 270,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 4.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 26.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 38,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 15.7,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 26,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 26,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2.1,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 15,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 0.6,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": null,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "2060",
+    "name": "2060",
+    "marketingName": "Nvidia GeForce RTX 2060",
+    "vendor": "nvidia",
+    "ramSize": 6144,
+    "price": 330,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 5.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 35.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 51,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 19,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 31,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 32,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2.6,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 16,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 755,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 63.8,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "2060S",
+    "name": "2060S",
+    "marketingName": "Nvidia GeForce RTX 2060 Super",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 399,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 4.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 22,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 39,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 40,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 22.2,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 77,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "2070",
+    "name": "2070",
+    "marketingName": "Nvidia GeForce RTX 2070",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 460,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 7.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.33,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 7.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.05,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 630,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 45.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 65.6,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 23.2,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 39,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 40,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 3.3,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 21,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 90,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "2070S",
+    "name": "2070S",
+    "marketingName": "Nvidia GeForce RTX 2070 Super",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 530,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 8.6,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.51,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.47,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 8.22,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.07,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 48.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 85,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 24.4,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 40,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 41,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 3.7,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 23,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 1.5,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 830,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 78,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "2080",
+    "name": "2080",
+    "marketingName": "Nvidia GeForce RTX 2080",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 750,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 9.1,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.65,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.48,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 9,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.07,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 58.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 68,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 25,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 42,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 42,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 4.4,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 30,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 1.191,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 1150,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": null,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "2080Ti",
+    "name": "2080Ti",
+    "marketingName": "Nvidia GeForce RTX 2080 Ti",
+    "vendor": "nvidia",
+    "ramSize": 11264,
+    "price": 1466,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 9.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 2.45,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.81,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 11,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.11,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 72,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 123,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 28,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 57,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 57,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 5.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 36,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": 1.692,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 105,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "3060",
+    "name": "3060",
+    "marketingName": "Nvidia GeForce RTX 3060",
+    "vendor": "nvidia",
+    "ramSize": 12288,
+    "price": 329,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 3.85,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.06,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 38.3,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 60,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 27.7,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 48,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 48,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 2.8,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 22.7,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 115,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "3060Ti",
+    "name": "3060Ti",
+    "marketingName": "Nvidia GeForce RTX 3060 Ti",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 399,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 10.5,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.53,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 4.4,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.06,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 54.9,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 98,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 33.8,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 60,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 61,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 4.2,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 30.5,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": 1000,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 170,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "3070",
+    "name": "3070",
+    "marketingName": "Nvidia GeForce RTX 3070",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 580,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 10.11,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.71,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.07,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 55.11,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 70,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 37,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 62,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 61,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 4.8,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 33.4,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 170,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "3080",
+    "name": "3080",
+    "marketingName": "Nvidia GeForce RTX 3080",
+    "vendor": "nvidia",
+    "ramSize": 10240,
+    "price": 820,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.95,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 10,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.11,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": 940,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 73,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 138,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 43,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 98,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 98,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 5.15,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 47,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 205,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "3080Ti",
+    "name": "3080Ti",
+    "marketingName": "Nvidia GeForce RTX 3080 Ti",
+    "vendor": "nvidia",
+    "ramSize": 12288,
+    "price": 1119,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 3.15,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 1.19,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 15.24,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.14,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 84.7,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 144.1,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": 56.4,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 77,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 77,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 7.3,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 58.9,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 261.2,
+        "coefficient": 1000000
+      }
+    ]
+  },
+  {
+    "id": "3090",
+    "name": "3090",
+    "marketingName": "Nvidia GeForce RTX 3090",
+    "vendor": "nvidia",
+    "ramSize": 24576,
+    "price": 1755,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 1.1,
+        "coefficient": 1
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 10.2,
+        "coefficient": 1
+      },
+      {
+        "name": "Cortex",
+        "value": 0.15,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "BeamHash",
+        "value": null,
+        "coefficient": 1
+      },
+      {
+        "name": "Ethash",
+        "value": 120,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Etchash",
+        "value": 120,
+        "coefficient": 1000000
+      },
+      {
+        "name": "MTP",
+        "value": 6.45,
+        "coefficient": 1000000
+      },
+      {
+        "name": "KAWPOW",
+        "value": 52,
+        "coefficient": 1000000
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1000
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000
+      },
+      {
+        "name": "Autolykos2",
+        "value": 275,
+        "coefficient": 1000000
+      }
+    ]
+  }
+]

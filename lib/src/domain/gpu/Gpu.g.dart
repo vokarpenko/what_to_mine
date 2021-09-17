@@ -34,7 +34,9 @@ class _$GpuSerializer implements StructuredSerializer<Gpu> {
       serializers.serialize(object.secondHand,
           specifiedType: const FullType(bool)),
       'algos',
-      serializers.serialize(object.algos, specifiedType: const FullType(Algos)),
+      serializers.serialize(object.hashAlgorithms,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(HashAlgorithm)])),
     ];
 
     return result;
@@ -76,8 +78,10 @@ class _$GpuSerializer implements StructuredSerializer<Gpu> {
               specifiedType: const FullType(bool)) as bool;
           break;
         case 'algos':
-          result.algos.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Algos))! as Algos);
+          result.hashAlgorithms.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(HashAlgorithm)]))!
+              as BuiltList<Object?>);
           break;
       }
     }
@@ -100,7 +104,7 @@ class _$Gpu extends Gpu {
   @override
   final bool secondHand;
   @override
-  final Algos algos;
+  final BuiltList<HashAlgorithm> hashAlgorithms;
 
   factory _$Gpu([void Function(GpuBuilder)? updates]) =>
       (new GpuBuilder()..update(updates)).build();
@@ -112,7 +116,7 @@ class _$Gpu extends Gpu {
       required this.vendor,
       required this.price,
       required this.secondHand,
-      required this.algos})
+      required this.hashAlgorithms})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'Gpu', 'id');
     BuiltValueNullFieldError.checkNotNull(name, 'Gpu', 'name');
@@ -121,7 +125,8 @@ class _$Gpu extends Gpu {
     BuiltValueNullFieldError.checkNotNull(vendor, 'Gpu', 'vendor');
     BuiltValueNullFieldError.checkNotNull(price, 'Gpu', 'price');
     BuiltValueNullFieldError.checkNotNull(secondHand, 'Gpu', 'secondHand');
-    BuiltValueNullFieldError.checkNotNull(algos, 'Gpu', 'algos');
+    BuiltValueNullFieldError.checkNotNull(
+        hashAlgorithms, 'Gpu', 'hashAlgorithms');
   }
 
   @override
@@ -141,7 +146,7 @@ class _$Gpu extends Gpu {
         vendor == other.vendor &&
         price == other.price &&
         secondHand == other.secondHand &&
-        algos == other.algos;
+        hashAlgorithms == other.hashAlgorithms;
   }
 
   @override
@@ -155,7 +160,7 @@ class _$Gpu extends Gpu {
                     vendor.hashCode),
                 price.hashCode),
             secondHand.hashCode),
-        algos.hashCode));
+        hashAlgorithms.hashCode));
   }
 
   @override
@@ -167,7 +172,7 @@ class _$Gpu extends Gpu {
           ..add('vendor', vendor)
           ..add('price', price)
           ..add('secondHand', secondHand)
-          ..add('algos', algos))
+          ..add('hashAlgorithms', hashAlgorithms))
         .toString();
   }
 }
@@ -200,9 +205,11 @@ class GpuBuilder implements Builder<Gpu, GpuBuilder> {
   bool? get secondHand => _$this._secondHand;
   set secondHand(bool? secondHand) => _$this._secondHand = secondHand;
 
-  AlgosBuilder? _algos;
-  AlgosBuilder get algos => _$this._algos ??= new AlgosBuilder();
-  set algos(AlgosBuilder? algos) => _$this._algos = algos;
+  ListBuilder<HashAlgorithm>? _hashAlgorithms;
+  ListBuilder<HashAlgorithm> get hashAlgorithms =>
+      _$this._hashAlgorithms ??= new ListBuilder<HashAlgorithm>();
+  set hashAlgorithms(ListBuilder<HashAlgorithm>? hashAlgorithms) =>
+      _$this._hashAlgorithms = hashAlgorithms;
 
   GpuBuilder();
 
@@ -215,7 +222,7 @@ class GpuBuilder implements Builder<Gpu, GpuBuilder> {
       _vendor = $v.vendor;
       _price = $v.price;
       _secondHand = $v.secondHand;
-      _algos = $v.algos.toBuilder();
+      _hashAlgorithms = $v.hashAlgorithms.toBuilder();
       _$v = null;
     }
     return this;
@@ -248,12 +255,12 @@ class GpuBuilder implements Builder<Gpu, GpuBuilder> {
                   BuiltValueNullFieldError.checkNotNull(price, 'Gpu', 'price'),
               secondHand: BuiltValueNullFieldError.checkNotNull(
                   secondHand, 'Gpu', 'secondHand'),
-              algos: algos.build());
+              hashAlgorithms: hashAlgorithms.build());
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'algos';
-        algos.build();
+        _$failedField = 'hashAlgorithms';
+        hashAlgorithms.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Gpu', _$failedField, e.toString());

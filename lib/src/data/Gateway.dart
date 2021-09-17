@@ -5,12 +5,12 @@ import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
 import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
 import 'package:what_to_mine/src/data/db/entities/UsedGpuEntity.dart';
 import 'package:what_to_mine/src/data/local/ILocalJsonReader.dart';
+import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
 
-import '../domain/algorithms/Algos.dart';
 import '../domain/currency/CryptoCurrency.dart';
 import 'db/AppDatabase.dart';
 
@@ -65,13 +65,12 @@ class Gateway implements IGateway {
 
   // Получить список используемых в расчетах видеокарт
   @override
-  Future<List<UsedGpu>?> getUsedGPUList() async {
-    List<UsedGpu>? result = [];
+  Future<List<UsedGpu>> getGpusUsedInCalc() async {
+    List<UsedGpu> result = [];
     List<UsedGpuEntity> listEntity = (await this._appDatabase.usedGpuDao.selectAll());
     listEntity.forEach((element) {
       result.add(element.usedGpu);
     });
-    print(result);
     return result;
   }
 
@@ -103,65 +102,30 @@ class Gateway implements IGateway {
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   @override
-  Future<Algos?> getUsedHashrates() async {
-    double Cuckarood29 = 0;
-    double Cuckatoo31 = 0;
-    double Cuckatoo32 = 0;
-    double CuckooCycle = 0;
-    double CuckooCortex = 0;
-    double Equihash = 0;
-    double Equihash_125_4 = 0;
-    double Equihash_144_5 = 0;
-    double BeamHash = 0;
-    double Ethash = 0;
-    double Etchash = 0;
-    double MTP = 0;
-    double KAWPOW = 0;
-    double RandomX = 0;
-    double Eaglesong = 0;
-    double Autolykos2 = 0;
+  Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
+    List<HashAlgorithm> result = await _jsonReader.getHashAlgorithmsWithZeroValues();
+    List<UsedGpu> usedGpus = await getGpusUsedInCalc();
 
-    List<UsedGpu>? usedGpus = await getUsedGPUList();
-    if (usedGpus == null) return null;
+    //Map<String, double> totalHashrateMap = Map();
     usedGpus.forEach((gpu) {
-      Algos algos = gpu.gpu.algos;
-      int quantity = gpu.quantity;
-
-      if (algos.Cuckarood29 != null) Cuckarood29 += algos.Cuckarood29! * quantity;
-      if (algos.Cuckatoo31 != null) Cuckatoo31 += algos.Cuckatoo31! * quantity;
-      if (algos.Cuckatoo32 != null) Cuckatoo32 += algos.Cuckatoo32! * quantity;
-      if (algos.CuckooCycle != null) CuckooCycle += algos.CuckooCycle! * quantity;
-      if (algos.CuckooCortex != null) CuckooCortex += algos.CuckooCortex! * quantity;
-      if (algos.Equihash != null) Equihash += algos.Equihash! * quantity;
-      if (algos.Equihash_125_4 != null) Equihash_125_4 += algos.Equihash_125_4! * quantity;
-      if (algos.Equihash_144_5 != null) Equihash_144_5 += algos.Equihash_144_5! * quantity;
-      if (algos.BeamHash != null) BeamHash += algos.BeamHash! * quantity;
-      if (algos.Ethash != null) Ethash += algos.Ethash! * quantity;
-      if (algos.Etchash != null) Etchash += algos.Etchash! * quantity;
-      if (algos.MTP != null) MTP += algos.MTP! * quantity;
-      if (algos.KAWPOW != null) KAWPOW += algos.KAWPOW! * quantity;
-      if (algos.RandomX != null) RandomX += algos.RandomX! * quantity;
-      if (algos.Eaglesong != null) Eaglesong += algos.Eaglesong! * quantity;
-      if (algos.Autolykos2 != null) Autolykos2 += algos.Autolykos2! * quantity;
+      gpu.gpu.hashAlgorithms.forEach((element) {
+        if (element.hashrate != null) {
+          result[result.indexWhere((r) => r.name == element.name)] =
+              element.rebuild((b) => b..hashrate = element.hashrate! * gpu.quantity);
+          /*if (totalHashrateMap.containsKey(element.name))
+            totalHashrateMap.update(element.name, (value) => value + element.hashrate! * gpu.quantity);
+          else
+            totalHashrateMap.putIfAbsent(element.name, () => element.hashrate! * gpu.quantity);*/
+        }
+      });
     });
-    Algos result = (AlgosBuilder()
-          ..Cuckarood29 = Cuckarood29
-          ..Cuckatoo31 = Cuckatoo31
-          ..Cuckatoo32 = Cuckatoo32
-          ..CuckooCycle = CuckooCycle
-          ..CuckooCortex = CuckooCortex
-          ..Equihash = Equihash
-          ..Equihash_125_4 = Equihash_125_4
-          ..Equihash_144_5 = Equihash_144_5
-          ..BeamHash = BeamHash
-          ..Ethash = Ethash
-          ..Etchash = Etchash
-          ..MTP = MTP
-          ..KAWPOW = KAWPOW
-          ..RandomX = RandomX
-          ..Eaglesong = Eaglesong
-          ..Autolykos2 = Autolykos2)
-        .build();
+    /* totalHashrateMap.forEach((key, value) {
+      result.add((HashAlgorithmBuilder()
+            ..hashrate = value
+            ..name = key
+            ..hashrateCoefficient = 1)
+          .build());
+    });*/
     return result;
   }
 
@@ -169,12 +133,15 @@ class Gateway implements IGateway {
   @override
   Future<List<Earnings>> getEarningsList() async {
     List<CryptoCurrency> currencies = await getCryptoCurrenciesList();
-    Algos? usedHashrates = await getUsedHashrates();
+    List<HashAlgorithm> hashratesUsedInCalc = await getHashratesUsedInCalc();
     List<Earnings> result = [];
-    if (usedHashrates == null) return result;
 
     currencies.forEach((currency) {
-      switch (currency.algorithm.toLowerCase()) {
+      HashAlgorithm algorithm =
+          hashratesUsedInCalc.singleWhere((element) => element.name.toLowerCase() == currency.algorithm.toLowerCase());
+      Earnings earning = Earnings.calc(currency, algorithm.hashrate!, algorithm.hashrateCoefficient);
+      result.add(earning);
+      /*  switch (currency.algorithm.toLowerCase()) {
         case "ethash":
           if (usedHashrates.Ethash != null) {
             Earnings earnings = _buildEarning(currency, usedHashrates.Ethash!, HashPrefix.megaHash);
@@ -202,21 +169,23 @@ class Gateway implements IGateway {
             print(currency.name + " " + earnings.dayEarningInCurrency.toString());
             result.add(earnings);
           }
-      }
+      }*/
     });
+    // Фильтруем список, отбрасывая монеты, которые дают доход 0
+    result = result.where((element) => element.monthEarningInCrypto > 0).toList();
     return result;
   }
 
-  // Создать экзепляр класса "Earnings"
-  Earnings _buildEarning(CryptoCurrency currency, double hashrate, int hashratePrefix) {
+/*  // Создать экзепляр класса "Earnings"
+  Earnings _buildEarning(CryptoCurrency currency, double hashrate, int hashrateCoefficient) {
     return Earnings(
       cryptoCurrency: currency,
-      dayEarningInCurrency: currency.calculateEarning(hashrate * hashratePrefix, Hours.hoursInDay) * currency.price,
-      dayEarningInCrypto: currency.calculateEarning(hashrate * hashratePrefix, Hours.hoursInDay),
-      weekEarningInCurrency: currency.calculateEarning(hashrate * hashratePrefix, Hours.hoursInWeek) * currency.price,
-      weekEarningInCrypto: currency.calculateEarning(hashrate * hashratePrefix, Hours.hoursInWeek),
-      monthEarningInCurrency: currency.calculateEarning(hashrate * hashratePrefix, Hours.hoursInMonth) * currency.price,
-      monthEarningInCrypto: currency.calculateEarning(hashrate * hashratePrefix, Hours.hoursInMonth),
+      dayEarningInCurrency: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInDay) * currency.price,
+      dayEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInDay),
+      weekEarningInCurrency: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInWeek) * currency.price,
+      weekEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInWeek),
+      monthEarningInCurrency: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInMonth) * currency.price,
+      monthEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInMonth),
     );
-  }
+  }*/
 }
