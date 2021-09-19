@@ -2,14 +2,14 @@ class Links {
   static String get iconsLink => 'https://static-ssl.minerstat.farm/32/';
 }
 
-class HashPrefix {
-  static final int megaHash = 1000000;
-  static final int kiloHash = 1000;
-  static final int hash = 1;
+class HashCoefficient {
+  static const int megaHash = 1000000;
+  static const int kiloHash = 1000;
+  static const int hash = 1;
 }
 
 class Hours {
-  static final int hoursInDay = 24;
-  static final int hoursInWeek = 168;
-  static final int hoursInMonth = 720;
+  static const int hoursInDay = 24;
+  static const int hoursInWeek = 168;
+  static const int hoursInMonth = 720;
 }

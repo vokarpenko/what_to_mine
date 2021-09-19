@@ -62,7 +62,7 @@ class GpuListViewModel {
 
   void onAddGPU(Gpu gpu, int quantity) async {
     UsedGpu newUsedGpu = (UsedGpuBuilder()
-          ..gpu = gpu.toBuilder()
+          ..gpuData = gpu.toBuilder()
           ..quantity = quantity)
         .build();
     Services.gpuService.addUsedGpu(newUsedGpu).then((value) => null).catchError((Object error) {

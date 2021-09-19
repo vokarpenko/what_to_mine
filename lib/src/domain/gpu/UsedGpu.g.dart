@@ -18,8 +18,8 @@ class _$UsedGpuSerializer implements StructuredSerializer<UsedGpu> {
   Iterable<Object?> serialize(Serializers serializers, UsedGpu object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[
-      'gpu',
-      serializers.serialize(object.gpu, specifiedType: const FullType(Gpu)),
+      'gpuData',
+      serializers.serialize(object.gpuData, specifiedType: const FullType(Gpu)),
       'quantity',
       serializers.serialize(object.quantity,
           specifiedType: const FullType(int)),
@@ -39,8 +39,8 @@ class _$UsedGpuSerializer implements StructuredSerializer<UsedGpu> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'gpu':
-          result.gpu.replace(serializers.deserialize(value,
+        case 'gpuData':
+          result.gpuData.replace(serializers.deserialize(value,
               specifiedType: const FullType(Gpu))! as Gpu);
           break;
         case 'quantity':
@@ -56,15 +56,15 @@ class _$UsedGpuSerializer implements StructuredSerializer<UsedGpu> {
 
 class _$UsedGpu extends UsedGpu {
   @override
-  final Gpu gpu;
+  final Gpu gpuData;
   @override
   final int quantity;
 
   factory _$UsedGpu([void Function(UsedGpuBuilder)? updates]) =>
       (new UsedGpuBuilder()..update(updates)).build();
 
-  _$UsedGpu._({required this.gpu, required this.quantity}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(gpu, 'UsedGpu', 'gpu');
+  _$UsedGpu._({required this.gpuData, required this.quantity}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(gpuData, 'UsedGpu', 'gpuData');
     BuiltValueNullFieldError.checkNotNull(quantity, 'UsedGpu', 'quantity');
   }
 
@@ -78,18 +78,20 @@ class _$UsedGpu extends UsedGpu {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UsedGpu && gpu == other.gpu && quantity == other.quantity;
+    return other is UsedGpu &&
+        gpuData == other.gpuData &&
+        quantity == other.quantity;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, gpu.hashCode), quantity.hashCode));
+    return $jf($jc($jc(0, gpuData.hashCode), quantity.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('UsedGpu')
-          ..add('gpu', gpu)
+          ..add('gpuData', gpuData)
           ..add('quantity', quantity))
         .toString();
   }
@@ -98,9 +100,9 @@ class _$UsedGpu extends UsedGpu {
 class UsedGpuBuilder implements Builder<UsedGpu, UsedGpuBuilder> {
   _$UsedGpu? _$v;
 
-  GpuBuilder? _gpu;
-  GpuBuilder get gpu => _$this._gpu ??= new GpuBuilder();
-  set gpu(GpuBuilder? gpu) => _$this._gpu = gpu;
+  GpuBuilder? _gpuData;
+  GpuBuilder get gpuData => _$this._gpuData ??= new GpuBuilder();
+  set gpuData(GpuBuilder? gpuData) => _$this._gpuData = gpuData;
 
   int? _quantity;
   int? get quantity => _$this._quantity;
@@ -111,7 +113,7 @@ class UsedGpuBuilder implements Builder<UsedGpu, UsedGpuBuilder> {
   UsedGpuBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _gpu = $v.gpu.toBuilder();
+      _gpuData = $v.gpuData.toBuilder();
       _quantity = $v.quantity;
       _$v = null;
     }
@@ -135,14 +137,14 @@ class UsedGpuBuilder implements Builder<UsedGpu, UsedGpuBuilder> {
     try {
       _$result = _$v ??
           new _$UsedGpu._(
-              gpu: gpu.build(),
+              gpuData: gpuData.build(),
               quantity: BuiltValueNullFieldError.checkNotNull(
                   quantity, 'UsedGpu', 'quantity'));
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'gpu';
-        gpu.build();
+        _$failedField = 'gpuData';
+        gpuData.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'UsedGpu', _$failedField, e.toString());

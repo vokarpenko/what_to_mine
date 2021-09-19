@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(icon: Icon(CupertinoIcons.money_dollar), label: "Курсы"),
           BottomNavigationBarItem(icon: Icon(Icons.personal_video_outlined), label: "Видеокарты"),
           BottomNavigationBarItem(icon: Icon(Icons.sort), label: "Хэшрейт"),
-          BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: "Еще"),
+          //BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: "Еще"),
         ],
         onTap: _onTap,
       ),

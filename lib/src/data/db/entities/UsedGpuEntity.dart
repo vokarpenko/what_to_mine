@@ -8,5 +8,5 @@ class UsedGpuEntity {
 
   final UsedGpu usedGpu;
 
-  UsedGpuEntity(this.usedGpu) : id = usedGpu.gpu.id;
+  UsedGpuEntity(this.usedGpu) : id = usedGpu.gpuData.id;
 }

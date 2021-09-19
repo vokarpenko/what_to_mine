@@ -6,7 +6,7 @@ import 'package:what_to_mine/src/serializers.dart';
 part 'UsedGpu.g.dart';
 
 abstract class UsedGpu implements Built<UsedGpu, UsedGpuBuilder> {
-  Gpu get gpu;
+  Gpu get gpuData;
   int get quantity;
 
   UsedGpu._();

@@ -78,12 +78,12 @@ class Gateway implements IGateway {
   @override
   Future<void> addUsedGpu(UsedGpu usedGpu) async {
     // Проверяем, если такая видеокарта уже есть, то суммируем их количество
-    UsedGpuEntity? usedGpuEntity = await _appDatabase.usedGpuDao.selectById(usedGpu.gpu.id);
+    UsedGpuEntity? usedGpuEntity = await _appDatabase.usedGpuDao.selectById(usedGpu.gpuData.id);
     if (usedGpuEntity != null) {
       int oldQuantity = usedGpuEntity.usedGpu.quantity;
       UsedGpu newUsedGpu = (UsedGpuBuilder()
             ..quantity = oldQuantity + usedGpu.quantity
-            ..gpu = usedGpu.gpu.toBuilder())
+            ..gpuData = usedGpu.gpuData.toBuilder())
           .build();
       await _appDatabase.usedGpuDao.insert(UsedGpuEntity(newUsedGpu));
       _onUsedGpuChanged.add(true);
@@ -103,15 +103,25 @@ class Gateway implements IGateway {
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   @override
   Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
+    print("***getHashratesUsedInCalc***");
     List<HashAlgorithm> result = await _jsonReader.getHashAlgorithmsWithZeroValues();
     List<UsedGpu> usedGpus = await getGpusUsedInCalc();
 
     //Map<String, double> totalHashrateMap = Map();
     usedGpus.forEach((gpu) {
-      gpu.gpu.hashAlgorithms.forEach((element) {
+      print(gpu.gpuData.name + " x" + gpu.quantity.toString());
+      gpu.gpuData.hashAlgorithms.forEach((element) {
         if (element.hashrate != null) {
-          result[result.indexWhere((r) => r.name == element.name)] =
-              element.rebuild((b) => b..hashrate = element.hashrate! * gpu.quantity);
+          int currentAlgorithmIndex = result.indexWhere((r) => r.name == element.name);
+          double currentAlgorithmHashrate = result[currentAlgorithmIndex].hashrate!;
+          /*
+          print(element.name);
+          print("b.hashrate! = " + result[currentAlgorithmIndex].hashrate!.toString());
+          print("element.hashrate! * gpu.quantity = " + (element.hashrate! * gpu.quantity).toString());
+          */
+
+          result[currentAlgorithmIndex] =
+              element.rebuild((b) => b..hashrate = (currentAlgorithmHashrate + (element.hashrate! * gpu.quantity)));
           /*if (totalHashrateMap.containsKey(element.name))
             totalHashrateMap.update(element.name, (value) => value + element.hashrate! * gpu.quantity);
           else
@@ -141,51 +151,9 @@ class Gateway implements IGateway {
           hashratesUsedInCalc.singleWhere((element) => element.name.toLowerCase() == currency.algorithm.toLowerCase());
       Earnings earning = Earnings.calc(currency, algorithm.hashrate!, algorithm.hashrateCoefficient);
       result.add(earning);
-      /*  switch (currency.algorithm.toLowerCase()) {
-        case "ethash":
-          if (usedHashrates.Ethash != null) {
-            Earnings earnings = _buildEarning(currency, usedHashrates.Ethash!, HashPrefix.megaHash);
-            print(currency.name + " " + earnings.dayEarningInCurrency.toString());
-            result.add(earnings);
-          }
-          break;
-        case "etchash":
-          if (usedHashrates.Etchash != null) {
-            Earnings earnings = _buildEarning(currency, usedHashrates.Etchash!, HashPrefix.megaHash);
-            print(currency.name + " " + earnings.dayEarningInCurrency.toString());
-            result.add(earnings);
-          }
-          break;
-        case "kawpow":
-          if (usedHashrates.KAWPOW != null) {
-            Earnings earnings = _buildEarning(currency, usedHashrates.KAWPOW!, HashPrefix.megaHash);
-            print(currency.name + " " + earnings.dayEarningInCurrency.toString());
-            result.add(earnings);
-          }
-          break;
-        case "autolykos2":
-          if (usedHashrates.Autolykos2 != null) {
-            Earnings earnings = _buildEarning(currency, usedHashrates.Autolykos2!, HashPrefix.megaHash);
-            print(currency.name + " " + earnings.dayEarningInCurrency.toString());
-            result.add(earnings);
-          }
-      }*/
     });
     // Фильтруем список, отбрасывая монеты, которые дают доход 0
     result = result.where((element) => element.monthEarningInCrypto > 0).toList();
     return result;
   }
-
-/*  // Создать экзепляр класса "Earnings"
-  Earnings _buildEarning(CryptoCurrency currency, double hashrate, int hashrateCoefficient) {
-    return Earnings(
-      cryptoCurrency: currency,
-      dayEarningInCurrency: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInDay) * currency.price,
-      dayEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInDay),
-      weekEarningInCurrency: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInWeek) * currency.price,
-      weekEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInWeek),
-      monthEarningInCurrency: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInMonth) * currency.price,
-      monthEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInMonth),
-    );
-  }*/
 }

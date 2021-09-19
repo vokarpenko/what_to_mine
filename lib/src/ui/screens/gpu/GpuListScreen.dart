@@ -51,13 +51,13 @@ class GpuListScreenState extends State<GpuListScreen> {
                       final item = items[index];
                       return Dismissible(
                         onDismissed: (direction) {
-                          _viewModel.deleteUsedGpu(items[index].gpu.id);
+                          _viewModel.deleteUsedGpu(items[index].gpuData.id);
                           setState(() {
                             items.removeAt(index);
                             itemsCount = items.length;
                           });
                         },
-                        key: Key(item.gpu.id),
+                        key: Key(item.gpuData.id),
                         child: UsedGPUWidget(items[index]),
                       );
                     },

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/ui/screens/hashrate/HashrateViewModel.dart';
 
@@ -53,7 +55,7 @@ class HashrateScreenState extends State<HashrateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("123"),
+        title: Text("Хэшрейт"),
       ),
       body: Center(
         child: StreamBuilder<List<HashAlgorithm>>(
@@ -66,14 +68,74 @@ class HashrateScreenState extends State<HashrateScreen> {
                 int itemsCount = snapshot.data!.length;
                 if (itemsCount > 0)
                   return ListView.builder(
-                    padding: EdgeInsets.only(top: 15, bottom: 15),
                     itemCount: itemsCount,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(items[index].name),
-                        subtitle:
-                            Text(items[index].hashrate.toString() + " " + items[index].hashrateCoefficient.toString()),
-                      );
+                      return Card(
+                          margin: EdgeInsets.all(10),
+                          elevation: 30,
+                          child: Container(
+                            padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
+                            child: Flex(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              direction: Axis.horizontal,
+                              children: [
+                                Flexible(flex: 1, child: Icon(Icons.forward)),
+                                Flexible(
+                                  fit: FlexFit.tight,
+                                  flex: 1,
+                                  child: Text(items[index].name),
+                                ),
+                                Flexible(
+                                    fit: FlexFit.tight,
+                                    flex: 1,
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(left: 10),
+                                      //width: 100,
+                                      child: TextField(
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(RegExp(r"^([0-9]){1,}([.][0-9]{0,2})?"))
+                                          ],
+                                          keyboardType: TextInputType.number,
+                                          decoration: new InputDecoration(
+                                            labelText: _viewModel.getHashUnit(items[index]),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.black26, width: 2),
+                                            ),
+                                          ),
+                                          controller:
+                                              TextEditingController(text: items[index].hashrate!.toStringAsFixed(2))),
+                                    )),
+                                Flexible(
+                                    fit: FlexFit.tight,
+                                    flex: 1,
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      //width: 100,
+                                      padding: EdgeInsets.only(left: 10),
+                                      child: TextField(
+                                          enabled: false,
+                                          decoration: new InputDecoration(
+                                            labelText: "W",
+                                            focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.black26, width: 2),
+                                            ),
+                                            disabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(color: Colors.black12, width: 2),
+                                            ),
+                                          ),
+                                          controller: TextEditingController()),
+                                    )),
+                              ],
+                            ),
+                          ));
                     },
                   );
                 else

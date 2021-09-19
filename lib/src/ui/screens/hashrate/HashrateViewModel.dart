@@ -35,4 +35,8 @@ class HashrateViewModel {
     _isLoading.close();
     _errorMessage.close();
   }
+
+  String getHashUnit(HashAlgorithm algorithm){
+    return algorithm.getHashUnit();
+  }
 }

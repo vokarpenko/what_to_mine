@@ -9,7 +9,7 @@ class UsedGPUWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Image logo;
-    if (_usedGPU.gpu.vendor == 'amd')
+    if (_usedGPU.gpuData.vendor == 'amd')
       logo = Image.asset(
         'assets/images/amd_logo.png',
       );
@@ -32,10 +32,7 @@ class UsedGPUWidget extends StatelessWidget {
             ),
           ),
           Column(
-            children: [
-              Text(_usedGPU.gpu.marketingName),
-              Text('Количество видеокарт ${_usedGPU.quantity}')
-            ],
+            children: [Text(_usedGPU.gpuData.marketingName), Text('Количество видеокарт ${_usedGPU.quantity}')],
           )
         ],
       ),

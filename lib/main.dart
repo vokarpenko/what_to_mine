@@ -11,13 +11,11 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double s = 0.18;
-    double l = s * 10;
-    print(l);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
+          //brightness: MediaQueryData.fromWindow(WidgetsBinding.instance!.window).platformBrightness
         ),
         initialRoute: ScreenRoutes.splashScreen,
         routes: {
