@@ -2,8 +2,8 @@
     package="com.practice.ui.what_to_mine">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="what_to_mine"
-        android:icon="@mipmap/ic_launcher">
+        android:label="What to mine?"
+        android:icon="@mipmap/launcher_icon">
 
        <activity
             android:name=".MainActivity"

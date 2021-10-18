@@ -1,4 +1,3 @@
-import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 
@@ -29,11 +28,7 @@ class GpuService {
     return _gateway.deleteUsedGpu(id);
   }
 
-  // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
-  Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
-    return _gateway.getHashratesUsedInCalc();
-  }
-
+  //Подписка на изменения используемых видеокарт
   Stream<bool> onUsedGpuChanged() {
     return _gateway.onUsedGpuChanged();
   }

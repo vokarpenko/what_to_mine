@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/ui/screens/hashrate/HashrateViewModel.dart';
+import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 class HashrateScreen extends StatefulWidget {
   final HashrateViewModel _viewModel = HashrateViewModel();
@@ -19,16 +20,16 @@ class HashrateScreenState extends State<HashrateScreen> {
   @override
   void initState() {
     super.initState();
-    _viewModel.usedGpuUpdate.listen((_) => _viewModel.onViewInitState());
-
+    _viewModel.infoMessage.listen((message) => UIUtils.showSnackBar(context, message));
     _viewModel.onViewInitState();
+
 /*    _viewModel.errorMessage.listen((message) {
       new Future.delayed(Duration.zero, () {
         showDialog(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Error"),
+                title: Text('Error'),
                 content: Text(message),
                 actions: [
                   TextButton(
@@ -37,7 +38,7 @@ class HashrateScreenState extends State<HashrateScreen> {
                         await SysUtils.delay(6);
                         _viewModel.onViewInitState();
                       },
-                      child: Text("OK"))
+                      child: Text('OK'))
                 ],
               );
             });
@@ -55,7 +56,22 @@ class HashrateScreenState extends State<HashrateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Хэшрейт"),
+        title: Text('Хэшрейт'),
+        actions: <Widget>[
+          StreamBuilder<bool>(
+              initialData: false,
+              stream: _viewModel.showApplyButton,
+              builder: (context, snapshot) => (snapshot.data!)
+                  ? IconButton(
+                      tooltip: "Применить",
+                      onPressed: _applyHashrateButtonClick,
+                      splashRadius: 25,
+                      icon: Icon(
+                        Icons.check,
+                        size: 30,
+                      ))
+                  : Container())
+        ],
       ),
       body: Center(
         child: StreamBuilder<List<HashAlgorithm>>(
@@ -90,15 +106,15 @@ class HashrateScreenState extends State<HashrateScreen> {
                                     fit: FlexFit.tight,
                                     flex: 1,
                                     child: Container(
-                                      alignment: Alignment.center,
                                       padding: EdgeInsets.only(left: 10),
-                                      //width: 100,
                                       child: TextField(
+                                          onChanged: (value) => _onChangeHashrate(items[index].name, value),
                                           inputFormatters: [
-                                            FilteringTextInputFormatter.allow(RegExp(r"^([0-9]){1,}([.][0-9]{0,2})?"))
+                                            FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,}([.][0-9]{0,2})?'))
                                           ],
                                           keyboardType: TextInputType.number,
                                           decoration: new InputDecoration(
+                                            contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
                                             labelText: _viewModel.getHashUnit(items[index]),
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
@@ -120,7 +136,8 @@ class HashrateScreenState extends State<HashrateScreen> {
                                       child: TextField(
                                           enabled: false,
                                           decoration: new InputDecoration(
-                                            labelText: "W",
+                                            contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
+                                            labelText: 'W',
                                             focusedBorder: OutlineInputBorder(
                                               borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
                                             ),
@@ -152,8 +169,17 @@ class HashrateScreenState extends State<HashrateScreen> {
 
   Widget _buildEmptyHashrateListLabel() {
     return Text(
-      "Список хэшрейтов пуст, добавьте свои первые видеокарты",
+      'Список хэшрейтов пуст, добавьте свои первые видеокарты',
       textAlign: TextAlign.center,
     );
+  }
+
+  void _onChangeHashrate(String name, String? value) {
+    _viewModel.onChangeHashrate(name, value);
+  }
+
+  void _applyHashrateButtonClick() {
+    UIUtils.hideKeyboard();
+    _viewModel.onApplyHashrate();
   }
 }

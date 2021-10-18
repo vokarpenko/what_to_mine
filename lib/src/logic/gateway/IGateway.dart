@@ -29,4 +29,16 @@ abstract class IGateway {
 
   // Подписка на изменение списка использованных в расчетах видеокарт
   Stream<bool> onUsedGpuChanged();
+
+  // Подписка на изменение пользовательских хэшрейтов
+  Stream<bool> onUserHashrateChanged();
+
+  // Получить список измененных хэшрейтов из кэша
+  Future<List<HashAlgorithm>> getEditedHashratesFromCache();
+
+  // Обновить изменный хэшрейт в кэше
+  Future<void> updateEditedHashrateInCache(String name, double hashrateValue);
+
+  // Обновить хэшрейты в базе данных
+  Future<void> updateHashratesInDB(List<HashAlgorithm> hashrates);
 }

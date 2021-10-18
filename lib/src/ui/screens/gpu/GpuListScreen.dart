@@ -24,7 +24,6 @@ class GpuListScreenState extends State<GpuListScreen> {
     super.initState();
     _viewModel.onViewInitState();
     _viewModel.addGPU.listen((_) => _showAddGPUDialog());
-    _viewModel.usedGpuUpdate.listen((_) => _viewModel.onViewInitState());
   }
 
   GpuListScreenState(this._viewModel);
@@ -100,63 +99,65 @@ class GpuListScreenState extends State<GpuListScreen> {
             builder: (context, setState) {
               return AlertDialog(
                 title: Text("Добаление видеокарты"),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flex(
-                      direction: Axis.horizontal,
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: Text(vendor, textAlign: TextAlign.end),
-                          fit: FlexFit.tight,
-                        ),
-                        Flexible(
+                content: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flex(
+                        direction: Axis.horizontal,
+                        children: [
+                          Flexible(
                             flex: 1,
-                            child: Switch(
-                              activeColor: Colors.green,
-                              inactiveTrackColor: AppColors.lightRed,
-                              inactiveThumbColor: Colors.red,
-                              value: switchValueIsNvidia,
-                              onChanged: (bool isNvidia) {
-                                setState(() {
-                                  switchValueIsNvidia = isNvidia;
-                                  isNvidia ? vendor = "Nvidia" : vendor = "AMD";
-                                  _gpus = _viewModel.onFilterGPUListByVendor(vendor);
-                                  selectedGpu = _gpus.first;
-                                });
-                              },
-                            ))
-                      ],
-                    ),
-                    DropdownButton<Gpu>(
-                      value: selectedGpu,
-                      isExpanded: true,
-                      iconSize: 24,
-                      elevation: 16,
-                      style: TextStyle(color: switchValueIsNvidia ? Colors.green : Colors.red),
-                      underline: Container(
-                        height: 1,
-                        color: switchValueIsNvidia ? Colors.green : Colors.red /*Theme.of(context).accentColor*/,
+                            child: Text(vendor, textAlign: TextAlign.end),
+                            fit: FlexFit.tight,
+                          ),
+                          Flexible(
+                              flex: 1,
+                              child: Switch(
+                                activeColor: Colors.green,
+                                inactiveTrackColor: AppColors.lightRed,
+                                inactiveThumbColor: Colors.red,
+                                value: switchValueIsNvidia,
+                                onChanged: (bool isNvidia) {
+                                  setState(() {
+                                    switchValueIsNvidia = isNvidia;
+                                    isNvidia ? vendor = "Nvidia" : vendor = "AMD";
+                                    _gpus = _viewModel.onFilterGPUListByVendor(vendor);
+                                    selectedGpu = _gpus.first;
+                                  });
+                                },
+                              ))
+                        ],
                       ),
-                      onChanged: (Gpu? newValue) {
-                        setState(() {
-                          selectedGpu = newValue!;
-                        });
-                      },
-                      items: _gpus.map<DropdownMenuItem<Gpu>>((Gpu value) {
-                        return DropdownMenuItem<Gpu>(
-                          value: value,
-                          child: Text(value.marketingName),
-                        );
-                      }).toList(),
-                    ),
-                    TextField(
-                        decoration: new InputDecoration(hintText: "Количество"),
-                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                        keyboardType: TextInputType.number,
-                        controller: controller)
-                  ],
+                      DropdownButton<Gpu>(
+                        value: selectedGpu,
+                        isExpanded: true,
+                        iconSize: 24,
+                        elevation: 16,
+                        style: TextStyle(color: switchValueIsNvidia ? Colors.green : Colors.red),
+                        underline: Container(
+                          height: 1,
+                          color: switchValueIsNvidia ? Colors.green : Colors.red /*Theme.of(context).accentColor*/,
+                        ),
+                        onChanged: (Gpu? newValue) {
+                          setState(() {
+                            selectedGpu = newValue!;
+                          });
+                        },
+                        items: _gpus.map<DropdownMenuItem<Gpu>>((Gpu value) {
+                          return DropdownMenuItem<Gpu>(
+                            value: value,
+                            child: Text(value.marketingName),
+                          );
+                        }).toList(),
+                      ),
+                      TextField(
+                          decoration: new InputDecoration(hintText: "Количество"),
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          keyboardType: TextInputType.number,
+                          controller: controller)
+                    ],
+                  ),
                 ),
                 actions: [
                   TextButton(

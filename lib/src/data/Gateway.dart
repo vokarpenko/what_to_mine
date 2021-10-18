@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:what_to_mine/src/constants.dart';
 import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
 import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
 import 'package:what_to_mine/src/data/db/entities/UsedGpuEntity.dart';
+import 'package:what_to_mine/src/data/db/entities/UserHashAlgorithmEntity.dart';
 import 'package:what_to_mine/src/data/local/ILocalJsonReader.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
@@ -19,20 +21,30 @@ class Gateway implements IGateway {
   final ILocalJsonReader _jsonReader;
   final MemoryStorage _cache;
   final AppDatabase _appDatabase;
+  final SharedPreferences _preferences;
+
+  static const String _useCustomHashratesKey = "USE_CUSTOM_HASHRATES_KEY";
+
   Gateway(
       {required IMinerStatClient client,
       required ILocalJsonReader jsonReader,
       required MemoryStorage cache,
-      required database})
+      required database,
+      required SharedPreferences preferences})
       : _client = client,
         _jsonReader = jsonReader,
         _cache = cache,
-        _appDatabase = database;
+        _appDatabase = database,
+        _preferences = preferences;
 
   final StreamController<bool> _onUsedGpuChanged = StreamController<bool>.broadcast();
+  final StreamController<bool> _onUserHashrateChanged = StreamController<bool>.broadcast();
 
   @override
   Stream<bool> onUsedGpuChanged() => _onUsedGpuChanged.stream;
+
+  @override
+  Stream<bool> onUserHashrateChanged() => _onUserHashrateChanged.stream;
 
   // Получить список криптовалют
   @override
@@ -91,6 +103,7 @@ class Gateway implements IGateway {
       await _appDatabase.usedGpuDao.insert(UsedGpuEntity(usedGpu));
       _onUsedGpuChanged.add(true);
     }
+    _preferences.setBool(_useCustomHashratesKey, false);
   }
 
   // Удалить используемую в расчетах видеокарту
@@ -98,44 +111,41 @@ class Gateway implements IGateway {
   Future<void> deleteUsedGpu(String id) async {
     await _appDatabase.usedGpuDao.deleteById(id);
     _onUsedGpuChanged.add(true);
+    _preferences.setBool(_useCustomHashratesKey, false);
   }
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   @override
   Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
     print("***getHashratesUsedInCalc***");
-    List<HashAlgorithm> result = await _jsonReader.getHashAlgorithmsWithZeroValues();
-    List<UsedGpu> usedGpus = await getGpusUsedInCalc();
 
-    //Map<String, double> totalHashrateMap = Map();
-    usedGpus.forEach((gpu) {
-      print(gpu.gpuData.name + " x" + gpu.quantity.toString());
-      gpu.gpuData.hashAlgorithms.forEach((element) {
-        if (element.hashrate != null) {
-          int currentAlgorithmIndex = result.indexWhere((r) => r.name == element.name);
-          double currentAlgorithmHashrate = result[currentAlgorithmIndex].hashrate!;
-          /*
-          print(element.name);
-          print("b.hashrate! = " + result[currentAlgorithmIndex].hashrate!.toString());
-          print("element.hashrate! * gpu.quantity = " + (element.hashrate! * gpu.quantity).toString());
-          */
+    List<HashAlgorithm> result = [];
 
-          result[currentAlgorithmIndex] =
-              element.rebuild((b) => b..hashrate = (currentAlgorithmHashrate + (element.hashrate! * gpu.quantity)));
-          /*if (totalHashrateMap.containsKey(element.name))
-            totalHashrateMap.update(element.name, (value) => value + element.hashrate! * gpu.quantity);
-          else
-            totalHashrateMap.putIfAbsent(element.name, () => element.hashrate! * gpu.quantity);*/
-        }
+    bool? useCustomHashrates = _preferences.getBool(_useCustomHashratesKey);
+
+    // Если используются кастомные хэшрейты, то просто берем их из бд
+    if (useCustomHashrates != null && useCustomHashrates) {
+      var userHashAlgorithms = await _appDatabase.userHashAlgorithmDao.selectAll();
+      userHashAlgorithms.forEach((entity) {
+        result.add(entity.algorithm);
       });
-    });
-    /* totalHashrateMap.forEach((key, value) {
-      result.add((HashAlgorithmBuilder()
-            ..hashrate = value
-            ..name = key
-            ..hashrateCoefficient = 1)
-          .build());
-    });*/
+    } else {
+      result = await _jsonReader.getHashAlgorithmsWithZeroValues();
+      List<UsedGpu> usedGpus = await getGpusUsedInCalc();
+
+      usedGpus.forEach((gpu) {
+        print(gpu.gpuData.name + " x" + gpu.quantity.toString());
+        gpu.gpuData.hashAlgorithms.forEach((element) {
+          if (element.hashrate != null) {
+            int currentAlgorithmIndex = result.indexWhere((r) => r.name == element.name);
+            double currentAlgorithmHashrate = result[currentAlgorithmIndex].hashrate!;
+            result[currentAlgorithmIndex] =
+                element.rebuild((b) => b..hashrate = (currentAlgorithmHashrate + (element.hashrate! * gpu.quantity)));
+          }
+        });
+      });
+      _cache.putEditedHashrates(result);
+    }
     return result;
   }
 
@@ -155,5 +165,24 @@ class Gateway implements IGateway {
     // Фильтруем список, отбрасывая монеты, которые дают доход 0
     result = result.where((element) => element.monthEarningInCrypto > 0).toList();
     return result;
+  }
+
+  @override
+  Future<List<HashAlgorithm>> getEditedHashratesFromCache() async {
+    return _cache.getEditedHashrate();
+  }
+
+  @override
+  Future<void> updateEditedHashrateInCache(String name, double hashrateValue) async {
+    return _cache.putEditedHashrate(name, hashrateValue);
+  }
+
+  @override
+  Future<void> updateHashratesInDB(List<HashAlgorithm> hashrates) async {
+    hashrates.forEach((element) {
+      _appDatabase.userHashAlgorithmDao.insert(UserHashAlgorithmEntity(element));
+    });
+    _preferences.setBool(_useCustomHashratesKey, true);
+    _onUserHashrateChanged.add(true);
   }
 }

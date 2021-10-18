@@ -62,6 +62,8 @@ class _$AppDatabase extends AppDatabase {
 
   UsedGpuDao? _usedGpuDaoInstance;
 
+  UserHashAlgorithmDao? _userHashAlgorithmDaoInstance;
+
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback? callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
@@ -82,6 +84,8 @@ class _$AppDatabase extends AppDatabase {
       onCreate: (database, version) async {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `used_gpu` (`id` TEXT NOT NULL, `usedGpu` TEXT NOT NULL, PRIMARY KEY (`id`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `user_hash_algorithm` (`id` TEXT NOT NULL, `algorithm` TEXT NOT NULL, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -92,6 +96,12 @@ class _$AppDatabase extends AppDatabase {
   @override
   UsedGpuDao get usedGpuDao {
     return _usedGpuDaoInstance ??= _$UsedGpuDao(database, changeListener);
+  }
+
+  @override
+  UserHashAlgorithmDao get userHashAlgorithmDao {
+    return _userHashAlgorithmDaoInstance ??=
+        _$UserHashAlgorithmDao(database, changeListener);
   }
 }
 
@@ -147,5 +157,62 @@ class _$UsedGpuDao extends UsedGpuDao {
   }
 }
 
+class _$UserHashAlgorithmDao extends UserHashAlgorithmDao {
+  _$UserHashAlgorithmDao(this.database, this.changeListener)
+      : _queryAdapter = QueryAdapter(database),
+        _userHashAlgorithmEntityInsertionAdapter = InsertionAdapter(
+            database,
+            'user_hash_algorithm',
+            (UserHashAlgorithmEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'algorithm':
+                      _userHashAlgorithmConverter.encode(item.algorithm)
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<UserHashAlgorithmEntity>
+      _userHashAlgorithmEntityInsertionAdapter;
+
+  @override
+  Future<List<UserHashAlgorithmEntity>> selectAll() async {
+    return _queryAdapter.queryList('SELECT * FROM user_hash_algorithm',
+        mapper: (Map<String, Object?> row) => UserHashAlgorithmEntity(
+            _userHashAlgorithmConverter.decode(row['algorithm'] as String)));
+  }
+
+  @override
+  Future<void> deleteAll() async {
+    await _queryAdapter.queryNoReturn('DELETE FROM user_hash_algorithm');
+  }
+
+  @override
+  Future<UserHashAlgorithmEntity?> selectById(String id) async {
+    return _queryAdapter.query(
+        'SELECT * FROM user_hash_algorithm WHERE id = ?1',
+        mapper: (Map<String, Object?> row) => UserHashAlgorithmEntity(
+            _userHashAlgorithmConverter.decode(row['algorithm'] as String)),
+        arguments: [id]);
+  }
+
+  @override
+  Future<void> deleteById(String id) async {
+    await _queryAdapter.queryNoReturn(
+        'DELETE FROM user_hash_algorithm WHERE id = ?1',
+        arguments: [id]);
+  }
+
+  @override
+  Future<void> insert(UserHashAlgorithmEntity entity) async {
+    await _userHashAlgorithmEntityInsertionAdapter.insert(
+        entity, OnConflictStrategy.replace);
+  }
+}
+
 // ignore_for_file: unused_element
 final _usedGpuConverter = UsedGpuConverter();
+final _userHashAlgorithmConverter = UserHashAlgorithmConverter();

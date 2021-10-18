@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:what_to_mine/src/data/Gateway.dart';
 import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
 import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
@@ -9,6 +10,7 @@ import 'package:what_to_mine/src/data/local/ILocalJsonReader.dart';
 import 'package:what_to_mine/src/data/local/LocalJsonReader.dart';
 import 'package:what_to_mine/src/logic/CurrenciesService.dart';
 import 'package:what_to_mine/src/logic/GpuService.dart';
+import 'package:what_to_mine/src/logic/HashAlgorithmService.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
 import 'package:what_to_mine/src/utils/SysUtils.dart';
@@ -44,14 +46,19 @@ class SplashViewModel {
       return;
     }
 
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     IMinerStatClient minerStatClient = MinerStatClient();
     ILocalJsonReader jsonReader = LocalJsonReader();
     MemoryStorage cache = MemoryStorage();
     AppDatabase database = await AppDatabase.create();
-    IGateway gateway = Gateway(client: minerStatClient, jsonReader: jsonReader, cache: cache, database: database);
+    IGateway gateway = Gateway(
+        client: minerStatClient, jsonReader: jsonReader, cache: cache, database: database, preferences: preferences);
     CurrenciesService currenciesService = CurrenciesService(gateway: gateway);
     GpuService gpuService = GpuService(gateway: gateway);
-    Services.initialize(currenciesService: currenciesService, gpuService: gpuService);
+    HashAlgorithmService algorithmService = HashAlgorithmService(gateway: gateway);
+
+    Services.initialize(
+        currenciesService: currenciesService, gpuService: gpuService, hashAlgorithmService: algorithmService);
     print("Application successful initialized");
   }
 }

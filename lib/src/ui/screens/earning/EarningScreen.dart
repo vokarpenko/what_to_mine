@@ -19,7 +19,6 @@ class EarningScreenState extends State<EarningScreen> {
   void initState() {
     super.initState();
     _viewModel.onViewInitState();
-    _viewModel.usedGpuUpdate.listen((_) => _viewModel.onViewInitState());
   }
 
   @override
