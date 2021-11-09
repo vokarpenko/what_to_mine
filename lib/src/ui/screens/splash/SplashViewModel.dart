@@ -28,8 +28,8 @@ class SplashViewModel {
   void onViewInitState() async {
     await _initializeApp();
 
-    Services.currenciesService.getCryptoCurrenciesList().whenComplete(() async {
-      await SysUtils.delay(2);
+    Services.currenciesService.getCryptoCurrenciesList(true).whenComplete(() async {
+      await SysUtils.delay(1);
       _openHomeScreen.add(true);
     });
   }

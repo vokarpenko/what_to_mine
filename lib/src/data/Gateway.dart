@@ -48,12 +48,12 @@ class Gateway implements IGateway {
 
   // Получить список криптовалют
   @override
-  Future<List<CryptoCurrency>> getCryptoCurrenciesList() async {
+  Future<List<CryptoCurrency>> getCryptoCurrenciesList({required bool isNeedFresh}) async {
     List<CryptoCurrency> list;
 
     List<CryptoCurrency>? listInCache = _cache.getCryptoCurrency();
 
-    if (listInCache != null && listInCache.isNotEmpty) {
+    if (listInCache != null && listInCache.isNotEmpty && !isNeedFresh) {
       list = listInCache;
     } else {
       list = await _client.getCryptoCurrenciesList();
@@ -152,7 +152,7 @@ class Gateway implements IGateway {
   // Получить доход по всем криптовалютам
   @override
   Future<List<Earnings>> getEarningsList() async {
-    List<CryptoCurrency> currencies = await getCryptoCurrenciesList();
+    List<CryptoCurrency> currencies = await getCryptoCurrenciesList(isNeedFresh: false);
     List<HashAlgorithm> hashratesUsedInCalc = await getHashratesUsedInCalc();
     List<Earnings> result = [];
 

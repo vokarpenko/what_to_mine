@@ -16,8 +16,12 @@ class CurrencyPricesViewModel {
   CurrencyPricesViewModel();
 
   void onViewInitState() async {
+    getData(false);
+  }
+
+  void getData(bool isNeedFresh) async {
     _isLoading.add(true);
-    Services.currenciesService.getCryptoCurrenciesList().then((list) {
+    Services.currenciesService.getCryptoCurrenciesList(isNeedFresh).then((list) {
       _currencyList.add(list);
     }).catchError((Object errorObject) {
       _isLoading.add(false);
@@ -27,8 +31,6 @@ class CurrencyPricesViewModel {
   }
 
   void onViewDispose() async {
-    _currencyList.close();
-    _isLoading.close();
-    _errorMessage.close();
+    this.._currencyList.close().._isLoading.close().._errorMessage.close();
   }
 }

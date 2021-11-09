@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/ui/screens/prices/CurrencyPricesViewModel.dart';
 import 'package:what_to_mine/src/ui/widgets/CryptoCurrencyWidget.dart';
+import 'package:what_to_mine/src/utils/SysUtils.dart';
 
 import '../../../domain/currency/CryptoCurrency.dart';
 
@@ -22,7 +23,7 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
   void initState() {
     super.initState();
     _viewModel.onViewInitState();
-/*    _viewModel.errorMessage.listen((message) {
+    _viewModel.errorMessage.listen((message) {
       new Future.delayed(Duration.zero, () {
         showDialog(
             context: context,
@@ -35,14 +36,14 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
                       onPressed: () async {
                         Navigator.pop(context);
                         await SysUtils.delay(6);
-                        _viewModel.onViewInitState();
+                        _viewModel.getData(true);
                       },
                       child: Text("OK"))
                 ],
               );
             });
       });
-    });*/
+    });
   }
 
   @override
@@ -65,7 +66,8 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  return CryptoCurrencyWidget(snapshot.data![index]);
+                  CryptoCurrency item = snapshot.data![index];
+                  return CryptoCurrencyWidget(ValueKey(item.name), item);
                 },
               );
             } else
@@ -87,7 +89,7 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
       floatingActionButton: FloatingActionButton(
         heroTag: "refreshCurrencies",
         onPressed: () {
-          _viewModel.onViewInitState();
+          _viewModel.getData(true);
         },
         child: const Icon(Icons.refresh),
       ),

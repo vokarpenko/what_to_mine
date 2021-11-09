@@ -7,7 +7,7 @@ import '../../domain/currency/CryptoCurrency.dart';
 
 abstract class IGateway {
   // Получить список криптовалют
-  Future<List<CryptoCurrency>> getCryptoCurrenciesList();
+  Future<List<CryptoCurrency>> getCryptoCurrenciesList({required bool isNeedFresh});
 
   // Получить список видеокарт
   Future<List<Gpu>?> getGPUList();

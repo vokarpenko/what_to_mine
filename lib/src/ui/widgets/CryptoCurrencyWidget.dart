@@ -4,7 +4,7 @@ import '../../domain/currency/CryptoCurrency.dart';
 
 class CryptoCurrencyWidget extends StatefulWidget {
   final CryptoCurrency _cryptoCurrency;
-  CryptoCurrencyWidget(this._cryptoCurrency);
+  CryptoCurrencyWidget(Key key, this._cryptoCurrency) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {

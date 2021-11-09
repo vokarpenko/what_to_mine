@@ -9,8 +9,8 @@ class CurrenciesService {
   CurrenciesService({required IGateway gateway}) : _gateway = gateway;
 
   // Получить список криптовалют
-  Future<List<CryptoCurrency>> getCryptoCurrenciesList() async {
-    return _gateway.getCryptoCurrenciesList();
+  Future<List<CryptoCurrency>> getCryptoCurrenciesList(bool isNeedFresh) async {
+    return _gateway.getCryptoCurrenciesList(isNeedFresh: isNeedFresh);
   }
 
   // Получить доход по всем криптовалютам с сортировкой по убыванию дохода
