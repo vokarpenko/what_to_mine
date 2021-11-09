@@ -144,8 +144,8 @@ class Gateway implements IGateway {
           }
         });
       });
-      _cache.putEditedHashrates(result);
     }
+    _cache.putEditedHashrates(result);
     return result;
   }
 
