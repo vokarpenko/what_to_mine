@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:what_to_mine/src/ui/screens/prices/CurrencyPricesViewModel.dart';
 import 'package:what_to_mine/src/ui/widgets/CryptoCurrencyWidget.dart';
 import 'package:what_to_mine/src/utils/SysUtils.dart';
@@ -54,6 +56,7 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    RefreshController _refreshController = RefreshController(initialRefresh: false);
     return Scaffold(
       appBar: AppBar(
         title: Text("Курсы криптовалют"),
@@ -63,35 +66,26 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
           stream: _viewModel.currencyList,
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  CryptoCurrency item = snapshot.data![index];
-                  return CryptoCurrencyWidget(ValueKey(item.name), item);
-                },
-              );
+              return SmartRefresher(
+                  enablePullDown: true,
+                  enablePullUp: false,
+                  header: WaterDropMaterialHeader(),
+                  controller: _refreshController,
+                  onRefresh: () async {
+                    await _viewModel.getData(true);
+                    await SysUtils.delay(1);
+                    _refreshController.refreshCompleted();
+                  },
+                  child: ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return CryptoCurrencyWidget(ValueKey(snapshot.data![index].name), snapshot.data![index]);
+                    },
+                  ));
             } else
               return CircularProgressIndicator();
           },
         ),
-      ),
-      /*StreamBuilder<bool>(
-          initialData: true,
-          stream: widget._viewModel.isLoading,
-          builder: (context, loadingSnapShot) {
-            if (loadingSnapShot.hasData && loadingSnapShot.data!)
-              return CircularProgressIndicator();
-            else
-              return Container();
-          },
-        ),*/
-
-      floatingActionButton: FloatingActionButton(
-        heroTag: "refreshCurrencies",
-        onPressed: () {
-          _viewModel.getData(true);
-        },
-        child: const Icon(Icons.refresh),
       ),
     );
   }

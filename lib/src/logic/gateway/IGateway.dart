@@ -25,7 +25,7 @@ abstract class IGateway {
   Future<List<HashAlgorithm>> getHashratesUsedInCalc();
 
   // Получить доход по всем криптовалютам
-  Future<List<Earnings>> getEarningsList();
+  Future<List<Earnings>> getEarningsList({required bool isNeedFresh});
 
   // Подписка на изменение списка использованных в расчетах видеокарт
   Stream<bool> onUsedGpuChanged();

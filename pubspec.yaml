@@ -1,5 +1,5 @@
 name: what_to_mine
-description: A new Flutter application.
+description: App for calculate best profit coin for mining.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -16,6 +16,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   built_value: ^8.0.0
   floor: ^1.1.0
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

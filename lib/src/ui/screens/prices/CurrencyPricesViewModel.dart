@@ -16,10 +16,11 @@ class CurrencyPricesViewModel {
   CurrencyPricesViewModel();
 
   void onViewInitState() async {
-    getData(false);
+    await getData(false);
   }
 
-  void getData(bool isNeedFresh) async {
+  Future<void> getData(bool isNeedFresh) async {
+    print("GET DATA");
     _isLoading.add(true);
     Services.currenciesService.getCryptoCurrenciesList(isNeedFresh).then((list) {
       _currencyList.add(list);

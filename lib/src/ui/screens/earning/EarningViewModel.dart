@@ -15,14 +15,14 @@ class EarningViewModel {
   EarningViewModel();
 
   void onViewInitState() async {
-    Services.gpuService.onUsedGpuChanged().listen((_) => _getData());
-    Services.hashAlgorithmService.onUserHashrateChanged().listen((_) => _getData());
-    _getData();
+    Services.gpuService.onUsedGpuChanged().listen((_) => getData(false));
+    Services.hashAlgorithmService.onUserHashrateChanged().listen((_) => getData(false));
+    getData(false);
   }
 
-  void _getData() async {
+  Future<void> getData(bool isNeedFresh) async {
     _isLoading.add(true);
-    Services.currenciesService.getEarningsList().then((earnings) {
+    Services.currenciesService.getEarningsList(isNeedFresh).then((earnings) {
       _earnings.add(earnings);
     }).catchError((Object errorObject) {
       _isLoading.add(false);

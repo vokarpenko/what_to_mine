@@ -151,8 +151,8 @@ class Gateway implements IGateway {
 
   // Получить доход по всем криптовалютам
   @override
-  Future<List<Earnings>> getEarningsList() async {
-    List<CryptoCurrency> currencies = await getCryptoCurrenciesList(isNeedFresh: false);
+  Future<List<Earnings>> getEarningsList({required bool isNeedFresh}) async {
+    List<CryptoCurrency> currencies = await getCryptoCurrenciesList(isNeedFresh: isNeedFresh);
     List<HashAlgorithm> hashratesUsedInCalc = await getHashratesUsedInCalc();
     List<Earnings> result = [];
 

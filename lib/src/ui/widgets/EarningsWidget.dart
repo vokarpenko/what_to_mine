@@ -5,7 +5,7 @@ import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 class EarningsWidget extends StatelessWidget {
   final Earnings _earnings;
 
-  EarningsWidget(this._earnings);
+  EarningsWidget(Key key, this._earnings) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
