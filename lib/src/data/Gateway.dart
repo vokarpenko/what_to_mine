@@ -153,14 +153,20 @@ class Gateway implements IGateway {
   @override
   Future<List<Earnings>> getEarningsList({required bool isNeedFresh}) async {
     List<CryptoCurrency> currencies = await getCryptoCurrenciesList(isNeedFresh: isNeedFresh);
-    List<HashAlgorithm> hashratesUsedInCalc = await getHashratesUsedInCalc();
+    List<HashAlgorithm?> hashratesUsedInCalc = await getHashratesUsedInCalc();
     List<Earnings> result = [];
 
+    //Находим монеты, по алгоритмам которых есть хэшрейты в gpu.json
     currencies.forEach((currency) {
-      HashAlgorithm algorithm =
-          hashratesUsedInCalc.singleWhere((element) => element.name.toLowerCase() == currency.algorithm.toLowerCase());
-      Earnings earning = Earnings.calc(currency, algorithm.hashrate!, algorithm.hashrateCoefficient);
-      result.add(earning);
+      HashAlgorithm? algorithm;
+      try {
+        algorithm = hashratesUsedInCalc
+            .singleWhere((element) => element!.name.toLowerCase() == currency.algorithm.toLowerCase());
+      } on StateError catch (_) {}
+      if (algorithm != null) {
+        Earnings earning = Earnings.calc(currency, algorithm.hashrate!, algorithm.hashrateCoefficient);
+        result.add(earning);
+      }
     });
     // Фильтруем список, отбрасывая монеты, которые дают доход 0
     result = result.where((element) => element.monthEarningInCrypto > 0).toList();

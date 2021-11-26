@@ -14,7 +14,7 @@ class MinerStatClient implements IMinerStatClient {
     // HTTP запрос
     var client = http.Client();
     var url = Uri.parse(
-        'https://api.minerstat.com/v2/coins?algo=Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,Cortex,Equihash,BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2');
+        'https://api.minerstat.com/v2/coins?algo=SHA-256,Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,Cortex,Equihash,BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2');
     var response = await client.post(url);
     print('***getCryptoCurrenciesList*** Response status: ${response.statusCode}');
     if (response.statusCode == 200) {
