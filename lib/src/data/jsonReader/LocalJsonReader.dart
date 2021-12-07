@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:what_to_mine/src/data/local/ILocalJsonReader.dart';
+import 'package:what_to_mine/src/data/jsonReader/ILocalJsonReader.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/serializers.dart';

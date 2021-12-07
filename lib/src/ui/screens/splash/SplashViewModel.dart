@@ -6,14 +6,18 @@ import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
 import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
 import 'package:what_to_mine/src/data/client/MinerStatClient.dart';
 import 'package:what_to_mine/src/data/db/AppDatabase.dart';
-import 'package:what_to_mine/src/data/local/ILocalJsonReader.dart';
-import 'package:what_to_mine/src/data/local/LocalJsonReader.dart';
+import 'package:what_to_mine/src/data/jsonReader/ILocalJsonReader.dart';
+import 'package:what_to_mine/src/data/jsonReader/LocalJsonReader.dart';
+import 'package:what_to_mine/src/logic/BackgroundTaskSchedulerService.dart';
 import 'package:what_to_mine/src/logic/CurrenciesService.dart';
 import 'package:what_to_mine/src/logic/GpuService.dart';
 import 'package:what_to_mine/src/logic/HashAlgorithmService.dart';
+import 'package:what_to_mine/src/logic/NotificationService.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
 import 'package:what_to_mine/src/utils/SysUtils.dart';
+
+import '../../../data/Scheduler/BackgroundTaskScheduler.dart';
 
 class SplashViewModel {
   final _loading = StreamController<bool>();
@@ -26,7 +30,7 @@ class SplashViewModel {
 
   SplashViewModel();
   void onViewInitState() async {
-    await _initializeApp();
+    await initializeApp();
 
     Services.currenciesService.getCryptoCurrenciesList(true).whenComplete(() async {
       await SysUtils.delay(1);
@@ -40,7 +44,7 @@ class SplashViewModel {
     _openHomeScreen.close();
   }
 
-  Future<void> _initializeApp() async {
+  Future<void> initializeApp() async {
     if (Services.isInitialized()) {
       print('Application initialized already');
       return;
@@ -51,14 +55,29 @@ class SplashViewModel {
     ILocalJsonReader jsonReader = LocalJsonReader();
     MemoryStorage cache = MemoryStorage();
     AppDatabase database = await AppDatabase.create();
+    BackgroundTaskScheduler backgroundScheduler = BackgroundTaskScheduler();
     IGateway gateway = Gateway(
-        client: minerStatClient, jsonReader: jsonReader, cache: cache, database: database, preferences: preferences);
+        client: minerStatClient,
+        jsonReader: jsonReader,
+        cache: cache,
+        database: database,
+        preferences: preferences,
+        backgroundScheduler: backgroundScheduler);
+
+    // Сервисы
     CurrenciesService currenciesService = CurrenciesService(gateway: gateway);
     GpuService gpuService = GpuService(gateway: gateway);
     HashAlgorithmService algorithmService = HashAlgorithmService(gateway: gateway);
+    NotificationService notificationService = NotificationService();
+    BackgroundTaskSchedulerService backgroundTaskSchedulerService = BackgroundTaskSchedulerService(gateway: gateway);
 
     Services.initialize(
-        currenciesService: currenciesService, gpuService: gpuService, hashAlgorithmService: algorithmService);
+        currenciesService: currenciesService,
+        gpuService: gpuService,
+        hashAlgorithmService: algorithmService,
+        notificationService: notificationService,
+        backgroundTaskSchedulerService: backgroundTaskSchedulerService);
+
     print("Application successful initialized");
   }
 }

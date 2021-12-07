@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.practice.ui.what_to_mine">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
+        tools:replace="android:label"
         android:label="What to mine?"
         android:icon="@mipmap/launcher_icon">
 

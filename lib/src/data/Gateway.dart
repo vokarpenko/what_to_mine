@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:what_to_mine/src/constants.dart';
+import 'package:what_to_mine/src/data/Scheduler/IBackgroundTaskScheduler.dart';
 import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
 import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
 import 'package:what_to_mine/src/data/db/entities/UsedGpuEntity.dart';
 import 'package:what_to_mine/src/data/db/entities/UserHashAlgorithmEntity.dart';
-import 'package:what_to_mine/src/data/local/ILocalJsonReader.dart';
+import 'package:what_to_mine/src/data/jsonReader/ILocalJsonReader.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
@@ -14,6 +15,7 @@ import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
 
 import '../domain/currency/CryptoCurrency.dart';
+import 'Scheduler/BackgroundTaskScheduler.dart';
 import 'db/AppDatabase.dart';
 
 class Gateway implements IGateway {
@@ -22,20 +24,23 @@ class Gateway implements IGateway {
   final MemoryStorage _cache;
   final AppDatabase _appDatabase;
   final SharedPreferences _preferences;
-
+  final IBackgroundTaskScheduler _backgroundScheduler;
   static const String _useCustomHashratesKey = "USE_CUSTOM_HASHRATES_KEY";
+  static const String _enableBackgroundTaskScheduler = "ENABLE_BACKGROUND_TASK_SCHEDULER";
 
   Gateway(
       {required IMinerStatClient client,
       required ILocalJsonReader jsonReader,
       required MemoryStorage cache,
       required database,
-      required SharedPreferences preferences})
+      required SharedPreferences preferences,
+      required BackgroundTaskScheduler backgroundScheduler})
       : _client = client,
         _jsonReader = jsonReader,
         _cache = cache,
         _appDatabase = database,
-        _preferences = preferences;
+        _preferences = preferences,
+        _backgroundScheduler = backgroundScheduler;
 
   final StreamController<bool> _onUsedGpuChanged = StreamController<bool>.broadcast();
   final StreamController<bool> _onUserHashrateChanged = StreamController<bool>.broadcast();
@@ -190,5 +195,22 @@ class Gateway implements IGateway {
     });
     _preferences.setBool(_useCustomHashratesKey, true);
     _onUserHashrateChanged.add(true);
+  }
+
+  @override
+  Future<void> enableScheduler(int interval) async {
+    _preferences.setBool(_enableBackgroundTaskScheduler, true);
+    return await _backgroundScheduler.enable(interval);
+  }
+
+  @override
+  Future<void> disableScheduler() async {
+    _preferences.setBool(_enableBackgroundTaskScheduler, false);
+    return await _backgroundScheduler.disable();
+  }
+
+  @override
+  Future<bool> isSchedulerEnabled() async {
+    return _preferences.getBool(_enableBackgroundTaskScheduler) ?? false;
   }
 }

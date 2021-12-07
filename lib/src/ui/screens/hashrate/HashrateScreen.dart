@@ -62,14 +62,17 @@ class HashrateScreenState extends State<HashrateScreen> {
               initialData: false,
               stream: _viewModel.showApplyButton,
               builder: (context, snapshot) => (snapshot.data!)
-                  ? IconButton(
-                      tooltip: "Применить",
-                      onPressed: _applyHashrateButtonClick,
-                      splashRadius: 25,
-                      icon: Icon(
-                        Icons.check,
-                        size: 30,
-                      ))
+                  ? Padding(
+                      padding: EdgeInsets.only(right: 5),
+                      child: IconButton(
+                          tooltip: "Применить",
+                          onPressed: _applyHashrateButtonClick,
+                          splashRadius: 25,
+                          icon: Icon(
+                            Icons.check,
+                            size: 30,
+                          )),
+                    )
                   : Container())
         ],
       ),

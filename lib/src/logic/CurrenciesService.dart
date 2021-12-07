@@ -19,4 +19,10 @@ class CurrenciesService {
     result.sort((a, b) => b.dayEarningInCurrency.compareTo(a.dayEarningInCurrency));
     return result;
   }
+
+  // Получить самую доходную криптовалюту
+  Future<Earnings> getTopCurrency() async {
+    List<Earnings> result = await getEarningsList(true);
+    return result.first;
+  }
 }

@@ -41,4 +41,13 @@ abstract class IGateway {
 
   // Обновить хэшрейты в базе данных
   Future<void> updateHashratesInDB(List<HashAlgorithm> hashrates);
+
+  // Включить планировщик задач
+  Future<void> enableScheduler(int interval);
+
+  // Отключить планировщик задач
+  Future<void> disableScheduler();
+
+  // Получить настройку "Включен ли планировщик задач"
+  Future<bool> isSchedulerEnabled();
 }

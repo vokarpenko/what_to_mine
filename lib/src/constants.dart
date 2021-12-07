@@ -13,3 +13,7 @@ class Hours {
   static const int hoursInWeek = 168;
   static const int hoursInMonth = 720;
 }
+
+class Tasks {
+  static const int sendNotification = 0;
+}

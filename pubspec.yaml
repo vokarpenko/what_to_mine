@@ -17,6 +17,8 @@ dependencies:
   built_value: ^8.0.0
   floor: ^1.1.0
   pull_to_refresh: ^2.0.0
+  flutter_local_notifications: ^9.1.4
+  background_fetch: ^1.0.3
 
 dev_dependencies:
   flutter_test:
