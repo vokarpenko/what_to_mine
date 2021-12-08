@@ -12,8 +12,8 @@ import 'package:what_to_mine/src/logic/BackgroundTaskSchedulerService.dart';
 import 'package:what_to_mine/src/logic/CurrenciesService.dart';
 import 'package:what_to_mine/src/logic/GpuService.dart';
 import 'package:what_to_mine/src/logic/HashAlgorithmService.dart';
-import 'package:what_to_mine/src/logic/NotificationService.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
+import 'package:what_to_mine/src/logic/SettingsService.dart';
 import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
 import 'package:what_to_mine/src/utils/SysUtils.dart';
 
@@ -68,14 +68,14 @@ class SplashViewModel {
     CurrenciesService currenciesService = CurrenciesService(gateway: gateway);
     GpuService gpuService = GpuService(gateway: gateway);
     HashAlgorithmService algorithmService = HashAlgorithmService(gateway: gateway);
-    NotificationService notificationService = NotificationService();
+    SettingsService settingsService = SettingsService(gateway: gateway);
     BackgroundTaskSchedulerService backgroundTaskSchedulerService = BackgroundTaskSchedulerService(gateway: gateway);
 
     Services.initialize(
         currenciesService: currenciesService,
         gpuService: gpuService,
         hashAlgorithmService: algorithmService,
-        notificationService: notificationService,
+        settingsService: settingsService,
         backgroundTaskSchedulerService: backgroundTaskSchedulerService);
 
     print("Application successful initialized");

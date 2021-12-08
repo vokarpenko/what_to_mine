@@ -39,25 +39,26 @@ class StateSettingScreen extends State<SettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Настройки"),
       ),
       body: ListView(
+          physics: NeverScrollableScrollPhysics(),
           children: ListTile.divideTiles(context: context, tiles: [
-        ListTile(
-          onTap: () => _viewModel.onOpenNotificationSettings(),
-          leading: Icon(Icons.notifications),
-          title: Text("Активация пуш-уведомлений"),
-          subtitle: Text("Получение уведомления"),
-        ),
-        ListTile(
-          leading: Icon(Icons.notifications),
-          title: Text("Отмена пуш-уведомлений"),
-          onTap: () => _viewModel.disableNotification(),
-        ),
-        ListTile(
-          title: Text("3"),
-        )
-      ]).toList()),
+            StreamBuilder<bool>(
+              stream: _viewModel.notificationsIsEnable,
+              initialData: false,
+              builder: (context, snapshot) {
+                return SwitchListTile.adaptive(
+                  title: Text("Пуш-уведомления"),
+                  subtitle: Text("Получение уведомлений"),
+                  value: snapshot.data!,
+                  onChanged: (isEnable) => _viewModel.changeNotificationStatus(isEnable),
+                  secondary: Icon(Icons.notifications),
+                );
+              },
+            ),
+          ]).toList()),
     );
   }
 }

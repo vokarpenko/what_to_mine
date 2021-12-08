@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
-import 'package:what_to_mine/src/ui/screens/ScreenRoutes.dart';
 import 'package:what_to_mine/src/ui/screens/earning/EarningViewModel.dart';
+import 'package:what_to_mine/src/ui/screens/settings/SettingsScreen.dart';
 import 'package:what_to_mine/src/ui/widgets/EarningsWidget.dart';
 import 'package:what_to_mine/src/utils/SysUtils.dart';
 
@@ -25,7 +26,7 @@ class EarningScreenState extends State<EarningScreen> {
     super.initState();
     _viewModel.onViewInitState();
     _subscriptionOpenSettingsScreen = _viewModel.openSettingsScreen.listen((_) {
-      Navigator.pushNamed(context, ScreenRoutes.settingsScreen);
+      showBarModalBottomSheet(context: context, builder: (context) => SettingScreen());
     });
   }
 

@@ -2,6 +2,7 @@ import 'package:background_fetch/background_fetch.dart';
 import 'package:what_to_mine/src/data/Scheduler/IBackgroundTaskScheduler.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 import 'package:what_to_mine/src/ui/screens/splash/SplashViewModel.dart';
+import 'package:what_to_mine/src/utils/Notificator.dart';
 
 class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
   BackgroundTaskScheduler();
@@ -64,7 +65,7 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
     Services.currenciesService.getTopCurrency().then((currency) {
       String title = "Сейчас выгодно добывать ${currency.cryptoCurrency.name}";
       String body = "Доходность ${currency.dayEarningInCurrency.toStringAsFixed(2)} USD в день!";
-      Services.notificationService.showNotification(title, body);
+      Notificator().showNotification(0, title, body);
     }).catchError((Object error) {
       String errorMessage = "Ошибка получения самой прибыльной монеты: \n ${error.toString()}";
       print(errorMessage);

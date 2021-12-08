@@ -1,5 +1,5 @@
 import 'package:what_to_mine/src/logic/BackgroundTaskSchedulerService.dart';
-import 'package:what_to_mine/src/logic/NotificationService.dart';
+import 'package:what_to_mine/src/logic/SettingsService.dart';
 
 import 'CurrenciesService.dart';
 import 'GpuService.dart';
@@ -9,7 +9,7 @@ class Services {
   static CurrenciesService? _currenciesService;
   static GpuService? _gpuService;
   static HashAlgorithmService? _hashAlgorithmService;
-  static NotificationService? _notificationService;
+  static SettingsService? _settingsService;
   static BackgroundTaskSchedulerService? _backgroundTaskSchedulerService;
   Services._();
 
@@ -17,7 +17,7 @@ class Services {
     return null != _currenciesService &&
         null != _gpuService &&
         null != _hashAlgorithmService &&
-        null != _notificationService &&
+        null != _settingsService &&
         null != _backgroundTaskSchedulerService;
   }
 
@@ -25,12 +25,12 @@ class Services {
       {required CurrenciesService currenciesService,
       required GpuService gpuService,
       required HashAlgorithmService hashAlgorithmService,
-      required NotificationService notificationService,
+      required SettingsService settingsService,
       required BackgroundTaskSchedulerService backgroundTaskSchedulerService}) {
     _currenciesService = currenciesService;
     _gpuService = gpuService;
     _hashAlgorithmService = hashAlgorithmService;
-    _notificationService = notificationService;
+    _settingsService = settingsService;
     _backgroundTaskSchedulerService = backgroundTaskSchedulerService;
   }
 
@@ -40,7 +40,7 @@ class Services {
 
   static HashAlgorithmService get hashAlgorithmService => _hashAlgorithmService!;
 
-  static NotificationService get notificationService => _notificationService!;
+  static SettingsService get settingsService => _settingsService!;
 
   static BackgroundTaskSchedulerService get backgroundTaskSchedulerService => _backgroundTaskSchedulerService!;
 }
