@@ -40,6 +40,7 @@ class EarningViewModel {
   }
 
   void openSettingScreen() async {
-    _openSettingsScreen.add(true);
+    bool isNotificationsEnable = await Services.settingsService.isNotificationsEnable();
+    _openSettingsScreen.add(isNotificationsEnable);
   }
 }

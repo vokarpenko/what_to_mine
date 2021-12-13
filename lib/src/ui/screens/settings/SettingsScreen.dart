@@ -1,38 +1,34 @@
-import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/ui/screens/settings/SettingsViewModel.dart';
 
 class SettingScreen extends StatefulWidget {
+  final bool isNotificationEnableInitValue;
   final SettingsViewModel _viewModel = SettingsViewModel();
+
+  SettingScreen(this.isNotificationEnableInitValue);
+
   @override
-  State<StatefulWidget> createState() {
-    return StateSettingScreen(_viewModel);
-  }
+  State<StatefulWidget> createState() => StateSettingScreen(_viewModel, isNotificationEnableInitValue);
 }
 
 class StateSettingScreen extends State<SettingScreen> {
+  final bool isNotificationEnableInitValue;
   SettingsViewModel _viewModel;
-  StreamSubscription? _subscriptionOpenNotificationSettings;
 
-  StateSettingScreen(this._viewModel);
+  StateSettingScreen(this._viewModel, this.isNotificationEnableInitValue);
 
   @override
   void initState() {
     super.initState();
     _viewModel.onViewInitState();
-    _subscriptionOpenNotificationSettings = _viewModel.openNotificationSettings.listen((_) async {
-      _viewModel.enableNotification();
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
-    this
-      .._viewModel.onDispose()
-      .._subscriptionOpenNotificationSettings?.cancel();
+    this.._viewModel.onDispose();
   }
 
   @override
@@ -47,7 +43,7 @@ class StateSettingScreen extends State<SettingScreen> {
           children: ListTile.divideTiles(context: context, tiles: [
             StreamBuilder<bool>(
               stream: _viewModel.notificationsIsEnable,
-              initialData: false,
+              initialData: isNotificationEnableInitValue,
               builder: (context, snapshot) {
                 return SwitchListTile.adaptive(
                   title: Text("Пуш-уведомления"),

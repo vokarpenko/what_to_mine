@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:what_to_mine/src/ui/screens/settings/SettingsScreen.dart';
 import 'package:what_to_mine/src/ui/screens/splash/SplashScreen.dart';
 
 import 'src/ui/Home.dart';
@@ -28,7 +27,7 @@ class _AppState extends State<App> {
         routes: {
           ScreenRoutes.splashScreen: (BuildContext context) => SplashScreen(),
           ScreenRoutes.homeScreen: (BuildContext context) => Home(),
-          ScreenRoutes.settingsScreen: (BuildContext context) => SettingScreen()
+          //ScreenRoutes.settingsScreen: (BuildContext context) => SettingScreen()
         });
   }
 }
