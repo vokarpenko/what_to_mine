@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:what_to_mine/src/data/Gateway.dart';
 import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
@@ -15,6 +16,7 @@ import 'package:what_to_mine/src/logic/HashAlgorithmService.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 import 'package:what_to_mine/src/logic/SettingsService.dart';
 import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
+import 'package:what_to_mine/src/ui/theme/ThemeConfig.dart';
 import 'package:what_to_mine/src/utils/SysUtils.dart';
 
 import '../../../data/Scheduler/BackgroundTaskScheduler.dart';
@@ -31,6 +33,8 @@ class SplashViewModel {
   SplashViewModel();
   void onViewInitState() async {
     await initializeApp();
+    // Устанавливаем тему
+    currentTheme.switchTheme(ThemeMode.values[await Services.settingsService.getThemeIndex()]);
 
     Services.currenciesService.getCryptoCurrenciesList(true).whenComplete(() async {
       await SysUtils.delay(1);

@@ -8,12 +8,12 @@ class SettingsViewModel {
   Stream<bool> get notificationsIsEnable => _notificationsIsEnable.stream;
 
   void onViewInitState() async {
-    Services.settingsService
+    /*Services.settingsService
         .isNotificationsEnable()
         .then((isEnabled) => changeNotificationStatus(isEnabled))
         .catchError((Object errorObject) {
       print(errorObject.toString());
-    });
+    });*/
   }
 
   void onDispose() async {

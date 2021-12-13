@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:what_to_mine/src/domain/Settings.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 
@@ -7,12 +8,12 @@ class EarningViewModel {
   final StreamController<List<Earnings>> _earnings = StreamController<List<Earnings>>();
   final StreamController<bool> _isLoading = StreamController<bool>();
   final StreamController<String> _errorMessage = StreamController<String>();
-  final StreamController<bool> _openSettingsScreen = StreamController<bool>();
+  final StreamController<Settings> _openSettingsScreen = StreamController<Settings>();
 
   Stream<List<Earnings>> get earnings => _earnings.stream;
   Stream<bool> get isLoading => _isLoading.stream;
   Stream<String> get errorMessage => _errorMessage.stream;
-  Stream<bool> get openSettingsScreen => _openSettingsScreen.stream;
+  Stream<Settings> get openSettingsScreen => _openSettingsScreen.stream;
 
   EarningViewModel();
 
@@ -40,7 +41,7 @@ class EarningViewModel {
   }
 
   void openSettingScreen() async {
-    bool isNotificationsEnable = await Services.settingsService.isNotificationsEnable();
-    _openSettingsScreen.add(isNotificationsEnable);
+    Settings settings = await Services.settingsService.getSettings();
+    _openSettingsScreen.add(settings);
   }
 }

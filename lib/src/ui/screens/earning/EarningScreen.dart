@@ -25,11 +25,9 @@ class EarningScreenState extends State<EarningScreen> {
   void initState() {
     super.initState();
     _viewModel.onViewInitState();
-    _subscriptionOpenSettingsScreen = _viewModel.openSettingsScreen.listen((isNotificationEnable) {
+    _subscriptionOpenSettingsScreen = _viewModel.openSettingsScreen.listen((settings) {
       showBarModalBottomSheet(
-          context: context,
-          duration: Duration(milliseconds: 300),
-          builder: (context) => SettingScreen(isNotificationEnable));
+          context: context, duration: Duration(milliseconds: 300), builder: (context) => SettingScreen(settings));
     });
   }
 

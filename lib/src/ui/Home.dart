@@ -25,7 +25,6 @@ class _HomeState extends State<Home> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        fixedColor: Theme.of(context).primaryColor,
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(

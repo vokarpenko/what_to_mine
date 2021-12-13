@@ -91,7 +91,7 @@ class HashrateScreenState extends State<HashrateScreen> {
                     itemBuilder: (context, index) {
                       return Card(
                           margin: EdgeInsets.all(10),
-                          elevation: 30,
+                          elevation: 5,
                           child: Container(
                             padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
                             child: Flex(

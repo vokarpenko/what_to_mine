@@ -8,6 +8,7 @@ import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
 import 'package:what_to_mine/src/data/db/entities/UsedGpuEntity.dart';
 import 'package:what_to_mine/src/data/db/entities/UserHashAlgorithmEntity.dart';
 import 'package:what_to_mine/src/data/jsonReader/ILocalJsonReader.dart';
+import 'package:what_to_mine/src/domain/Settings.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
@@ -26,8 +27,7 @@ class Gateway implements IGateway {
   final SharedPreferences _preferences;
   final IBackgroundTaskScheduler _backgroundScheduler;
   static const String _useCustomHashratesKey = "USE_CUSTOM_HASHRATES_KEY";
-  static const String _enableBackgroundTaskScheduler = "ENABLE_BACKGROUND_TASK_SCHEDULER";
-
+  static const String _settingsKey = "SETTINGS";
   Gateway(
       {required IMinerStatClient client,
       required ILocalJsonReader jsonReader,
@@ -199,18 +199,34 @@ class Gateway implements IGateway {
 
   @override
   Future<void> enableScheduler(int interval) async {
-    _preferences.setBool(_enableBackgroundTaskScheduler, true);
+    //_preferences.setBool(_enableBackgroundTaskScheduler, true);
+    Settings settings = await getSettings();
+    settings.notificationIsEnabled = true;
+    this.setSettings(settings);
     return await _backgroundScheduler.enable(interval);
   }
 
   @override
   Future<void> disableScheduler() async {
-    _preferences.setBool(_enableBackgroundTaskScheduler, false);
+    Settings settings = await getSettings();
+    settings.notificationIsEnabled = false;
+    this.setSettings(settings);
     return await _backgroundScheduler.disable();
   }
 
   @override
   Future<bool> isSchedulerEnabled() async {
-    return _preferences.getBool(_enableBackgroundTaskScheduler) ?? false;
+    return (await getSettings()).notificationIsEnabled;
+  }
+
+  @override
+  Future<Settings> getSettings() async {
+    String? settingsString = _preferences.getString(_settingsKey);
+    return settingsString != null ? Settings.fromJsonString(settingsString) : Settings();
+  }
+
+  @override
+  Future<void> setSettings(Settings settings) {
+    return _preferences.setString(_settingsKey, settings.toJsonString());
   }
 }

@@ -1,3 +1,4 @@
+import 'package:what_to_mine/src/domain/Settings.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
@@ -50,4 +51,10 @@ abstract class IGateway {
 
   // Получить настройку "Включен ли планировщик задач"
   Future<bool> isSchedulerEnabled();
+
+  // Получить настройки
+  Future<Settings> getSettings();
+
+  // Сохранить настройки
+  Future<void> setSettings(Settings settings);
 }

@@ -18,7 +18,7 @@ class UsedGPUWidget extends StatelessWidget {
 
     return Card(
       margin: EdgeInsets.all(10),
-      elevation: 30,
+      elevation: 5,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

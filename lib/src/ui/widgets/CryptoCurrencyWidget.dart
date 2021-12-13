@@ -38,7 +38,7 @@ class CryptoCurrencyState extends State<CryptoCurrencyWidget> {
       );
     return Card(
       margin: EdgeInsets.all(10),
-      elevation: 30,
+      elevation: 5,
       child: Center(
           child: Flex(
         //mainAxisAlignment: MainAxisAlignment.spaceBetween,

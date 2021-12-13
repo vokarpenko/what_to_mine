@@ -27,7 +27,7 @@ class EarningsWidget extends StatelessWidget {
 
     return Card(
       margin: EdgeInsets.all(10),
-      elevation: 30,
+      elevation: 5,
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
