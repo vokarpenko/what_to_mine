@@ -1,0 +1,17 @@
+{
+  "home_earnings": "Доходы",
+  "home_prices": "Курсы",
+  "home_gpus": "Видеокарты",
+  "home_hashrate": "Хэшрейт",
+  "settings_appbar_title": "Настройки",
+  "settings_notification": "Пуш-уведомления",
+  "settings_notification_enable_subtitle": "Пуш-уведомления включены",
+  "settings_notification_disable_subtitle": "Пуш-уведомления отключены",
+  "settings_theme": "Тема приложения",
+  "settings_theme_system": "Системная тема",
+  "settings_theme_light": "Светлая тема",
+  "settings_theme_dark": "Темная тема",
+  "settings_language": "Язык",
+  "settings_language_en": "Английский",
+  "settings_language_ru": "Русский"
+}

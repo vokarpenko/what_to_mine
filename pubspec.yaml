@@ -20,6 +20,7 @@ dependencies:
   flutter_local_notifications: ^9.1.4
   background_fetch: ^1.0.3
   modal_bottom_sheet: ^2.0.0
+  easy_localization: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -31,11 +32,13 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/icons/
     - assets/json/
     - assets/images/
+    - assets/translations/
   uses-material-design: true
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/app_icon.png"
+  image_path: "assets/icons/app_icon.png"

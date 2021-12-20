@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/ui/screens/earning/EarningScreen.dart';
@@ -28,13 +29,12 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-            label: "Доходы",
+            label: "home_earnings".tr(),
             icon: Icon(Icons.stream),
           ),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.money_dollar), label: "Курсы"),
-          BottomNavigationBarItem(icon: Icon(Icons.personal_video_outlined), label: "Видеокарты"),
-          BottomNavigationBarItem(icon: Icon(Icons.sort), label: "Хэшрейт"),
-          //BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: "Еще"),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.money_dollar), label: "home_prices".tr()),
+          BottomNavigationBarItem(icon: Icon(Icons.personal_video_outlined), label: "home_gpus".tr()),
+          BottomNavigationBarItem(icon: Icon(Icons.sort), label: "home_hashrate".tr()),
         ],
         onTap: _onTap,
       ),

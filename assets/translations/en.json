@@ -1,0 +1,17 @@
+{
+  "home_earnings": "Earnings",
+  "home_prices": "Prices",
+  "home_gpus": "GPUs",
+  "home_hashrate": "Hashrate",
+  "settings_appbar_title": "Settings",
+  "settings_notification": "Push-notification",
+  "settings_notification_enable_subtitle": "Push-notification is enable",
+  "settings_notification_disable_subtitle": "Push-notification is disable",
+  "settings_theme": "App theme",
+  "settings_theme_system": "System theme",
+  "settings_theme_light": "Light theme",
+  "settings_theme_dark": "Dark theme",
+  "settings_language": "Language",
+  "settings_language_en": "English",
+  "settings_language_ru": "Russian"
+}

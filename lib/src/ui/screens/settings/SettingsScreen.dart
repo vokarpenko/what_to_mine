@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:what_to_mine/src/domain/Settings.dart';
 import 'package:what_to_mine/src/ui/screens/settings/SettingsViewModel.dart';
+import 'package:what_to_mine/src/ui/widgets/LanguageSelectorWidget.dart';
 import 'package:what_to_mine/src/ui/widgets/ThemeSelectorWidget.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -37,7 +39,7 @@ class StateSettingScreen extends State<SettingScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Настройки"),
+        title: Text('settings_appbar_title').tr(),
       ),
       body: ListView(
           physics: NeverScrollableScrollPhysics(),
@@ -46,26 +48,75 @@ class StateSettingScreen extends State<SettingScreen> {
               stream: _viewModel.notificationsIsEnable,
               initialData: _settings.notificationIsEnabled,
               builder: (context, snapshot) {
+                String subTitle;
+                (snapshot.data!)
+                    ? subTitle = "settings_notification_enable_subtitle".tr()
+                    : subTitle = "settings_notification_disable_subtitle".tr();
+
                 return SwitchListTile.adaptive(
-                  title: Text("Пуш-уведомления"),
-                  subtitle: Text("Получение уведомлений"),
+                  title: Text("settings_notification".tr()),
+                  subtitle: Text(subTitle),
                   value: snapshot.data!,
-                  onChanged: (isEnable) => _viewModel.changeNotificationStatus(isEnable),
+                  onChanged: (isEnable) => _viewModel.onChangeNotificationStatus(isEnable),
                   secondary: Icon(Icons.notifications),
                 );
               },
             ),
-            ListTile(
-              leading: Icon(Icons.invert_colors),
-              title: Text("Тема"),
-              subtitle: Text("Тема приложения"),
-              onTap: () => showBarModalBottomSheet(
-                  expand: false,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  duration: Duration(milliseconds: 300),
-                  builder: (context) => ThemeSelectorWidget()),
-            )
+            StreamBuilder<ThemeMode>(
+              stream: _viewModel.themeMode,
+              initialData: ThemeMode.values[_settings.themeIndex],
+              builder: (context, snapshot) {
+                String subTitle;
+                switch (snapshot.data!) {
+                  case ThemeMode.system:
+                    subTitle = "settings_theme_system".tr();
+                    break;
+                  case ThemeMode.light:
+                    subTitle = "settings_theme_light".tr();
+                    break;
+                  case ThemeMode.dark:
+                    subTitle = "settings_theme_dark".tr();
+                    break;
+                }
+                return ListTile(
+                  leading: Icon(Icons.invert_colors),
+                  title: Text("settings_theme".tr()),
+                  subtitle: Text(subTitle),
+                  onTap: () => showBarModalBottomSheet(
+                      expand: false,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      duration: Duration(milliseconds: 300),
+                      builder: (context) => ThemeSelectorWidget(_viewModel)),
+                );
+              },
+            ),
+            StreamBuilder<String>(
+              stream: _viewModel.locale,
+              initialData: EasyLocalization.of(context)?.locale.languageCode,
+              builder: (context, snapshot) {
+                String subTitle = "";
+                switch (snapshot.data!) {
+                  case 'en':
+                    subTitle = "settings_language_en".tr();
+                    break;
+                  case 'ru':
+                    subTitle = "settings_language_ru".tr();
+                    break;
+                }
+                return ListTile(
+                  leading: Icon(Icons.language),
+                  title: Text("settings_language".tr()),
+                  subtitle: Text(subTitle),
+                  onTap: () => showBarModalBottomSheet(
+                      expand: false,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      duration: Duration(milliseconds: 300),
+                      builder: (context) => LanguageSelectorWidget(_viewModel)),
+                );
+              },
+            ),
           ]).toList()),
     );
   }
