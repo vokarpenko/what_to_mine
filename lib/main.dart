@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animated_theme/animated_theme_app.dart';
-import 'package:flutter_animated_theme/animation_type.dart';
 import 'package:what_to_mine/src/ui/screens/splash/SplashScreen.dart';
 import 'package:what_to_mine/src/ui/theme/AppThemeData.dart';
 import 'package:what_to_mine/src/ui/theme/ThemeConfig.dart';
@@ -26,9 +24,7 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedThemeApp(
-        animationDuration: Duration(milliseconds: 1500),
-        animationType: AnimationType.CIRCULAR_ANIMATED_THEME,
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
         themeMode: currentTheme.currentTheme(),
         theme: AppThemeData.lightTheme,

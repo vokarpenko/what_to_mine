@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:what_to_mine/src/domain/Settings.dart';
-import 'package:what_to_mine/src/logic/Services.dart';
 import 'package:what_to_mine/src/ui/screens/settings/SettingsViewModel.dart';
-import 'package:what_to_mine/src/ui/theme/ThemeConfig.dart';
 import 'package:what_to_mine/src/ui/widgets/ThemeSelectorWidget.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -58,11 +56,6 @@ class StateSettingScreen extends State<SettingScreen> {
               },
             ),
             ListTile(
-                leading: Icon(Icons.invert_colors),
-                title: Text("Тема"),
-                subtitle: Text("Тема приложения"),
-                onTap: _onSwitchTheme),
-            ListTile(
               leading: Icon(Icons.invert_colors),
               title: Text("Тема"),
               subtitle: Text("Тема приложения"),
@@ -73,57 +66,7 @@ class StateSettingScreen extends State<SettingScreen> {
                   duration: Duration(milliseconds: 300),
                   builder: (context) => ThemeSelectorWidget()),
             )
-            /*Column(
-              children: <Widget>[
-                RadioListTile<ThemeMode>(
-                  title: const Text('Системная'),
-                  value: ThemeMode.system,
-                  groupValue: currentTheme.currentTheme(),
-                  onChanged: (ThemeMode? value) {
-                    if (value != null) {
-                      setState(() {
-                        _onThemeSelected(value);
-                      });
-                    }
-                  },
-                ),
-                RadioListTile<ThemeMode>(
-                  title: const Text('Светлая'),
-                  value: ThemeMode.light,
-                  groupValue: currentTheme.currentTheme(),
-                  onChanged: (ThemeMode? value) {
-                    if (value != null) {
-                      setState(() {
-                        _onThemeSelected(value);
-                      });
-                    }
-                  },
-                ),
-                RadioListTile<ThemeMode>(
-                  title: const Text('Темная'),
-                  value: ThemeMode.dark,
-                  groupValue: currentTheme.currentTheme(),
-                  onChanged: (ThemeMode? value) {
-                    if (value != null) {
-                      setState(() {
-                        _onThemeSelected(value);
-                      });
-                    }
-                  },
-                ),
-              ],
-            )*/
           ]).toList()),
     );
-  }
-
-  Future<void> _onSwitchTheme() async {
-    if (currentTheme.currentTheme().name == Brightness.dark.name) {
-      currentTheme.switchTheme(ThemeMode.light);
-      await Services.settingsService.saveThemeIndex(ThemeMode.light.index);
-    } else {
-      currentTheme.switchTheme(ThemeMode.dark);
-      await Services.settingsService.saveThemeIndex(ThemeMode.dark.index);
-    }
   }
 }

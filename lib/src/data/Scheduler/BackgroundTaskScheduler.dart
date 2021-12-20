@@ -1,8 +1,9 @@
 import 'package:background_fetch/background_fetch.dart';
 import 'package:what_to_mine/src/data/Scheduler/IBackgroundTaskScheduler.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
-import 'package:what_to_mine/src/ui/screens/splash/SplashViewModel.dart';
 import 'package:what_to_mine/src/utils/Notificator.dart';
+
+import '../../app.dart';
 
 class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
   BackgroundTaskScheduler();
@@ -55,7 +56,7 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
       return;
     }
     // Выполняется, когда приложение закрыто.
-    await SplashViewModel().initializeApp();
+    await initializeApp();
     await _showNotificationsInTheBackground();
     print('backgroundFetchHeadlessTask');
     BackgroundFetch.finish(taskId);

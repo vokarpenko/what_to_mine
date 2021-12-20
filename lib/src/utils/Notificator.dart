@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:what_to_mine/src/ui/contstants.dart';
 
 class Notificator {
   static final Notificator _instance = Notificator._();
@@ -6,7 +7,7 @@ class Notificator {
 
   NotificationDetails _platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails('Channel id', 'What to mine notification channel',
-          importance: Importance.defaultImportance, priority: Priority.defaultPriority),
+          channelShowBadge: true, color: AppColors.orange, importance: Importance.max, priority: Priority.max),
       iOS: IOSNotificationDetails());
 
   factory Notificator() {

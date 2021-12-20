@@ -115,6 +115,7 @@ class GpuListScreenState extends State<GpuListScreen> {
                               flex: 1,
                               child: Switch(
                                 activeColor: Colors.green,
+                                activeTrackColor: AppColors.lightGreen,
                                 inactiveTrackColor: AppColors.lightRed,
                                 inactiveThumbColor: Colors.red,
                                 value: switchValueIsNvidia,
