@@ -29,13 +29,13 @@ abstract class HashAlgorithm implements Built<HashAlgorithm, HashAlgorithmBuilde
   String getHashUnit() {
     switch (hashrateCoefficient) {
       case HashCoefficient.hash:
-        return "h/s";
+        return 'h/s';
       case HashCoefficient.kiloHash:
-        return "kh/s";
+        return 'kh/s';
       case HashCoefficient.megaHash:
-        return "Mh/s";
+        return 'Mh/s';
       default:
-        return "";
+        return '';
     }
   }
 }

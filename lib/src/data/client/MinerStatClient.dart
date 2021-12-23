@@ -6,7 +6,6 @@ import '../../domain/currency/CryptoCurrency.dart';
 import 'IMinerStatClient.dart';
 
 class MinerStatClient implements IMinerStatClient {
-  //final Uri _cryptoCurrencyListUrl = Uri(path: "https://api.minerstat.com/v2/coins");
   MinerStatClient();
 
   @override
@@ -31,7 +30,7 @@ class MinerStatClient implements IMinerStatClient {
         throw Exception('Failed to load data');
       }
     } on Exception catch (e) {
-      print("Exception post: ${e.toString()}");
+      print('Exception post: ${e.toString()}');
       return Future.error(e);
     }
   }

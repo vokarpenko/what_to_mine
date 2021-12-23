@@ -52,5 +52,5 @@ Future<void> initializeApp() async {
       settingsService: settingsService,
       backgroundTaskSchedulerService: backgroundTaskSchedulerService);
 
-  print("Application successful initialized");
+  print('Application successful initialized');
 }

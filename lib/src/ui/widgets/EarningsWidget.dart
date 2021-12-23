@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 
@@ -60,11 +60,11 @@ class EarningsWidget extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.all(3),
-                        child: Text("Суточный объем ${_earnings.cryptoCurrency.coin}"),
+                        child: Text('daily_volume'.tr() + ' ${_earnings.cryptoCurrency.coin}'),
                       ),
                       Container(
                         padding: EdgeInsets.all(3),
-                        child: Text(_earnings.cryptoCurrency.volume.toStringAsFixed(2) + " USD"),
+                        child: Text(_earnings.cryptoCurrency.volume.toStringAsFixed(2) + ' USD'),
                       ),
                     ],
                   ),
@@ -82,16 +82,16 @@ class EarningsWidget extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.all(3),
-                        child: Text("Доход за день"),
+                        child: Text('income_per_day'.tr()),
                       ),
                       Container(
                         padding: EdgeInsets.all(3),
-                        child: Text(_earnings.dayEarningInCurrency.toStringAsFixed(4) + " USD"),
+                        child: Text(_earnings.dayEarningInCurrency.toStringAsFixed(4) + ' USD'),
                       ),
                       Container(
                           padding: EdgeInsets.all(3),
                           child: Text(
-                              _earnings.dayEarningInCrypto.toStringAsFixed(8) + " ${_earnings.cryptoCurrency.coin}")),
+                              _earnings.dayEarningInCrypto.toStringAsFixed(8) + ' ${_earnings.cryptoCurrency.coin}')),
                     ],
                   ),
                 ),
@@ -103,16 +103,16 @@ class EarningsWidget extends StatelessWidget {
                       children: [
                         Container(
                           padding: EdgeInsets.all(3),
-                          child: Text("Доход за месяц"),
+                          child: Text('income_per_month'.tr()),
                         ),
                         Container(
                           padding: EdgeInsets.all(3),
-                          child: Text(_earnings.monthEarningInCurrency.toStringAsFixed(4) + " USD"),
+                          child: Text(_earnings.monthEarningInCurrency.toStringAsFixed(4) + ' USD'),
                         ),
                         Container(
                           padding: EdgeInsets.all(3),
                           child: Text(
-                              _earnings.monthEarningInCrypto.toStringAsFixed(8) + " ${_earnings.cryptoCurrency.coin}"),
+                              _earnings.monthEarningInCrypto.toStringAsFixed(8) + ' ${_earnings.cryptoCurrency.coin}'),
                         ),
                       ],
                     ))

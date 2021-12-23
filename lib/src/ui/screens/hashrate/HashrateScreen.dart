@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
@@ -56,7 +56,7 @@ class HashrateScreenState extends State<HashrateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Хэшрейт'),
+        title: Text('hashrate_appbar_title'.tr()),
         actions: <Widget>[
           StreamBuilder<bool>(
               initialData: false,
@@ -65,7 +65,7 @@ class HashrateScreenState extends State<HashrateScreen> {
                   ? Padding(
                       padding: EdgeInsets.only(right: 5),
                       child: IconButton(
-                          tooltip: "Применить",
+                          tooltip: 'apply'.tr(),
                           onPressed: _applyHashrateButtonClick,
                           splashRadius: 25,
                           icon: Icon(
@@ -129,7 +129,7 @@ class HashrateScreenState extends State<HashrateScreen> {
                                           controller:
                                               TextEditingController(text: items[index].hashrate!.toStringAsFixed(2))),
                                     )),
-                                Flexible(
+                                /*Flexible(
                                     fit: FlexFit.tight,
                                     flex: 1,
                                     child: Container(
@@ -152,7 +152,7 @@ class HashrateScreenState extends State<HashrateScreen> {
                                             ),
                                           ),
                                           controller: TextEditingController()),
-                                    )),
+                                    )),*/
                               ],
                             ),
                           ));
@@ -172,7 +172,7 @@ class HashrateScreenState extends State<HashrateScreen> {
 
   Widget _buildEmptyHashrateListLabel() {
     return Text(
-      'Список хэшрейтов пуст, добавьте свои первые видеокарты',
+      'empty_hashrates_message'.tr(),
       textAlign: TextAlign.center,
     );
   }

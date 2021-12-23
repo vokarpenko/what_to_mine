@@ -17,10 +17,10 @@ class Settings {
       return false;
   }
 
-  Map<String, dynamic> _toJson() => {"notificationIsEnabled": notificationIsEnabled, "themeIndex": themeIndex};
+  Map<String, dynamic> _toJson() => {'notificationIsEnabled': notificationIsEnabled, 'themeIndex': themeIndex};
 
   static Settings _fromJson(Map<String, dynamic> json) {
-    return Settings(notificationIsEnabled: json["notificationIsEnabled"], themeIndex: json["themeIndex"]);
+    return Settings(notificationIsEnabled: json['notificationIsEnabled'], themeIndex: json['themeIndex']);
   }
 
   String toJsonString() => jsonEncode(_toJson());

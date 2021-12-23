@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -44,12 +45,12 @@ class EarningScreenState extends State<EarningScreen> {
     RefreshController _refreshController = RefreshController(initialRefresh: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Доходность"),
+        title: Text('earnings_appbar_title'.tr()),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 5),
             child: IconButton(
-                tooltip: "Настройки",
+                tooltip: "settings_appbar_title".tr(),
                 onPressed: () => _viewModel.openSettingScreen(),
                 splashRadius: 25,
                 icon: Icon(
@@ -83,7 +84,7 @@ class EarningScreenState extends State<EarningScreen> {
                   ));
             else
               return (Text(
-                "Чтобы увидеть доходы от ваших видеокарт добавьте их на вкладке \"Видеокарты\"",
+                'empty_earnings_message'.tr(),
                 textAlign: TextAlign.center,
               ));
           } else

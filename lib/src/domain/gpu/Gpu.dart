@@ -14,7 +14,7 @@ abstract class Gpu implements Built<Gpu, GpuBuilder> {
   //List<int> get  ramSize;
   int get price;
   bool get secondHand;
-  @BuiltValueField(wireName: "algos")
+  @BuiltValueField(wireName: 'algos')
   BuiltList<HashAlgorithm> get hashAlgorithms;
 
   Gpu._();

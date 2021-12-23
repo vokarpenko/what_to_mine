@@ -37,7 +37,7 @@ class StateSplashScreen extends State<SplashScreen> {
           child: Container(
         width: 200,
         height: 200,
-        child: Image.asset("assets/images/splash_loading.gif"),
+        child: Image.asset('assets/images/splash_loading.gif'),
       )),
     );
   }

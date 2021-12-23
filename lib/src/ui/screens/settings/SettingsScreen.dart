@@ -50,11 +50,11 @@ class StateSettingScreen extends State<SettingScreen> {
               builder: (context, snapshot) {
                 String subTitle;
                 (snapshot.data!)
-                    ? subTitle = "settings_notification_enable_subtitle".tr()
-                    : subTitle = "settings_notification_disable_subtitle".tr();
+                    ? subTitle = 'settings_notification_enable_subtitle'.tr()
+                    : subTitle = 'settings_notification_disable_subtitle'.tr();
 
                 return SwitchListTile.adaptive(
-                  title: Text("settings_notification".tr()),
+                  title: Text('settings_notification'.tr()),
                   subtitle: Text(subTitle),
                   value: snapshot.data!,
                   onChanged: (isEnable) => _viewModel.onChangeNotificationStatus(isEnable),
@@ -69,18 +69,18 @@ class StateSettingScreen extends State<SettingScreen> {
                 String subTitle;
                 switch (snapshot.data!) {
                   case ThemeMode.system:
-                    subTitle = "settings_theme_system".tr();
+                    subTitle = 'settings_theme_system'.tr();
                     break;
                   case ThemeMode.light:
-                    subTitle = "settings_theme_light".tr();
+                    subTitle = 'settings_theme_light'.tr();
                     break;
                   case ThemeMode.dark:
-                    subTitle = "settings_theme_dark".tr();
+                    subTitle = 'settings_theme_dark'.tr();
                     break;
                 }
                 return ListTile(
                   leading: Icon(Icons.invert_colors),
-                  title: Text("settings_theme".tr()),
+                  title: Text('settings_theme'.tr()),
                   subtitle: Text(subTitle),
                   onTap: () => showBarModalBottomSheet(
                       expand: false,
@@ -98,15 +98,15 @@ class StateSettingScreen extends State<SettingScreen> {
                 String subTitle = "";
                 switch (snapshot.data!) {
                   case 'en':
-                    subTitle = "settings_language_en".tr();
+                    subTitle = 'settings_language_en'.tr();
                     break;
                   case 'ru':
-                    subTitle = "settings_language_ru".tr();
+                    subTitle = 'settings_language_ru'.tr();
                     break;
                 }
                 return ListTile(
                   leading: Icon(Icons.language),
-                  title: Text("settings_language".tr()),
+                  title: Text('settings_language'.tr()),
                   subtitle: Text(subTitle),
                   onTap: () => showBarModalBottomSheet(
                       expand: false,

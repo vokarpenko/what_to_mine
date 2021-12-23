@@ -5,7 +5,7 @@ import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart';
 
 // Хранилище в памяти
 class MemoryStorage {
-  final String _cryptoCurrencyKey = "CryptoCurrencyList";
+  final String _cryptoCurrencyKey = 'CryptoCurrencyList';
 
   //TODO скорее всего отсюда нужно убрать map и оставить просто list
   LinkedHashMap<String, List<CryptoCurrency>> _cryptoCurrencyCache = new LinkedHashMap<String, List<CryptoCurrency>>();

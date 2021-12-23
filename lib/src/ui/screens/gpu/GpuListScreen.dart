@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
@@ -27,11 +28,12 @@ class GpuListScreenState extends State<GpuListScreen> {
   }
 
   GpuListScreenState(this._viewModel);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Видеокарты"),
+        title: Text('gpus_appbar_title'.tr()),
       ),
       body: Center(
         child: StreamBuilder<List<UsedGpu>>(
@@ -98,7 +100,7 @@ class GpuListScreenState extends State<GpuListScreen> {
           return StatefulBuilder(
             builder: (context, setState) {
               return AlertDialog(
-                title: Text("Добаление видеокарты"),
+                title: Text('adding_gpus'.tr()),
                 content: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -153,7 +155,7 @@ class GpuListScreenState extends State<GpuListScreen> {
                         }).toList(),
                       ),
                       TextField(
-                          decoration: new InputDecoration(hintText: "Количество"),
+                          decoration: new InputDecoration(hintText: 'quantity'.tr()),
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           keyboardType: TextInputType.number,
                           controller: controller)
@@ -165,13 +167,13 @@ class GpuListScreenState extends State<GpuListScreen> {
                       onPressed: () async {
                         Navigator.pop(context);
                       },
-                      child: Text("ОТМЕНА")),
+                      child: Text('cancel'.tr())),
                   TextButton(
                       onPressed: () async {
                         Navigator.pop(context);
                         _viewModel.onAddGPU(selectedGpu, int.parse(controller.value.text));
                       },
-                      child: Text("OK"))
+                      child: Text('ok'.tr()))
                 ],
               );
             },
@@ -183,7 +185,7 @@ class GpuListScreenState extends State<GpuListScreen> {
 
   Text _buildEmptyGpuListLabel() {
     return Text(
-      "Список видеокарт пуст, добавьте ваши первые видеокарты",
+      'empty_gpus_message'.tr(),
       textAlign: TextAlign.center,
     );
   }

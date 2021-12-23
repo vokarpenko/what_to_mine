@@ -68,7 +68,7 @@ class CryptoCurrencyState extends State<CryptoCurrencyWidget> {
                     padding: EdgeInsets.all(5),
                   ),
                   Container(
-                    child: Text(_cryptoCurrency.price.toStringAsFixed(5) + " \$"),
+                    child: Text(_cryptoCurrency.price.toStringAsFixed(5) + ' \$'),
                     padding: EdgeInsets.all(5),
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 
@@ -59,7 +60,7 @@ class HashrateViewModel {
     Services.hashAlgorithmService.updateHashratesInDB(hashrates).then((_) {
       _isLoading.add(false);
       _showApplyButton.add(false);
-      _infoMessage.add("Хэшрейты обновлены");
+      _infoMessage.add('hashrates_update_message'.tr());
     }).catchError((Object errorObject) {
       _isLoading.add(false);
       print(errorObject.toString());

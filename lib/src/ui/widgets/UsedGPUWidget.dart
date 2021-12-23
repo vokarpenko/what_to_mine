@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 
@@ -32,7 +33,7 @@ class UsedGPUWidget extends StatelessWidget {
             ),
           ),
           Column(
-            children: [Text(_usedGPU.gpuData.marketingName), Text('Количество видеокарт ${_usedGPU.quantity}')],
+            children: [Text(_usedGPU.gpuData.marketingName), Text('gpu_quantity'.tr() + ' ${_usedGPU.quantity}')],
           )
         ],
       ),

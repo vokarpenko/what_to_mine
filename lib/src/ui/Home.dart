@@ -29,12 +29,12 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-            label: "home_earnings".tr(),
+            label: 'home_earnings'.tr(),
             icon: Icon(Icons.stream),
           ),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.money_dollar), label: "home_prices".tr()),
-          BottomNavigationBarItem(icon: Icon(Icons.personal_video_outlined), label: "home_gpus".tr()),
-          BottomNavigationBarItem(icon: Icon(Icons.sort), label: "home_hashrate".tr()),
+          BottomNavigationBarItem(icon: Icon(CupertinoIcons.money_dollar), label: 'home_prices'.tr()),
+          BottomNavigationBarItem(icon: Icon(Icons.personal_video_outlined), label: 'home_gpus'.tr()),
+          BottomNavigationBarItem(icon: Icon(Icons.sort), label: 'home_hashrate'.tr()),
         ],
         onTap: _onTap,
       ),

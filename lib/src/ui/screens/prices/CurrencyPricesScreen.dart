@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:what_to_mine/src/ui/screens/prices/CurrencyPricesViewModel.dart';
@@ -31,7 +31,7 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Error"),
+                title: Text('error'.tr()),
                 content: Text(message),
                 actions: [
                   TextButton(
@@ -40,7 +40,7 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
                         await SysUtils.delay(6);
                         _viewModel.getData(true);
                       },
-                      child: Text("OK"))
+                      child: Text('ok'.tr()))
                 ],
               );
             });
@@ -59,7 +59,7 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
     RefreshController _refreshController = RefreshController(initialRefresh: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Курсы криптовалют"),
+        title: Text('prices_appbar_title'.tr()),
       ),
       body: Center(
         child: StreamBuilder<List<CryptoCurrency>>(

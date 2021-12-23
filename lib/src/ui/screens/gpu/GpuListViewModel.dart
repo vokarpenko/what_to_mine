@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
@@ -17,7 +18,6 @@ class GpuListViewModel {
   Stream<List<Gpu>> get gpus => _gpus.stream;
   Stream<List<UsedGpu>> get usedGpus => _usedGpus.stream;
 
-  // Состояние viewModel
   List<Gpu>? _listGPU;
 
   void onViewInitState() async {
@@ -65,13 +65,13 @@ class GpuListViewModel {
           ..quantity = quantity)
         .build();
     Services.gpuService.addUsedGpu(newUsedGpu).then((value) => null).catchError((Object error) {
-      _errorMessage.add("Ошибка добавления видеокарты: " + error.toString());
+      _errorMessage.add('gpu_add_error'.tr() + ': ' + error.toString());
     });
   }
 
   void deleteUsedGpu(String id) async {
     Services.gpuService.deleteUsedGpu(id).then((value) => null).catchError((Object error) {
-      _errorMessage.add("Ошибка удаления видеокарты: " + error.toString());
+      _errorMessage.add('gpu_delete_error'.tr() + ': ' + error.toString());
     });
   }
 }

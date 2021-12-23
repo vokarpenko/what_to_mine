@@ -20,7 +20,6 @@ class CurrencyPricesViewModel {
   }
 
   Future<void> getData(bool isNeedFresh) async {
-    print("GET DATA");
     _isLoading.add(true);
     Services.currenciesService.getCryptoCurrenciesList(isNeedFresh).then((list) {
       _currencyList.add(list);
@@ -32,6 +31,9 @@ class CurrencyPricesViewModel {
   }
 
   void onViewDispose() async {
-    this.._currencyList.close().._isLoading.close().._errorMessage.close();
+    this
+      .._currencyList.close()
+      .._isLoading.close()
+      .._errorMessage.close();
   }
 }
