@@ -24,15 +24,18 @@ class SettingsViewModel {
 
   void onChangeNotificationStatus(bool isEnable) async {
     _notificationsIsEnable.add(isEnable);
-    isEnable
-        ? await Services.backgroundTaskSchedulerService.enableScheduler(60)
-        : await Services.backgroundTaskSchedulerService.disableScheduler();
+    if (isEnable) {
+      await Services.backgroundTaskSchedulerService.enableScheduler(60);
+    } else {
+      await Services.backgroundTaskSchedulerService.disableScheduler();
+    }
+    await Services.settingsService.setNotificationsIsEnable(isEnable);
   }
 
   void onSwitchTheme(ThemeMode theme) async {
     _themeMode.add(theme);
     currentTheme.switchTheme(theme);
-    await Services.settingsService.saveThemeIndex(theme.index);
+    await Services.settingsService.setThemeIndex(theme.index);
   }
 
   void onChangeLocale(String locale) async {

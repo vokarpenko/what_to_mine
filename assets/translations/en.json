@@ -20,6 +20,8 @@
   "settings_language": "Language",
   "settings_language_en": "English",
   "settings_language_ru": "Russian",
+  "intro_go_start": "Start",
+  "intro_go_skip": "Skip",
   "daily_volume": "Daily volume",
   "income_per_day": "Income per day",
   "per_day": "per day",

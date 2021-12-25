@@ -36,7 +36,8 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
             requiresDeviceIdle: false,
             requiredNetworkType: NetworkType.NONE), (String taskId) async {
       // Выполняется, когда приложение работает в фоне.
-      await _showNotificationsInTheBackground();
+      await _showNotificationsInTheBackground(
+          'now_profitable_to_mine_message'.tr(), 'earnings_appbar_title'.tr(), 'per_day'.tr());
       BackgroundFetch.finish(taskId);
     }, (String taskId) async {
       // Обработчик таймаута задачи
@@ -56,18 +57,18 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
     }
     // Выполняется, когда приложение закрыто.
     await initializeApp();
-    await _showNotificationsInTheBackground();
+    // Когда приложение закрыто нет доступа к context, поэтому уведомление выводим на английском
+    await _showNotificationsInTheBackground('It is now profitable to mine', 'Earning', 'per day');
     print('backgroundFetchHeadlessTask');
     BackgroundFetch.finish(taskId);
   }
 
-  static Future<void> _showNotificationsInTheBackground() async {
+  static Future<void> _showNotificationsInTheBackground(
+      String nowProfitableToMineMessage, String earningsTitle, String perDayText) async {
     Services.currenciesService.getMostProfitableCurrency().then((currency) {
-      String title = 'now_profitable_to_mine_message'.tr() + ' ${currency.cryptoCurrency.name}';
-      String body = 'earnings_appbar_title'.tr() +
-          ' ${currency.dayEarningInCurrency.toStringAsFixed(2)} USD ' +
-          'per_day'.tr() +
-          '!';
+      String title = '$nowProfitableToMineMessage' + ' ${currency.cryptoCurrency.name}';
+      String body =
+          '$earningsTitle' + ' ${currency.dayEarningInCurrency.toStringAsFixed(2)} USD ' + '$perDayText' + '!';
       Notificator().showNotification(0, title, body);
     }).catchError((Object error) {
       String errorMessage = 'error_get_top_currency'.tr() + ': \n ${error.toString()}';

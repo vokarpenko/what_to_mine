@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:what_to_mine/src/ui/screens/introduction/IntroScreen.dart';
 import 'package:what_to_mine/src/ui/screens/splash/SplashScreen.dart';
 import 'package:what_to_mine/src/ui/theme/AppThemeData.dart';
 import 'package:what_to_mine/src/ui/theme/ThemeConfig.dart';
@@ -49,7 +50,7 @@ class _AppState extends State<App> {
         routes: {
           ScreenRoutes.splashScreen: (BuildContext context) => SplashScreen(),
           ScreenRoutes.homeScreen: (BuildContext context) => Home(),
-          //ScreenRoutes.settingsScreen: (BuildContext context) => SettingScreen()
+          ScreenRoutes.introScreen: (BuildContext context) => IntroScreen()
         });
   }
 }

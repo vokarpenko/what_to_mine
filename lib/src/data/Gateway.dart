@@ -178,16 +178,19 @@ class Gateway implements IGateway {
     return result;
   }
 
+  // Получить хэшрейты из кэша
   @override
   Future<List<HashAlgorithm>> getEditedHashratesFromCache() async {
     return _cache.getEditedHashrate();
   }
 
+  //Обновить хэшрейты в кэшэ
   @override
   Future<void> updateEditedHashrateInCache(String name, double hashrateValue) async {
     return _cache.putEditedHashrate(name, hashrateValue);
   }
 
+  // Обновить хэшрейты в БД
   @override
   Future<void> updateHashratesInDB(List<HashAlgorithm> hashrates) async {
     hashrates.forEach((element) {
@@ -197,34 +200,32 @@ class Gateway implements IGateway {
     _onUserHashrateChanged.add(true);
   }
 
+  // Включить шедулер
   @override
   Future<void> enableScheduler(int interval) async {
-    //_preferences.setBool(_enableBackgroundTaskScheduler, true);
-    Settings settings = await getSettings();
-    settings.notificationIsEnabled = true;
-    this.setSettings(settings);
     return await _backgroundScheduler.enable(interval);
   }
 
+  // Отключить шедулер
   @override
   Future<void> disableScheduler() async {
-    Settings settings = await getSettings();
-    settings.notificationIsEnabled = false;
-    this.setSettings(settings);
     return await _backgroundScheduler.disable();
   }
 
+  // Включен ли шедулер?
   @override
   Future<bool> isSchedulerEnabled() async {
     return (await getSettings()).notificationIsEnabled;
   }
 
+  // Получить настройки
   @override
   Future<Settings> getSettings() async {
     String? settingsString = _preferences.getString(_settingsKey);
     return settingsString != null ? Settings.fromJsonString(settingsString) : Settings();
   }
 
+  // Установить настройки
   @override
   Future<void> setSettings(Settings settings) {
     return _preferences.setString(_settingsKey, settings.toJsonString());
