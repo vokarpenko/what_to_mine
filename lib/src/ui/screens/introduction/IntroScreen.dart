@@ -42,8 +42,16 @@ class IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return IntroductionScreen(
       pages: [
-        _buildPage("", "", Container()),
-        _buildPage("", "", Container()),
+        _buildPage("Добавьте видеокарты", "Для начала нужно добавить видеокарты в приложение",
+            'assets/images/intro_page_1.png'),
+        _buildPage(
+            "Отредактируйте хэшрейты",
+            "После добавление видеокарт, можно персонализировать хэшрейты именно под вашу ферму",
+            'assets/images/intro_page_2.png'),
+        _buildPage(
+            "Следите за доходом",
+            "Отслеживайте доходность на разных монетах, чтобы понимать, что сейчас выгоднее всего майнить",
+            'assets/images/intro_page_3.png')
       ],
       onDone: () {
         _viewModel.onDone();
@@ -65,16 +73,14 @@ class IntroScreenState extends State<IntroScreen> {
     );
   }
 
-  PageViewModel _buildPage(String? title, String? body, Widget? image) {
+  PageViewModel _buildPage(String title, String body, String imagePath) {
     return PageViewModel(
-      title: "Title of first page",
-      body: "Here you can write the description of the page, to explain someting...",
-      image: const Center(child: Icon(Icons.android)),
-      footer: ElevatedButton(
-        onPressed: () {
-          // On button presed
-        },
-        child: const Text("Let's Go !"),
+      decoration: PageDecoration(imageAlignment: Alignment.bottomCenter),
+      title: title,
+      body: body,
+      image: Container(
+        margin: EdgeInsets.only(top: 50),
+        child: Image.asset(imagePath),
       ),
     );
   }

@@ -50,7 +50,6 @@ class SettingsService {
 
   // Получить настройку "Это первый запуск приложения?"
   Future<bool> isTheFirstRun() async {
-    //return (await this.getSettings()).isFirstRun;
-    return false;
+    return (await this.getSettings()).isFirstRun;
   }
 }
