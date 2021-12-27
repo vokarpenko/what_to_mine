@@ -12,13 +12,16 @@ class EarningsWidget extends StatelessWidget {
     Widget icon;
     if (_earnings.cryptoCurrency.iconLink != null) {
       icon = Container(
-          width: 35,
-          height: 35,
+        width: 35,
+        height: 35,
+        child: ClipOval(
           child: FadeInImage.assetNetwork(
-            fit: BoxFit.fill,
-            placeholder: 'assets/images/loading.gif',
-            image: _earnings.cryptoCurrency.iconLink!,
-          ));
+              placeholderFit: BoxFit.fill,
+              fit: BoxFit.fill,
+              placeholder: 'assets/images/loading.gif',
+              image: _earnings.cryptoCurrency.iconLink!),
+        ),
+      );
     } else
       icon = Container(
         width: 35,

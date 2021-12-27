@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +7,7 @@ import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 import 'package:what_to_mine/src/ui/contstants.dart';
 import 'package:what_to_mine/src/ui/widgets/UsedGPUWidget.dart';
+import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 import 'GpuListViewModel.dart';
 
@@ -19,15 +22,27 @@ class GpuListScreen extends StatefulWidget {
 
 class GpuListScreenState extends State<GpuListScreen> {
   final GpuListViewModel _viewModel;
+  StreamSubscription? _subscriptionAddGpu, _subscriptionError;
+
+  GpuListScreenState(this._viewModel);
 
   @override
   void initState() {
     super.initState();
     _viewModel.onViewInitState();
-    _viewModel.addGPU.listen((_) => _showAddGPUDialog());
+    _subscriptionAddGpu = _viewModel.addGpu.listen((_) => _showAddGPUDialog());
+    _subscriptionError =
+        _viewModel.errorMessage.listen((error) => UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr()));
   }
 
-  GpuListScreenState(this._viewModel);
+  @override
+  void dispose() {
+    super.dispose();
+    this
+      .._viewModel.onViewDispose()
+      .._subscriptionAddGpu?.cancel()
+      .._subscriptionError?.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {

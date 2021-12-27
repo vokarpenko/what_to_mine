@@ -6,19 +6,17 @@ import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 
 class GpuListViewModel {
-  final StreamController<bool> _isLoading = StreamController<bool>();
   final StreamController<String> _errorMessage = StreamController<String>();
-  final StreamController<bool> _addGPU = StreamController<bool>();
-  final StreamController<List<Gpu>> _gpus = StreamController<List<Gpu>>();
+  final StreamController _addGpu = StreamController();
   final StreamController<List<UsedGpu>> _usedGpus = StreamController<List<UsedGpu>>();
 
-  Stream<bool> get isLoading => _isLoading.stream;
   Stream<String> get errorMessage => _errorMessage.stream;
-  Stream<bool> get addGPU => _addGPU.stream;
-  Stream<List<Gpu>> get gpus => _gpus.stream;
+
+  Stream get addGpu => _addGpu.stream;
+
   Stream<List<UsedGpu>> get usedGpus => _usedGpus.stream;
 
-  List<Gpu>? _listGPU;
+  List<Gpu>? _listOfAllGpu;
 
   void onViewInitState() async {
     Services.gpuService.onUsedGpuChanged().listen((_) => _getData());
@@ -26,36 +24,32 @@ class GpuListViewModel {
   }
 
   void _getData() async {
-    Services.gpuService.getGPUList().then((gpuList) {
-      if (gpuList != null) {
-        _listGPU = gpuList;
-        gpuList = onFilterGPUListByVendor('nvidia');
-        _gpus.add(gpuList);
-      }
-    });
-
+    _listOfAllGpu = await Services.gpuService.getGPUList();
     Services.gpuService.getUsedGPUList().then((usedGpuList) {
       if (usedGpuList != null)
         _usedGpus.add(usedGpuList);
       else
         _usedGpus.add([]);
+    }).catchError((error) {
+      String errorMessage = 'error_get_gpu_list'.tr() + '.\n${error.toString()}';
+      print(errorMessage);
+      _errorMessage.add(errorMessage);
     });
   }
 
   void onViewDispose() async {
-    _isLoading.close();
-    _errorMessage.close();
-    _addGPU.close();
-    _gpus.close();
-    _usedGpus.close();
+    this
+      .._errorMessage.close()
+      .._addGpu.close()
+      .._usedGpus.close();
   }
 
   void onClickAddGPU() async {
-    _addGPU.add(true);
+    _addGpu.add('');
   }
 
   List<Gpu> onFilterGPUListByVendor(String vendor) {
-    List<Gpu> result = _listGPU!.where((element) => element.vendor == vendor.toLowerCase()).toList();
+    List<Gpu> result = _listOfAllGpu!.where((element) => element.vendor == vendor.toLowerCase()).toList();
     return result;
   }
 

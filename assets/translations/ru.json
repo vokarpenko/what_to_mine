@@ -42,7 +42,14 @@
   "now_profitable_to_mine_message": "Сейчас выгодно майнить",
   "empty_earnings_message": "Чтобы увидеть доходы от ваших видеокарт добавьте их на вкладке Видеокарты",
   "empty_gpus_message": "Список видеокарт пуст, добавьте ваши первые видеокарты",
-  "error_gpu_delete": "Ошибка удаления видеокарты",
-  "error_gpu_add": "Ошибка добавления видеокарты",
-  "error_get_top_currency": "Ошибка получения самой прибыльной монеты"
+  "error_update_hashrate_in_db": "Ошибка при обновлении хэшрейтов в базе данных",
+  "error_update_edited_hashrate_in_cache": "Ошибка при обновлении хэшрейта в кэшэ",
+  "error_get_hashrates_used_in_calc": "Ошибка при получении хэшрейтов",
+  "error_get_gpu_list": "Ошибка при получении списка видеокарт",
+  "error_get_earnings_list": "Ошибка при получении списка доходов",
+  "error_get_crypto_currencies_list": "Ошибка при получении списка криптовалют",
+  "error_internet_is_unavailable": "Нет соединения с интернетом",
+  "error_gpu_delete": "Ошибка при удалении видеокарты",
+  "error_gpu_add": "Ошибка при добавлении видеокарты",
+  "error_get_top_currency": "Ошибка при получения самой прибыльной монеты"
 }

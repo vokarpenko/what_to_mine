@@ -25,10 +25,12 @@ class CryptoCurrencyState extends State<CryptoCurrencyWidget> {
           margin: EdgeInsets.all(20),
           width: 35,
           height: 35,
-          child: FadeInImage.assetNetwork(
-            fit: BoxFit.fill,
-            placeholder: 'assets/images/loading.gif',
-            image: _cryptoCurrency.iconLink!,
+          child: ClipOval(
+            child: FadeInImage.assetNetwork(
+                placeholderFit: BoxFit.fill,
+                fit: BoxFit.fill,
+                placeholder: 'assets/images/loading.gif',
+                image: _cryptoCurrency.iconLink!),
           ));
     } else
       icon = Container(

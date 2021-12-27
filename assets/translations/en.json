@@ -42,6 +42,13 @@
   "now_profitable_to_mine_message": "It is now profitable to mine",
   "empty_earnings_message": "To see the income from your video cards, add them on the GPUs tab",
   "empty_gpus_message": "The GPUs list is empty, add your first GPUs",
+  "error_update_hashrate_in_db": "Update hashrate in database error",
+  "error_update_edited_hashrate_in_cache": "Update Edited Hashrate in cache error",
+  "error_get_hashrates_used_in_calc": "Get hashrates error",
+  "error_get_gpu_list": "Get gpu list error",
+  "error_get_earnings_list": "Get earnings list error",
+  "error_get_crypto_currencies_list": "Get crypto currencies list error",
+  "error_internet_is_unavailable": "Internet is unavailable",
   "error_gpu_delete": "GPU delete error",
   "error_gpu_add": "GPU add error",
   "error_get_top_currency": "Error getting the most profitable coin"

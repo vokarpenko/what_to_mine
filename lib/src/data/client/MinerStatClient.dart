@@ -19,7 +19,6 @@ class MinerStatClient implements IMinerStatClient {
       print('***getCryptoCurrenciesList*** Response status: ${response.statusCode}');
       if (response.statusCode == 200) {
         // Если сервер вернул 200 значит все успешно, парсим JSON.
-
         List<dynamic> parsedListJson = jsonDecode(response.body);
         List<CryptoCurrency> result = List<CryptoCurrency>.from(parsedListJson.map((i) => CryptoCurrency.fromJson(i)));
         client.close();

@@ -9,6 +9,7 @@ import 'package:what_to_mine/src/ui/screens/earning/EarningViewModel.dart';
 import 'package:what_to_mine/src/ui/screens/settings/SettingsScreen.dart';
 import 'package:what_to_mine/src/ui/widgets/EarningsWidget.dart';
 import 'package:what_to_mine/src/utils/SysUtils.dart';
+import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 class EarningScreen extends StatefulWidget {
   final EarningViewModel _viewModel = EarningViewModel();
@@ -20,8 +21,10 @@ class EarningScreen extends StatefulWidget {
 
 class EarningScreenState extends State<EarningScreen> {
   EarningViewModel _viewModel = EarningViewModel();
+  StreamSubscription? _subscriptionOpenSettingsScreen, _subscriptionError;
+
   EarningScreenState(this._viewModel);
-  StreamSubscription? _subscriptionOpenSettingsScreen;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +33,9 @@ class EarningScreenState extends State<EarningScreen> {
       showBarModalBottomSheet(
           context: context, duration: Duration(milliseconds: 300), builder: (context) => SettingScreen(settings));
     });
+    _subscriptionError = _viewModel.errorMessage.listen((error) {
+      UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr());
+    });
   }
 
   @override
@@ -37,7 +43,8 @@ class EarningScreenState extends State<EarningScreen> {
     super.dispose();
     this
       .._viewModel.onViewDispose()
-      .._subscriptionOpenSettingsScreen?.cancel();
+      .._subscriptionOpenSettingsScreen?.cancel()
+      .._subscriptionError?.cancel();
   }
 
   @override

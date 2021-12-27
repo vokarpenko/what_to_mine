@@ -1,12 +1,15 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/ui/screens/hashrate/HashrateViewModel.dart';
+import 'package:what_to_mine/src/ui/widgets/HashrateWidget.dart';
 import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 class HashrateScreen extends StatefulWidget {
   final HashrateViewModel _viewModel = HashrateViewModel();
+
   @override
   State<StatefulWidget> createState() {
     return HashrateScreenState(_viewModel);
@@ -15,41 +18,26 @@ class HashrateScreen extends StatefulWidget {
 
 class HashrateScreenState extends State<HashrateScreen> {
   final HashrateViewModel _viewModel;
+  StreamSubscription? _subscriptionInfoMessage, _subscriptionError;
+
   HashrateScreenState(this._viewModel);
 
   @override
   void initState() {
     super.initState();
-    _viewModel.infoMessage.listen((message) => UIUtils.showSnackBar(context, message));
+    _subscriptionInfoMessage = _viewModel.infoMessage.listen((message) => UIUtils.showSnackBar(context, message));
+    _subscriptionError =
+        _viewModel.errorMessage.listen((error) => UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr()));
     _viewModel.onViewInitState();
-
-/*    _viewModel.errorMessage.listen((message) {
-      new Future.delayed(Duration.zero, () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('Error'),
-                content: Text(message),
-                actions: [
-                  TextButton(
-                      onPressed: () async {
-                        Navigator.pop(context);
-                        await SysUtils.delay(6);
-                        _viewModel.onViewInitState();
-                      },
-                      child: Text('OK'))
-                ],
-              );
-            });
-      });
-    });*/
   }
 
   @override
   void dispose() {
     super.dispose();
-    widget._viewModel.onViewDispose();
+    this
+      .._viewModel.onViewDispose()
+      .._subscriptionInfoMessage?.cancel()
+      .._subscriptionError?.cancel();
   }
 
   @override
@@ -63,16 +51,16 @@ class HashrateScreenState extends State<HashrateScreen> {
               stream: _viewModel.showApplyButton,
               builder: (context, snapshot) => (snapshot.data!)
                   ? Padding(
-                      padding: EdgeInsets.only(right: 5),
-                      child: IconButton(
-                          tooltip: 'apply'.tr(),
-                          onPressed: _applyHashrateButtonClick,
-                          splashRadius: 25,
-                          icon: Icon(
-                            Icons.check,
-                            size: 30,
-                          )),
-                    )
+                padding: EdgeInsets.only(right: 5),
+                child: IconButton(
+                    tooltip: 'apply'.tr(),
+                    onPressed: _applyHashrateButtonClick,
+                    splashRadius: 25,
+                    icon: Icon(
+                      Icons.check,
+                      size: 30,
+                    )),
+              )
                   : Container())
         ],
       ),
@@ -88,75 +76,7 @@ class HashrateScreenState extends State<HashrateScreen> {
                 if (itemsCount > 0)
                   return ListView.builder(
                     itemCount: itemsCount,
-                    itemBuilder: (context, index) {
-                      return Card(
-                          margin: EdgeInsets.all(10),
-                          elevation: 5,
-                          child: Container(
-                            padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-                            child: Flex(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              direction: Axis.horizontal,
-                              children: [
-                                Flexible(flex: 1, child: Icon(Icons.forward)),
-                                Flexible(
-                                  fit: FlexFit.tight,
-                                  flex: 1,
-                                  child: Text(items[index].name),
-                                ),
-                                Flexible(
-                                    fit: FlexFit.tight,
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: TextField(
-                                          onChanged: (value) => _onChangeHashrate(items[index].name, value),
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,}([.][0-9]{0,2})?'))
-                                          ],
-                                          keyboardType: TextInputType.number,
-                                          decoration: new InputDecoration(
-                                            contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
-                                            labelText: _viewModel.getHashUnit(items[index]),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.black26, width: 2),
-                                            ),
-                                          ),
-                                          controller:
-                                              TextEditingController(text: items[index].hashrate!.toStringAsFixed(2))),
-                                    )),
-                                /*Flexible(
-                                    fit: FlexFit.tight,
-                                    flex: 1,
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      //width: 100,
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: TextField(
-                                          enabled: false,
-                                          decoration: new InputDecoration(
-                                            contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
-                                            labelText: 'W',
-                                            focusedBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.black26, width: 2),
-                                            ),
-                                            disabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide(color: Colors.black12, width: 2),
-                                            ),
-                                          ),
-                                          controller: TextEditingController()),
-                                    )),*/
-                              ],
-                            ),
-                          ));
-                    },
+                    itemBuilder: (context, index) => HashrateWidget(_viewModel, items[index]),
                   );
                 else
                   return _buildEmptyHashrateListLabel();
@@ -175,10 +95,6 @@ class HashrateScreenState extends State<HashrateScreen> {
       'empty_hashrates_message'.tr(),
       textAlign: TextAlign.center,
     );
-  }
-
-  void _onChangeHashrate(String name, String? value) {
-    _viewModel.onChangeHashrate(name, value);
   }
 
   void _applyHashrateButtonClick() {

@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:what_to_mine/src/ui/screens/prices/CurrencyPricesViewModel.dart';
 import 'package:what_to_mine/src/ui/widgets/CryptoCurrencyWidget.dart';
 import 'package:what_to_mine/src/utils/SysUtils.dart';
+import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 import '../../../domain/currency/CryptoCurrency.dart';
 
@@ -18,40 +21,25 @@ class CurrencyPricesScreen extends StatefulWidget {
 
 class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
   final CurrencyPricesViewModel _viewModel;
+  StreamSubscription? _subscriptionError;
 
   CurrencyPricesScreenState(this._viewModel);
 
   @override
   void initState() {
     super.initState();
+    _subscriptionError =
+        _viewModel.errorMessage.listen((error) => UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr()));
     _viewModel.onViewInitState();
-    _viewModel.errorMessage.listen((message) {
-      new Future.delayed(Duration.zero, () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('error'.tr()),
-                content: Text(message),
-                actions: [
-                  TextButton(
-                      onPressed: () async {
-                        Navigator.pop(context);
-                        await SysUtils.delay(6);
-                        _viewModel.getData(true);
-                      },
-                      child: Text('ok'.tr()))
-                ],
-              );
-            });
-      });
-    });
+    _viewModel.onViewInitState();
   }
 
   @override
   void dispose() {
     super.dispose();
-    widget._viewModel.onViewDispose();
+    this
+      .._viewModel.onViewDispose()
+      .._subscriptionError?.cancel();
   }
 
   @override
