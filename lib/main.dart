@@ -4,6 +4,7 @@ import 'package:what_to_mine/src/ui/screens/introduction/IntroScreen.dart';
 import 'package:what_to_mine/src/ui/screens/splash/SplashScreen.dart';
 import 'package:what_to_mine/src/ui/theme/AppThemeData.dart';
 import 'package:what_to_mine/src/ui/theme/ThemeConfig.dart';
+import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 import 'src/ui/Home.dart';
 import 'src/ui/screens/ScreenRoutes.dart';
@@ -16,7 +17,7 @@ void main() async {
         supportedLocales: [Locale('en'), Locale('ru')],
         path: 'assets/translations',
         saveLocale: true,
-        fallbackLocale: Locale('en'),
+        fallbackLocale: UIUtils.getFallbackLocale(),
         useOnlyLangCode: true,
         child: App()),
   );

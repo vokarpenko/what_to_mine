@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class UIUtils {
@@ -9,5 +11,13 @@ class UIUtils {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
     ));
+  }
+
+  static Locale getFallbackLocale() {
+    String deviceLocale = Platform.localeName;
+    if (deviceLocale == 'ru_RU')
+      return Locale('ru');
+    else
+      return Locale('en');
   }
 }

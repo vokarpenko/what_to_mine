@@ -42,16 +42,9 @@ class IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return IntroductionScreen(
       pages: [
-        _buildPage("Добавьте видеокарты", "Для начала нужно добавить видеокарты в приложение",
-            'assets/images/intro_page_1.png'),
-        _buildPage(
-            "Отредактируйте хэшрейты",
-            "После добавление видеокарт, можно персонализировать хэшрейты именно под вашу ферму",
-            'assets/images/intro_page_2.png'),
-        _buildPage(
-            "Следите за доходом",
-            "Отслеживайте доходность на разных монетах, чтобы понимать, что сейчас выгоднее всего майнить",
-            'assets/images/intro_page_3.png')
+        _buildPage('intro_page1_title'.tr(), 'intro_page1_body'.tr(), 'assets/images/intro_page_1.png'),
+        _buildPage('intro_page2_title'.tr(), 'intro_page2_body'.tr(), 'assets/images/intro_page_2.png'),
+        _buildPage('intro_page3_title'.tr(), 'intro_page3_body'.tr(), 'assets/images/intro_page_3.png')
       ],
       onDone: () {
         _viewModel.onDone();

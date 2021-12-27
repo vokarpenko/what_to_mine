@@ -1,4 +1,10 @@
 {
+  "intro_page1_title": "Add graphics cards",
+  "intro_page2_title": "Edit hashrates",
+  "intro_page3_title": "Track your income",
+  "intro_page1_body": "First you need to add video cards to the application",
+  "intro_page2_body": "After adding video cards, you can personalize hashrates specifically for your farm",
+  "intro_page3_body": "Track profitability on different coins to understand what is the most profitable to mine right now",
   "home_earnings": "Earnings",
   "home_prices": "Prices",
   "home_gpus": "GPUs",

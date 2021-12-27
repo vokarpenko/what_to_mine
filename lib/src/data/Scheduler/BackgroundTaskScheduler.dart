@@ -65,11 +65,13 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
 
   static Future<void> _showNotificationsInTheBackground(
       String nowProfitableToMineMessage, String earningsTitle, String perDayText) async {
-    Services.currenciesService.getMostProfitableCurrency().then((currency) {
-      String title = '$nowProfitableToMineMessage' + ' ${currency.cryptoCurrency.name}';
-      String body =
-          '$earningsTitle' + ' ${currency.dayEarningInCurrency.toStringAsFixed(2)} USD ' + '$perDayText' + '!';
-      Notificator().showNotification(0, title, body);
+    Services.currenciesService.getMostProfitableCurrency().then((earnings) {
+      if (earnings != null) {
+        String title = '$nowProfitableToMineMessage' + ' ${earnings.cryptoCurrency.name}';
+        String body =
+            '$earningsTitle' + ' ${earnings.dayEarningInCurrency.toStringAsFixed(2)} USD ' + '$perDayText' + '!';
+        Notificator().showNotification(0, title, body);
+      }
     }).catchError((Object error) {
       String errorMessage = 'error_get_top_currency'.tr() + ': \n ${error.toString()}';
       print(errorMessage);

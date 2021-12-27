@@ -14,15 +14,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
-  late AnimationController _earningsIconAnimationController;
-  late AnimationController _pricesIconAnimationController;
-  late AnimationController _gpusIconAnimationController;
-  late AnimationController _hashratesIconAnimationController;
+  late AnimationController _earningsIconAnimationController,
+      _pricesIconAnimationController,
+      _gpusIconAnimationController,
+      _hashratesIconAnimationController;
 
-  bool earningsIsSelected = true;
-  bool pricesIsSelected = false;
-  bool gpusIsSelected = false;
-  bool hashratesIsSelected = false;
+  bool earningsIsSelected = true, pricesIsSelected = false, gpusIsSelected = false, hashratesIsSelected = false;
   int _currentIndex = 0;
 
   @override
@@ -32,6 +29,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     _pricesIconAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     _gpusIconAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     _hashratesIconAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    this
+      .._earningsIconAnimationController.dispose()
+      .._pricesIconAnimationController.dispose()
+      .._gpusIconAnimationController.dispose()
+      .._hashratesIconAnimationController.dispose();
   }
 
   @override
