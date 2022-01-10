@@ -42,49 +42,52 @@ class HashrateScreenState extends State<HashrateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('hashrate_appbar_title'.tr()),
-        actions: <Widget>[
-          StreamBuilder<bool>(
-              initialData: false,
-              stream: _viewModel.showApplyButton,
-              builder: (context, snapshot) => (snapshot.data!)
-                  ? Padding(
-                padding: EdgeInsets.only(right: 5),
-                child: IconButton(
-                    tooltip: 'apply'.tr(),
-                    onPressed: _applyHashrateButtonClick,
-                    splashRadius: 25,
-                    icon: Icon(
-                      Icons.check,
-                      size: 30,
-                    )),
-              )
-                  : Container())
-        ],
-      ),
-      body: Center(
-        child: StreamBuilder<List<HashAlgorithm>>(
-          stream: _viewModel.hashrate,
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              List<HashAlgorithm> items = [];
-              items = snapshot.data!;
-              if (snapshot.data!.isNotEmpty) {
-                int itemsCount = snapshot.data!.length;
-                if (itemsCount > 0)
-                  return ListView.builder(
-                    itemCount: itemsCount,
-                    itemBuilder: (context, index) => HashrateWidget(_viewModel, items[index]),
-                  );
-                else
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('hashrate_appbar_title'.tr()),
+          actions: <Widget>[
+            StreamBuilder<bool>(
+                initialData: false,
+                stream: _viewModel.showApplyButton,
+                builder: (context, snapshot) => (snapshot.data!)
+                    ? Padding(
+                        padding: EdgeInsets.only(right: 5),
+                        child: IconButton(
+                            tooltip: 'apply'.tr(),
+                            onPressed: _applyHashrateButtonClick,
+                            splashRadius: 25,
+                            icon: Icon(
+                              Icons.check,
+                              size: 30,
+                            )),
+                      )
+                    : Container())
+          ],
+        ),
+        body: Center(
+          child: StreamBuilder<List<HashAlgorithm>>(
+            stream: _viewModel.hashrate,
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data != null) {
+                List<HashAlgorithm> items = [];
+                items = snapshot.data!;
+                if (snapshot.data!.isNotEmpty) {
+                  int itemsCount = snapshot.data!.length;
+                  if (itemsCount > 0)
+                    return ListView.builder(
+                      itemCount: itemsCount,
+                      itemBuilder: (context, index) => HashrateWidget(_viewModel, items[index]),
+                    );
+                  else
+                    return _buildEmptyHashrateListLabel();
+                } else
                   return _buildEmptyHashrateListLabel();
               } else
-                return _buildEmptyHashrateListLabel();
-            } else
-              return CircularProgressIndicator();
-          },
+                return CircularProgressIndicator();
+            },
+          ),
         ),
       ),
     );

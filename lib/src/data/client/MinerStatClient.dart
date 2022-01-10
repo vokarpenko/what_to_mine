@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart' as http;
 
 import '../../domain/currency/CryptoCurrency.dart';
@@ -25,8 +26,8 @@ class MinerStatClient implements IMinerStatClient {
         return result;
       } else {
         client.close();
-        print('Failed to load data');
-        throw Exception('Failed to load data');
+        print('error_load_data'.tr());
+        throw Exception('error_load_data'.tr());
       }
     } on Exception catch (e) {
       print('Exception post: ${e.toString()}');

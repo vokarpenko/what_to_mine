@@ -20,15 +20,21 @@ class GpuListScreen extends StatefulWidget {
   }
 }
 
-class GpuListScreenState extends State<GpuListScreen> {
+class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMixin {
   final GpuListViewModel _viewModel;
   StreamSubscription? _subscriptionAddGpu, _subscriptionError;
+  late AnimationController _hideFabAnimation;
 
   GpuListScreenState(this._viewModel);
 
   @override
   void initState() {
     super.initState();
+    _hideFabAnimation = AnimationController(
+      vsync: this,
+      duration: kThemeAnimationDuration,
+    );
+    _hideFabAnimation.forward();
     _viewModel.onViewInitState();
     _subscriptionAddGpu = _viewModel.addGpu.listen((_) => _showAddGPUDialog());
     _subscriptionError =
@@ -40,6 +46,7 @@ class GpuListScreenState extends State<GpuListScreen> {
     super.dispose();
     this
       .._viewModel.onViewDispose()
+      .._hideFabAnimation.dispose()
       .._subscriptionAddGpu?.cancel()
       .._subscriptionError?.cancel();
   }
@@ -47,55 +54,59 @@ class GpuListScreenState extends State<GpuListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('gpus_appbar_title'.tr()),
-      ),
-      body: Center(
-        child: StreamBuilder<List<UsedGpu>>(
-          stream: _viewModel.usedGpus,
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              List<UsedGpu> items = [];
-              items = snapshot.data!;
-              if (snapshot.data!.isNotEmpty) {
-                int itemsCount = snapshot.data!.length;
-                if (itemsCount > 0)
-                  return ListView.builder(
-                    padding: EdgeInsets.only(top: 15, bottom: 15),
-                    itemCount: itemsCount,
-                    itemBuilder: (context, index) {
-                      final item = items[index];
-                      return Dismissible(
-                        onDismissed: (direction) {
-                          _viewModel.deleteUsedGpu(items[index].gpuData.id);
-                          setState(() {
-                            items.removeAt(index);
-                            itemsCount = items.length;
-                          });
-                        },
-                        key: Key(item.gpuData.id),
-                        child: UsedGPUWidget(items[index]),
-                      );
-                    },
-                  );
-                else
+        appBar: AppBar(
+          title: Text('gpus_appbar_title'.tr()),
+        ),
+        body: Center(
+          child: StreamBuilder<List<UsedGpu>>(
+            stream: _viewModel.usedGpus,
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data != null) {
+                List<UsedGpu> items = [];
+                items = snapshot.data!;
+                if (snapshot.data!.isNotEmpty) {
+                  int itemsCount = snapshot.data!.length;
+                  if (itemsCount > 0)
+                    return ListView.builder(
+                      padding: EdgeInsets.only(top: 15, bottom: 15),
+                      itemCount: itemsCount,
+                      itemBuilder: (context, index) {
+                        final item = items[index];
+                        return Dismissible(
+                          onDismissed: (direction) {
+                            _viewModel.deleteUsedGpu(items[index].gpuData.id);
+                            setState(() {
+                              items.removeAt(index);
+                              itemsCount = items.length;
+                            });
+                          },
+                          key: Key(item.gpuData.id),
+                          child: UsedGPUWidget(items[index]),
+                        );
+                      },
+                    );
+                  else
+                    return _buildEmptyGpuListLabel();
+                } else
                   return _buildEmptyGpuListLabel();
               } else
-                return _buildEmptyGpuListLabel();
-            } else
-              return CircularProgressIndicator();
-          },
+                return CircularProgressIndicator();
+            },
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: "gpuAdd",
-        onPressed: _onClickAddGPU,
-        child: Icon(Icons.add),
-      ),
-    );
+        floatingActionButton: ScaleTransition(
+          scale: _hideFabAnimation,
+          alignment: Alignment.bottomCenter,
+          child: FloatingActionButton(
+            heroTag: "gpuAdd",
+            onPressed: _onClickAddGPU,
+            child: Icon(Icons.add),
+          ),
+        ));
   }
 
   void _onClickAddGPU() {
+    _hideFabAnimation.reverse();
     _viewModel.onClickAddGPU();
   }
 
@@ -180,11 +191,13 @@ class GpuListScreenState extends State<GpuListScreen> {
                 actions: [
                   TextButton(
                       onPressed: () async {
+                        _hideFabAnimation.forward();
                         Navigator.pop(context);
                       },
                       child: Text('cancel'.tr())),
                   TextButton(
                       onPressed: () async {
+                        _hideFabAnimation.forward();
                         Navigator.pop(context);
                         _viewModel.onAddGPU(selectedGpu, int.parse(controller.value.text));
                       },

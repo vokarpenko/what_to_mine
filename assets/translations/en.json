@@ -51,5 +51,6 @@
   "error_internet_is_unavailable": "Internet is unavailable",
   "error_gpu_delete": "GPU delete error",
   "error_gpu_add": "GPU add error",
-  "error_get_top_currency": "Error getting the most profitable coin"
+  "error_get_top_currency": "Error getting the most profitable coin",
+  "error_load_data": "Failed to load data"
 }
