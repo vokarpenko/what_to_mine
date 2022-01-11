@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
-import 'package:what_to_mine/src/ui/contstants.dart';
+import 'package:what_to_mine/src/ui/constants.dart';
 import 'package:what_to_mine/src/ui/widgets/UsedGPUWidget.dart';
 import 'package:what_to_mine/src/utils/UIUtils.dart';
 

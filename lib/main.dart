@@ -38,6 +38,11 @@ class _AppState extends State<App> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
         localizationsDelegates: context.localizationDelegates,

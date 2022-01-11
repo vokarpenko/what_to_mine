@@ -91,4 +91,41 @@ class CryptoCurrency {
     else
       return 0;
   }
+
+  bool isCoin() {
+    return this.type == 'coin';
+  }
+
+  bool hasPrice() {
+    return this.price != -1;
+  }
+
+  bool hasReward() {
+    return this.reward != -1;
+  }
+
+  bool volumeMoreThan(double volume) {
+    return this.volume > volume;
+  }
+
+  bool operator ==(o) =>
+      o is CryptoCurrency &&
+      name == o.name &&
+      coin == o.coin &&
+      name == o.name &&
+      type == o.type &&
+      algorithm == o.algorithm &&
+      price == o.price &&
+      reward == o.reward &&
+      networkHashrate == o.networkHashrate &&
+      rewardUnit == o.rewardUnit &&
+      volume == o.volume &&
+      iconLink == o.iconLink;
+
+  @override
+  String toString() =>
+      '\n{ \n id = $id \n coin = $coin \n name = $name \n type = $type \n algorithm = $algorithm \n price = $price \n reward = $reward \n networkHashrate = $networkHashrate \n rewardUnit = $rewardUnit \n volume = $volume \n iconLink = $iconLink \n}';
+
+  @override
+  int get hashCode => super.hashCode;
 }

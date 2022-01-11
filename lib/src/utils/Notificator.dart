@@ -1,5 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:what_to_mine/src/ui/contstants.dart';
+import 'package:what_to_mine/src/ui/constants.dart';
 
 class Notificator {
   static final Notificator _instance = Notificator._();

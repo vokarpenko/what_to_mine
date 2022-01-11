@@ -26,8 +26,9 @@ class Gateway implements IGateway {
   final AppDatabase _appDatabase;
   final SharedPreferences _preferences;
   final IBackgroundTaskScheduler _backgroundScheduler;
-  static const String _useCustomHashratesKey = "USE_CUSTOM_HASHRATES_KEY";
-  static const String _settingsKey = "SETTINGS";
+  static const String _useCustomHashratesKey = 'USE_CUSTOM_HASHRATES_KEY';
+  static const String _settingsKey = 'SETTINGS';
+
   Gateway(
       {required IMinerStatClient client,
       required ILocalJsonReader jsonReader,
@@ -51,27 +52,37 @@ class Gateway implements IGateway {
   @override
   Stream<bool> onUserHashrateChanged() => _onUserHashrateChanged.stream;
 
+  Future<void> dispose() async {
+    _onUsedGpuChanged.close();
+    _onUserHashrateChanged.close();
+  }
+
   // Получить список криптовалют
   @override
   Future<List<CryptoCurrency>> getCryptoCurrenciesList({required bool isNeedFresh}) async {
     List<CryptoCurrency> list;
-
-    List<CryptoCurrency>? listInCache = _cache.getCryptoCurrency();
+    List<CryptoCurrency>? listInCache;
+    if (!isNeedFresh) listInCache = _cache.getCryptoCurrencies();
 
     if (listInCache != null && listInCache.isNotEmpty && !isNeedFresh) {
       list = listInCache;
     } else {
       list = await _client.getCryptoCurrenciesList();
-      list = list
-          .where((element) =>
-              element.type == "coin" && element.price != -1 && element.reward != -1 && element.volume > 1000)
-          .toList();
+      list = _filterCryptoCurrencies(list);
       list.forEach((element) {
         element.iconLink = Links.iconsLink + element.coin.toLowerCase() + ".png";
       });
-      _cache.putCryptoCurrency(list);
+      _cache.putCryptoCurrencies(list);
     }
     return list;
+  }
+
+  // Фильтруем только подходящие криптовалюты
+  List<CryptoCurrency> _filterCryptoCurrencies(List<CryptoCurrency> list) {
+    return list
+        .where(
+            (element) => element.isCoin() && element.hasPrice() && element.hasReward() && element.volumeMoreThan(1000))
+        .toList();
   }
 
   // Получить список видеокарт

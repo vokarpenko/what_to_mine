@@ -7,16 +7,16 @@ class MemoryStorage {
   List<HashAlgorithm> _editedHashrateCache = [];
 
   // Добавить данные криптовалют в кэш
-  void putCryptoCurrency(List<CryptoCurrency> cryptoCurrency) {
+  void putCryptoCurrencies(List<CryptoCurrency> cryptoCurrency) {
     if (_cryptoCurrencyCache.isNotEmpty) _cryptoCurrencyCache.clear();
     _cryptoCurrencyCache.addAll(cryptoCurrency);
   }
 
   // Получить данные криптовалют из кэша
-  List<CryptoCurrency>? getCryptoCurrency() => _cryptoCurrencyCache;
+  List<CryptoCurrency>? getCryptoCurrencies() => _cryptoCurrencyCache;
 
   // Очистить кэш данных криптовалют
-  void clearCryptoCurrencyCache() => _cryptoCurrencyCache.clear();
+  void clearCryptoCurrenciesCache() => _cryptoCurrencyCache.clear();
 
   // Добавить новые данные хэшрейтов в кэш
   void putEditedHashrates(List<HashAlgorithm> hashrates) {
