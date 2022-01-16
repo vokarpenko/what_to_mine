@@ -2,81 +2,97 @@
   {
     "name": "Cuckarood29",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "Cuckatoo31",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "Cuckatoo32",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "CuckooCycle",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "Cortex",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "Equihash",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "Equihash(125,4)",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "Equihash(144,5)",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "BeamHash",
     "value": 0,
-    "coefficient": 1
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "Ethash",
     "value": 0,
-    "coefficient": 1000000
+    "coefficient": 1000000,
+    "power": 0
   },
   {
     "name": "Etchash",
     "value": 0,
-    "coefficient": 1000000
-  },
-  {
-    "name": "MTP",
-    "value": 0,
-    "coefficient": 1000000
+    "coefficient": 1000000,
+    "power": 0
   },
   {
     "name": "KAWPOW",
     "value": 0,
-    "coefficient": 1000000
+    "coefficient": 1000000,
+    "power": 0
   },
   {
     "name": "RandomX",
     "value": 0,
-    "coefficient": 1000
+    "coefficient": 1,
+    "power": 0
   },
   {
     "name": "Eaglesong",
     "value": 0,
-    "coefficient": 1000000
+    "coefficient": 1000000,
+    "power": 0
   },
   {
     "name": "Autolykos2",
     "value": 0,
-    "coefficient": 1000000
+    "coefficient": 1000000,
+    "power": 0
+  },
+  {
+    "name": "Darkcoin",
+    "value": 0,
+    "coefficient": 1000000000,
+    "power": 0
   }
 ]

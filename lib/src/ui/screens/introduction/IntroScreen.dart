@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:what_to_mine/src/ui/screens/ScreenRoutes.dart';
@@ -18,6 +19,7 @@ class IntroScreen extends StatefulWidget {
 class IntroScreenState extends State<IntroScreen> {
   IntroViewModel _viewModel;
   StreamSubscription? _subscriptionOpenHomeScreen;
+  double selectedItem = 0.1;
 
   IntroScreenState(this._viewModel);
 
@@ -44,13 +46,14 @@ class IntroScreenState extends State<IntroScreen> {
       pages: [
         _buildPage('intro_page1_title'.tr(), 'intro_page1_body'.tr(), 'assets/images/intro_page_1.png'),
         _buildPage('intro_page2_title'.tr(), 'intro_page2_body'.tr(), 'assets/images/intro_page_2.png'),
-        _buildPage('intro_page3_title'.tr(), 'intro_page3_body'.tr(), 'assets/images/intro_page_3.png')
+        _buildPage('intro_page3_title'.tr(), 'intro_page3_body'.tr(), 'assets/images/intro_page_3.png'),
+        _buildElectricityCostPage()
       ],
       onDone: () {
-        _viewModel.onDone();
+        _viewModel.onDone(selectedItem);
       },
       onSkip: () {
-        _viewModel.onDone();
+        _viewModel.onSkip();
       },
       showSkipButton: true,
       skip: Text("intro_go_skip".tr()),
@@ -74,6 +77,47 @@ class IntroScreenState extends State<IntroScreen> {
       image: Container(
         margin: EdgeInsets.only(top: 50),
         child: Image.asset(imagePath),
+      ),
+    );
+  }
+
+  PageViewModel _buildElectricityCostPage() {
+    List<double> items = [];
+    for (int i = 1; i <= 40; i++) {
+      double item = 0.01 * i;
+      items.add(double.parse(item.toStringAsFixed(2)));
+    }
+
+    return PageViewModel(
+      decoration: PageDecoration(imageAlignment: Alignment.bottomCenter),
+      title: 'intro_page4_title'.tr(),
+      bodyWidget: Container(
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          child: CupertinoPicker(
+            diameterRatio: 2,
+            scrollController: FixedExtentScrollController(initialItem: 9),
+            children: items.map<DropdownMenuItem<double>>((double value) {
+              return DropdownMenuItem<double>(
+                value: value,
+                child: Center(
+                  child: Text(
+                    value.toStringAsFixed(2) + ' USD',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ),
+              );
+            }).toList(),
+            onSelectedItemChanged: (int selected) {
+              setState(() {
+                selectedItem = items.elementAt(selected);
+              });
+            },
+            itemExtent: 50,
+          )),
+      image: Container(
+        margin: EdgeInsets.only(top: 50),
+        child: Image.asset('assets/images/intro_page_4.png'),
       ),
     );
   }

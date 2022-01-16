@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:what_to_mine/src/domain/Settings.dart';
 import 'package:what_to_mine/src/ui/screens/settings/SettingsViewModel.dart';
+import 'package:what_to_mine/src/ui/widgets/ElectricityCostSelectorWidget.dart';
 import 'package:what_to_mine/src/ui/widgets/LanguageSelectorWidget.dart';
 import 'package:what_to_mine/src/ui/widgets/ThemeSelectorWidget.dart';
 
@@ -52,13 +53,28 @@ class StateSettingScreen extends State<SettingScreen> {
                 (snapshot.data!)
                     ? subTitle = 'settings_notification_enable_subtitle'.tr()
                     : subTitle = 'settings_notification_disable_subtitle'.tr();
-
                 return SwitchListTile.adaptive(
                   title: Text('settings_notification'.tr()),
                   subtitle: Text(subTitle),
                   value: snapshot.data!,
                   onChanged: (isEnable) => _viewModel.onChangeNotificationStatus(isEnable),
                   secondary: Icon(Icons.notifications),
+                );
+              },
+            ),
+            StreamBuilder<double>(
+              stream: _viewModel.electricityCost,
+              initialData: _settings.electricityCost,
+              builder: (context, snapshot) {
+                return ListTile(
+                  leading: Icon(Icons.electrical_services),
+                  title: Text('setting_electricity_cost'.tr()),
+                  subtitle: Text('${snapshot.data?.toStringAsFixed(2)} USD'),
+                  onTap: () => showBarModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      duration: Duration(milliseconds: 300),
+                      builder: (context) => ElectricityCostSelectorWidget(_viewModel, snapshot.data!)),
                 );
               },
             ),
@@ -83,7 +99,6 @@ class StateSettingScreen extends State<SettingScreen> {
                   title: Text('settings_theme'.tr()),
                   subtitle: Text(subTitle),
                   onTap: () => showBarModalBottomSheet(
-                      expand: false,
                       backgroundColor: Colors.transparent,
                       context: context,
                       duration: Duration(milliseconds: 300),
@@ -109,7 +124,6 @@ class StateSettingScreen extends State<SettingScreen> {
                   title: Text('settings_language'.tr()),
                   subtitle: Text(subTitle),
                   onTap: () => showBarModalBottomSheet(
-                      expand: false,
                       backgroundColor: Colors.transparent,
                       context: context,
                       duration: Duration(milliseconds: 300),

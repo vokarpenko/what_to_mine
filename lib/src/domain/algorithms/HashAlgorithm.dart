@@ -15,6 +15,9 @@ abstract class HashAlgorithm implements Built<HashAlgorithm, HashAlgorithmBuilde
   @BuiltValueField(wireName: 'coefficient')
   int get hashrateCoefficient;
 
+  @BuiltValueField(wireName: 'power')
+  int? get power;
+
   HashAlgorithm._();
 
   factory HashAlgorithm([void Function(HashAlgorithmBuilder) updates]) = _$HashAlgorithm;
@@ -31,9 +34,11 @@ abstract class HashAlgorithm implements Built<HashAlgorithm, HashAlgorithmBuilde
       case HashCoefficient.hash:
         return 'h/s';
       case HashCoefficient.kiloHash:
-        return 'kh/s';
+        return 'Kh/s';
       case HashCoefficient.megaHash:
         return 'Mh/s';
+      case HashCoefficient.gigaHash:
+        return 'Gh/s';
       default:
         return '';
     }

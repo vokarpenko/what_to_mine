@@ -22,16 +22,20 @@ class _$HashAlgorithmSerializer implements StructuredSerializer<HashAlgorithm> {
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
       'coefficient',
-      serializers.serialize(object.hashrateCoefficient,
-          specifiedType: const FullType(int)),
+      serializers.serialize(object.hashrateCoefficient, specifiedType: const FullType(int)),
     ];
     Object? value;
     value = object.hashrate;
     if (value != null) {
       result
         ..add('value')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(double)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(double)));
+    }
+    value = object.power;
+    if (value != null) {
+      result
+        ..add('power')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     return result;
   }
@@ -49,16 +53,16 @@ class _$HashAlgorithmSerializer implements StructuredSerializer<HashAlgorithm> {
       final Object? value = iterator.current;
       switch (key) {
         case 'name':
-          result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+          result.name = serializers.deserialize(value, specifiedType: const FullType(String)) as String;
           break;
         case 'value':
-          result.hashrate = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double?;
+          result.hashrate = serializers.deserialize(value, specifiedType: const FullType(double)) as double?;
           break;
         case 'coefficient':
-          result.hashrateCoefficient = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+          result.hashrateCoefficient = serializers.deserialize(value, specifiedType: const FullType(int)) as int;
+          break;
+        case 'power':
+          result.power = serializers.deserialize(value, specifiedType: const FullType(int)) as int?;
           break;
       }
     }
@@ -74,13 +78,13 @@ class _$HashAlgorithm extends HashAlgorithm {
   final double? hashrate;
   @override
   final int hashrateCoefficient;
+  @override
+  final int? power;
 
   factory _$HashAlgorithm([void Function(HashAlgorithmBuilder)? updates]) =>
       (new HashAlgorithmBuilder()..update(updates)).build();
 
-  _$HashAlgorithm._(
-      {required this.name, this.hashrate, required this.hashrateCoefficient})
-      : super._() {
+  _$HashAlgorithm._({required this.name, this.hashrate, required this.hashrateCoefficient, this.power}) : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'HashAlgorithm', 'name');
     BuiltValueNullFieldError.checkNotNull(
         hashrateCoefficient, 'HashAlgorithm', 'hashrateCoefficient');
@@ -99,13 +103,13 @@ class _$HashAlgorithm extends HashAlgorithm {
     return other is HashAlgorithm &&
         name == other.name &&
         hashrate == other.hashrate &&
-        hashrateCoefficient == other.hashrateCoefficient;
+        hashrateCoefficient == other.hashrateCoefficient &&
+        power == other.power;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, name.hashCode), hashrate.hashCode),
-        hashrateCoefficient.hashCode));
+    return $jf($jc($jc($jc($jc(0, name.hashCode), hashrate.hashCode), hashrateCoefficient.hashCode), power.hashCode));
   }
 
   @override
@@ -113,7 +117,8 @@ class _$HashAlgorithm extends HashAlgorithm {
     return (newBuiltValueToStringHelper('HashAlgorithm')
           ..add('name', name)
           ..add('hashrate', hashrate)
-          ..add('hashrateCoefficient', hashrateCoefficient))
+          ..add('hashrateCoefficient', hashrateCoefficient)
+          ..add('power', power))
         .toString();
   }
 }
@@ -127,13 +132,22 @@ class HashAlgorithmBuilder
   set name(String? name) => _$this._name = name;
 
   double? _hashrate;
+
   double? get hashrate => _$this._hashrate;
+
   set hashrate(double? hashrate) => _$this._hashrate = hashrate;
 
   int? _hashrateCoefficient;
+
   int? get hashrateCoefficient => _$this._hashrateCoefficient;
-  set hashrateCoefficient(int? hashrateCoefficient) =>
-      _$this._hashrateCoefficient = hashrateCoefficient;
+
+  set hashrateCoefficient(int? hashrateCoefficient) => _$this._hashrateCoefficient = hashrateCoefficient;
+
+  int? _power;
+
+  int? get power => _$this._power;
+
+  set power(int? power) => _$this._power = power;
 
   HashAlgorithmBuilder();
 
@@ -143,6 +157,7 @@ class HashAlgorithmBuilder
       _name = $v.name;
       _hashrate = $v.hashrate;
       _hashrateCoefficient = $v.hashrateCoefficient;
+      _power = $v.power;
       _$v = null;
     }
     return this;
@@ -163,11 +178,11 @@ class HashAlgorithmBuilder
   _$HashAlgorithm build() {
     final _$result = _$v ??
         new _$HashAlgorithm._(
-            name: BuiltValueNullFieldError.checkNotNull(
-                name, 'HashAlgorithm', 'name'),
+            name: BuiltValueNullFieldError.checkNotNull(name, 'HashAlgorithm', 'name'),
             hashrate: hashrate,
-            hashrateCoefficient: BuiltValueNullFieldError.checkNotNull(
-                hashrateCoefficient, 'HashAlgorithm', 'hashrateCoefficient'));
+            hashrateCoefficient:
+                BuiltValueNullFieldError.checkNotNull(hashrateCoefficient, 'HashAlgorithm', 'hashrateCoefficient'),
+            power: power);
     replace(_$result);
     return _$result;
   }

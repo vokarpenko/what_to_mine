@@ -5,13 +5,16 @@ class Settings {
   bool notificationIsEnabled;
   int themeIndex;
   bool isFirstRun;
+  double electricityCost;
 
-  Settings({int themeIndex = 1, bool notificationIsEnabled = false, bool isFirstRun = true})
+  Settings(
+      {int themeIndex = 1, bool notificationIsEnabled = false, bool isFirstRun = true, double electricityCost = 0.1})
       : themeIndex = themeIndex,
         notificationIsEnabled = notificationIsEnabled,
-        isFirstRun = isFirstRun;
+        isFirstRun = isFirstRun,
+        electricityCost = electricityCost;
 
-  // Превращаем в value type
+  @override
   bool operator ==(Object other) {
     if (other is Settings) {
       return this.themeIndex == other.themeIndex &&
@@ -21,14 +24,19 @@ class Settings {
       return false;
   }
 
-  Map<String, dynamic> _toJson() =>
-      {'notificationIsEnabled': notificationIsEnabled, 'themeIndex': themeIndex, 'isFirstRun': isFirstRun};
+  Map<String, dynamic> _toJson() => {
+        'notificationIsEnabled': notificationIsEnabled,
+        'themeIndex': themeIndex,
+        'isFirstRun': isFirstRun,
+        'electricityCost': electricityCost
+      };
 
   static Settings _fromJson(Map<String, dynamic> json) {
     return Settings(
         notificationIsEnabled: json['notificationIsEnabled'],
         themeIndex: json['themeIndex'],
-        isFirstRun: json['isFirstRun']);
+        isFirstRun: json['isFirstRun'],
+        electricityCost: json['electricityCost']);
   }
 
   String toJsonString() => jsonEncode(_toJson());

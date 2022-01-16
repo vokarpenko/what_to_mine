@@ -21,22 +21,22 @@ class HashrateWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             direction: Axis.horizontal,
             children: [
-              Flexible(flex: 1, child: Icon(Icons.forward)),
+              Flexible(flex: 4, child: Icon(Icons.forward)),
               Flexible(
                 fit: FlexFit.tight,
-                flex: 1,
+                flex: 5,
                 child: Text(_algorithm.name),
               ),
               Flexible(
                   fit: FlexFit.tight,
-                  flex: 1,
+                  flex: 5,
                   child: Container(
                     padding: EdgeInsets.only(left: 10),
                     child: TextField(
                         onChanged: (value) => _onChangeHashrate(_algorithm.name, value),
                         inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,}([.][0-9]{0,2})?'))],
                         keyboardType: TextInputType.number,
-                        decoration: new InputDecoration(
+                        decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
                           labelText: _viewModel.getHashUnit(_algorithm),
                           focusedBorder: OutlineInputBorder(
@@ -48,16 +48,18 @@ class HashrateWidget extends StatelessWidget {
                         ),
                         controller: TextEditingController(text: _algorithm.hashrate!.toStringAsFixed(2))),
                   )),
-              /*Flexible(
+              Flexible(
                   fit: FlexFit.tight,
-                  flex: 1,
+                  flex: 5,
                   child: Container(
                     alignment: Alignment.center,
                     //width: 100,
                     padding: EdgeInsets.only(left: 10),
                     child: TextField(
-                        enabled: false,
-                        decoration: new InputDecoration(
+                        onChanged: (value) => _onChangePower(_algorithm.name, value),
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,}'))],
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
                           labelText: 'W',
                           focusedBorder: OutlineInputBorder(
@@ -70,8 +72,8 @@ class HashrateWidget extends StatelessWidget {
                             borderSide: BorderSide(color: Colors.black12, width: 2),
                           ),
                         ),
-                        controller: TextEditingController()),
-                  )),*/
+                        controller: TextEditingController(text: _algorithm.power!.toString())),
+                  )),
             ],
           ),
         ));
@@ -79,5 +81,9 @@ class HashrateWidget extends StatelessWidget {
 
   void _onChangeHashrate(String name, String? value) {
     _viewModel.onChangeHashrate(name, value);
+  }
+
+  void _onChangePower(String name, String? value) {
+    _viewModel.onChangePower(name, value);
   }
 }

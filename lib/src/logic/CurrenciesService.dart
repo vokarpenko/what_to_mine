@@ -16,7 +16,7 @@ class CurrenciesService {
   // Получить доход по всем криптовалютам с сортировкой по убыванию дохода
   Future<List<Earnings>> getEarningsList(bool isNeedFresh) async {
     List<Earnings> result = await _gateway.getEarningsList(isNeedFresh: isNeedFresh);
-    result.sort((a, b) => b.dayEarningInCurrency.compareTo(a.dayEarningInCurrency));
+    result.sort((a, b) => b.netDayEarningInCurrency.compareTo(a.netDayEarningInCurrency));
     return result;
   }
 

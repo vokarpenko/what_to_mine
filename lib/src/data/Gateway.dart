@@ -45,6 +45,7 @@ class Gateway implements IGateway {
 
   final StreamController<bool> _onUsedGpuChanged = StreamController<bool>.broadcast();
   final StreamController<bool> _onUserHashrateChanged = StreamController<bool>.broadcast();
+  final StreamController<bool> _onElectricityCostChanged = StreamController<bool>();
 
   @override
   Stream<bool> onUsedGpuChanged() => _onUsedGpuChanged.stream;
@@ -52,9 +53,13 @@ class Gateway implements IGateway {
   @override
   Stream<bool> onUserHashrateChanged() => _onUserHashrateChanged.stream;
 
+  @override
+  Stream<bool> onElectricityCostChanged() => _onElectricityCostChanged.stream;
+
   Future<void> dispose() async {
     _onUsedGpuChanged.close();
     _onUserHashrateChanged.close();
+    _onElectricityCostChanged.close();
   }
 
   // Получить список криптовалют
@@ -152,11 +157,15 @@ class Gateway implements IGateway {
       usedGpus.forEach((gpu) {
         print(gpu.gpuData.name + " x" + gpu.quantity.toString());
         gpu.gpuData.hashAlgorithms.forEach((element) {
-          if (element.hashrate != null) {
+          if (element.hashrate != null && element.power != null) {
             int currentAlgorithmIndex = result.indexWhere((r) => r.name == element.name);
-            double currentAlgorithmHashrate = result[currentAlgorithmIndex].hashrate!;
-            result[currentAlgorithmIndex] =
-                element.rebuild((b) => b..hashrate = (currentAlgorithmHashrate + (element.hashrate! * gpu.quantity)));
+            if (currentAlgorithmIndex != -1) {
+              double currentAlgorithmHashrate = result[currentAlgorithmIndex].hashrate!;
+              int currentAlgorithmPower = result[currentAlgorithmIndex].power!;
+              result[currentAlgorithmIndex] = element.rebuild((b) => b
+                ..hashrate = (currentAlgorithmHashrate + element.hashrate! * gpu.quantity)
+                ..power = (currentAlgorithmPower + element.power! * gpu.quantity));
+            }
           }
         });
       });
@@ -168,6 +177,7 @@ class Gateway implements IGateway {
   // Получить доход по всем криптовалютам
   @override
   Future<List<Earnings>> getEarningsList({required bool isNeedFresh}) async {
+    double electricityCost = (await getSettings()).electricityCost;
     List<CryptoCurrency> currencies = await getCryptoCurrenciesList(isNeedFresh: isNeedFresh);
     List<HashAlgorithm?> hashratesUsedInCalc = await getHashratesUsedInCalc();
     List<Earnings> result = [];
@@ -180,12 +190,12 @@ class Gateway implements IGateway {
             .singleWhere((element) => element!.name.toLowerCase() == currency.algorithm.toLowerCase());
       } on StateError catch (_) {}
       if (algorithm != null) {
-        Earnings earning = Earnings.calc(currency, algorithm.hashrate!, algorithm.hashrateCoefficient);
+        Earnings earning = Earnings.create(currency, algorithm, electricityCost);
         result.add(earning);
       }
     });
     // Фильтруем список, отбрасывая монеты, которые дают доход 0
-    result = result.where((element) => element.monthEarningInCrypto > 0).toList();
+    result = result.where((element) => element.monthEarningsMoreThan(0.0001) == true).toList();
     return result;
   }
 
@@ -199,6 +209,12 @@ class Gateway implements IGateway {
   @override
   Future<void> updateEditedHashrateInCache(String name, double hashrateValue) async {
     return _cache.putEditedHashrate(name, hashrateValue);
+  }
+
+  //Обновить хэшрейты в кэшэ
+  @override
+  Future<void> updateEditedPowerInCache(String name, int powerValue) async {
+    return _cache.putEditedPower(name, powerValue);
   }
 
   // Обновить хэшрейты в БД
@@ -240,5 +256,13 @@ class Gateway implements IGateway {
   @override
   Future<void> setSettings(Settings settings) {
     return _preferences.setString(_settingsKey, settings.toJsonString());
+  }
+
+  @override
+  Future<void> setElectricityCost(double cost) async {
+    Settings settings = await getSettings();
+    settings.electricityCost = cost;
+    _onElectricityCostChanged.add(true);
+    return setSettings(settings);
   }
 }

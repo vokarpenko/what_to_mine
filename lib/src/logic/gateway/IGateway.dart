@@ -34,11 +34,17 @@ abstract class IGateway {
   // Подписка на изменение пользовательских хэшрейтов
   Stream<bool> onUserHashrateChanged();
 
+  // Подписка на изменение стоимости электроэнергии
+  Stream<bool> onElectricityCostChanged();
+
   // Получить список измененных хэшрейтов из кэша
   Future<List<HashAlgorithm>> getEditedHashratesFromCache();
 
   // Обновить изменный хэшрейт в кэше
   Future<void> updateEditedHashrateInCache(String name, double hashrateValue);
+
+  // Обновить изменную мощность в кэше
+  Future<void> updateEditedPowerInCache(String name, int powerValue);
 
   // Обновить хэшрейты в базе данных
   Future<void> updateHashratesInDB(List<HashAlgorithm> hashrates);
@@ -57,4 +63,6 @@ abstract class IGateway {
 
   // Сохранить настройки
   Future<void> setSettings(Settings settings);
+
+  Future<void> setElectricityCost(double cost);
 }

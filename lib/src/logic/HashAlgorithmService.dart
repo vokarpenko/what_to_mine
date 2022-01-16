@@ -22,6 +22,11 @@ class HashAlgorithmService {
     return _gateway.updateEditedHashrateInCache(name, hashrateValue);
   }
 
+  // Обновить мощность в кэше
+  Future<void> updateEditedPowerInCache(String name, int powerValue) async {
+    return _gateway.updateEditedPowerInCache(name, powerValue);
+  }
+
   // Обновить хэшрейты в бд
   Future<void> updateHashratesInDB(List<HashAlgorithm> hashrates) async {
     return _gateway.updateHashratesInDB(hashrates);

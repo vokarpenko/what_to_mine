@@ -57,20 +57,16 @@ class MockMemoryStorage extends _i1.Mock implements _i7.MemoryStorage {
   @override
   void clearCryptoCurrenciesCache() =>
       super.noSuchMethod(Invocation.method(#clearCryptoCurrenciesCache, []), returnValueForMissingStub: null);
-
   @override
   void putEditedHashrates(List<_i9.HashAlgorithm>? hashrates) =>
       super.noSuchMethod(Invocation.method(#putEditedHashrates, [hashrates]), returnValueForMissingStub: null);
-
   @override
   void putEditedHashrate(String? name, double? hashrateValue) =>
       super.noSuchMethod(Invocation.method(#putEditedHashrate, [name, hashrateValue]), returnValueForMissingStub: null);
-
   @override
   List<_i9.HashAlgorithm> getEditedHashrate() =>
       (super.noSuchMethod(Invocation.method(#getEditedHashrate, []), returnValue: <_i9.HashAlgorithm>[])
           as List<_i9.HashAlgorithm>);
-
   @override
   void clearEditedHashrateCache() =>
       super.noSuchMethod(Invocation.method(#clearEditedHashrateCache, []), returnValueForMissingStub: null);
@@ -112,20 +108,16 @@ class MockAppDatabase extends _i1.Mock implements _i11.AppDatabase {
   _i4.StreamController<String> get changeListener =>
       (super.noSuchMethod(Invocation.getter(#changeListener), returnValue: _FakeStreamController_2<String>())
           as _i4.StreamController<String>);
-
   @override
   set changeListener(_i4.StreamController<String>? _changeListener) =>
       super.noSuchMethod(Invocation.setter(#changeListener, _changeListener), returnValueForMissingStub: null);
-
   @override
   _i5.DatabaseExecutor get database =>
       (super.noSuchMethod(Invocation.getter(#database), returnValue: _FakeDatabaseExecutor_3())
           as _i5.DatabaseExecutor);
-
   @override
   set database(_i5.DatabaseExecutor? _database) =>
       super.noSuchMethod(Invocation.setter(#database, _database), returnValueForMissingStub: null);
-
   @override
   _i4.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
@@ -143,12 +135,6 @@ class MockLocalJsonReader extends _i1.Mock implements _i12.LocalJsonReader {
   _i4.Future<List<_i13.Gpu>?> getGPUList() =>
       (super.noSuchMethod(Invocation.method(#getGPUList, []), returnValue: Future<List<_i13.Gpu>?>.value())
           as _i4.Future<List<_i13.Gpu>?>);
-
-  @override
-  _i4.Future<Map<String, dynamic>> getHashrateCoefficients() =>
-      (super.noSuchMethod(Invocation.method(#getHashrateCoefficients, []),
-          returnValue: Future<Map<String, dynamic>>.value(<String, dynamic>{})) as _i4.Future<Map<String, dynamic>>);
-
   @override
   _i4.Future<List<_i9.HashAlgorithm>> getHashAlgorithmsWithZeroValues() =>
       (super.noSuchMethod(Invocation.method(#getHashAlgorithmsWithZeroValues, []),
@@ -193,6 +179,10 @@ class MockGateway extends _i1.Mock implements _i15.Gateway {
           as _i4.Stream<bool>);
 
   @override
+  _i4.Future<void> dispose() => (super.noSuchMethod(Invocation.method(#dispose, []),
+      returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+
+  @override
   _i4.Future<List<_i8.CryptoCurrency>> getCryptoCurrenciesList({bool? isNeedFresh}) =>
       (super.noSuchMethod(Invocation.method(#getCryptoCurrenciesList, [], {#isNeedFresh: isNeedFresh}),
               returnValue: Future<List<_i8.CryptoCurrency>>.value(<_i8.CryptoCurrency>[]))
@@ -220,7 +210,6 @@ class MockGateway extends _i1.Mock implements _i15.Gateway {
       (super.noSuchMethod(Invocation.method(#getHashratesUsedInCalc, []),
               returnValue: Future<List<_i9.HashAlgorithm>>.value(<_i9.HashAlgorithm>[]))
           as _i4.Future<List<_i9.HashAlgorithm>>);
-
   @override
   _i4.Future<List<_i17.Earnings>> getEarningsList({bool? isNeedFresh}) =>
       (super.noSuchMethod(Invocation.method(#getEarningsList, [], {#isNeedFresh: isNeedFresh}),

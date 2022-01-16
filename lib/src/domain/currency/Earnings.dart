@@ -1,6 +1,5 @@
+import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart';
-
-import '../../constants.dart';
 
 class Earnings {
   final double dayEarningInCrypto;
@@ -11,36 +10,50 @@ class Earnings {
   final double weekEarningInCurrency;
   final double monthEarningInCurrency;
 
+  final double netDayEarningInCurrency;
+  final double netWeekEarningInCurrency;
+  final double netMonthEarningInCurrency;
+
+  final double dayElectricityCost;
+  final double weekElectricityCost;
+  final double monthElectricityCost;
+
   final CryptoCurrency cryptoCurrency;
 
   Earnings._(
       {required double dayEarningInCrypto,
-      required double weekEarningInCrypto,
-      required double monthEarningInCrypto,
       required double dayEarningInCurrency,
-      required double weekEarningInCurrency,
-      required double monthEarningInCurrency,
+      required double netDayEarningInCurrency,
+      required double dayElectricityCost,
       required CryptoCurrency cryptoCurrency})
       : dayEarningInCrypto = dayEarningInCrypto,
-        weekEarningInCrypto = weekEarningInCrypto,
-        monthEarningInCrypto = monthEarningInCrypto,
+        weekEarningInCrypto = dayEarningInCrypto * 7,
+        monthEarningInCrypto = dayEarningInCrypto * 30,
         dayEarningInCurrency = dayEarningInCurrency,
-        weekEarningInCurrency = weekEarningInCurrency,
-        monthEarningInCurrency = monthEarningInCurrency,
+        weekEarningInCurrency = dayEarningInCurrency * 7,
+        monthEarningInCurrency = dayEarningInCurrency * 30,
+        netDayEarningInCurrency = netDayEarningInCurrency,
+        netWeekEarningInCurrency = netDayEarningInCurrency * 7,
+        netMonthEarningInCurrency = netDayEarningInCurrency * 30,
+        dayElectricityCost = dayElectricityCost,
+        weekElectricityCost = dayElectricityCost * 7,
+        monthElectricityCost = dayElectricityCost * 30,
         cryptoCurrency = cryptoCurrency;
 
-  static Earnings calc(CryptoCurrency currency, double hashrate, int hashrateCoefficient) {
+  static Earnings create(CryptoCurrency currency, HashAlgorithm algorithm, double electricityCost) {
+    double dayEarningInCrypto = currency.calculateDayEarning((algorithm.hashrate ?? 0) * algorithm.hashrateCoefficient);
+    double dayEarningInCurrency = dayEarningInCrypto * currency.price;
+    double dayElectricityCost = (algorithm.power ?? 0) * electricityCost * 24 / 1000;
+    double netDayEarningInCurrency = dayEarningInCurrency - dayElectricityCost;
     return Earnings._(
-      cryptoCurrency: currency,
-      dayEarningInCurrency:
-          currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInDay) * currency.price,
-      dayEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInDay),
-      weekEarningInCurrency:
-          currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInWeek) * currency.price,
-      weekEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInWeek),
-      monthEarningInCurrency:
-          currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInMonth) * currency.price,
-      monthEarningInCrypto: currency.calculateEarning(hashrate * hashrateCoefficient, Hours.hoursInMonth),
-    );
+        cryptoCurrency: currency,
+        dayEarningInCurrency: dayEarningInCurrency,
+        dayEarningInCrypto: dayEarningInCrypto,
+        dayElectricityCost: dayElectricityCost,
+        netDayEarningInCurrency: netDayEarningInCurrency);
+  }
+
+  bool monthEarningsMoreThan(double value) {
+    return this.monthEarningInCurrency > value;
   }
 }

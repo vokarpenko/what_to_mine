@@ -13,8 +13,17 @@ class IntroViewModel {
     _openHomeScreen.close();
   }
 
-  void onDone() async {
-    _openHomeScreen.add("");
+  void onDone(double cost) async {
+    // устанавливаем стоимость электроэнергии
+    _openHomeScreen.add('');
+    await Services.settingsService.setElectricityCost(cost);
+    await Services.settingsService.setIsFirstRun(false);
+  }
+
+  void onSkip() async {
+    _openHomeScreen.add('');
+    // устанавливаем стандартую стоимость электроэнергии
+    await Services.settingsService.setElectricityCost(0.1);
     await Services.settingsService.setIsFirstRun(false);
   }
 }

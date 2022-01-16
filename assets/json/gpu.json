@@ -10,83 +10,99 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 1.6,
-        "coefficient": 1
+        "value": 2.17,
+        "coefficient": 1,
+        "power": 70
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.42,
+        "coefficient": 1,
+        "power": 102
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.14,
+        "coefficient": 1,
+        "power": 65
       },
       {
         "name": "CuckooCycle",
         "value": 1.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 72
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": 300,
-        "coefficient": 1
+        "value": null,
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 13,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 86
       },
       {
         "name": "Equihash(144,5)",
         "value": 24,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 105
       },
       {
-        "name": "BeamHash",
-        "value": 8,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 14,
+        "coefficient": 1,
+        "power": 88
       },
       {
         "name": "Ethash",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Etchash",
         "value": 27,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 70
       },
       {
         "name": "KAWPOW",
         "value": 10,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 105
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 393,
+        "coefficient": 1,
+        "power": 56
       },
       {
         "name": "Eaglesong",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
         "value": 63,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 55
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.75,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -101,83 +117,99 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 1.6,
-        "coefficient": 1
+        "value": 2.17,
+        "coefficient": 1,
+        "power": 70
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.42,
+        "coefficient": 1,
+        "power": 102
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.14,
+        "coefficient": 1,
+        "power": 65
       },
       {
         "name": "CuckooCycle",
         "value": 1.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 72
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": 300,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 54
       },
       {
         "name": "Equihash(125,4)",
         "value": 13,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 86
       },
       {
         "name": "Equihash(144,5)",
         "value": 24,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 105
       },
       {
-        "name": "BeamHash",
-        "value": 8,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 14,
+        "coefficient": 1,
+        "power": 88
       },
       {
         "name": "Ethash",
         "value": 27,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 70
       },
       {
         "name": "Etchash",
         "value": 27,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 70
       },
       {
         "name": "KAWPOW",
         "value": 10,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 105
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 393,
+        "coefficient": 1,
+        "power": 56
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.3,
+        "coefficient": 1000000,
+        "power": 79
       },
       {
         "name": "Autolykos2",
         "value": 63,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 55
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.75,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -192,83 +224,99 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 1.9,
-        "coefficient": 1
+        "value": 2.2,
+        "coefficient": 1,
+        "power": 80
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.5,
+        "coefficient": 1,
+        "power": 80
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.16,
+        "coefficient": 1,
+        "power": 100
       },
       {
         "name": "CuckooCycle",
-        "value": 2,
-        "coefficient": 1
+        "value": 1.8,
+        "coefficient": 1,
+        "power": 72
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": 300,
-        "coefficient": 1
+        "value": null,
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 14,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 86
       },
       {
         "name": "Equihash(144,5)",
-        "value": 28,
-        "coefficient": 1
+        "value": 25,
+        "coefficient": 1,
+        "power": 105
       },
       {
-        "name": "BeamHash",
-        "value": 11,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 15,
+        "coefficient": 1,
+        "power": 88
       },
       {
         "name": "Ethash",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Etchash",
         "value": 29,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 70
       },
       {
         "name": "KAWPOW",
         "value": 11,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 105
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 375,
+        "coefficient": 1,
+        "power": 96
       },
       {
         "name": "Eaglesong",
-        "value": 360,
-        "coefficient": 1000000
+        "value": null,
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
-        "value": 63.5,
-        "coefficient": 1000000
+        "value": 66,
+        "coefficient": 1000000,
+        "power": 55
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.75,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -283,83 +331,99 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 1.9,
-        "coefficient": 1
+        "value": 2.2,
+        "coefficient": 1,
+        "power": 78
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.53,
+        "coefficient": 1,
+        "power": 100
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.16,
+        "coefficient": 1,
+        "power": 80
       },
       {
         "name": "CuckooCycle",
-        "value": 2,
-        "coefficient": 1
+        "value": 2.5,
+        "coefficient": 1,
+        "power": 106
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": 300,
-        "coefficient": 1
+        "value": 154,
+        "coefficient": 1,
+        "power": 57
       },
       {
         "name": "Equihash(125,4)",
         "value": 14,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 72
       },
       {
         "name": "Equihash(144,5)",
         "value": 28,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 88
       },
       {
-        "name": "BeamHash",
-        "value": 11,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 12,
+        "coefficient": 1,
+        "power": 111
       },
       {
         "name": "Ethash",
         "value": 29,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 80
       },
       {
         "name": "Etchash",
         "value": 29,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 80
       },
       {
         "name": "KAWPOW",
         "value": 11,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 113
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 393,
+        "coefficient": 1,
+        "power": 56
       },
       {
         "name": "Eaglesong",
         "value": 360,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 109
       },
       {
         "name": "Autolykos2",
         "value": 63.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 103
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.75,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -375,82 +439,98 @@
       {
         "name": "Cuckarood29",
         "value": 1.6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 70
       },
       {
         "name": "Cuckatoo31",
-        "value": 0.67,
-        "coefficient": 1
+        "value": 0.52,
+        "coefficient": 1,
+        "power": 125
       },
       {
         "name": "Cuckatoo32",
-        "value": 0.18,
-        "coefficient": 1
+        "value": 0.17,
+        "coefficient": 1,
+        "power": 125
       },
       {
         "name": "CuckooCycle",
         "value": 1.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 72
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": 300,
-        "coefficient": 1
+        "value": 286,
+        "coefficient": 1,
+        "power": 73
       },
       {
         "name": "Equihash(125,4)",
         "value": 14,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 86
       },
       {
         "name": "Equihash(144,5)",
-        "value": 24,
-        "coefficient": 1
+        "value": 25,
+        "coefficient": 1,
+        "power": 105
       },
       {
-        "name": "BeamHash",
-        "value": 9,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 15,
+        "coefficient": 1,
+        "power": 88
       },
       {
         "name": "Ethash",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Etchash",
         "value": 30,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 75
       },
       {
         "name": "KAWPOW",
         "value": 11,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 105
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 450,
+        "coefficient": 1,
+        "power": 50
       },
       {
         "name": "Eaglesong",
-        "value": 324,
-        "coefficient": 1000000
+        "value": 292,
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
-        "value": 63.5,
-        "coefficient": 1000000
+        "value": 66,
+        "coefficient": 1000000,
+        "power": 55
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.75,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -466,82 +546,98 @@
       {
         "name": "Cuckarood29",
         "value": 1.6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 70
       },
       {
         "name": "Cuckatoo31",
-        "value": 0.67,
-        "coefficient": 1
+        "value": 0.52,
+        "coefficient": 1,
+        "power": 125
       },
       {
         "name": "Cuckatoo32",
-        "value": 0.18,
-        "coefficient": 1
+        "value": 0.17,
+        "coefficient": 1,
+        "power": 125
       },
       {
         "name": "CuckooCycle",
         "value": 1.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 72
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": 300,
-        "coefficient": 1
+        "value": 286,
+        "coefficient": 1,
+        "power": 73
       },
       {
         "name": "Equihash(125,4)",
         "value": 14,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 86
       },
       {
         "name": "Equihash(144,5)",
-        "value": 24,
-        "coefficient": 1
+        "value": 25,
+        "coefficient": 1,
+        "power": 105
       },
       {
-        "name": "BeamHash",
-        "value": 9,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 15,
+        "coefficient": 1,
+        "power": 88
       },
       {
         "name": "Ethash",
         "value": 30,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 80
       },
       {
         "name": "Etchash",
         "value": 30,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 80
       },
       {
         "name": "KAWPOW",
         "value": 11,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 105
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 450,
+        "coefficient": 1,
+        "power": 50
       },
       {
         "name": "Eaglesong",
-        "value": 324,
-        "coefficient": 1000000
+        "value": 292,
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
-        "value": 63.5,
-        "coefficient": 1000000
+        "value": 66,
+        "coefficient": 1000000,
+        "power": 55
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.75,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -556,83 +652,99 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 1.8,
-        "coefficient": 1
+        "value": 2.59,
+        "coefficient": 1,
+        "power": 130
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.57,
+        "coefficient": 1,
+        "power": 82
       },
       {
         "name": "Cuckatoo32",
         "value": 0.23,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 74
       },
       {
         "name": "CuckooCycle",
         "value": 2,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 84
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 296,
+        "coefficient": 1,
+        "power": 116
       },
       {
         "name": "Equihash(125,4)",
         "value": 17,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 136
       },
       {
         "name": "Equihash(144,5)",
         "value": 27,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 142
       },
       {
-        "name": "BeamHash",
-        "value": 11.5,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 15,
+        "coefficient": 1,
+        "power": 110
       },
       {
         "name": "Ethash",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Etchash",
-        "value": 30,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1.5,
-        "coefficient": 1000000
+        "value": 31,
+        "coefficient": 1000000,
+        "power": 100
       },
       {
         "name": "KAWPOW",
         "value": 12,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 130
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 490,
+        "coefficient": 1,
+        "power": 63
       },
       {
         "name": "Eaglesong",
-        "value": 300,
-        "coefficient": 1000000
+        "value": 350,
+        "coefficient": 1000000,
+        "power": 79
       },
       {
         "name": "Autolykos2",
         "value": 66,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 59
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.75,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -647,83 +759,99 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 1.8,
-        "coefficient": 1
+        "value": 2.59,
+        "coefficient": 1,
+        "power": 130
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.57,
+        "coefficient": 1,
+        "power": 82
       },
       {
         "name": "Cuckatoo32",
         "value": 0.23,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 74
       },
       {
         "name": "CuckooCycle",
         "value": 2,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 84
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 296,
+        "coefficient": 1,
+        "power": 116
       },
       {
         "name": "Equihash(125,4)",
         "value": 17,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 136
       },
       {
         "name": "Equihash(144,5)",
         "value": 27,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 142
       },
       {
-        "name": "BeamHash",
-        "value": 11.5,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 15,
+        "coefficient": 1,
+        "power": 110
       },
       {
         "name": "Ethash",
-        "value": 30,
-        "coefficient": 1000000
+        "value": 31,
+        "coefficient": 1000000,
+        "power": 100
       },
       {
         "name": "Etchash",
-        "value": 30,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1.5,
-        "coefficient": 1000000
+        "value": 31,
+        "coefficient": 1000000,
+        "power": 100
       },
       {
         "name": "KAWPOW",
         "value": 12,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 130
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 490,
+        "coefficient": 1,
+        "power": 63
       },
       {
         "name": "Eaglesong",
-        "value": 300,
-        "coefficient": 1000000
+        "value": 350,
+        "coefficient": 1000000,
+        "power": 79
       },
       {
         "name": "Autolykos2",
         "value": 66,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 59
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.75,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -738,83 +866,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 2.3,
-        "coefficient": 1
+        "value": null,
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cuckatoo31",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cuckatoo32",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "CuckooCycle",
         "value": 2.6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 147
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 18,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 101
       },
       {
         "name": "Equihash(144,5)",
         "value": 31,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 99
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 12,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 112
       },
       {
         "name": "Ethash",
         "value": 34,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 160
       },
       {
         "name": "Etchash",
         "value": 34,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 160
       },
       {
         "name": "KAWPOW",
         "value": 12,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 183
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 554,
+        "coefficient": 1,
+        "power": 125
       },
       {
         "name": "Eaglesong",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       }
     ]
   },
@@ -830,82 +968,92 @@
       {
         "name": "Cuckarood29",
         "value": 3.2,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 166
       },
       {
         "name": "Cuckatoo31",
         "value": 1.15,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 164
       },
       {
         "name": "Cuckatoo32",
         "value": 0.42,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 114
       },
       {
         "name": "CuckooCycle",
         "value": 3.2,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 158
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": 450,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 162
       },
       {
         "name": "Equihash(125,4)",
         "value": 24,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 162
       },
       {
         "name": "Equihash(144,5)",
         "value": 34,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 185
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 14,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 99
       },
       {
         "name": "Ethash",
         "value": 43,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 165
       },
       {
         "name": "Etchash",
         "value": 43,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 3,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 165
       },
       {
         "name": "KAWPOW",
         "value": 21,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 180
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 972,
+        "coefficient": 1,
+        "power": 180
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.48,
+        "coefficient": 1000000000,
+        "power": 165
       },
       {
         "name": "Autolykos2",
         "value": 170.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 120
       }
     ]
   },
@@ -921,82 +1069,92 @@
       {
         "name": "Cuckarood29",
         "value": 4,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 218
       },
       {
         "name": "Cuckatoo31",
         "value": 1.37,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 260
       },
       {
         "name": "Cuckatoo32",
-        "value": 0.49,
-        "coefficient": 1
+        "value": 0.40,
+        "coefficient": 1,
+        "power": 260
       },
       {
         "name": "CuckooCycle",
         "value": 4.4,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 96
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": 500,
-        "coefficient": 1
+        "value": null,
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 28.5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 167
       },
       {
         "name": "Equihash(144,5)",
         "value": 43,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 159
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 15,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 152
       },
       {
         "name": "Ethash",
         "value": 44,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 170
       },
       {
         "name": "Etchash",
         "value": 44,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 3.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 170
       },
       {
         "name": "KAWPOW",
         "value": 23,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 174
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 1200,
+        "coefficient": 1,
+        "power": 184
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.64,
+        "coefficient": 1000000,
+        "power": 171
       },
       {
         "name": "Autolykos2",
-        "value": 185,
-        "coefficient": 1000000
+        "value": 163,
+        "coefficient": 1000000,
+        "power": 134
       }
     ]
   },
@@ -1012,82 +1170,92 @@
       {
         "name": "Cuckarood29",
         "value": 5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 162
       },
       {
         "name": "Cuckatoo31",
         "value": 2.05,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 220
       },
       {
         "name": "Cuckatoo32",
         "value": 0.77,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 214
       },
       {
         "name": "CuckooCycle",
         "value": 5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 130
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": 500,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 199
       },
       {
         "name": "Equihash(125,4)",
         "value": 36,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 170
       },
       {
         "name": "Equihash(144,5)",
         "value": 49,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 135
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 19,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 124
       },
       {
         "name": "Ethash",
         "value": 90,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 195
       },
       {
         "name": "Etchash",
         "value": 90,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 4.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 195
       },
       {
         "name": "KAWPOW",
         "value": 24,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 220
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 1592,
+        "coefficient": 1,
+        "power": 161
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.86,
+        "coefficient": 1000000,
+        "power": 216
       },
       {
         "name": "Autolykos2",
         "value": 245,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 142
       }
     ]
   },
@@ -1103,82 +1271,92 @@
       {
         "name": "Cuckarood29",
         "value": 3.75,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 74
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.62,
+        "coefficient": 1,
+        "power": 143
       },
       {
         "name": "Cuckatoo32",
         "value": 0.24,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 104
       },
       {
         "name": "CuckooCycle",
-        "value": null,
-        "coefficient": 1
+        "value": 1.3,
+        "coefficient": 1,
+        "power": 62
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 24,
+        "coefficient": 1,
+        "power": 124
       },
       {
         "name": "Equihash(125,4)",
         "value": 30.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 124
       },
       {
         "name": "Equihash(144,5)",
         "value": 54.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 107
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 18.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 151
       },
       {
         "name": "Ethash",
         "value": 43,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 101
       },
       {
         "name": "Etchash",
         "value": 44,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 101
       },
       {
         "name": "KAWPOW",
         "value": 15.06,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 160
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 757,
+        "coefficient": 1,
+        "power": 142
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.68,
+        "coefficient": 1000000,
+        "power": 116
       },
       {
         "name": "Autolykos2",
         "value": 80,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 101
       }
     ]
   },
@@ -1194,82 +1372,92 @@
       {
         "name": "Cuckarood29",
         "value": 3.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 72
       },
       {
         "name": "Cuckatoo31",
         "value": 1.12,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 91
       },
       {
         "name": "Cuckatoo32",
         "value": 0.4,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 165
       },
       {
         "name": "CuckooCycle",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 111
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 29,
+        "coefficient": 1,
+        "power": 151
       },
       {
         "name": "Equihash(125,4)",
-        "value": null,
-        "coefficient": 1
+        "value": 29.7,
+        "coefficient": 1,
+        "power": 151
       },
       {
         "name": "Equihash(144,5)",
-        "value": null,
-        "coefficient": 1
+        "value": 53.3,
+        "coefficient": 1,
+        "power": 168
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 24,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 147
       },
       {
         "name": "Ethash",
         "value": 54,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 112
       },
       {
         "name": "Etchash",
         "value": 55,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 112
       },
       {
         "name": "KAWPOW",
         "value": 24.8,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 119
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 845.4,
+        "coefficient": 1,
+        "power": 79
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.67,
+        "coefficient": 1000000,
+        "power": 147
       },
       {
         "name": "Autolykos2",
         "value": 108,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 132
       }
     ]
   },
@@ -1284,83 +1472,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": null,
-        "coefficient": 1
+        "value": 5.01,
+        "coefficient": 1,
+        "power": 143
       },
       {
         "name": "Cuckatoo31",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.57,
+        "coefficient": 1,
+        "power": 207
       },
       {
         "name": "CuckooCycle",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": 65,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 132
       },
       {
         "name": "Equihash(125,4)",
         "value": 49,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 183
       },
       {
         "name": "Equihash(144,5)",
         "value": 64,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 173
       },
       {
-        "name": "BeamHash",
-        "value": null,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 34,
+        "coefficient": 1,
+        "power": 186
       },
       {
         "name": "Ethash",
         "value": 44,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 121
       },
       {
         "name": "Etchash",
         "value": 44.6,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 121
       },
       {
         "name": "KAWPOW",
         "value": 22.7,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 140
       },
       {
         "name": "RandomX",
         "value": null,
-        "coefficient": 1000
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 1.01,
+        "coefficient": 1000000,
+        "power": 185
       },
       {
         "name": "Autolykos2",
         "value": 86.4,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 101
       }
     ]
   },
@@ -1375,83 +1573,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": null,
-        "coefficient": 1
+        "value": 6.42,
+        "coefficient": 1,
+        "power": 173
       },
       {
         "name": "Cuckatoo31",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 101
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 1.77,
+        "coefficient": 1,
+        "power": 42
       },
       {
         "name": "CuckooCycle",
         "value": 8.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 96
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 218
       },
       {
         "name": "Equihash(125,4)",
         "value": 67.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 218
       },
       {
         "name": "Equihash(144,5)",
         "value": 110,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 146
       },
       {
-        "name": "BeamHash",
-        "value": null,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 44.3,
+        "coefficient": 1,
+        "power": 129
       },
       {
         "name": "Ethash",
         "value": 63,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 122
       },
       {
         "name": "Etchash",
         "value": 63,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 122
       },
       {
         "name": "KAWPOW",
         "value": 32.7,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 138
       },
       {
         "name": "RandomX",
         "value": null,
-        "coefficient": 1000
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 1.4,
+        "coefficient": 1000000,
+        "power": 219
       },
       {
         "name": "Autolykos2",
         "value": 115,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 134
       }
     ]
   },
@@ -1466,83 +1674,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": null,
-        "coefficient": 1
+        "value": 6.2,
+        "coefficient": 1,
+        "power": 127
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 2,
+        "coefficient": 1,
+        "power": 165
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.6,
+        "coefficient": 1,
+        "power": 121
       },
       {
         "name": "CuckooCycle",
-        "value": 8.9,
-        "coefficient": 1
+        "value": 5.6,
+        "coefficient": 1,
+        "power": 124
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 67.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 294
       },
       {
         "name": "Equihash(144,5)",
         "value": 110,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 123
       },
       {
-        "name": "BeamHash",
-        "value": null,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 51.6,
+        "coefficient": 1,
+        "power": 162
       },
       {
         "name": "Ethash",
         "value": 63,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 160
       },
       {
         "name": "Etchash",
         "value": 63,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 160
       },
       {
         "name": "KAWPOW",
         "value": 32.7,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 255
       },
       {
         "name": "RandomX",
         "value": null,
-        "coefficient": 1000
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Eaglesong",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
-        "value": null,
-        "coefficient": 1000000
+        "value": 119,
+        "coefficient": 1000000,
+        "power": 207
       }
     ]
   },
@@ -1557,83 +1775,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": null,
-        "coefficient": 1
+        "value": 7.8,
+        "coefficient": 1,
+        "power": 243
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 2.5,
+        "coefficient": 1,
+        "power": 284
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 1.1,
+        "coefficient": 1,
+        "power": 289
       },
       {
         "name": "CuckooCycle",
         "value": 8.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 243
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 67.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 109
       },
       {
         "name": "Equihash(144,5)",
         "value": 110,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 104
       },
       {
-        "name": "BeamHash",
-        "value": null,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 37,
+        "coefficient": 1,
+        "power": 133
       },
       {
         "name": "Ethash",
         "value": 63,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 146
       },
       {
         "name": "Etchash",
         "value": 63,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 6.32,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 146
       },
       {
         "name": "KAWPOW",
         "value": 32.7,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 203
       },
       {
         "name": "RandomX",
         "value": null,
-        "coefficient": 1000
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 1.2,
+        "coefficient": 1000000,
+        "power": 103
       },
       {
         "name": "Autolykos2",
-        "value": null,
-        "coefficient": 1000000
+        "value": 117,
+        "coefficient": 1000000,
+        "power": 207
       }
     ]
   },
@@ -1649,82 +1877,92 @@
       {
         "name": "Cuckarood29",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cuckatoo31",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cuckatoo32",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "CuckooCycle",
-        "value": 2.12,
-        "coefficient": 1
+        "value": null,
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": 170,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 80
       },
       {
         "name": "Equihash(125,4)",
-        "value": null,
-        "coefficient": 1
+        "value": 1,
+        "coefficient": 1,
+        "power": 80
       },
       {
         "name": "Equihash(144,5)",
         "value": 22,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 80
       },
       {
-        "name": "BeamHash",
-        "value": 6.6,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": null,
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Ethash",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Etchash",
         "value": 14,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 80
       },
       {
         "name": "KAWPOW",
         "value": 7,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 80
       },
       {
         "name": "RandomX",
-        "value": 0.181,
-        "coefficient": 1000
+        "value": 100,
+        "coefficient": 1,
+        "power": 60
       },
       {
         "name": "Eaglesong",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
         "value": 32,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 70
       }
     ]
   },
@@ -1740,82 +1978,92 @@
       {
         "name": "Cuckarood29",
         "value": 3.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 90
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.2,
+        "coefficient": 1,
+        "power": 88
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.1,
+        "coefficient": 1,
+        "power": 100
       },
       {
         "name": "CuckooCycle",
         "value": 3.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 77
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": 236,
-        "coefficient": 1
+        "value": 0.2,
+        "coefficient": 1,
+        "power": 107
       },
       {
         "name": "Equihash(125,4)",
         "value": 16.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 81
       },
       {
         "name": "Equihash(144,5)",
         "value": 35,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 122
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 10,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 94
       },
       {
         "name": "Ethash",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Etchash",
         "value": 23,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 97
       },
       {
         "name": "KAWPOW",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "RandomX",
-        "value": 0.28,
-        "coefficient": 1000
+        "value": 309,
+        "coefficient": 1,
+        "power": 74
       },
       {
         "name": "Eaglesong",
-        "value": 330,
-        "coefficient": 1000000
+        "value": 0.3,
+        "coefficient": 1000000,
+        "power": 101
       },
       {
         "name": "Autolykos2",
         "value": 52,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 76
       }
     ]
   },
@@ -1831,82 +2079,92 @@
       {
         "name": "Cuckarood29",
         "value": 3.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 90
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.2,
+        "coefficient": 1,
+        "power": 88
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.1,
+        "coefficient": 1,
+        "power": 100
       },
       {
         "name": "CuckooCycle",
         "value": 3.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 77
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": 236,
-        "coefficient": 1
+        "value": 0.2,
+        "coefficient": 1,
+        "power": 107
       },
       {
         "name": "Equihash(125,4)",
         "value": 16.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 81
       },
       {
         "name": "Equihash(144,5)",
         "value": 35,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 122
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 10,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 94
       },
       {
         "name": "Ethash",
         "value": 22,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 99
       },
       {
         "name": "Etchash",
         "value": 23,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 1,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 97
       },
       {
         "name": "KAWPOW",
         "value": 10,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 99
       },
       {
         "name": "RandomX",
-        "value": 0.28,
-        "coefficient": 1000
+        "value": 309,
+        "coefficient": 1,
+        "power": 74
       },
       {
         "name": "Eaglesong",
-        "value": 330,
-        "coefficient": 1000000
+        "value": 0.3,
+        "coefficient": 1000000,
+        "power": 101
       },
       {
         "name": "Autolykos2",
         "value": 52,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 76
       }
     ]
   },
@@ -1922,82 +2180,92 @@
       {
         "name": "Cuckarood29",
         "value": 4.5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 83
       },
       {
         "name": "Cuckatoo31",
         "value": 0.86,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 151
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.28,
+        "coefficient": 1,
+        "power": 108
       },
       {
         "name": "CuckooCycle",
         "value": 5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 115
       },
       {
         "name": "Cortex",
         "value": 0.04,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 108
       },
       {
         "name": "Equihash",
-        "value": 500,
-        "coefficient": 1
+        "value": 0.4,
+        "coefficient": 1,
+        "power": 158
       },
       {
         "name": "Equihash(125,4)",
         "value": 32.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 93
       },
       {
         "name": "Equihash(144,5)",
         "value": 55.5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 115
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 17.4,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 76
       },
       {
         "name": "Ethash",
         "value": 26,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 125
       },
       {
         "name": "Etchash",
         "value": 27,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2.6,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 122
       },
       {
         "name": "KAWPOW",
         "value": 14,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 124
       },
       {
         "name": "RandomX",
-        "value": 0.609,
-        "coefficient": 1000
+        "value": 558,
+        "coefficient": 1,
+        "power": 104
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.5,
+        "coefficient": 1000000,
+        "power": 114
       },
       {
         "name": "Autolykos2",
         "value": 65,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 97
       }
     ]
   },
@@ -2015,82 +2283,92 @@
       {
         "name": "Cuckarood29",
         "value": 6.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 112
       },
       {
         "name": "Cuckatoo31",
         "value": 0.86,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 127
       },
       {
         "name": "Cuckatoo32",
         "value": 0.27,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 84
       },
       {
         "name": "CuckooCycle",
         "value": 6.2,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 102
       },
       {
         "name": "Cortex",
         "value": 0.04,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 97
       },
       {
         "name": "Equihash",
-        "value": 460,
-        "coefficient": 1
+        "value": 0.4,
+        "coefficient": 1,
+        "power": 181
       },
       {
         "name": "Equihash(125,4)",
         "value": 40.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 114
       },
       {
         "name": "Equihash(144,5)",
         "value": 65,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 123
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 19.6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 119
       },
       {
         "name": "Ethash",
         "value": 28,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 129
       },
       {
         "name": "Etchash",
         "value": 29,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2.65,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 159
       },
       {
         "name": "KAWPOW",
         "value": 15,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 124
       },
       {
         "name": "RandomX",
-        "value": 0.769,
-        "coefficient": 1000
+        "value": 614,
+        "coefficient": 1,
+        "power": 104
       },
       {
         "name": "Eaglesong",
-        "value": 778,
-        "coefficient": 1000000
+        "value": 0.7,
+        "coefficient": 1000000,
+        "power": 129
       },
       {
         "name": "Autolykos2",
         "value": 65,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 98
       }
     ]
   },
@@ -2109,82 +2387,92 @@
       {
         "name": "Cuckarood29",
         "value": 6.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 97
       },
       {
         "name": "Cuckatoo31",
         "value": 0.93,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 134
       },
       {
         "name": "Cuckatoo32",
         "value": 0.27,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 102
       },
       {
         "name": "CuckooCycle",
         "value": 5.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 120
       },
       {
         "name": "Cortex",
         "value": 0.04,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 100
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 0.4,
+        "coefficient": 1,
+        "power": 128
       },
       {
         "name": "Equihash(125,4)",
         "value": 37,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 128
       },
       {
         "name": "Equihash(144,5)",
         "value": 60,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 199
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 16,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 100
       },
       {
         "name": "Ethash",
         "value": 37,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 122
       },
       {
         "name": "Etchash",
         "value": 41,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2.05,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 122
       },
       {
         "name": "KAWPOW",
         "value": 14,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 179
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 394,
+        "coefficient": 1,
+        "power": 102
       },
       {
         "name": "Eaglesong",
-        "value": 592,
-        "coefficient": 1000000
+        "value": 0.6,
+        "coefficient": 1000000,
+        "power": 149
       },
       {
         "name": "Autolykos2",
         "value": 70,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 98
       }
     ]
   },
@@ -2200,82 +2488,92 @@
       {
         "name": "Cuckarood29",
         "value": 6.5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 137
       },
       {
         "name": "Cuckatoo31",
         "value": 1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 114
       },
       {
         "name": "Cuckatoo32",
         "value": 0.33,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 105
       },
       {
         "name": "CuckooCycle",
         "value": 6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 131
       },
       {
         "name": "Cortex",
         "value": 0.04,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 107
       },
       {
         "name": "Equihash",
-        "value": 650,
-        "coefficient": 1
+        "value": 0.5,
+        "coefficient": 1,
+        "power": 141
       },
       {
         "name": "Equihash(125,4)",
         "value": 42.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 136
       },
       {
         "name": "Equihash(144,5)",
         "value": 62,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 133
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 19,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 135
       },
       {
         "name": "Ethash",
         "value": 35,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 160
       },
       {
         "name": "Etchash",
         "value": 35,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 3,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 160
       },
       {
         "name": "KAWPOW",
         "value": 17,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 130
       },
       {
         "name": "RandomX",
-        "value": 0.73,
-        "coefficient": 1000
+        "value": 786,
+        "coefficient": 1,
+        "power": 133
       },
       {
         "name": "Eaglesong",
-        "value": 780,
-        "coefficient": 1000000
+        "value": 0.7,
+        "coefficient": 1000000,
+        "power": 128
       },
       {
         "name": "Autolykos2",
         "value": 67,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 123
       }
     ]
   },
@@ -2291,82 +2589,92 @@
       {
         "name": "Cuckarood29",
         "value": 8.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 119
       },
       {
         "name": "Cuckatoo31",
         "value": 1.62,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 191
       },
       {
         "name": "Cuckatoo32",
         "value": 0.56,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 280
       },
       {
         "name": "CuckooCycle",
         "value": 8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 164
       },
       {
         "name": "Cortex",
         "value": 0.04,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 134
       },
       {
         "name": "Equihash",
-        "value": 750,
-        "coefficient": 1
+        "value": 0.6,
+        "coefficient": 1,
+        "power": 241
       },
       {
         "name": "Equihash(125,4)",
         "value": 56.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 234
       },
       {
         "name": "Equihash(144,5)",
         "value": 82,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 163
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 28.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 263
       },
       {
         "name": "Ethash",
         "value": 45,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 210
       },
       {
         "name": "Etchash",
         "value": 50,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 3.9,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 224
       },
       {
         "name": "KAWPOW",
         "value": 25,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 250
       },
       {
         "name": "RandomX",
-        "value": 1.136,
-        "coefficient": 1000
+        "value": 933,
+        "coefficient": 1,
+        "power": 197
       },
       {
         "name": "Eaglesong",
-        "value": 1150,
-        "coefficient": 1000000
+        "value": 0.8,
+        "coefficient": 1000000,
+        "power": 129
       },
       {
         "name": "Autolykos2",
         "value": 105,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 166
       }
     ]
   },
@@ -2382,82 +2690,92 @@
       {
         "name": "Cuckarood29",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.2,
+        "coefficient": 1,
+        "power": 66
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.1,
+        "coefficient": 1,
+        "power": 51
       },
       {
         "name": "CuckooCycle",
-        "value": null,
-        "coefficient": 1
+        "value": 1.8,
+        "coefficient": 1,
+        "power": 87
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 13.1,
+        "coefficient": 1,
+        "power": 56
       },
       {
         "name": "Equihash(125,4)",
-        "value": null,
-        "coefficient": 1
+        "value": 13.1,
+        "coefficient": 1,
+        "power": 49
       },
       {
         "name": "Equihash(144,5)",
-        "value": null,
-        "coefficient": 1
+        "value": 19.9,
+        "coefficient": 1,
+        "power": 49
       },
       {
-        "name": "BeamHash",
-        "value": null,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 10.5,
+        "coefficient": 1,
+        "power": 49
       },
       {
         "name": "Ethash",
-        "value": null,
-        "coefficient": 1000000
+        "value": 13.3,
+        "coefficient": 1000000,
+        "power": 55
       },
       {
         "name": "Etchash",
         "value": 18.1,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 78
       },
       {
         "name": "KAWPOW",
         "value": 8.1,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 66
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 298,
+        "coefficient": 1,
+        "power": 53
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.3,
+        "coefficient": 1000000,
+        "power": 66
       },
       {
         "name": "Autolykos2",
         "value": 36,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 72
       }
     ]
   },
@@ -2473,82 +2791,92 @@
       {
         "name": "Cuckarood29",
         "value": 4.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 82
       },
       {
         "name": "Cuckatoo31",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 70
       },
       {
         "name": "Cuckatoo32",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 71
       },
       {
         "name": "CuckooCycle",
         "value": 3.7,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 58
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
         "value": 280,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 66
       },
       {
         "name": "Equihash(125,4)",
         "value": 20.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 66
       },
       {
         "name": "Equihash(144,5)",
         "value": 25.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 61
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 12.4,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 104
       },
       {
         "name": "Ethash",
         "value": 21,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 60
       },
       {
         "name": "Etchash",
         "value": 21,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 68
       },
       {
         "name": "KAWPOW",
         "value": 10.7,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 114
       },
       {
         "name": "RandomX",
-        "value": 0.58,
-        "coefficient": 1000
+        "value": 488,
+        "coefficient": 1,
+        "power": 50
       },
       {
         "name": "Eaglesong",
-        "value": 486,
-        "coefficient": 1000000
+        "value": 0.4,
+        "coefficient": 1000000,
+        "power": 106
       },
       {
         "name": "Autolykos2",
         "value": 47,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 46
       }
     ]
   },
@@ -2563,83 +2891,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 5.1,
-        "coefficient": 1
+        "value": null,
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.3,
+        "coefficient": 1,
+        "power": 93
       },
       {
         "name": "Cuckatoo32",
         "value": 0.26,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 90
       },
       {
         "name": "CuckooCycle",
-        "value": null,
-        "coefficient": 1
+        "value": 2.2,
+        "coefficient": 1,
+        "power": 74
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 13.9,
+        "coefficient": 1,
+        "power": 71
       },
       {
         "name": "Equihash(125,4)",
-        "value": null,
-        "coefficient": 1
+        "value": 13.9,
+        "coefficient": 1,
+        "power": 71
       },
       {
         "name": "Equihash(144,5)",
-        "value": null,
-        "coefficient": 1
+        "value": 21,
+        "coefficient": 1,
+        "power": 88
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 15,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 82
       },
       {
         "name": "Ethash",
         "value": 31,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 46
       },
       {
         "name": "Etchash",
         "value": 31,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2.2,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 70
       },
       {
         "name": "KAWPOW",
         "value": 14.2,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 79
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 466,
+        "coefficient": 1,
+        "power": 74
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.5,
+        "coefficient": 1000000,
+        "power": 97
       },
       {
         "name": "Autolykos2",
         "value": 63,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 67
       }
     ]
   },
@@ -2655,82 +2993,92 @@
       {
         "name": "Cuckarood29",
         "value": 5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 91
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.3,
+        "coefficient": 1,
+        "power": 54
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.1,
+        "coefficient": 1,
+        "power": 111
       },
       {
         "name": "CuckooCycle",
         "value": 4.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 79
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 22.4,
+        "coefficient": 1,
+        "power": 77
       },
       {
         "name": "Equihash(125,4)",
         "value": 26.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 77
       },
       {
         "name": "Equihash(144,5)",
         "value": 38,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 112
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 15.7,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 80
       },
       {
         "name": "Ethash",
         "value": 26,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 104
       },
       {
         "name": "Etchash",
         "value": 26,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2.1,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 97
       },
       {
         "name": "KAWPOW",
         "value": 15,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 81
       },
       {
         "name": "RandomX",
-        "value": 0.6,
-        "coefficient": 1000
+        "value": 600,
+        "coefficient": 1,
+        "power": 77
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.5,
+        "coefficient": 1000000,
+        "power": 99
       },
       {
         "name": "Autolykos2",
-        "value": null,
-        "coefficient": 1000000
+        "value": 47,
+        "coefficient": 1000000,
+        "power": 60
       }
     ]
   },
@@ -2746,82 +3094,92 @@
       {
         "name": "Cuckarood29",
         "value": 6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 105
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.4,
+        "coefficient": 1,
+        "power": 120
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.2,
+        "coefficient": 1,
+        "power": 125
       },
       {
         "name": "CuckooCycle",
         "value": 5.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 196
       },
       {
         "name": "Cortex",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 0.5,
+        "coefficient": 1,
+        "power": 177
       },
       {
         "name": "Equihash(125,4)",
         "value": 35.5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 126
       },
       {
         "name": "Equihash(144,5)",
         "value": 51,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 165
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 19,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 78
       },
       {
         "name": "Ethash",
         "value": 31,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 140
       },
       {
         "name": "Etchash",
         "value": 32,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2.6,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 138
       },
       {
         "name": "KAWPOW",
         "value": 16,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 165
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 630,
+        "coefficient": 1,
+        "power": 105
       },
       {
         "name": "Eaglesong",
         "value": 755,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 130
       },
       {
         "name": "Autolykos2",
         "value": 63.8,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 113
       }
     ]
   },
@@ -2837,82 +3195,92 @@
       {
         "name": "Cuckarood29",
         "value": 4.6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 163
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.5,
+        "coefficient": 1,
+        "power": 150
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.3,
+        "coefficient": 1,
+        "power": 85
       },
       {
         "name": "CuckooCycle",
-        "value": null,
-        "coefficient": 1
+        "value": 6.4,
+        "coefficient": 1,
+        "power": 145
       },
       {
         "name": "Cortex",
-        "value": null,
-        "coefficient": 1
+        "value": 0.042,
+        "coefficient": 1,
+        "power": 84
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
-        "value": null,
-        "coefficient": 1
+        "value": 37.9,
+        "coefficient": 1,
+        "power": 123
       },
       {
         "name": "Equihash(144,5)",
-        "value": null,
-        "coefficient": 1
+        "value": 49.6,
+        "coefficient": 1,
+        "power": 98
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 22,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 172
       },
       {
         "name": "Ethash",
         "value": 39,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 130
       },
       {
         "name": "Etchash",
         "value": 40,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 156
       },
       {
         "name": "KAWPOW",
         "value": 22.2,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 124
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 496,
+        "coefficient": 1,
+        "power": 59
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.7,
+        "coefficient": 1000000,
+        "power": 168
       },
       {
         "name": "Autolykos2",
         "value": 77,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 149
       }
     ]
   },
@@ -2928,82 +3296,92 @@
       {
         "name": "Cuckarood29",
         "value": 7.6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 121
       },
       {
         "name": "Cuckatoo31",
         "value": 1.33,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 215
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.35,
+        "coefficient": 1,
+        "power": 162
       },
       {
         "name": "CuckooCycle",
         "value": 7.5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 110
       },
       {
         "name": "Cortex",
         "value": 0.05,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 95
       },
       {
         "name": "Equihash",
         "value": 630,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 212
       },
       {
         "name": "Equihash(125,4)",
         "value": 45.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 170
       },
       {
         "name": "Equihash(144,5)",
         "value": 65.6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 152
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 23.2,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 112
       },
       {
         "name": "Ethash",
         "value": 39,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 183
       },
       {
         "name": "Etchash",
         "value": 40,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 3.3,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 115
       },
       {
         "name": "KAWPOW",
         "value": 21,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 147
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 759,
+        "coefficient": 1,
+        "power": 126
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.6,
+        "coefficient": 1000000,
+        "power": 78
       },
       {
         "name": "Autolykos2",
         "value": 90,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 150
       }
     ]
   },
@@ -3019,82 +3397,92 @@
       {
         "name": "Cuckarood29",
         "value": 8.6,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 156
       },
       {
         "name": "Cuckatoo31",
         "value": 1.51,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 211
       },
       {
         "name": "Cuckatoo32",
         "value": 0.47,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 133
       },
       {
         "name": "CuckooCycle",
         "value": 8.22,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 129
       },
       {
         "name": "Cortex",
         "value": 0.07,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 128
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 0.6,
+        "coefficient": 1,
+        "power": 150
       },
       {
         "name": "Equihash(125,4)",
         "value": 48.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 155
       },
       {
         "name": "Equihash(144,5)",
         "value": 85,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 211
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 24.4,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 217
       },
       {
         "name": "Ethash",
         "value": 40,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 166
       },
       {
         "name": "Etchash",
         "value": 41,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 3.7,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 116
       },
       {
         "name": "KAWPOW",
         "value": 23,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 162
       },
       {
         "name": "RandomX",
-        "value": 1.5,
-        "coefficient": 1000
+        "value": 1500,
+        "coefficient": 1,
+        "power": 54
       },
       {
         "name": "Eaglesong",
         "value": 830,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 92
       },
       {
         "name": "Autolykos2",
         "value": 78,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 144
       }
     ]
   },
@@ -3110,82 +3498,92 @@
       {
         "name": "Cuckarood29",
         "value": 9.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 174
       },
       {
         "name": "Cuckatoo31",
         "value": 1.65,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 157
       },
       {
         "name": "Cuckatoo32",
         "value": 0.48,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 210
       },
       {
         "name": "CuckooCycle",
         "value": 9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 117
       },
       {
         "name": "Cortex",
         "value": 0.07,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 172
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 0.7,
+        "coefficient": 1,
+        "power": 195
       },
       {
         "name": "Equihash(125,4)",
         "value": 58.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 195
       },
       {
         "name": "Equihash(144,5)",
         "value": 68,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 218
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 25,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 167
       },
       {
         "name": "Ethash",
         "value": 42,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 178
       },
       {
         "name": "Etchash",
         "value": 42,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 4.4,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 196
       },
       {
         "name": "KAWPOW",
         "value": 30,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 222
       },
       {
         "name": "RandomX",
-        "value": 1.191,
-        "coefficient": 1000
+        "value": 1191,
+        "coefficient": 1,
+        "power": 154
       },
       {
         "name": "Eaglesong",
         "value": 1150,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 197
       },
       {
         "name": "Autolykos2",
-        "value": null,
-        "coefficient": 1000000
+        "value": 72,
+        "coefficient": 1000000,
+        "power": 121
       }
     ]
   },
@@ -3201,82 +3599,92 @@
       {
         "name": "Cuckarood29",
         "value": 9.5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 186
       },
       {
         "name": "Cuckatoo31",
         "value": 2.45,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 179
       },
       {
         "name": "Cuckatoo32",
         "value": 0.81,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 151
       },
       {
         "name": "CuckooCycle",
         "value": 11,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 189
       },
       {
         "name": "Cortex",
         "value": 0.11,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 210
       },
       {
         "name": "Equihash",
-        "value": null,
-        "coefficient": 1
+        "value": 0.7,
+        "coefficient": 1,
+        "power": 222
       },
       {
         "name": "Equihash(125,4)",
         "value": 72,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 222
       },
       {
         "name": "Equihash(144,5)",
         "value": 123,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 242
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 28,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 129
       },
       {
         "name": "Ethash",
         "value": 57,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 150
       },
       {
         "name": "Etchash",
         "value": 57,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 5.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 150
       },
       {
         "name": "KAWPOW",
         "value": 36,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 303
       },
       {
         "name": "RandomX",
-        "value": 1.692,
-        "coefficient": 1000
+        "value": 1692,
+        "coefficient": 1,
+        "power": 248
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.002,
+        "coefficient": 1000000,
+        "power": 243
       },
       {
         "name": "Autolykos2",
         "value": 105,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 127
       }
     ]
   },
@@ -3291,83 +3699,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": null,
-        "coefficient": 1
+        "value": 1.5,
+        "coefficient": 1,
+        "power": 116
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.9,
+        "coefficient": 1,
+        "power": 107
       },
       {
         "name": "Cuckatoo32",
-        "value": null,
-        "coefficient": 1
+        "value": 0.2,
+        "coefficient": 1,
+        "power": 163
       },
       {
         "name": "CuckooCycle",
         "value": 3.85,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 137
       },
       {
         "name": "Cortex",
         "value": 0.06,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 123
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 38.3,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 109
       },
       {
         "name": "Equihash(144,5)",
         "value": 60,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 139
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 27.7,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 132
       },
       {
         "name": "Ethash",
         "value": 48,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 110
       },
       {
         "name": "Etchash",
         "value": 48,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 2.8,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 110
       },
       {
         "name": "KAWPOW",
         "value": 22.7,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 144
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 709,
+        "coefficient": 1,
+        "power": 107
       },
       {
         "name": "Eaglesong",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
         "value": 115,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 109
       }
     ]
   },
@@ -3383,82 +3801,92 @@
       {
         "name": "Cuckarood29",
         "value": 10.5,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 164
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.5,
+        "coefficient": 1,
+        "power": 174
       },
       {
         "name": "Cuckatoo32",
         "value": 0.53,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 92
       },
       {
         "name": "CuckooCycle",
         "value": 4.4,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 133
       },
       {
         "name": "Cortex",
         "value": 0.06,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 130
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 54.9,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 120
       },
       {
         "name": "Equihash(144,5)",
         "value": 98,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 111
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 33.8,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 113
       },
       {
         "name": "Ethash",
         "value": 60,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 120
       },
       {
         "name": "Etchash",
         "value": 61,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 4.2,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 120
       },
       {
         "name": "KAWPOW",
         "value": 30.5,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 150
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 820,
+        "coefficient": 1,
+        "power": 155
       },
       {
         "name": "Eaglesong",
         "value": 1000,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 120
       },
       {
         "name": "Autolykos2",
         "value": 170,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 120
       }
     ]
   },
@@ -3474,82 +3902,92 @@
       {
         "name": "Cuckarood29",
         "value": 10.11,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 118
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 0.6,
+        "coefficient": 1,
+        "power": 131
       },
       {
         "name": "Cuckatoo32",
         "value": 0.71,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 113
       },
       {
         "name": "CuckooCycle",
-        "value": null,
-        "coefficient": 1
+        "value": 7.9,
+        "coefficient": 1,
+        "power": 131
       },
       {
         "name": "Cortex",
         "value": 0.07,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 108
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 55.11,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 116
       },
       {
         "name": "Equihash(144,5)",
         "value": 70,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 161
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 37,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 207
       },
       {
         "name": "Ethash",
         "value": 62,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 117
       },
       {
         "name": "Etchash",
         "value": 61,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 4.8,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 117
       },
       {
         "name": "KAWPOW",
         "value": 33.4,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 152
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 800,
+        "coefficient": 1,
+        "power": 121
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.001,
+        "coefficient": 1000000,
+        "power": 203
       },
       {
         "name": "Autolykos2",
         "value": 170,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 130
       }
     ]
   },
@@ -3564,83 +4002,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": null,
-        "coefficient": 1
+        "value": 2.9,
+        "coefficient": 1,
+        "power": 222
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 1.7,
+        "coefficient": 1,
+        "power": 167
       },
       {
         "name": "Cuckatoo32",
         "value": 0.95,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 226
       },
       {
         "name": "CuckooCycle",
         "value": 10,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 300
       },
       {
         "name": "Cortex",
         "value": 0.11,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 254
       },
       {
         "name": "Equihash",
         "value": 940,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 217
       },
       {
         "name": "Equihash(125,4)",
         "value": 73,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 217
       },
       {
         "name": "Equihash(144,5)",
         "value": 138,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 255
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 43,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 264
       },
       {
         "name": "Ethash",
         "value": 98,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 224
       },
       {
         "name": "Etchash",
         "value": 98,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 5.15,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 224
       },
       {
         "name": "KAWPOW",
         "value": 47,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 279
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 1556,
+        "coefficient": 1,
+        "power": 81
       },
       {
         "name": "Eaglesong",
-        "value": null,
-        "coefficient": 1000000
+        "value": 0.002,
+        "coefficient": 1000000,
+        "power": 237
       },
       {
         "name": "Autolykos2",
         "value": 205,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 180
       }
     ]
   },
@@ -3655,83 +4103,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": null,
-        "coefficient": 1
+        "value": 3.2,
+        "coefficient": 1,
+        "power": 188
       },
       {
         "name": "Cuckatoo31",
         "value": 3.15,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 233
       },
       {
         "name": "Cuckatoo32",
         "value": 1.19,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 334
       },
       {
         "name": "CuckooCycle",
         "value": 15.24,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 361
       },
       {
         "name": "Cortex",
         "value": 0.14,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 348
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
         "value": 84.7,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 270
       },
       {
         "name": "Equihash(144,5)",
         "value": 144.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 295
       },
       {
-        "name": "BeamHash",
+        "name": "BeamHashIII",
         "value": 56.4,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 268
       },
       {
         "name": "Ethash",
         "value": 77,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 282
       },
       {
         "name": "Etchash",
         "value": 77,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 7.3,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 282
       },
       {
         "name": "KAWPOW",
         "value": 58.9,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 327
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 1742,
+        "coefficient": 1,
+        "power": 116
       },
       {
         "name": "Eaglesong",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
         "value": 261.2,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 210
       }
     ]
   },
@@ -3746,83 +4204,93 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": null,
-        "coefficient": 1
+        "value": 3.6,
+        "coefficient": 1,
+        "power": 301
       },
       {
         "name": "Cuckatoo31",
-        "value": null,
-        "coefficient": 1
+        "value": 2.7,
+        "coefficient": 1,
+        "power": 347
       },
       {
         "name": "Cuckatoo32",
         "value": 1.1,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 323
       },
       {
         "name": "CuckooCycle",
         "value": 10.2,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 343
       },
       {
         "name": "Cortex",
         "value": 0.15,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": 312
       },
       {
         "name": "Equihash",
         "value": null,
-        "coefficient": 1
+        "coefficient": 1,
+        "power": null
       },
       {
         "name": "Equihash(125,4)",
-        "value": null,
-        "coefficient": 1
+        "value": 78,
+        "coefficient": 1,
+        "power": 280
       },
       {
         "name": "Equihash(144,5)",
-        "value": null,
-        "coefficient": 1
+        "value": 134,
+        "coefficient": 1,
+        "power": 347
       },
       {
-        "name": "BeamHash",
-        "value": null,
-        "coefficient": 1
+        "name": "BeamHashIII",
+        "value": 38,
+        "coefficient": 1,
+        "power": 283
       },
       {
         "name": "Ethash",
         "value": 120,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 290
       },
       {
         "name": "Etchash",
         "value": 120,
-        "coefficient": 1000000
-      },
-      {
-        "name": "MTP",
-        "value": 6.45,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 290
       },
       {
         "name": "KAWPOW",
         "value": 52,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 344
       },
       {
         "name": "RandomX",
-        "value": null,
-        "coefficient": 1000
+        "value": 2000,
+        "coefficient": 1,
+        "power": 290
       },
       {
         "name": "Eaglesong",
         "value": null,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": null
       },
       {
         "name": "Autolykos2",
         "value": 275,
-        "coefficient": 1000000
+        "coefficient": 1000000,
+        "power": 269
       }
     ]
   }

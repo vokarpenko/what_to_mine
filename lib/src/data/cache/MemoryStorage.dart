@@ -30,6 +30,12 @@ class MemoryStorage {
     _editedHashrateCache[index] = _editedHashrateCache[index].rebuild((b) => b..hashrate = hashrateValue);
   }
 
+  // Добавить новые данные мощности в кэш
+  void putEditedPower(String name, int power) {
+    int index = _editedHashrateCache.indexWhere((element) => element.name == name);
+    _editedHashrateCache[index] = _editedHashrateCache[index].rebuild((b) => b..power = power);
+  }
+
   // Получить данные измененых хэшрейтов из кэша
   List<HashAlgorithm> getEditedHashrate() => _editedHashrateCache;
 

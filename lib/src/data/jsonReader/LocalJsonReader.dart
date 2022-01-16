@@ -23,13 +23,6 @@ class LocalJsonReader implements ILocalJsonReader {
     }
   }
 
-  @override
-  Future<Map<String, dynamic>> getHashrateCoefficients() async {
-    final String jsonCoefficient = await rootBundle.loadString('assets/json/hashrate_algorithms_coefficient.json');
-    Map<String, dynamic> coefficient = jsonDecode(jsonCoefficient);
-    return coefficient;
-  }
-
   Future<List<HashAlgorithm>> getHashAlgorithmsWithZeroValues() async {
     String jsonGpus = await rootBundle.loadString('assets/json/algos.json');
     List<dynamic> json = jsonDecode(jsonGpus);

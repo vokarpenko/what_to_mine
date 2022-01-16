@@ -57,6 +57,20 @@ class HashrateViewModel {
     });
   }
 
+  void onChangePower(String name, String? value) async {
+    int powerValue;
+    if (value == null || value == '') value = '0';
+    powerValue = int.parse(value);
+    Services.hashAlgorithmService
+        .updateEditedPowerInCache(name, powerValue)
+        .then((_) => _showApplyButton.add(true))
+        .catchError((error) {
+      String errorMessage = 'error_update_edited_power_in_cache'.tr() + '.\n${error.toString()}';
+      print(errorMessage);
+      _errorMessage.add(errorMessage);
+    });
+  }
+
   void onApplyHashrate() async {
     List<HashAlgorithm> hashrates = await Services.hashAlgorithmService.getEditedHashratesFromCache();
     Services.hashAlgorithmService.updateHashratesInDB(hashrates).then((_) {

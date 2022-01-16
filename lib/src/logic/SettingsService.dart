@@ -52,4 +52,19 @@ class SettingsService {
   Future<bool> isTheFirstRun() async {
     return (await this.getSettings()).isFirstRun;
   }
+
+  // Сохранить стоимость электроэнергии
+  Future<void> setElectricityCost(double cost) async {
+    return _gateway.setElectricityCost(cost);
+  }
+
+  // Получить стоимость электроэнергии
+  Future<double> getElectricityCost() async {
+    return (await this.getSettings()).electricityCost;
+  }
+
+  //Подписка на изменение стоимости электроэнергии
+  Stream<bool> onUserHashrateChanged() {
+    return _gateway.onElectricityCostChanged();
+  }
 }

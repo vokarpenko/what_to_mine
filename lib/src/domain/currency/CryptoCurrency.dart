@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import '../../constants.dart';
+
 class CryptoCurrency {
   final String id;
   final String coin;
@@ -17,25 +21,24 @@ class CryptoCurrency {
   final String updated;
   */
 
-  CryptoCurrency(
-      {required this.id,
-      required this.coin,
-      required this.name,
-      required this.type,
-      required this.algorithm,
-      required this.price,
-      required this.reward,
-      required this.networkHashrate,
-      required this.rewardUnit,
-      required this.volume,
-      this.iconLink
+  CryptoCurrency({required this.id,
+    required this.coin,
+    required this.name,
+    required this.type,
+    required this.algorithm,
+    required this.price,
+    required this.reward,
+    required this.networkHashrate,
+    required this.rewardUnit,
+    required this.volume,
+    this.iconLink
 
-      /*
+    /*
       required this.difficulty,
       required this.rewardBlock,
       required this.updated
       */
-      });
+  });
 
   factory CryptoCurrency.fromJson(Map<String, dynamic> json) {
     var reward;
@@ -85,9 +88,24 @@ class CryptoCurrency {
         );
   }
 
-  double calculateEarning(double? usedHashrate, int timeInHours) {
+  String getStringNetworkHashrate() {
+    if (networkHashrate == 0.0) return '';
+    int intHashrate = networkHashrate.toInt();
+    int length = intHashrate.toString().length;
+    // Ph/s
+    if (length >= 16 && length <= 18) return ((intHashrate / pow(10, 15)).toStringAsFixed(2) + ' Ph/s');
+    // Th/s
+    if (length >= 13 && length <= 15) return ((intHashrate / pow(10, 12)).toStringAsFixed(2) + ' Th/s');
+    // Gh/s
+    if (length >= 10 && length <= 12) return ((intHashrate / pow(10, 9)).toStringAsFixed(2) + ' Gh/s');
+    // Mh/s
+    if (length >= 7 && length <= 9) return ((intHashrate / pow(10, 6)).toStringAsFixed(2) + ' Mh/s');
+    return intHashrate.toString() + ' h/s';
+  }
+
+  double calculateDayEarning(double? usedHashrate) {
     if (reward > 0 && usedHashrate != null && usedHashrate > 0)
-      return reward * usedHashrate * timeInHours;
+      return reward * usedHashrate * Hours.hoursInDay;
     else
       return 0;
   }
@@ -110,17 +128,17 @@ class CryptoCurrency {
 
   bool operator ==(o) =>
       o is CryptoCurrency &&
-      name == o.name &&
-      coin == o.coin &&
-      name == o.name &&
-      type == o.type &&
-      algorithm == o.algorithm &&
-      price == o.price &&
-      reward == o.reward &&
-      networkHashrate == o.networkHashrate &&
-      rewardUnit == o.rewardUnit &&
-      volume == o.volume &&
-      iconLink == o.iconLink;
+          name == o.name &&
+          coin == o.coin &&
+          name == o.name &&
+          type == o.type &&
+          algorithm == o.algorithm &&
+          price == o.price &&
+          reward == o.reward &&
+          networkHashrate == o.networkHashrate &&
+          rewardUnit == o.rewardUnit &&
+          volume == o.volume &&
+          iconLink == o.iconLink;
 
   @override
   String toString() =>

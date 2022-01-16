@@ -8,10 +8,15 @@ class SettingsViewModel {
   final _notificationsIsEnable = StreamController<bool>();
   final _themeMode = StreamController<ThemeMode>();
   final _locale = StreamController<String>();
+  final _electricityCost = StreamController<double>();
 
   Stream<bool> get notificationsIsEnable => _notificationsIsEnable.stream;
+
   Stream<ThemeMode> get themeMode => _themeMode.stream;
+
   Stream<String> get locale => _locale.stream;
+
+  Stream<double> get electricityCost => _electricityCost.stream;
 
   void onViewInitState() async {}
 
@@ -19,7 +24,8 @@ class SettingsViewModel {
     this
       .._notificationsIsEnable.close()
       .._themeMode.close()
-      .._locale.close();
+      .._locale.close()
+      .._electricityCost.close();
   }
 
   void onChangeNotificationStatus(bool isEnable) async {
@@ -40,5 +46,10 @@ class SettingsViewModel {
 
   void onChangeLocale(String locale) async {
     _locale.add(locale);
+  }
+
+  void onChangeElectricityCost(double cost) async {
+    _electricityCost.add(cost);
+    Services.settingsService.setElectricityCost(cost);
   }
 }
