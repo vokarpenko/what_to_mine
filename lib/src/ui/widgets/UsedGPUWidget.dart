@@ -20,21 +20,33 @@ class UsedGPUWidget extends StatelessWidget {
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 5,
-      child: Row(
+      child: Flex(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        direction: Axis.horizontal,
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 10, bottom: 10),
-            height: 70,
-            width: 70,
-            child: ClipRRect(
-              child: logo,
-              borderRadius: BorderRadius.circular(40),
-            ),
-          ),
-          Column(
-            children: [Text(_usedGPU.gpuData.marketingName), Text('gpu_quantity'.tr() + ' ${_usedGPU.quantity}')],
-          )
+          Flexible(
+              flex: 1,
+              child: Container(
+                margin: EdgeInsets.only(top: 10, bottom: 10),
+                height: 70,
+                width: 70,
+                child: ClipRRect(
+                  child: logo,
+                  borderRadius: BorderRadius.circular(40),
+                ),
+              )),
+          Flexible(
+              fit: FlexFit.tight,
+              flex: 2,
+              child: Column(
+                children: [
+                  Text(_usedGPU.gpuData.marketingName),
+                  Padding(
+                    padding: EdgeInsets.only(top: 3),
+                    child: Text('gpu_quantity'.tr() + ' ${_usedGPU.quantity}'),
+                  )
+                ],
+              ))
         ],
       ),
     );

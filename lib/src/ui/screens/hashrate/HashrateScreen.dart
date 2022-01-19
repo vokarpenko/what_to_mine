@@ -75,11 +75,21 @@ class HashrateScreenState extends State<HashrateScreen> {
                 items = snapshot.data!;
                 if (snapshot.data!.isNotEmpty) {
                   int itemsCount = snapshot.data!.length;
-                  if (itemsCount > 0)
-                    return ListView.builder(
-                      itemCount: itemsCount,
-                      itemBuilder: (context, index) => HashrateWidget(_viewModel, items[index]),
+                  if (itemsCount > 0) {
+                    List<HashrateWidget> widgets = [];
+                    items.forEach((item) {
+                      widgets.add(HashrateWidget(_viewModel, item));
+                    });
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: widgets,
+                      ),
                     );
+                  }
+                  /*return ListView.builder(
+                      itemCount: itemsCount,
+                      itemBuilder: (context, index) => HashrateWidget(ValueKey(items[index]), _viewModel, items[index]),
+                    );*/
                   else
                     return _buildEmptyHashrateListLabel();
                 } else

@@ -1,5 +1,6 @@
 import 'package:background_fetch/background_fetch.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:what_to_mine/src/constants.dart';
 import 'package:what_to_mine/src/data/Scheduler/IBackgroundTaskScheduler.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 import 'package:what_to_mine/src/utils/Notificator.dart';
@@ -70,7 +71,7 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
         String title = '$nowProfitableToMineMessage' + ' ${earnings.cryptoCurrency.name}';
         String body =
             '$earningsTitle' + ' ${earnings.dayEarningInCurrency.toStringAsFixed(2)} USD ' + '$perDayText' + '!';
-        Notificator().showNotification(0, title, body);
+        Notificator().showNotification(sendNotification, title, body);
       }
     }).catchError((Object error) {
       String errorMessage = 'error_get_top_currency'.tr() + ': \n ${error.toString()}';

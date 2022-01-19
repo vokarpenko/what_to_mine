@@ -90,14 +90,35 @@ class EarningScreenState extends State<EarningScreen> {
                     },
                   ));
             else
-              return (Text(
-                'empty_earnings_message'.tr(),
-                textAlign: TextAlign.center,
-              ));
+              return _buildEmptyEarningsListWidget();
           } else
             return CircularProgressIndicator();
         },
       )),
+    );
+  }
+
+  Widget _buildEmptyEarningsListWidget() {
+    Brightness brightness = Theme.of(context).brightness;
+    String imagePath =
+        brightness == Brightness.light ? 'assets/images/not_earnings.png' : 'assets/images/not_earnings_bw.png';
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          imagePath,
+          fit: BoxFit.fitWidth,
+          width: MediaQuery.of(context).size.width * 0.6,
+        ),
+        Container(
+          padding: EdgeInsets.only(top: 30, left: 5, right: 5),
+          child: Text(
+            'empty_earnings_message'.tr(),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline4?.copyWith(fontSize: 20),
+          ),
+        )
+      ],
     );
   }
 }

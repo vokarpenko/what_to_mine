@@ -7,7 +7,9 @@ class HashrateWidget extends StatelessWidget {
   final HashrateViewModel _viewModel;
   final HashAlgorithm _algorithm;
 
-  HashrateWidget(this._viewModel, this._algorithm);
+  HashrateWidget(this._viewModel, HashAlgorithm algorithm)
+      : _algorithm = algorithm,
+        super(key: ValueKey(algorithm));
 
   @override
   Widget build(BuildContext context) {

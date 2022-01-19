@@ -9,12 +9,8 @@ class HashCoefficient {
   static const int hash = 1;
 }
 
-class Hours {
-  static const int hoursInDay = 24;
-//static const int hoursInWeek = 168;
-//static const int hoursInMonth = 720;
-}
-
-class Tasks {
-  static const int sendNotification = 0;
-}
+const int hoursInDay = 24;
+const int daysInWeek = 7;
+const int daysInMonth = 30;
+const int wattInKiloWatt = 1000;
+const int sendNotification = 0;

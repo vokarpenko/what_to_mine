@@ -23,6 +23,7 @@ class LocalJsonReader implements ILocalJsonReader {
     }
   }
 
+  // Получить список алгоритмов
   Future<List<HashAlgorithm>> getHashAlgorithmsWithZeroValues() async {
     String jsonGpus = await rootBundle.loadString('assets/json/algos.json');
     List<dynamic> json = jsonDecode(jsonGpus);

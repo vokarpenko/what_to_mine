@@ -109,15 +109,15 @@ class EarningsWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding: EdgeInsets.all(3),
+                            padding: EdgeInsets.only(left: 3, top: 3, bottom: 3),
                             child: Text('net_income_per_month'.tr()),
                           ),
                           Container(
-                            padding: EdgeInsets.all(3),
+                            padding: EdgeInsets.only(left: 3, top: 3, bottom: 3),
                             child: Text(_earnings.netMonthEarningInCurrency.toStringAsFixed(4) + ' USD'),
                           ),
                           Container(
-                            padding: EdgeInsets.all(3),
+                            padding: EdgeInsets.only(left: 3, top: 3, bottom: 3),
                             child: Text(_earnings.monthEarningInCrypto.toStringAsFixed(8) +
                                 ' ${_earnings.cryptoCurrency.coin}'),
                           ),

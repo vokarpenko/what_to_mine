@@ -21,24 +21,25 @@ class CryptoCurrency {
   final String updated;
   */
 
-  CryptoCurrency({required this.id,
-    required this.coin,
-    required this.name,
-    required this.type,
-    required this.algorithm,
-    required this.price,
-    required this.reward,
-    required this.networkHashrate,
-    required this.rewardUnit,
-    required this.volume,
-    this.iconLink
+  CryptoCurrency(
+      {required this.id,
+      required this.coin,
+      required this.name,
+      required this.type,
+      required this.algorithm,
+      required this.price,
+      required this.reward,
+      required this.networkHashrate,
+      required this.rewardUnit,
+      required this.volume,
+      this.iconLink
 
-    /*
+      /*
       required this.difficulty,
       required this.rewardBlock,
       required this.updated
       */
-  });
+      });
 
   factory CryptoCurrency.fromJson(Map<String, dynamic> json) {
     var reward;
@@ -105,7 +106,7 @@ class CryptoCurrency {
 
   double calculateDayEarning(double? usedHashrate) {
     if (reward > 0 && usedHashrate != null && usedHashrate > 0)
-      return reward * usedHashrate * Hours.hoursInDay;
+      return reward * usedHashrate * hoursInDay;
     else
       return 0;
   }
@@ -128,17 +129,17 @@ class CryptoCurrency {
 
   bool operator ==(o) =>
       o is CryptoCurrency &&
-          name == o.name &&
-          coin == o.coin &&
-          name == o.name &&
-          type == o.type &&
-          algorithm == o.algorithm &&
-          price == o.price &&
-          reward == o.reward &&
-          networkHashrate == o.networkHashrate &&
-          rewardUnit == o.rewardUnit &&
-          volume == o.volume &&
-          iconLink == o.iconLink;
+      name == o.name &&
+      coin == o.coin &&
+      name == o.name &&
+      type == o.type &&
+      algorithm == o.algorithm &&
+      price == o.price &&
+      reward == o.reward &&
+      networkHashrate == o.networkHashrate &&
+      rewardUnit == o.rewardUnit &&
+      volume == o.volume &&
+      iconLink == o.iconLink;
 
   @override
   String toString() =>

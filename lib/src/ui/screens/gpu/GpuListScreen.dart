@@ -86,9 +86,9 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
                       },
                     );
                   else
-                    return _buildEmptyGpuListLabel();
+                    return _buildEmptyGpuListWidget();
                 } else
-                  return _buildEmptyGpuListLabel();
+                  return _buildEmptyGpuListWidget();
               } else
                 return CircularProgressIndicator();
             },
@@ -119,7 +119,7 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
     Gpu selectedGpu = _gpus.first;
 
     new Future.delayed(Duration.zero, () {
-      TextEditingController controller = TextEditingController(text: "1");
+      TextEditingController controller = TextEditingController(text: '1');
       showDialog(
         context: context,
         builder: (context) {
@@ -211,10 +211,26 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
     });
   }
 
-  Text _buildEmptyGpuListLabel() {
-    return Text(
-      'empty_gpus_message'.tr(),
-      textAlign: TextAlign.center,
+  Widget _buildEmptyGpuListWidget() {
+    Brightness brightness = Theme.of(context).brightness;
+    String imagePath = brightness == Brightness.light ? 'assets/images/not_gpus.png' : 'assets/images/not_gpus_bw.png';
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          imagePath,
+          fit: BoxFit.fitWidth,
+          width: MediaQuery.of(context).size.width * 0.6,
+        ),
+        Container(
+          padding: EdgeInsets.only(top: 30, left: 5, right: 5),
+          child: Text(
+            'empty_gpus_message'.tr(),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline4?.copyWith(fontSize: 20),
+          ),
+        )
+      ],
     );
   }
 }

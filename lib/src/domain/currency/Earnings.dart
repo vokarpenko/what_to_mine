@@ -1,6 +1,8 @@
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart';
 
+import '../../constants.dart';
+
 class Earnings {
   final double dayEarningInCrypto;
   final double weekEarningInCrypto;
@@ -27,23 +29,23 @@ class Earnings {
       required double dayElectricityCost,
       required CryptoCurrency cryptoCurrency})
       : dayEarningInCrypto = dayEarningInCrypto,
-        weekEarningInCrypto = dayEarningInCrypto * 7,
-        monthEarningInCrypto = dayEarningInCrypto * 30,
+        weekEarningInCrypto = dayEarningInCrypto * daysInWeek,
+        monthEarningInCrypto = dayEarningInCrypto * daysInMonth,
         dayEarningInCurrency = dayEarningInCurrency,
-        weekEarningInCurrency = dayEarningInCurrency * 7,
-        monthEarningInCurrency = dayEarningInCurrency * 30,
+        weekEarningInCurrency = dayEarningInCurrency * daysInWeek,
+        monthEarningInCurrency = dayEarningInCurrency * daysInMonth,
         netDayEarningInCurrency = netDayEarningInCurrency,
-        netWeekEarningInCurrency = netDayEarningInCurrency * 7,
-        netMonthEarningInCurrency = netDayEarningInCurrency * 30,
+        netWeekEarningInCurrency = netDayEarningInCurrency * daysInWeek,
+        netMonthEarningInCurrency = netDayEarningInCurrency * daysInMonth,
         dayElectricityCost = dayElectricityCost,
-        weekElectricityCost = dayElectricityCost * 7,
-        monthElectricityCost = dayElectricityCost * 30,
+        weekElectricityCost = dayElectricityCost * daysInWeek,
+        monthElectricityCost = dayElectricityCost * daysInMonth,
         cryptoCurrency = cryptoCurrency;
 
   static Earnings create(CryptoCurrency currency, HashAlgorithm algorithm, double electricityCost) {
     double dayEarningInCrypto = currency.calculateDayEarning((algorithm.hashrate ?? 0) * algorithm.hashrateCoefficient);
     double dayEarningInCurrency = dayEarningInCrypto * currency.price;
-    double dayElectricityCost = (algorithm.power ?? 0) * electricityCost * 24 / 1000;
+    double dayElectricityCost = (algorithm.power ?? 0) * electricityCost * hoursInDay / wattInKiloWatt;
     double netDayEarningInCurrency = dayEarningInCurrency - dayElectricityCost;
     return Earnings._(
         cryptoCurrency: currency,
