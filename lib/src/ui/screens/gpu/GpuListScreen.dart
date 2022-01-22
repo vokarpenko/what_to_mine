@@ -106,7 +106,7 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
   }
 
   void _onClickAddGPU() {
-    _hideFabAnimation.reverse();
+    //_hideFabAnimation.reverse();
     _viewModel.onClickAddGPU();
   }
 
@@ -191,13 +191,13 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
                 actions: [
                   TextButton(
                       onPressed: () async {
-                        _hideFabAnimation.forward();
+                        //_hideFabAnimation.forward();
                         Navigator.pop(context);
                       },
                       child: Text('cancel'.tr())),
                   TextButton(
                       onPressed: () async {
-                        _hideFabAnimation.forward();
+                        //_hideFabAnimation.forward();
                         Navigator.pop(context);
                         _viewModel.onAddGPU(selectedGpu, int.parse(controller.value.text));
                       },

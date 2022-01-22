@@ -70,7 +70,7 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
       if (earnings != null) {
         String title = '$nowProfitableToMineMessage' + ' ${earnings.cryptoCurrency.name}';
         String body =
-            '$earningsTitle' + ' ${earnings.dayEarningInCurrency.toStringAsFixed(2)} USD ' + '$perDayText' + '!';
+            '$earningsTitle' + ' ${earnings.netDayEarningInCurrency.toStringAsFixed(2)} USD ' + '$perDayText' + '!';
         Notificator().showNotification(sendNotification, title, body);
       }
     }).catchError((Object error) {

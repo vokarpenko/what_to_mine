@@ -31,7 +31,7 @@ class SettingsViewModel {
   void onChangeNotificationStatus(bool isEnable) async {
     _notificationsIsEnable.add(isEnable);
     if (isEnable) {
-      await Services.backgroundTaskSchedulerService.enableScheduler(60);
+      await Services.backgroundTaskSchedulerService.enableScheduler(120);
     } else {
       await Services.backgroundTaskSchedulerService.disableScheduler();
     }
