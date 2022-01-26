@@ -60,6 +60,7 @@
   "error_internet_is_unavailable": "Internet is unavailable",
   "error_gpu_delete": "GPU delete error",
   "error_gpu_add": "GPU add error",
+  "error_quantity_gpu_add": "There cannot be more than 1000 identical GPUs",
   "error_get_top_currency": "Error getting the most profitable coin",
   "error_load_data": "Failed to load data"
 }

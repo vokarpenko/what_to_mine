@@ -59,13 +59,13 @@ class GpuListViewModel {
           ..quantity = quantity)
         .build();
     Services.gpuService.addUsedGpu(newUsedGpu).then((value) => null).catchError((Object error) {
-      _errorMessage.add('gpu_add_error'.tr() + ': ' + error.toString());
+      _errorMessage.add('error_gpu_add'.tr() + '.\n${error.toString()}');
     });
   }
 
   void deleteUsedGpu(String id) async {
     Services.gpuService.deleteUsedGpu(id).then((value) => null).catchError((Object error) {
-      _errorMessage.add('gpu_delete_error'.tr() + ': ' + error.toString());
+      _errorMessage.add('error_gpu_delete'.tr() + '.\n${error.toString()}');
     });
   }
 }

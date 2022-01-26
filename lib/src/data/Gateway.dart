@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:what_to_mine/src/constants.dart';
 import 'package:what_to_mine/src/data/Scheduler/IBackgroundTaskScheduler.dart';
@@ -116,6 +117,7 @@ class Gateway implements IGateway {
     UsedGpuEntity? usedGpuEntity = await _appDatabase.usedGpuDao.selectById(usedGpu.gpuData.id);
     if (usedGpuEntity != null) {
       int oldQuantity = usedGpuEntity.usedGpu.quantity;
+      if (oldQuantity + usedGpu.quantity > 1000) throw Exception('error_quantity_gpu_add'.tr());
       UsedGpu newUsedGpu = (UsedGpuBuilder()
             ..quantity = oldQuantity + usedGpu.quantity
             ..gpuData = usedGpu.gpuData.toBuilder())
