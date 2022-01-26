@@ -85,12 +85,7 @@ class HashrateScreenState extends State<HashrateScreen> {
                         children: widgets,
                       ),
                     );
-                  }
-                  /*return ListView.builder(
-                      itemCount: itemsCount,
-                      itemBuilder: (context, index) => HashrateWidget(ValueKey(items[index]), _viewModel, items[index]),
-                    );*/
-                  else
+                  } else
                     return _buildEmptyHashrateListLabel();
                 } else
                   return _buildEmptyHashrateListLabel();

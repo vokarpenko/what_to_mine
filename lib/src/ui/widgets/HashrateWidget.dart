@@ -36,7 +36,7 @@ class HashrateWidget extends StatelessWidget {
                     padding: EdgeInsets.only(left: 10),
                     child: TextField(
                         onChanged: (value) => _onChangeHashrate(_algorithm.name, value),
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,}([.][0-9]{0,2})?'))],
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,12}([.][0-9]{0,2})?'))],
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
@@ -59,7 +59,7 @@ class HashrateWidget extends StatelessWidget {
                     padding: EdgeInsets.only(left: 10),
                     child: TextField(
                         onChanged: (value) => _onChangePower(_algorithm.name, value),
-                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,}'))],
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,10}'))],
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),

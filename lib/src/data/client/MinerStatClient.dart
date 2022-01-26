@@ -12,9 +12,9 @@ class MinerStatClient implements IMinerStatClient {
   @override
   Future<List<CryptoCurrency>> getCryptoCurrenciesList() async {
     // HTTP запрос
+    //?algo=SHA-256,Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,Cortex,Equihash,Equihash(125,4),Equihash(144,5),BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2,Darkcoin
     var client = http.Client();
-    var url = Uri.parse(
-        'https://api.minerstat.com/v2/coins?algo=SHA-256,Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,Cortex,Equihash,BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2,Darkcoin');
+    var url = Uri.parse('https://api.minerstat.com/v2/coins');
     try {
       var response = await client.post(url);
       print('***getCryptoCurrenciesList*** Response status: ${response.statusCode}');

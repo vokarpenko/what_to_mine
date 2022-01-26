@@ -14,6 +14,7 @@ import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
+import 'package:what_to_mine/src/utils/Extensions.dart';
 
 import '../domain/currency/CryptoCurrency.dart';
 import 'Scheduler/BackgroundTaskScheduler.dart';
@@ -84,10 +85,11 @@ class Gateway implements IGateway {
 
   // Фильтруем только подходящие криптовалюты
   List<CryptoCurrency> _filterCryptoCurrencies(List<CryptoCurrency> list) {
-    return list
+    list = list
         .where(
-            (element) => element.isCoin() && element.hasPrice() && element.hasReward() && element.volumeMoreThan(1000))
+            (element) => element.isCoin() && element.hasPrice() && element.hasReward() && element.volumeMoreThan(100))
         .toList();
+    return list.unique((x) => x.name);
   }
 
   // Получить список видеокарт
@@ -179,6 +181,7 @@ class Gateway implements IGateway {
   Future<List<Earnings>> getEarningsList({required bool isNeedFresh}) async {
     double electricityCost = (await getSettings()).electricityCost;
     List<CryptoCurrency> currencies = await getCryptoCurrenciesList(isNeedFresh: isNeedFresh);
+    currencies = _filterCryptoCurrencies(currencies);
     List<HashAlgorithm?> hashratesUsedInCalc = await getHashratesUsedInCalc();
     List<Earnings> result = [];
 

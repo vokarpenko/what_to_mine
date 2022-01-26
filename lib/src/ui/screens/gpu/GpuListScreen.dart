@@ -182,7 +182,7 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
                       ),
                       TextField(
                           decoration: new InputDecoration(hintText: 'quantity'.tr()),
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([1-9]){1}([0-9]{1,2})?'))],
                           keyboardType: TextInputType.number,
                           controller: controller)
                     ],
@@ -214,23 +214,26 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
   Widget _buildEmptyGpuListWidget() {
     Brightness brightness = Theme.of(context).brightness;
     String imagePath = brightness == Brightness.light ? 'assets/images/not_gpus.png' : 'assets/images/not_gpus_bw.png';
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          imagePath,
-          fit: BoxFit.fitWidth,
-          width: MediaQuery.of(context).size.width * 0.6,
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 30, left: 5, right: 5),
-          child: Text(
-            'empty_gpus_message'.tr(),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline4?.copyWith(fontSize: 20),
+    return SingleChildScrollView(
+      physics: NeverScrollableScrollPhysics(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            imagePath,
+            fit: BoxFit.fitWidth,
+            width: MediaQuery.of(context).size.width * 0.6,
           ),
-        )
-      ],
+          Container(
+            padding: EdgeInsets.only(top: 30, left: 5, right: 5),
+            child: Text(
+              'empty_gpus_message'.tr(),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline4?.copyWith(fontSize: 20),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

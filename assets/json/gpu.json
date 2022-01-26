@@ -100,7 +100,7 @@
       },
       {
         "name": "Darkcoin",
-        "value": 0.75,
+        "value": 0.70,
         "coefficient": 1000000000,
         "power": 75
       }
@@ -207,7 +207,7 @@
       },
       {
         "name": "Darkcoin",
-        "value": 0.75,
+        "value": 0.70,
         "coefficient": 1000000000,
         "power": 75
       }
@@ -949,10 +949,10 @@
         "power": null
       },
       {
-        "name": "Autolykos2",
-        "value": null,
-        "coefficient": 1000000,
-        "power": null
+        "name": "Darkcoin",
+        "value": 0.8,
+        "coefficient": 1000000000,
+        "power": 75
       }
     ]
   },
@@ -1054,6 +1054,12 @@
         "value": 170.5,
         "coefficient": 1000000,
         "power": 120
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
       }
     ]
   },
@@ -1155,6 +1161,12 @@
         "value": 163,
         "coefficient": 1000000,
         "power": 134
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.45,
+        "coefficient": 1000000000,
+        "power": 130
       }
     ]
   },
@@ -1256,6 +1268,12 @@
         "value": 245,
         "coefficient": 1000000,
         "power": 142
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.34,
+        "coefficient": 1000000000,
+        "power": 160
       }
     ]
   },
@@ -1357,6 +1375,12 @@
         "value": 80,
         "coefficient": 1000000,
         "power": 101
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.2,
+        "coefficient": 1000000000,
+        "power": 120
       }
     ]
   },
@@ -1458,6 +1482,12 @@
         "value": 108,
         "coefficient": 1000000,
         "power": 132
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.3,
+        "coefficient": 1000000000,
+        "power": 140
       }
     ]
   },
@@ -1559,6 +1589,12 @@
         "value": 86.4,
         "coefficient": 1000000,
         "power": 101
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.2,
+        "coefficient": 1000000000,
+        "power": 110
       }
     ]
   },
@@ -1660,6 +1696,12 @@
         "value": 115,
         "coefficient": 1000000,
         "power": 134
+      },
+      {
+        "name": "Darkcoin",
+        "value": 3.5,
+        "coefficient": 1000000000,
+        "power": 170
       }
     ]
   },
@@ -1761,6 +1803,12 @@
         "value": 119,
         "coefficient": 1000000,
         "power": 207
+      },
+      {
+        "name": "Darkcoin",
+        "value": 3.9,
+        "coefficient": 1000000000,
+        "power": 190
       }
     ]
   },
@@ -1862,6 +1910,12 @@
         "value": 117,
         "coefficient": 1000000,
         "power": 207
+      },
+      {
+        "name": "Darkcoin",
+        "value": 4.4,
+        "coefficient": 1000000000,
+        "power": 200
       }
     ]
   },
@@ -1963,6 +2017,12 @@
         "value": 32,
         "coefficient": 1000000,
         "power": 70
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
       }
     ]
   },
@@ -2064,6 +2124,12 @@
         "value": 52,
         "coefficient": 1000000,
         "power": 76
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
       }
     ]
   },
@@ -2165,6 +2231,12 @@
         "value": 52,
         "coefficient": 1000000,
         "power": 76
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
       }
     ]
   },
@@ -2266,6 +2338,12 @@
         "value": 65,
         "coefficient": 1000000,
         "power": 97
+      },
+      {
+        "name": "Darkcoin",
+        "value": 0.9,
+        "coefficient": 1000000000,
+        "power": 120
       }
     ]
   },
@@ -2369,6 +2447,12 @@
         "value": 65,
         "coefficient": 1000000,
         "power": 98
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.2,
+        "coefficient": 1000000000,
+        "power": 120
       }
     ]
   },
@@ -2473,6 +2557,12 @@
         "value": 70,
         "coefficient": 1000000,
         "power": 98
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
       }
     ]
   },
@@ -2574,6 +2664,12 @@
         "value": 67,
         "coefficient": 1000000,
         "power": 123
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.4,
+        "coefficient": 1000000000,
+        "power": 140
       }
     ]
   },
@@ -2675,6 +2771,12 @@
         "value": 105,
         "coefficient": 1000000,
         "power": 166
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2,
+        "coefficient": 1000000000,
+        "power": 210
       }
     ]
   },
@@ -2776,6 +2878,12 @@
         "value": 36,
         "coefficient": 1000000,
         "power": 72
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
       }
     ]
   },
@@ -2877,6 +2985,12 @@
         "value": 47,
         "coefficient": 1000000,
         "power": 46
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.259,
+        "coefficient": 1000000000,
+        "power": 103
       }
     ]
   },
@@ -2978,6 +3092,12 @@
         "value": 63,
         "coefficient": 1000000,
         "power": 67
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.2,
+        "coefficient": 1000000000,
+        "power": 110
       }
     ]
   },
@@ -3079,6 +3199,12 @@
         "value": 47,
         "coefficient": 1000000,
         "power": 60
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.3,
+        "coefficient": 1000000000,
+        "power": 100
       }
     ]
   },
@@ -3180,6 +3306,12 @@
         "value": 63.8,
         "coefficient": 1000000,
         "power": 113
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.7,
+        "coefficient": 1000000000,
+        "power": 135
       }
     ]
   },
@@ -3281,6 +3413,12 @@
         "value": 77,
         "coefficient": 1000000,
         "power": 149
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
       }
     ]
   },
@@ -3382,6 +3520,12 @@
         "value": 90,
         "coefficient": 1000000,
         "power": 150
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.298,
+        "coefficient": 1000000000,
+        "power": 127
       }
     ]
   },
@@ -3483,6 +3627,12 @@
         "value": 78,
         "coefficient": 1000000,
         "power": 144
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
       }
     ]
   },
@@ -3584,6 +3734,119 @@
         "value": 72,
         "coefficient": 1000000,
         "power": 121
+      },
+      {
+        "name": "Darkcoin",
+        "value": null,
+        "coefficient": 1000000000,
+        "power": null
+      }
+    ]
+  },
+  {
+    "id": "2080S",
+    "name": "2080S",
+    "marketingName": "Nvidia GeForce RTX 2080 Super",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 750,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 9.1,
+        "coefficient": 1,
+        "power": 174
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.96,
+        "coefficient": 1,
+        "power": 190
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.517,
+        "coefficient": 1,
+        "power": 290
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 9.6,
+        "coefficient": 1,
+        "power": 224
+      },
+      {
+        "name": "Cortex",
+        "value": 0.08,
+        "coefficient": 1,
+        "power": 117
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1,
+        "power": null
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 58.9,
+        "coefficient": 1,
+        "power": 180
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 72,
+        "coefficient": 1,
+        "power": 225
+      },
+      {
+        "name": "BeamHashIII",
+        "value": 29.41,
+        "coefficient": 1,
+        "power": 218
+      },
+      {
+        "name": "Ethash",
+        "value": 44.5,
+        "coefficient": 1000000,
+        "power": 192
+      },
+      {
+        "name": "Etchash",
+        "value": 44.5,
+        "coefficient": 1000000,
+        "power": 192
+      },
+      {
+        "name": "KAWPOW",
+        "value": 26.75,
+        "coefficient": 1000000,
+        "power": 172
+      },
+      {
+        "name": "RandomX",
+        "value": 1067,
+        "coefficient": 1,
+        "power": 200
+      },
+      {
+        "name": "Eaglesong",
+        "value": 1150,
+        "coefficient": 1000000,
+        "power": 244
+      },
+      {
+        "name": "Autolykos2",
+        "value": 72,
+        "coefficient": 1000000,
+        "power": 121
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.456,
+        "coefficient": 1000000000,
+        "power": 131
       }
     ]
   },
@@ -3685,6 +3948,12 @@
         "value": 105,
         "coefficient": 1000000,
         "power": 127
+      },
+      {
+        "name": "Darkcoin",
+        "value": 3.536,
+        "coefficient": 1000000000,
+        "power": 272
       }
     ]
   },
@@ -3699,27 +3968,27 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 1.5,
+        "value": 1.52,
         "coefficient": 1,
-        "power": 116
+        "power": 109
       },
       {
         "name": "Cuckatoo31",
-        "value": 0.9,
+        "value": 0.85,
         "coefficient": 1,
-        "power": 107
+        "power": 121
       },
       {
         "name": "Cuckatoo32",
-        "value": 0.2,
+        "value": 0.26,
         "coefficient": 1,
         "power": 163
       },
       {
         "name": "CuckooCycle",
-        "value": 3.85,
+        "value": 6,
         "coefficient": 1,
-        "power": 137
+        "power": 90
       },
       {
         "name": "Cortex",
@@ -3735,9 +4004,9 @@
       },
       {
         "name": "Equihash(125,4)",
-        "value": 38.3,
+        "value": 29.81,
         "coefficient": 1,
-        "power": 109
+        "power": 139
       },
       {
         "name": "Equihash(144,5)",
@@ -3753,19 +4022,19 @@
       },
       {
         "name": "Ethash",
-        "value": 48,
+        "value": 49.6,
         "coefficient": 1000000,
         "power": 110
       },
       {
         "name": "Etchash",
-        "value": 48,
+        "value": 49.6,
         "coefficient": 1000000,
         "power": 110
       },
       {
         "name": "KAWPOW",
-        "value": 22.7,
+        "value": 23.42,
         "coefficient": 1000000,
         "power": 144
       },
@@ -3783,9 +4052,122 @@
       },
       {
         "name": "Autolykos2",
-        "value": 115,
+        "value": 108,
         "coefficient": 1000000,
         "power": 109
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.877,
+        "coefficient": 1000000000,
+        "power": 135
+      }
+    ]
+  },
+  {
+    "id": "3060 LHR",
+    "name": "3060 LHR",
+    "marketingName": "Nvidia GeForce RTX 3060 LHR",
+    "vendor": "nvidia",
+    "ramSize": 12288,
+    "price": 329,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 1.52,
+        "coefficient": 1,
+        "power": 109
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.02,
+        "coefficient": 1,
+        "power": 157
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.27,
+        "coefficient": 1,
+        "power": 116
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 6.84,
+        "coefficient": 1,
+        "power": 101
+      },
+      {
+        "name": "Cortex",
+        "value": 0.06,
+        "coefficient": 1,
+        "power": 136
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1,
+        "power": null
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 29.76,
+        "coefficient": 1,
+        "power": 155
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 60,
+        "coefficient": 1,
+        "power": 139
+      },
+      {
+        "name": "BeamHashIII",
+        "value": 27.7,
+        "coefficient": 1,
+        "power": 132
+      },
+      {
+        "name": "Ethash",
+        "value": 33.5,
+        "coefficient": 1000000,
+        "power": 110
+      },
+      {
+        "name": "Etchash",
+        "value": 33.5,
+        "coefficient": 1000000,
+        "power": 110
+      },
+      {
+        "name": "KAWPOW",
+        "value": 20.59,
+        "coefficient": 1000000,
+        "power": 169
+      },
+      {
+        "name": "RandomX",
+        "value": 709,
+        "coefficient": 1,
+        "power": 107
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000,
+        "power": null
+      },
+      {
+        "name": "Autolykos2",
+        "value": 103,
+        "coefficient": 1000000,
+        "power": 141
+      },
+      {
+        "name": "Darkcoin",
+        "value": 1.877,
+        "coefficient": 1000000000,
+        "power": 135
       }
     ]
   },
@@ -3800,33 +4182,33 @@
     "algos": [
       {
         "name": "Cuckarood29",
-        "value": 10.5,
+        "value": 2.03,
         "coefficient": 1,
-        "power": 164
+        "power": 119
       },
       {
         "name": "Cuckatoo31",
-        "value": 0.5,
+        "value": 0.56,
         "coefficient": 1,
         "power": 174
       },
       {
         "name": "Cuckatoo32",
-        "value": 0.53,
+        "value": 0.29,
         "coefficient": 1,
-        "power": 92
+        "power": 172
       },
       {
         "name": "CuckooCycle",
-        "value": 4.4,
+        "value": 7.28,
         "coefficient": 1,
-        "power": 133
+        "power": 138
       },
       {
         "name": "Cortex",
         "value": 0.06,
         "coefficient": 1,
-        "power": 130
+        "power": 109
       },
       {
         "name": "Equihash",
@@ -3836,21 +4218,21 @@
       },
       {
         "name": "Equihash(125,4)",
-        "value": 54.9,
+        "value": 41.41,
         "coefficient": 1,
-        "power": 120
+        "power": 124
       },
       {
         "name": "Equihash(144,5)",
-        "value": 98,
+        "value": 71.5,
         "coefficient": 1,
-        "power": 111
+        "power": 129
       },
       {
         "name": "BeamHashIII",
-        "value": 33.8,
+        "value": 27.56,
         "coefficient": 1,
-        "power": 113
+        "power": 197
       },
       {
         "name": "Ethash",
@@ -3860,7 +4242,7 @@
       },
       {
         "name": "Etchash",
-        "value": 61,
+        "value": 60,
         "coefficient": 1000000,
         "power": 120
       },
@@ -3872,9 +4254,9 @@
       },
       {
         "name": "RandomX",
-        "value": 820,
+        "value": 795,
         "coefficient": 1,
-        "power": 155
+        "power": 116
       },
       {
         "name": "Eaglesong",
@@ -3884,9 +4266,122 @@
       },
       {
         "name": "Autolykos2",
-        "value": 170,
+        "value": 132,
         "coefficient": 1000000,
         "power": 120
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.295,
+        "coefficient": 1000000000,
+        "power": 150
+      }
+    ]
+  },
+  {
+    "id": "3060Ti LHR",
+    "name": "3060Ti LHR",
+    "marketingName": "Nvidia GeForce RTX 3060 Ti LHR",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 399,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 2.02,
+        "coefficient": 1,
+        "power": 164
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.52,
+        "coefficient": 1,
+        "power": 115
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.28,
+        "coefficient": 1,
+        "power": 196
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 7.99,
+        "coefficient": 1,
+        "power": 122
+      },
+      {
+        "name": "Cortex",
+        "value": 0.06,
+        "coefficient": 1,
+        "power": 109
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1,
+        "power": null
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 38.23,
+        "coefficient": 1,
+        "power": 140
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 62.33,
+        "coefficient": 1,
+        "power": 120
+      },
+      {
+        "name": "BeamHashIII",
+        "value": 26.7,
+        "coefficient": 1,
+        "power": 124
+      },
+      {
+        "name": "Ethash",
+        "value": 43,
+        "coefficient": 1000000,
+        "power": 120
+      },
+      {
+        "name": "Etchash",
+        "value": 43,
+        "coefficient": 1000000,
+        "power": 120
+      },
+      {
+        "name": "KAWPOW",
+        "value": 24.3,
+        "coefficient": 1000000,
+        "power": 129
+      },
+      {
+        "name": "RandomX",
+        "value": null,
+        "coefficient": 1,
+        "power": null
+      },
+      {
+        "name": "Eaglesong",
+        "value": 1000,
+        "coefficient": 1000000,
+        "power": 120
+      },
+      {
+        "name": "Autolykos2",
+        "value": 127,
+        "coefficient": 1000000,
+        "power": 155
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.295,
+        "coefficient": 1000000000,
+        "power": 150
       }
     ]
   },
@@ -3913,7 +4408,7 @@
       },
       {
         "name": "Cuckatoo32",
-        "value": 0.71,
+        "value": 0.34,
         "coefficient": 1,
         "power": 113
       },
@@ -3925,9 +4420,9 @@
       },
       {
         "name": "Cortex",
-        "value": 0.07,
+        "value": 0.06,
         "coefficient": 1,
-        "power": 108
+        "power": 124
       },
       {
         "name": "Equihash",
@@ -3985,9 +4480,229 @@
       },
       {
         "name": "Autolykos2",
-        "value": 170,
+        "value": 173,
         "coefficient": 1000000,
         "power": 130
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.614,
+        "coefficient": 1000000000,
+        "power": 136
+      }
+    ]
+  },
+  {
+    "id": "3070 LHR",
+    "name": "3070 LHR",
+    "marketingName": "Nvidia GeForce RTX 3070 LHR",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 580,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 10.11,
+        "coefficient": 1,
+        "power": 118
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.6,
+        "coefficient": 1,
+        "power": 131
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.36,
+        "coefficient": 1,
+        "power": 236
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 10,
+        "coefficient": 1,
+        "power": 131
+      },
+      {
+        "name": "Cortex",
+        "value": 0.06,
+        "coefficient": 1,
+        "power": 124
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1,
+        "power": null
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 55.11,
+        "coefficient": 1,
+        "power": 116
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 70,
+        "coefficient": 1,
+        "power": 161
+      },
+      {
+        "name": "BeamHashIII",
+        "value": 37,
+        "coefficient": 1,
+        "power": 207
+      },
+      {
+        "name": "Ethash",
+        "value": 45,
+        "coefficient": 1000000,
+        "power": 117
+      },
+      {
+        "name": "Etchash",
+        "value": 45,
+        "coefficient": 1000000,
+        "power": 117
+      },
+      {
+        "name": "KAWPOW",
+        "value": 24.3,
+        "coefficient": 1000000,
+        "power": 129
+      },
+      {
+        "name": "RandomX",
+        "value": 800,
+        "coefficient": 1,
+        "power": 121
+      },
+      {
+        "name": "Eaglesong",
+        "value": 0.001,
+        "coefficient": 1000000,
+        "power": 203
+      },
+      {
+        "name": "Autolykos2",
+        "value": 144,
+        "coefficient": 1000000,
+        "power": 130
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.614,
+        "coefficient": 1000000000,
+        "power": 136
+      }
+    ]
+  },
+  {
+    "id": "3070Ti",
+    "name": "3070Ti",
+    "marketingName": "Nvidia GeForce RTX 3070 Ti",
+    "vendor": "nvidia",
+    "ramSize": 8192,
+    "price": 580,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 10.11,
+        "coefficient": 1,
+        "power": 118
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 0.6,
+        "coefficient": 1,
+        "power": 179
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.36,
+        "coefficient": 1,
+        "power": 250
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 9.25,
+        "coefficient": 1,
+        "power": 187
+      },
+      {
+        "name": "Cortex",
+        "value": 0.084,
+        "coefficient": 1,
+        "power": 200
+      },
+      {
+        "name": "Equihash",
+        "value": null,
+        "coefficient": 1,
+        "power": null
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 55.6,
+        "coefficient": 1,
+        "power": 215
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 98,
+        "coefficient": 1,
+        "power": 260
+      },
+      {
+        "name": "BeamHashIII",
+        "value": 36,
+        "coefficient": 1,
+        "power": 216
+      },
+      {
+        "name": "Ethash",
+        "value": 54,
+        "coefficient": 1000000,
+        "power": 200
+      },
+      {
+        "name": "Etchash",
+        "value": 54,
+        "coefficient": 1000000,
+        "power": 200
+      },
+      {
+        "name": "KAWPOW",
+        "value": 39.9,
+        "coefficient": 1000000,
+        "power": 250
+      },
+      {
+        "name": "RandomX",
+        "value": 1128,
+        "coefficient": 1,
+        "power": 187
+      },
+      {
+        "name": "Eaglesong",
+        "value": null,
+        "coefficient": 1000000,
+        "power": null
+      },
+      {
+        "name": "Autolykos2",
+        "value": 173,
+        "coefficient": 1000000,
+        "power": 160
+      },
+      {
+        "name": "Darkcoin",
+        "value": 2.939,
+        "coefficient": 1000000000,
+        "power": 238
       }
     ]
   },
@@ -4014,13 +4729,13 @@
       },
       {
         "name": "Cuckatoo32",
-        "value": 0.95,
+        "value": 0.51,
         "coefficient": 1,
         "power": 226
       },
       {
         "name": "CuckooCycle",
-        "value": 10,
+        "value": 12.67,
         "coefficient": 1,
         "power": 300
       },
@@ -4050,9 +4765,9 @@
       },
       {
         "name": "BeamHashIII",
-        "value": 43,
+        "value": 42,
         "coefficient": 1,
-        "power": 264
+        "power": 260
       },
       {
         "name": "Ethash",
@@ -4086,9 +4801,122 @@
       },
       {
         "name": "Autolykos2",
-        "value": 205,
+        "value": 218,
         "coefficient": 1000000,
         "power": 180
+      },
+      {
+        "name": "Darkcoin",
+        "value": 4.017,
+        "coefficient": 1000000000,
+        "power": 320
+      }
+    ]
+  },
+  {
+    "id": "3080 LHR",
+    "name": "3080 LHR",
+    "marketingName": "Nvidia GeForce RTX 3080 LHR",
+    "vendor": "nvidia",
+    "ramSize": 10240,
+    "price": 820,
+    "secondHand": false,
+    "algos": [
+      {
+        "name": "Cuckarood29",
+        "value": 2.9,
+        "coefficient": 1,
+        "power": 222
+      },
+      {
+        "name": "Cuckatoo31",
+        "value": 1.88,
+        "coefficient": 1,
+        "power": 243
+      },
+      {
+        "name": "Cuckatoo32",
+        "value": 0.51,
+        "coefficient": 1,
+        "power": 226
+      },
+      {
+        "name": "CuckooCycle",
+        "value": 13.47,
+        "coefficient": 1,
+        "power": 300
+      },
+      {
+        "name": "Cortex",
+        "value": 0.11,
+        "coefficient": 1,
+        "power": 254
+      },
+      {
+        "name": "Equihash",
+        "value": 940,
+        "coefficient": 1,
+        "power": 217
+      },
+      {
+        "name": "Equihash(125,4)",
+        "value": 73,
+        "coefficient": 1,
+        "power": 217
+      },
+      {
+        "name": "Equihash(144,5)",
+        "value": 138,
+        "coefficient": 1,
+        "power": 255
+      },
+      {
+        "name": "BeamHashIII",
+        "value": 42,
+        "coefficient": 1,
+        "power": 260
+      },
+      {
+        "name": "Ethash",
+        "value": 64.87,
+        "coefficient": 1000000,
+        "power": 224
+      },
+      {
+        "name": "Etchash",
+        "value": 64.87,
+        "coefficient": 1000000,
+        "power": 224
+      },
+      {
+        "name": "KAWPOW",
+        "value": 39.85,
+        "coefficient": 1000000,
+        "power": 317
+      },
+      {
+        "name": "RandomX",
+        "value": 1556,
+        "coefficient": 1,
+        "power": 81
+      },
+      {
+        "name": "Eaglesong",
+        "value": 0.002,
+        "coefficient": 1000000,
+        "power": 237
+      },
+      {
+        "name": "Autolykos2",
+        "value": 190,
+        "coefficient": 1000000,
+        "power": 297
+      },
+      {
+        "name": "Darkcoin",
+        "value": 4.017,
+        "coefficient": 1000000000,
+        "power": 320
       }
     ]
   },
@@ -4190,6 +5018,12 @@
         "value": 261.2,
         "coefficient": 1000000,
         "power": 210
+      },
+      {
+        "name": "Darkcoin",
+        "value": 4.914,
+        "coefficient": 1000000000,
+        "power": 320
       }
     ]
   },
@@ -4291,6 +5125,12 @@
         "value": 275,
         "coefficient": 1000000,
         "power": 269
+      },
+      {
+        "name": "Darkcoin",
+        "value": 5.012,
+        "coefficient": 1000000000,
+        "power": 328
       }
     ]
   }
