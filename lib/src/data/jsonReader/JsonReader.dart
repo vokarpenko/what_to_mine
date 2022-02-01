@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:what_to_mine/src/data/jsonReader/ILocalJsonReader.dart';
+import 'package:what_to_mine/src/data/jsonReader/IJsonReader.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/serializers.dart';
 
-class LocalJsonReader implements ILocalJsonReader {
+class JsonReader implements IJsonReader {
   // Получить список видеокарт
   @override
   Future<List<Gpu>?> getGPUList() async {

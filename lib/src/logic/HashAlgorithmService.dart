@@ -1,11 +1,10 @@
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
-
-import 'gateway/IGateway.dart';
+import 'package:what_to_mine/src/logic/gateway/IHashAlgorithmGateway.dart';
 
 class HashAlgorithmService {
-  final IGateway _gateway;
+  final IHashAlgorithmGateway _gateway;
 
-  HashAlgorithmService({required IGateway gateway}) : _gateway = gateway;
+  HashAlgorithmService({required IHashAlgorithmGateway gateway}) : _gateway = gateway;
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
@@ -34,6 +33,6 @@ class HashAlgorithmService {
 
   //Подписка на изменения используемых видеокарт
   Stream<bool> onUserHashrateChanged() {
-    return _gateway.onUserHashrateChanged();
+    return _gateway.userHashrateChangedStream();
   }
 }

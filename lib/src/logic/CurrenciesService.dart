@@ -1,12 +1,12 @@
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
-import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
+import 'package:what_to_mine/src/logic/gateway/ICurrenciesGateway.dart';
 
 import '../domain/currency/CryptoCurrency.dart';
 
 class CurrenciesService {
-  final IGateway _gateway;
+  final ICurrenciesGateway _gateway;
 
-  CurrenciesService({required IGateway gateway}) : _gateway = gateway;
+  CurrenciesService({required ICurrenciesGateway gateway}) : _gateway = gateway;
 
   // Получить список криптовалют
   Future<List<CryptoCurrency>> getCryptoCurrenciesList(bool isNeedFresh) async {
@@ -22,7 +22,7 @@ class CurrenciesService {
 
   // Получить самую доходную криптовалюту
   Future<Earnings?> getMostProfitableCurrency() async {
-    List<Earnings> result = await getEarningsList(true);
+    List<Earnings> result = await this.getEarningsList(true);
     if (result.isNotEmpty) return result.first;
   }
 }

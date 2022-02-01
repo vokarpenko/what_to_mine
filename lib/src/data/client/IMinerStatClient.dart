@@ -1,6 +1,6 @@
 import '../../domain/currency/CryptoCurrency.dart';
 
 abstract class IMinerStatClient {
-  // Получить список криптовалют
-  Future<List<CryptoCurrency>> getCryptoCurrenciesList();
+  // Получить список криптовалют из api
+  Future<List<CryptoCurrency>> getCryptoCurrenciesListFromApi();
 }

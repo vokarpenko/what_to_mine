@@ -3,41 +3,44 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:what_to_mine/src/constants.dart';
-import 'package:what_to_mine/src/data/Scheduler/IBackgroundTaskScheduler.dart';
 import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
 import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
 import 'package:what_to_mine/src/data/db/entities/UsedGpuEntity.dart';
 import 'package:what_to_mine/src/data/db/entities/UserHashAlgorithmEntity.dart';
-import 'package:what_to_mine/src/data/jsonReader/ILocalJsonReader.dart';
 import 'package:what_to_mine/src/domain/Settings.dart';
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
-import 'package:what_to_mine/src/logic/gateway/IGateway.dart';
+import 'package:what_to_mine/src/logic/gateway/ICurrenciesGateway.dart';
+import 'package:what_to_mine/src/logic/gateway/IGpuGateway.dart';
+import 'package:what_to_mine/src/logic/gateway/IHashAlgorithmGateway.dart';
+import 'package:what_to_mine/src/logic/gateway/ISchedulerGateway.dart';
+import 'package:what_to_mine/src/logic/gateway/ISettingsGateway.dart';
 import 'package:what_to_mine/src/utils/Extensions.dart';
+import 'package:what_to_mine/src/utils/scheduler/IBackgroundTaskScheduler.dart';
 
 import '../domain/currency/CryptoCurrency.dart';
-import 'Scheduler/BackgroundTaskScheduler.dart';
 import 'db/AppDatabase.dart';
+import 'jsonReader/IJsonReader.dart';
 
-class Gateway implements IGateway {
+class Gateway implements ICurrenciesGateway, IGpuGateway, IHashAlgorithmGateway, ISchedulerGateway, ISettingsGateway {
   final IMinerStatClient _client;
-  final ILocalJsonReader _jsonReader;
+  final IJsonReader _jsonReader;
   final MemoryStorage _cache;
   final AppDatabase _appDatabase;
   final SharedPreferences _preferences;
   final IBackgroundTaskScheduler _backgroundScheduler;
-  static const String _useCustomHashratesKey = 'USE_CUSTOM_HASHRATES_KEY';
-  static const String _settingsKey = 'SETTINGS';
+  static const String _useCustomHashratesKey = 'h';
+  static const String _settingsKey = 's';
 
   Gateway(
       {required IMinerStatClient client,
-      required ILocalJsonReader jsonReader,
+      required IJsonReader jsonReader,
       required MemoryStorage cache,
       required database,
       required SharedPreferences preferences,
-      required BackgroundTaskScheduler backgroundScheduler})
+      required IBackgroundTaskScheduler backgroundScheduler})
       : _client = client,
         _jsonReader = jsonReader,
         _cache = cache,
@@ -45,23 +48,23 @@ class Gateway implements IGateway {
         _preferences = preferences,
         _backgroundScheduler = backgroundScheduler;
 
-  final StreamController<bool> _onUsedGpuChanged = StreamController<bool>.broadcast();
-  final StreamController<bool> _onUserHashrateChanged = StreamController<bool>.broadcast();
-  final StreamController<bool> _onElectricityCostChanged = StreamController<bool>();
+  final StreamController<bool> _usedGpuChanged = StreamController<bool>.broadcast();
+  final StreamController<bool> _userHashrateChanged = StreamController<bool>.broadcast();
+  final StreamController<bool> _electricityCostChanged = StreamController<bool>();
 
   @override
-  Stream<bool> onUsedGpuChanged() => _onUsedGpuChanged.stream;
+  Stream<bool> usedGpuChangedStream() => _usedGpuChanged.stream;
 
   @override
-  Stream<bool> onUserHashrateChanged() => _onUserHashrateChanged.stream;
+  Stream<bool> userHashrateChangedStream() => _userHashrateChanged.stream;
 
   @override
-  Stream<bool> onElectricityCostChanged() => _onElectricityCostChanged.stream;
+  Stream<bool> electricityCostChangedStream() => _electricityCostChanged.stream;
 
   Future<void> dispose() async {
-    _onUsedGpuChanged.close();
-    _onUserHashrateChanged.close();
-    _onElectricityCostChanged.close();
+    _usedGpuChanged.close();
+    _userHashrateChanged.close();
+    _electricityCostChanged.close();
   }
 
   // Получить список криптовалют
@@ -74,10 +77,10 @@ class Gateway implements IGateway {
     if (listInCache != null && listInCache.isNotEmpty && !isNeedFresh) {
       list = listInCache;
     } else {
-      list = await _client.getCryptoCurrenciesList();
+      list = await _client.getCryptoCurrenciesListFromApi();
       list = _filterCryptoCurrencies(list);
       list.forEach((element) {
-        element.iconLink = Links.iconsLink + element.coin.toLowerCase() + ".png";
+        element.iconLink = Links.iconsLink + element.coin.toLowerCase() + '.png';
       });
       _cache.putCryptoCurrencies(list);
     }
@@ -101,7 +104,7 @@ class Gateway implements IGateway {
 
   // Получить список используемых в расчетах видеокарт
   @override
-  Future<List<UsedGpu>> getGpusUsedInCalc() async {
+  Future<List<UsedGpu>> getUsedGPUList() async {
     List<UsedGpu> result = [];
     List<UsedGpuEntity> listEntity = (await this._appDatabase.usedGpuDao.selectAll());
     listEntity.forEach((element) {
@@ -123,10 +126,10 @@ class Gateway implements IGateway {
             ..gpuData = usedGpu.gpuData.toBuilder())
           .build();
       await _appDatabase.usedGpuDao.insert(UsedGpuEntity(newUsedGpu));
-      _onUsedGpuChanged.add(true);
+      _usedGpuChanged.add(true);
     } else {
       await _appDatabase.usedGpuDao.insert(UsedGpuEntity(usedGpu));
-      _onUsedGpuChanged.add(true);
+      _usedGpuChanged.add(true);
     }
     _preferences.setBool(_useCustomHashratesKey, false);
   }
@@ -135,15 +138,13 @@ class Gateway implements IGateway {
   @override
   Future<void> deleteUsedGpu(String id) async {
     await _appDatabase.usedGpuDao.deleteById(id);
-    _onUsedGpuChanged.add(true);
+    _usedGpuChanged.add(true);
     _preferences.setBool(_useCustomHashratesKey, false);
   }
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   @override
   Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
-    print("***getHashratesUsedInCalc***");
-
     List<HashAlgorithm> result = [];
 
     bool? useCustomHashrates = _preferences.getBool(_useCustomHashratesKey);
@@ -156,7 +157,7 @@ class Gateway implements IGateway {
       });
     } else {
       result = await _jsonReader.getHashAlgorithmsWithZeroValues();
-      List<UsedGpu> usedGpus = await getGpusUsedInCalc();
+      List<UsedGpu> usedGpus = await getUsedGPUList();
 
       usedGpus.forEach((gpu) {
         print(gpu.gpuData.name + " x" + gpu.quantity.toString());
@@ -229,7 +230,7 @@ class Gateway implements IGateway {
       _appDatabase.userHashAlgorithmDao.insert(UserHashAlgorithmEntity(element));
     });
     _preferences.setBool(_useCustomHashratesKey, true);
-    _onUserHashrateChanged.add(true);
+    _userHashrateChanged.add(true);
   }
 
   // Включить шедулер
@@ -242,12 +243,6 @@ class Gateway implements IGateway {
   @override
   Future<void> disableScheduler() async {
     return await _backgroundScheduler.disable();
-  }
-
-  // Включен ли шедулер?
-  @override
-  Future<bool> isSchedulerEnabled() async {
-    return (await getSettings()).notificationIsEnabled;
   }
 
   // Получить настройки
@@ -264,10 +259,7 @@ class Gateway implements IGateway {
   }
 
   @override
-  Future<void> setElectricityCost(double cost) async {
-    Settings settings = await getSettings();
-    settings.electricityCost = cost;
-    _onElectricityCostChanged.add(true);
-    return setSettings(settings);
+  Future<void> onElectricityCostChanged() async {
+    _electricityCostChanged.add(true);
   }
 }

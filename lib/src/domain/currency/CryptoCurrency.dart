@@ -15,31 +15,17 @@ class CryptoCurrency {
   final double volume;
   String? iconLink;
 
-  /*
-  final int difficulty;
-  final String rewardBlock;
-  final String updated;
-  */
-
-  CryptoCurrency(
-      {required this.id,
-      required this.coin,
-      required this.name,
-      required this.type,
-      required this.algorithm,
-      required this.price,
-      required this.reward,
-      required this.networkHashrate,
-      required this.rewardUnit,
-      required this.volume,
-      this.iconLink
-
-      /*
-      required this.difficulty,
-      required this.rewardBlock,
-      required this.updated
-      */
-      });
+  CryptoCurrency({required this.id,
+    required this.coin,
+    required this.name,
+    required this.type,
+    required this.algorithm,
+    required this.price,
+    required this.reward,
+    required this.networkHashrate,
+    required this.rewardUnit,
+    required this.volume,
+    this.iconLink});
 
   factory CryptoCurrency.fromJson(Map<String, dynamic> json) {
     var reward;
@@ -80,13 +66,7 @@ class CryptoCurrency {
         reward: reward,
         networkHashrate: networkHashrate,
         rewardUnit: json['reward_unit'],
-        volume: volume
-        /*
-        rewardUnit: json['reward_unit'],
-        rewardBlock: json['reward_block'],
-        updated: json['updated'],
-        */
-        );
+        volume: volume);
   }
 
   String getStringNetworkHashrate() {

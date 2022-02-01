@@ -1,11 +1,11 @@
 import 'package:what_to_mine/src/domain/Settings.dart';
 
-import 'gateway/IGateway.dart';
+import 'gateway/ISettingsGateway.dart';
 
 class SettingsService {
-  IGateway _gateway;
+  ISettingsGateway _gateway;
 
-  SettingsService({required IGateway gateway}) : _gateway = gateway;
+  SettingsService({required ISettingsGateway gateway}) : _gateway = gateway;
 
   // Получить настройки приложения
   Future<Settings> getSettings() async {
@@ -55,7 +55,10 @@ class SettingsService {
 
   // Сохранить стоимость электроэнергии
   Future<void> setElectricityCost(double cost) async {
-    return _gateway.setElectricityCost(cost);
+    _gateway.onElectricityCostChanged();
+    Settings settings = await getSettings();
+    settings.electricityCost = cost;
+    return this.setSettings(settings);
   }
 
   // Получить стоимость электроэнергии
@@ -64,7 +67,7 @@ class SettingsService {
   }
 
   //Подписка на изменение стоимости электроэнергии
-  Stream<bool> onUserHashrateChanged() {
-    return _gateway.onElectricityCostChanged();
+  Stream<bool> onElectricityCostChanged() {
+    return _gateway.electricityCostChangedStream();
   }
 }

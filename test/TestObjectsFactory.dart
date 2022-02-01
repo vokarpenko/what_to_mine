@@ -130,7 +130,7 @@ class TestObjectsFactory {
 
   static Gpu createGtx1080() => Gpu((g) => g
     ..name = 'gtx1080'
-    ..hashAlgorithms = (ListBuilder<HashAlgorithm>([createEthash(10), createKawpow(10)]))
+    ..hashAlgorithms = (ListBuilder<HashAlgorithm>([createEthash(10, 100), createKawpow(10, 100)]))
     ..secondHand = false
     ..price = 100
     ..id = 'gtx1080'
@@ -139,7 +139,7 @@ class TestObjectsFactory {
 
   static Gpu createGtx1070() => Gpu((g) => g
     ..name = 'gtx1070'
-    ..hashAlgorithms = (ListBuilder<HashAlgorithm>([createEthash(10), createKawpow(10)]))
+    ..hashAlgorithms = (ListBuilder<HashAlgorithm>([createEthash(10, 100), createKawpow(10, 100)]))
     ..secondHand = false
     ..price = 100
     ..id = 'gtx1070'
@@ -176,20 +176,22 @@ class TestObjectsFactory {
 
   static List<UsedGpuEntity> createUsedGpusEntities() => [createUsedGpuEntityGtx1070(2), createUsedGpuEntityGtx1080(1)];
 
-  static HashAlgorithm createEthash(double hashrate) => HashAlgorithm((a) => a
+  static HashAlgorithm createEthash(double hashrate, int power) => HashAlgorithm((a) => a
     ..name = 'ethash'
     ..hashrate = hashrate
+    ..power = power
     ..hashrateCoefficient = HashCoefficient.megaHash);
 
-  static HashAlgorithm createKawpow(double hashrate) => HashAlgorithm((a) => a
+  static HashAlgorithm createKawpow(double hashrate, int power) => HashAlgorithm((a) => a
     ..name = 'kawpow'
     ..hashrate = hashrate
+    ..power = power
     ..hashrateCoefficient = HashCoefficient.megaHash);
 
-  static List<HashAlgorithm> createHashAlgorithms() => [createEthash(30), createKawpow(30)];
+  static List<HashAlgorithm> createHashAlgorithms() => [createEthash(30, 300), createKawpow(30, 300)];
 
   static List<UserHashAlgorithmEntity> createEntitiesHashAlgorithms() =>
-      [UserHashAlgorithmEntity(createEthash(30)), UserHashAlgorithmEntity(createKawpow(30))];
+      [UserHashAlgorithmEntity(createEthash(30, 300)), UserHashAlgorithmEntity(createKawpow(30, 300))];
 
-  static List<HashAlgorithm> createHashAlgorithmsWithZeroValues() => [createEthash(0), createKawpow(0)];
+  static List<HashAlgorithm> createHashAlgorithmsWithZeroValues() => [createEthash(0, 0), createKawpow(0, 0)];
 }

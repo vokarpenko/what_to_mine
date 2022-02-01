@@ -7,25 +7,25 @@ import '../../domain/currency/CryptoCurrency.dart';
 import 'IMinerStatClient.dart';
 
 class MinerStatClient implements IMinerStatClient {
-  MinerStatClient();
+  final _client;
+
+  MinerStatClient() : _client = http.Client();
 
   @override
-  Future<List<CryptoCurrency>> getCryptoCurrenciesList() async {
-    // HTTP запрос
-    //?algo=SHA-256,Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,Cortex,Equihash,Equihash(125,4),Equihash(144,5),BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2,Darkcoin
-    var client = http.Client();
+  Future<List<CryptoCurrency>> getCryptoCurrenciesListFromApi() async {
+    //SHA-256,Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,Cortex,Equihash,Equihash(125,4),Equihash(144,5),BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2,Darkcoin
     var url = Uri.parse('https://api.minerstat.com/v2/coins');
     try {
-      var response = await client.post(url);
-      print('***getCryptoCurrenciesList*** Response status: ${response.statusCode}');
+      var response = await _client.post(url);
+      print('getCryptoCurrenciesList Response status: ${response.statusCode}');
       if (response.statusCode == 200) {
         // Если сервер вернул 200 значит все успешно, парсим JSON.
         List<dynamic> parsedListJson = jsonDecode(response.body);
         List<CryptoCurrency> result = List<CryptoCurrency>.from(parsedListJson.map((i) => CryptoCurrency.fromJson(i)));
-        client.close();
+        //_client.close();
         return result;
       } else {
-        client.close();
+        //_client.close();
         print('error_load_data'.tr());
         throw Exception('error_load_data'.tr());
       }

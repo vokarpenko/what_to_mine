@@ -7,7 +7,6 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sqflite/sqflite.dart' as _i5;
 import 'package:what_to_mine/src/data/Gateway.dart' as _i15;
-import 'package:what_to_mine/src/data/Scheduler/BackgroundTaskScheduler.dart' as _i14;
 import 'package:what_to_mine/src/data/cache/MemoryStorage.dart' as _i7;
 import 'package:what_to_mine/src/data/client/MinerStatClient.dart' as _i10;
 import 'package:what_to_mine/src/data/db/AppDatabase.dart' as _i11;
@@ -15,13 +14,14 @@ import 'package:what_to_mine/src/data/db/dao/UsedGpuDao.dart' as _i2;
 import 'package:what_to_mine/src/data/db/dao/UserHashAlgorithmDao.dart' as _i3;
 import 'package:what_to_mine/src/data/db/entities/UsedGpuEntity.dart' as _i18;
 import 'package:what_to_mine/src/data/db/entities/UserHashAlgorithmEntity.dart' as _i19;
-import 'package:what_to_mine/src/data/jsonReader/LocalJsonReader.dart' as _i12;
+import 'package:what_to_mine/src/data/jsonReader/JsonReader.dart' as _i12;
 import 'package:what_to_mine/src/domain/Settings.dart' as _i6;
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart' as _i9;
 import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart' as _i8;
 import 'package:what_to_mine/src/domain/currency/Earnings.dart' as _i17;
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart' as _i13;
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart' as _i16;
+import 'package:what_to_mine/src/utils/scheduler/BackgroundTaskScheduler.dart' as _i14;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -57,16 +57,24 @@ class MockMemoryStorage extends _i1.Mock implements _i7.MemoryStorage {
   @override
   void clearCryptoCurrenciesCache() =>
       super.noSuchMethod(Invocation.method(#clearCryptoCurrenciesCache, []), returnValueForMissingStub: null);
+
   @override
   void putEditedHashrates(List<_i9.HashAlgorithm>? hashrates) =>
       super.noSuchMethod(Invocation.method(#putEditedHashrates, [hashrates]), returnValueForMissingStub: null);
+
   @override
   void putEditedHashrate(String? name, double? hashrateValue) =>
       super.noSuchMethod(Invocation.method(#putEditedHashrate, [name, hashrateValue]), returnValueForMissingStub: null);
+
+  @override
+  void putEditedPower(String? name, int? power) =>
+      super.noSuchMethod(Invocation.method(#putEditedPower, [name, power]), returnValueForMissingStub: null);
+
   @override
   List<_i9.HashAlgorithm> getEditedHashrate() =>
       (super.noSuchMethod(Invocation.method(#getEditedHashrate, []), returnValue: <_i9.HashAlgorithm>[])
           as List<_i9.HashAlgorithm>);
+
   @override
   void clearEditedHashrateCache() =>
       super.noSuchMethod(Invocation.method(#clearEditedHashrateCache, []), returnValueForMissingStub: null);
@@ -81,8 +89,8 @@ class MockMinerStatClient extends _i1.Mock implements _i10.MinerStatClient {
   }
 
   @override
-  _i4.Future<List<_i8.CryptoCurrency>> getCryptoCurrenciesList() =>
-      (super.noSuchMethod(Invocation.method(#getCryptoCurrenciesList, []),
+  _i4.Future<List<_i8.CryptoCurrency>> getCryptoCurrenciesListFromApi() =>
+      (super.noSuchMethod(Invocation.method(#getCryptoCurrenciesListFromApi, []),
               returnValue: Future<List<_i8.CryptoCurrency>>.value(<_i8.CryptoCurrency>[]))
           as _i4.Future<List<_i8.CryptoCurrency>>);
 }
@@ -123,11 +131,11 @@ class MockAppDatabase extends _i1.Mock implements _i11.AppDatabase {
       returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }
 
-/// A class which mocks [LocalJsonReader].
+/// A class which mocks [JsonReader].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLocalJsonReader extends _i1.Mock implements _i12.LocalJsonReader {
-  MockLocalJsonReader() {
+class MockJsonReader extends _i1.Mock implements _i12.JsonReader {
+  MockJsonReader() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -135,6 +143,7 @@ class MockLocalJsonReader extends _i1.Mock implements _i12.LocalJsonReader {
   _i4.Future<List<_i13.Gpu>?> getGPUList() =>
       (super.noSuchMethod(Invocation.method(#getGPUList, []), returnValue: Future<List<_i13.Gpu>?>.value())
           as _i4.Future<List<_i13.Gpu>?>);
+
   @override
   _i4.Future<List<_i9.HashAlgorithm>> getHashAlgorithmsWithZeroValues() =>
       (super.noSuchMethod(Invocation.method(#getHashAlgorithmsWithZeroValues, []),
@@ -169,13 +178,18 @@ class MockGateway extends _i1.Mock implements _i15.Gateway {
   }
 
   @override
-  _i4.Stream<bool> onUsedGpuChanged() =>
-      (super.noSuchMethod(Invocation.method(#onUsedGpuChanged, []), returnValue: Stream<bool>.empty())
+  _i4.Stream<bool> usedGpuChangedStream() =>
+      (super.noSuchMethod(Invocation.method(#usedGpuChangedStream, []), returnValue: Stream<bool>.empty())
           as _i4.Stream<bool>);
 
   @override
-  _i4.Stream<bool> onUserHashrateChanged() =>
-      (super.noSuchMethod(Invocation.method(#onUserHashrateChanged, []), returnValue: Stream<bool>.empty())
+  _i4.Stream<bool> userHashrateChangedStream() =>
+      (super.noSuchMethod(Invocation.method(#userHashrateChangedStream, []), returnValue: Stream<bool>.empty())
+          as _i4.Stream<bool>);
+
+  @override
+  _i4.Stream<bool> electricityCostChangedStream() =>
+      (super.noSuchMethod(Invocation.method(#electricityCostChangedStream, []), returnValue: Stream<bool>.empty())
           as _i4.Stream<bool>);
 
   @override
@@ -194,7 +208,7 @@ class MockGateway extends _i1.Mock implements _i15.Gateway {
           as _i4.Future<List<_i13.Gpu>?>);
 
   @override
-  _i4.Future<List<_i16.UsedGpu>> getGpusUsedInCalc() => (super.noSuchMethod(Invocation.method(#getGpusUsedInCalc, []),
+  _i4.Future<List<_i16.UsedGpu>> getUsedGPUList() => (super.noSuchMethod(Invocation.method(#getUsedGPUList, []),
       returnValue: Future<List<_i16.UsedGpu>>.value(<_i16.UsedGpu>[])) as _i4.Future<List<_i16.UsedGpu>>);
 
   @override
@@ -227,6 +241,11 @@ class MockGateway extends _i1.Mock implements _i15.Gateway {
           returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 
   @override
+  _i4.Future<void> updateEditedPowerInCache(String? name, int? powerValue) =>
+      (super.noSuchMethod(Invocation.method(#updateEditedPowerInCache, [name, powerValue]),
+          returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+
+  @override
   _i4.Future<void> updateHashratesInDB(List<_i9.HashAlgorithm>? hashrates) =>
       (super.noSuchMethod(Invocation.method(#updateHashratesInDB, [hashrates]),
           returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
@@ -241,11 +260,6 @@ class MockGateway extends _i1.Mock implements _i15.Gateway {
       returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 
   @override
-  _i4.Future<bool> isSchedulerEnabled() =>
-      (super.noSuchMethod(Invocation.method(#isSchedulerEnabled, []), returnValue: Future<bool>.value(false))
-          as _i4.Future<bool>);
-
-  @override
   _i4.Future<_i6.Settings> getSettings() => (super.noSuchMethod(Invocation.method(#getSettings, []),
       returnValue: Future<_i6.Settings>.value(_FakeSettings_4())) as _i4.Future<_i6.Settings>);
 
@@ -253,6 +267,10 @@ class MockGateway extends _i1.Mock implements _i15.Gateway {
   _i4.Future<void> setSettings(_i6.Settings? settings) =>
       (super.noSuchMethod(Invocation.method(#setSettings, [settings]),
           returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> onElectricityCostChanged() => (super.noSuchMethod(Invocation.method(#onElectricityCostChanged, []),
+      returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }
 
 /// A class which mocks [UsedGpuDao].

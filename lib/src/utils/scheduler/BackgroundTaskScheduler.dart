@@ -1,9 +1,9 @@
 import 'package:background_fetch/background_fetch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:what_to_mine/src/constants.dart';
-import 'package:what_to_mine/src/data/Scheduler/IBackgroundTaskScheduler.dart';
 import 'package:what_to_mine/src/logic/Services.dart';
 import 'package:what_to_mine/src/utils/Notificator.dart';
+import 'package:what_to_mine/src/utils/scheduler/IBackgroundTaskScheduler.dart';
 
 import '../../app.dart';
 

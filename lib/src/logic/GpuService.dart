@@ -1,12 +1,11 @@
 import 'package:what_to_mine/src/domain/gpu/Gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
-
-import 'gateway/IGateway.dart';
+import 'package:what_to_mine/src/logic/gateway/IGpuGateway.dart';
 
 class GpuService {
-  final IGateway _gateway;
+  final IGpuGateway _gateway;
 
-  GpuService({required IGateway gateway}) : _gateway = gateway;
+  GpuService({required IGpuGateway gateway}) : _gateway = gateway;
 
   // Получить список всех видеокарт
   Future<List<Gpu>?> getGPUList() async {
@@ -15,7 +14,7 @@ class GpuService {
 
   // Получить список используемых в расчетах видеокарт
   Future<List<UsedGpu>?> getUsedGPUList() async {
-    return _gateway.getGpusUsedInCalc();
+    return _gateway.getUsedGPUList();
   }
 
   // Добавить используемую в расчетах видеокарту
@@ -30,6 +29,6 @@ class GpuService {
 
   //Подписка на изменения используемых видеокарт
   Stream<bool> onUsedGpuChanged() {
-    return _gateway.onUsedGpuChanged();
+    return _gateway.usedGpuChangedStream();
   }
 }

@@ -14,7 +14,7 @@ Future<void> main() async {
   MockMemoryStorage mockCache = MockMemoryStorage();
   MockBackgroundTaskScheduler mockBackgroundTaskScheduler = MockBackgroundTaskScheduler();
   MockAppDatabase mockAppDatabase = MockAppDatabase();
-  MockLocalJsonReader mockLocalJsonReader = MockLocalJsonReader();
+  MockJsonReader mockJsonReader = MockJsonReader();
   MinerStatClient mockMinerStatClient = MockMinerStatClient();
   MockUsedGpuDao mockUsedGpuDao = MockUsedGpuDao();
   MockUserHashAlgorithmDao mockUserHashAlgorithmDao = MockUserHashAlgorithmDao();
@@ -28,7 +28,7 @@ Future<void> main() async {
         cache: mockCache,
         backgroundScheduler: mockBackgroundTaskScheduler,
         database: mockAppDatabase,
-        jsonReader: mockLocalJsonReader,
+        jsonReader: mockJsonReader,
         client: mockMinerStatClient);
   });
 
@@ -38,7 +38,7 @@ Future<void> main() async {
     List<CryptoCurrency> listCryptoCurrencies = TestObjectsFactory.createCryptoCurrenciesListWithFilters();
     List<CryptoCurrency> result;
 
-    when(mockMinerStatClient.getCryptoCurrenciesList())
+    when(mockMinerStatClient.getCryptoCurrenciesListFromApi())
         .thenAnswer((_) async => TestObjectsFactory.createCryptoCurrenciesList());
     when(mockCache.putCryptoCurrencies(TestObjectsFactory.createCryptoCurrenciesListWithFilters()))
         .thenAnswer((_) => _);
@@ -64,7 +64,7 @@ Future<void> main() async {
     List<CryptoCurrency> result;
 
     when(mockCache.getCryptoCurrencies()).thenAnswer((_) => []);
-    when(mockMinerStatClient.getCryptoCurrenciesList())
+    when(mockMinerStatClient.getCryptoCurrenciesListFromApi())
         .thenAnswer((_) async => TestObjectsFactory.createCryptoCurrenciesList());
     when(mockCache.putCryptoCurrencies(TestObjectsFactory.createCryptoCurrenciesListWithFilters()))
         .thenAnswer((_) => _);
@@ -81,7 +81,7 @@ Future<void> main() async {
     when(mockAppDatabase.usedGpuDao).thenReturn(mockUsedGpuDao);
     when(mockUsedGpuDao.selectAll()).thenAnswer((_) async => TestObjectsFactory.createUsedGpusEntities());
 
-    result = await gateway.getGpusUsedInCalc();
+    result = await gateway.getUsedGPUList();
 
     expect(listUsedGpus, equals(result));
   });
@@ -97,7 +97,7 @@ Future<void> main() async {
 
     await gateway.addUsedGpu(usedGpu);
 
-    expect(sharedPreferences.getBool('USE_CUSTOM_HASHRATES_KEY'), false);
+    expect(sharedPreferences.getBool('h'), false);
   });
 
   test('deleteUsedGpu', () async {
@@ -108,18 +108,18 @@ Future<void> main() async {
 
     await gateway.deleteUsedGpu(usedGpu.gpuData.id);
 
-    expect(sharedPreferences.getBool('USE_CUSTOM_HASHRATES_KEY'), false);
+    expect(sharedPreferences.getBool('h'), false);
   });
 
   test('getHashratesUsedInCalc with custom hashrates', () async {
     Map<String, bool> initialValues = {
-      "USE_CUSTOM_HASHRATES_KEY": true,
+      "h": true,
     };
     SharedPreferences.setMockInitialValues(initialValues);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Gateway gateway = Gateway(
         client: mockMinerStatClient,
-        jsonReader: mockLocalJsonReader,
+        jsonReader: mockJsonReader,
         cache: mockCache,
         database: mockAppDatabase,
         preferences: sharedPreferences,
@@ -138,13 +138,13 @@ Future<void> main() async {
 
   test('getHashratesUsedInCalc without custom hashrates', () async {
     Map<String, bool> initialValues = {
-      "USE_CUSTOM_HASHRATES_KEY": false,
+      "h": false,
     };
     SharedPreferences.setMockInitialValues(initialValues);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Gateway gateway = Gateway(
         client: mockMinerStatClient,
-        jsonReader: mockLocalJsonReader,
+        jsonReader: mockJsonReader,
         cache: mockCache,
         database: mockAppDatabase,
         preferences: sharedPreferences,
@@ -156,7 +156,7 @@ Future<void> main() async {
     when(mockAppDatabase.usedGpuDao).thenReturn(mockUsedGpuDao);
     when(mockUsedGpuDao.selectAll()).thenAnswer((_) async => TestObjectsFactory.createUsedGpusEntities());
 
-    when(mockLocalJsonReader.getHashAlgorithmsWithZeroValues())
+    when(mockJsonReader.getHashAlgorithmsWithZeroValues())
         .thenAnswer((_) async => TestObjectsFactory.createHashAlgorithmsWithZeroValues());
     result = await gateway.getHashratesUsedInCalc();
 

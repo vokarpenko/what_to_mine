@@ -20,7 +20,7 @@ class EarningViewModel {
   void onViewInitState() async {
     Services.gpuService.onUsedGpuChanged().listen((_) => getData(false));
     Services.hashAlgorithmService.onUserHashrateChanged().listen((_) => getData(false));
-    Services.settingsService.onUserHashrateChanged().listen((_) => getData(false));
+    Services.settingsService.onElectricityCostChanged().listen((_) => getData(false));
     getData(false);
   }
 

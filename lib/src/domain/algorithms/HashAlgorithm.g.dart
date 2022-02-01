@@ -86,13 +86,11 @@ class _$HashAlgorithm extends HashAlgorithm {
 
   _$HashAlgorithm._({required this.name, this.hashrate, required this.hashrateCoefficient, this.power}) : super._() {
     BuiltValueNullFieldError.checkNotNull(name, 'HashAlgorithm', 'name');
-    BuiltValueNullFieldError.checkNotNull(
-        hashrateCoefficient, 'HashAlgorithm', 'hashrateCoefficient');
+    BuiltValueNullFieldError.checkNotNull(hashrateCoefficient, 'HashAlgorithm', 'hashrateCoefficient');
   }
 
   @override
-  HashAlgorithm rebuild(void Function(HashAlgorithmBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+  HashAlgorithm rebuild(void Function(HashAlgorithmBuilder) updates) => (toBuilder()..update(updates)).build();
 
   @override
   HashAlgorithmBuilder toBuilder() => new HashAlgorithmBuilder()..replace(this);
@@ -128,7 +126,9 @@ class HashAlgorithmBuilder
   _$HashAlgorithm? _$v;
 
   String? _name;
+
   String? get name => _$this._name;
+
   set name(String? name) => _$this._name = name;
 
   double? _hashrate;
