@@ -4,7 +4,8 @@ import 'package:what_to_mine/src/ui/screens/settings/SettingsViewModel.dart';
 
 class ThemeSelectorWidget extends StatelessWidget {
   final SettingsViewModel _viewModel;
-  ThemeSelectorWidget(this._viewModel);
+  const ThemeSelectorWidget(this._viewModel, {Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -15,7 +16,7 @@ class ThemeSelectorWidget extends StatelessWidget {
         children: <Widget>[
           ListTile(
             title: Text('settings_theme_system'.tr()),
-            leading: Icon(Icons.build),
+            leading: const Icon(Icons.build),
             onTap: () {
               _onSwitchTheme(ThemeMode.system);
               Navigator.of(context).pop();
@@ -23,7 +24,7 @@ class ThemeSelectorWidget extends StatelessWidget {
           ),
           ListTile(
             title: Text('settings_theme_light'.tr()),
-            leading: ImageIcon(
+            leading: const ImageIcon(
               AssetImage('assets/icons/light_theme_icon.png'),
               size: 27,
             ),
@@ -34,7 +35,7 @@ class ThemeSelectorWidget extends StatelessWidget {
           ),
           ListTile(
             title: Text('settings_theme_dark'.tr()),
-            leading: ImageIcon(AssetImage('assets/icons/dark_theme_icon.png')),
+            leading: const ImageIcon(AssetImage('assets/icons/dark_theme_icon.png')),
             onTap: () {
               _onSwitchTheme(ThemeMode.dark);
               Navigator.of(context).pop();

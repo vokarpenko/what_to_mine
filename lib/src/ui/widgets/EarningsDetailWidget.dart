@@ -5,13 +5,13 @@ import 'package:what_to_mine/src/domain/currency/Earnings.dart';
 class EarningsDetailWidget extends StatelessWidget {
   final Earnings _earnings;
 
-  EarningsDetailWidget(this._earnings);
+  const EarningsDetailWidget(this._earnings, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Widget icon;
     if (_earnings.cryptoCurrency.iconLink != null) {
-      icon = Container(
+      icon = SizedBox(
         width: 35,
         height: 35,
         child: ClipOval(
@@ -22,15 +22,16 @@ class EarningsDetailWidget extends StatelessWidget {
               image: _earnings.cryptoCurrency.iconLink!),
         ),
       );
-    } else
-      icon = Container(
+    } else {
+      icon = const SizedBox(
         width: 35,
         height: 35,
       );
+    }
 
     return Container(
-      margin: EdgeInsets.only(top: 20, bottom: 20),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(top: 20, bottom: 20),
+      padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -53,11 +54,11 @@ class EarningsDetailWidget extends StatelessWidget {
               )),
             ],
           ),
-          Divider(
+          const Divider(
             color: Colors.transparent,
           ),
           Padding(
-              padding: EdgeInsets.all(3),
+              padding: const EdgeInsets.all(3),
               child: Flex(
                 direction: Axis.horizontal,
                 children: [
@@ -80,7 +81,7 @@ class EarningsDetailWidget extends StatelessWidget {
                 ],
               )),
           Padding(
-              padding: EdgeInsets.all(3),
+              padding: const EdgeInsets.all(3),
               child: Flex(
                 direction: Axis.horizontal,
                 children: [
@@ -103,7 +104,7 @@ class EarningsDetailWidget extends StatelessWidget {
                 ],
               )),
           Padding(
-            padding: EdgeInsets.all(3),
+            padding: const EdgeInsets.all(3),
             child: Flex(
               direction: Axis.horizontal,
               children: [
@@ -126,7 +127,7 @@ class EarningsDetailWidget extends StatelessWidget {
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           Flex(
             direction: Axis.horizontal,
             children: [
@@ -137,15 +138,15 @@ class EarningsDetailWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(3),
+                      padding: const EdgeInsets.all(3),
                       child: Text('income_per_day'.tr()),
                     ),
                     Container(
-                      padding: EdgeInsets.all(3),
+                      padding: const EdgeInsets.all(3),
                       child: Text(_earnings.dayEarningInCurrency.toStringAsFixed(4) + ' USD'),
                     ),
                     Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text(
                             _earnings.dayEarningInCrypto.toStringAsFixed(8) + ' ${_earnings.cryptoCurrency.coin}')),
                   ],
@@ -158,15 +159,15 @@ class EarningsDetailWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text('income_per_month'.tr()),
                       ),
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text(_earnings.monthEarningInCurrency.toStringAsFixed(2) + ' USD'),
                       ),
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text(
                             _earnings.monthEarningInCrypto.toStringAsFixed(8) + ' ${_earnings.cryptoCurrency.coin}'),
                       ),
@@ -174,7 +175,7 @@ class EarningsDetailWidget extends StatelessWidget {
                   ))
             ],
           ),
-          Divider(),
+          const Divider(),
           Flex(
             direction: Axis.horizontal,
             children: [
@@ -185,11 +186,11 @@ class EarningsDetailWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(3),
+                      padding: const EdgeInsets.all(3),
                       child: Text('electricity_cost_per_day'.tr()),
                     ),
                     Container(
-                      padding: EdgeInsets.all(3),
+                      padding: const EdgeInsets.all(3),
                       child: Text(_earnings.dayElectricityCost.toStringAsFixed(2) + ' USD'),
                     ),
                   ],
@@ -202,18 +203,18 @@ class EarningsDetailWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text('electricity_cost_per_month'.tr()),
                       ),
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text(_earnings.monthElectricityCost.toStringAsFixed(2) + ' USD'),
                       ),
                     ],
                   ))
             ],
           ),
-          Divider(),
+          const Divider(),
           Flex(
             direction: Axis.horizontal,
             children: [
@@ -224,12 +225,12 @@ class EarningsDetailWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text('net_income_per_day'.tr()),
                       ),
                       // чистая прибыль за день
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text(_earnings.netDayEarningInCurrency.toStringAsFixed(4) + ' USD'),
                       ),
                     ],
@@ -241,11 +242,11 @@ class EarningsDetailWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text('net_income_per_month'.tr()),
                       ),
                       Container(
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         child: Text(_earnings.netMonthEarningInCurrency.toStringAsFixed(2) + ' USD'),
                       ),
                     ],

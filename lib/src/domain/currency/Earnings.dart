@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_initializing_formals
+
 import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
 import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart';
 
@@ -22,12 +24,11 @@ class Earnings {
 
   final CryptoCurrency cryptoCurrency;
 
-  Earnings._(
-      {required double dayEarningInCrypto,
-      required double dayEarningInCurrency,
-      required double netDayEarningInCurrency,
-      required double dayElectricityCost,
-      required CryptoCurrency cryptoCurrency})
+  Earnings._({required double dayEarningInCrypto,
+    required double dayEarningInCurrency,
+    required double netDayEarningInCurrency,
+    required double dayElectricityCost,
+    required CryptoCurrency cryptoCurrency})
       : dayEarningInCrypto = dayEarningInCrypto,
         weekEarningInCrypto = dayEarningInCrypto * daysInWeek,
         monthEarningInCrypto = dayEarningInCrypto * daysInMonth,
@@ -56,6 +57,6 @@ class Earnings {
   }
 
   bool monthEarningsMoreThan(double value) {
-    return this.monthEarningInCurrency > value;
+    return monthEarningInCurrency > value;
   }
 }

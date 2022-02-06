@@ -3,7 +3,7 @@ import 'package:what_to_mine/src/domain/Settings.dart';
 import 'gateway/ISettingsGateway.dart';
 
 class SettingsService {
-  ISettingsGateway _gateway;
+  final ISettingsGateway _gateway;
 
   SettingsService({required ISettingsGateway gateway}) : _gateway = gateway;
 
@@ -21,36 +21,36 @@ class SettingsService {
   Future<void> setNotificationsIsEnable(bool isEnabled) async {
     Settings settings = await _gateway.getSettings();
     settings.notificationIsEnabled = isEnabled;
-    return this.setSettings(settings);
+    return setSettings(settings);
   }
 
   // Получить настройку включены ли уведомления
   Future<bool> isNotificationsEnable() async {
-    return (await this.getSettings()).notificationIsEnabled;
+    return (await getSettings()).notificationIsEnabled;
   }
 
   // Сохранить индекс темы
   Future<void> setThemeIndex(int index) async {
     Settings settings = await _gateway.getSettings();
     settings.themeIndex = index;
-    return this.setSettings(settings);
+    return setSettings(settings);
   }
 
   // Получить индекс темы
   Future<int> getThemeIndex() async {
-    return (await this.getSettings()).themeIndex;
+    return (await getSettings()).themeIndex;
   }
 
   // Сохранить настройку "Это первый запуск приложения?"
   Future<void> setIsFirstRun(bool isFirstRun) async {
     Settings settings = await _gateway.getSettings();
     settings.isFirstRun = isFirstRun;
-    return this.setSettings(settings);
+    return setSettings(settings);
   }
 
   // Получить настройку "Это первый запуск приложения?"
   Future<bool> isTheFirstRun() async {
-    return (await this.getSettings()).isFirstRun;
+    return (await getSettings()).isFirstRun;
   }
 
   // Сохранить стоимость электроэнергии
@@ -58,12 +58,12 @@ class SettingsService {
     _gateway.onElectricityCostChanged();
     Settings settings = await getSettings();
     settings.electricityCost = cost;
-    return this.setSettings(settings);
+    return setSettings(settings);
   }
 
   // Получить стоимость электроэнергии
   Future<double> getElectricityCost() async {
-    return (await this.getSettings()).electricityCost;
+    return (await getSettings()).electricityCost;
   }
 
   //Подписка на изменение стоимости электроэнергии

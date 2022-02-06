@@ -22,7 +22,7 @@ class CurrenciesService {
 
   // Получить самую доходную криптовалюту
   Future<Earnings?> getMostProfitableCurrency() async {
-    List<Earnings> result = await this.getEarningsList(true);
+    List<Earnings> result = await getEarningsList(true);
     if (result.isNotEmpty) return result.first;
   }
 }

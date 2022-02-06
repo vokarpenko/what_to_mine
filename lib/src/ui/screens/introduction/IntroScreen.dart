@@ -8,20 +8,20 @@ import 'package:what_to_mine/src/ui/screens/ScreenRoutes.dart';
 import 'package:what_to_mine/src/ui/screens/introduction/IntroViewModel.dart';
 
 class IntroScreen extends StatefulWidget {
-  final IntroViewModel _viewModel = IntroViewModel();
+  const IntroScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return IntroScreenState(_viewModel);
+    return IntroScreenState();
   }
 }
 
 class IntroScreenState extends State<IntroScreen> {
-  IntroViewModel _viewModel;
+  final IntroViewModel _viewModel = IntroViewModel();
   StreamSubscription? _subscriptionOpenHomeScreen;
   double selectedItem = 0.1;
 
-  IntroScreenState(this._viewModel);
+  IntroScreenState();
 
   @override
   void initState() {
@@ -57,8 +57,8 @@ class IntroScreenState extends State<IntroScreen> {
       },
       showSkipButton: true,
       skip: Text("intro_go_skip".tr()),
-      next: Icon(Icons.navigate_next),
-      done: Text('intro_go_start'.tr(), style: TextStyle(fontWeight: FontWeight.w600)),
+      next: const Icon(Icons.navigate_next),
+      done: Text('intro_go_start'.tr(), style: const TextStyle(fontWeight: FontWeight.w600)),
       dotsDecorator: DotsDecorator(
           size: const Size.square(10.0),
           activeSize: const Size(20.0, 10.0),
@@ -71,11 +71,11 @@ class IntroScreenState extends State<IntroScreen> {
 
   PageViewModel _buildPage(String title, String body, String imagePath) {
     return PageViewModel(
-      decoration: PageDecoration(imageAlignment: Alignment.bottomCenter),
+      decoration: const PageDecoration(imageAlignment: Alignment.bottomCenter),
       title: title,
       body: body,
       image: Container(
-        margin: EdgeInsets.only(top: 50),
+        margin: const EdgeInsets.only(top: 50),
         child: Image.asset(imagePath),
       ),
     );
@@ -89,9 +89,9 @@ class IntroScreenState extends State<IntroScreen> {
     }
 
     return PageViewModel(
-      decoration: PageDecoration(imageAlignment: Alignment.bottomCenter),
+      decoration: const PageDecoration(imageAlignment: Alignment.bottomCenter),
       title: 'intro_page4_title'.tr(),
-      bodyWidget: Container(
+      bodyWidget: SizedBox(
           height: 200,
           width: MediaQuery.of(context).size.width,
           child: CupertinoPicker(
@@ -116,7 +116,7 @@ class IntroScreenState extends State<IntroScreen> {
             itemExtent: 50,
           )),
       image: Container(
-        margin: EdgeInsets.only(top: 50),
+        margin: const EdgeInsets.only(top: 50),
         child: Image.asset('assets/images/intro_page_4.png'),
       ),
     );

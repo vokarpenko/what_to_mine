@@ -8,19 +8,19 @@ import 'package:what_to_mine/src/ui/widgets/HashrateWidget.dart';
 import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 class HashrateScreen extends StatefulWidget {
-  final HashrateViewModel _viewModel = HashrateViewModel();
+  const HashrateScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return HashrateScreenState(_viewModel);
+    return HashrateScreenState();
   }
 }
 
 class HashrateScreenState extends State<HashrateScreen> {
-  final HashrateViewModel _viewModel;
+  final HashrateViewModel _viewModel = HashrateViewModel();
   StreamSubscription? _subscriptionInfoMessage, _subscriptionError;
 
-  HashrateScreenState(this._viewModel);
+  HashrateScreenState();
 
   @override
   void initState() {
@@ -53,12 +53,12 @@ class HashrateScreenState extends State<HashrateScreen> {
                 stream: _viewModel.showApplyButton,
                 builder: (context, snapshot) => (snapshot.data!)
                     ? Padding(
-                        padding: EdgeInsets.only(right: 5),
+                  padding: const EdgeInsets.only(right: 5),
                         child: IconButton(
                             tooltip: 'apply'.tr(),
                             onPressed: _applyHashrateButtonClick,
                             splashRadius: 25,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.check,
                               size: 30,
                             )),
@@ -77,20 +77,23 @@ class HashrateScreenState extends State<HashrateScreen> {
                   int itemsCount = snapshot.data!.length;
                   if (itemsCount > 0) {
                     List<HashrateWidget> widgets = [];
-                    items.forEach((item) {
+                    for (var item in items) {
                       widgets.add(HashrateWidget(_viewModel, item));
-                    });
+                    }
                     return SingleChildScrollView(
                       child: Column(
                         children: widgets,
                       ),
                     );
-                  } else
+                  } else {
                     return _buildEmptyHashrateListLabel();
-                } else
+                  }
+                } else {
                   return _buildEmptyHashrateListLabel();
-              } else
-                return CircularProgressIndicator();
+                }
+              } else {
+                return const CircularProgressIndicator();
+              }
             },
           ),
         ),

@@ -6,19 +6,19 @@ import 'package:what_to_mine/src/ui/screens/splash/SplashViewModel.dart';
 import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 class SplashScreen extends StatefulWidget {
-  final SplashViewModel _viewModel = SplashViewModel();
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return StateSplashScreen(_viewModel);
+    return StateSplashScreen();
   }
 }
 
 class StateSplashScreen extends State<SplashScreen> {
-  final SplashViewModel _viewModel;
+  final SplashViewModel _viewModel = SplashViewModel();
   StreamSubscription? _subscriptionOpenNextScreen, _subscriptionError;
 
-  StateSplashScreen(this._viewModel);
+  StateSplashScreen();
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class StateSplashScreen extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: Center(
-          child: Container(
+          child: SizedBox(
         width: 200,
         height: 200,
         child: Image.asset('assets/images/splash_loading.gif'),

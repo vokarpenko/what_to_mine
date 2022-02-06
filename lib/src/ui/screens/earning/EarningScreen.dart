@@ -12,18 +12,19 @@ import 'package:what_to_mine/src/utils/SysUtils.dart';
 import 'package:what_to_mine/src/utils/UIUtils.dart';
 
 class EarningScreen extends StatefulWidget {
-  final EarningViewModel _viewModel = EarningViewModel();
+  const EarningScreen({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
-    return EarningScreenState(_viewModel);
+    return EarningScreenState();
   }
 }
 
 class EarningScreenState extends State<EarningScreen> {
-  EarningViewModel _viewModel = EarningViewModel();
+  final EarningViewModel _viewModel = EarningViewModel();
   StreamSubscription? _subscriptionOpenSettingsScreen, _subscriptionError;
 
-  EarningScreenState(this._viewModel);
+  EarningScreenState();
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class EarningScreenState extends State<EarningScreen> {
     _viewModel.onViewInitState();
     _subscriptionOpenSettingsScreen = _viewModel.openSettingsScreen.listen((settings) {
       showBarModalBottomSheet(
-          context: context, duration: Duration(milliseconds: 300), builder: (context) => SettingScreen(settings));
+          context: context, duration: const Duration(milliseconds: 300), builder: (context) => SettingScreen(settings));
     });
     _subscriptionError = _viewModel.errorMessage.listen((error) {
       UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr());
@@ -55,12 +56,12 @@ class EarningScreenState extends State<EarningScreen> {
         title: Text('earnings_appbar_title'.tr()),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 5),
+            padding: const EdgeInsets.only(right: 5),
             child: IconButton(
                 tooltip: "settings_appbar_title".tr(),
                 onPressed: () => _viewModel.openSettingScreen(),
                 splashRadius: 25,
-                icon: Icon(
+                icon: const Icon(
                   Icons.settings,
                   size: 27,
                 )),
@@ -72,11 +73,11 @@ class EarningScreenState extends State<EarningScreen> {
         stream: _viewModel.earnings,
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
-            if (snapshot.data!.isNotEmpty)
+            if (snapshot.data!.isNotEmpty) {
               return SmartRefresher(
                   enablePullDown: true,
                   enablePullUp: false,
-                  header: WaterDropMaterialHeader(),
+                  header: const WaterDropMaterialHeader(),
                   controller: _refreshController,
                   onRefresh: () async {
                     await _viewModel.getData(true);
@@ -89,10 +90,12 @@ class EarningScreenState extends State<EarningScreen> {
                       return EarningsWidget(ValueKey(snapshot.data![index].cryptoCurrency.name), snapshot.data![index]);
                     },
                   ));
-            else
+            } else {
               return _buildEmptyEarningsListWidget();
-          } else
-            return CircularProgressIndicator();
+            }
+          } else {
+            return const CircularProgressIndicator();
+          }
         },
       )),
     );
@@ -111,7 +114,7 @@ class EarningScreenState extends State<EarningScreen> {
           width: MediaQuery.of(context).size.width * 0.6,
         ),
         Container(
-          padding: EdgeInsets.only(top: 30, left: 5, right: 5),
+          padding: const EdgeInsets.only(top: 30, left: 5, right: 5),
           child: Text(
             'empty_earnings_message'.tr(),
             textAlign: TextAlign.center,

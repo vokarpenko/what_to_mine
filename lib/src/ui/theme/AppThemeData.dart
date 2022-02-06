@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppThemeData {
-  static final MaterialColor mainColor = Colors.red;
+  static const MaterialColor mainColor = Colors.red;
 
   AppThemeData._();
 

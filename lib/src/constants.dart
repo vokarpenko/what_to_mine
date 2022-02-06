@@ -1,7 +1,3 @@
-class Links {
-  static String get iconsLink => 'https://static-ssl.minerstat.farm/32/';
-}
-
 class HashCoefficient {
   static const int gigaHash = 1000000000;
   static const int megaHash = 1000000;
@@ -14,3 +10,4 @@ const int daysInWeek = 7;
 const int daysInMonth = 30;
 const int wattInKiloWatt = 1000;
 const int sendNotification = 0;
+const String iconURL = 'https://static-ssl.minerstat.farm/32/';

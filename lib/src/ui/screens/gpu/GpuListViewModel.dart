@@ -26,10 +26,11 @@ class GpuListViewModel {
   void _getData() async {
     _listOfAllGpu = await Services.gpuService.getGPUList();
     Services.gpuService.getUsedGPUList().then((usedGpuList) {
-      if (usedGpuList != null)
+      if (usedGpuList != null) {
         _usedGpus.add(usedGpuList);
-      else
+      } else {
         _usedGpus.add([]);
+      }
     }).catchError((error) {
       String errorMessage = 'error_get_gpu_list'.tr() + '.\n${error.toString()}';
       print(errorMessage);

@@ -3,8 +3,8 @@ import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart';
 
 // Хранилище в памяти
 class MemoryStorage {
-  List<CryptoCurrency> _cryptoCurrencyCache = [];
-  List<HashAlgorithm> _editedHashrateCache = [];
+  final List<CryptoCurrency> _cryptoCurrencyCache = [];
+  final List<HashAlgorithm> _editedHashrateCache = [];
 
   // Добавить данные криптовалют в кэш
   void putCryptoCurrencies(List<CryptoCurrency> cryptoCurrency) {

@@ -27,6 +27,8 @@ import 'data/jsonReader/JsonReader.dart';
 import 'logic/SchedulerService.dart';
 
 class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _AppState();
 }
@@ -57,9 +59,9 @@ class _AppState extends State<App> {
         darkTheme: AppThemeData.darkTheme,
         initialRoute: ScreenRoutes.splashScreen,
         routes: {
-          ScreenRoutes.splashScreen: (BuildContext context) => SplashScreen(),
-          ScreenRoutes.homeScreen: (BuildContext context) => Home(),
-          ScreenRoutes.introScreen: (BuildContext context) => IntroScreen()
+          ScreenRoutes.splashScreen: (BuildContext context) => const SplashScreen(),
+          ScreenRoutes.homeScreen: (BuildContext context) => const Home(),
+          ScreenRoutes.introScreen: (BuildContext context) => const IntroScreen()
         });
   }
 }

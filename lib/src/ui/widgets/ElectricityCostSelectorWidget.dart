@@ -6,7 +6,7 @@ class ElectricityCostSelectorWidget extends StatelessWidget {
   final SettingsViewModel _viewModel;
   final double initialItem;
 
-  ElectricityCostSelectorWidget(this._viewModel, this.initialItem);
+  const ElectricityCostSelectorWidget(this._viewModel, this.initialItem, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ElectricityCostSelectorWidget extends StatelessWidget {
     return Material(
         child: SafeArea(
       top: false,
-      child: Container(
+          child: SizedBox(
           height: 200,
           width: MediaQuery.of(context).size.width,
           child: CupertinoPicker(

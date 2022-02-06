@@ -12,20 +12,20 @@ import 'package:what_to_mine/src/utils/UIUtils.dart';
 import 'GpuListViewModel.dart';
 
 class GpuListScreen extends StatefulWidget {
-  final GpuListViewModel _viewModel = GpuListViewModel();
+  const GpuListScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return GpuListScreenState(_viewModel);
+    return GpuListScreenState();
   }
 }
 
 class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMixin {
-  final GpuListViewModel _viewModel;
+  final GpuListViewModel _viewModel = GpuListViewModel();
   StreamSubscription? _subscriptionAddGpu, _subscriptionError;
   late AnimationController _hideFabAnimation;
 
-  GpuListScreenState(this._viewModel);
+  GpuListScreenState();
 
   @override
   void initState() {
@@ -66,9 +66,9 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
                 items = snapshot.data!;
                 if (snapshot.data!.isNotEmpty) {
                   int itemsCount = snapshot.data!.length;
-                  if (itemsCount > 0)
+                  if (itemsCount > 0) {
                     return ListView.builder(
-                      padding: EdgeInsets.only(top: 15, bottom: 15),
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
                       itemCount: itemsCount,
                       itemBuilder: (context, index) {
                         final item = items[index];
@@ -85,12 +85,15 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
                         );
                       },
                     );
-                  else
+                  } else {
                     return _buildEmptyGpuListWidget();
-                } else
+                  }
+                } else {
                   return _buildEmptyGpuListWidget();
-              } else
-                return CircularProgressIndicator();
+                }
+              } else {
+                return const CircularProgressIndicator();
+              }
             },
           ),
         ),
@@ -100,7 +103,7 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
           child: FloatingActionButton(
             heroTag: "gpuAdd",
             onPressed: _onClickAddGPU,
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
           ),
         ));
   }
@@ -118,7 +121,7 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
     List<Gpu> _gpus = _viewModel.onFilterGPUListByVendor(vendor);
     Gpu selectedGpu = _gpus.first;
 
-    new Future.delayed(Duration.zero, () {
+    Future.delayed(Duration.zero, () {
       TextEditingController controller = TextEditingController(text: '1');
       showDialog(
         context: context,
@@ -181,7 +184,7 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
                         }).toList(),
                       ),
                       TextField(
-                          decoration: new InputDecoration(hintText: 'quantity'.tr()),
+                          decoration: InputDecoration(hintText: 'quantity'.tr()),
                           inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([1-9]){1}([0-9]{1,2})?'))],
                           keyboardType: TextInputType.number,
                           controller: controller)
@@ -215,7 +218,7 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
     Brightness brightness = Theme.of(context).brightness;
     String imagePath = brightness == Brightness.light ? 'assets/images/not_gpus.png' : 'assets/images/not_gpus_bw.png';
     return SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -225,7 +228,7 @@ class GpuListScreenState extends State<GpuListScreen> with TickerProviderStateMi
             width: MediaQuery.of(context).size.width * 0.6,
           ),
           Container(
-            padding: EdgeInsets.only(top: 30, left: 5, right: 5),
+            padding: const EdgeInsets.only(top: 30, left: 5, right: 5),
             child: Text(
               'empty_gpus_message'.tr(),
               textAlign: TextAlign.center,

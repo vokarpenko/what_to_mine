@@ -7,43 +7,21 @@ import 'package:what_to_mine/src/ui/widgets/ElectricityCostSelectorWidget.dart';
 import 'package:what_to_mine/src/ui/widgets/LanguageSelectorWidget.dart';
 import 'package:what_to_mine/src/ui/widgets/ThemeSelectorWidget.dart';
 
-class SettingScreen extends StatefulWidget {
+class SettingScreen extends StatelessWidget {
   final Settings _settings;
   final SettingsViewModel _viewModel = SettingsViewModel();
 
-  SettingScreen(this._settings);
-
-  @override
-  State<StatefulWidget> createState() => StateSettingScreen(_viewModel, _settings);
-}
-
-class StateSettingScreen extends State<SettingScreen> {
-  final Settings _settings;
-  SettingsViewModel _viewModel;
-
-  StateSettingScreen(this._viewModel, this._settings);
-
-  @override
-  void initState() {
-    super.initState();
-    _viewModel.onViewInitState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    this.._viewModel.onDispose();
-  }
+  SettingScreen(this._settings, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('settings_appbar_title').tr(),
+        title: const Text('settings_appbar_title').tr(),
       ),
       body: ListView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: ListTile.divideTiles(context: context, tiles: [
             StreamBuilder<bool>(
               stream: _viewModel.notificationsIsEnable,
@@ -58,7 +36,7 @@ class StateSettingScreen extends State<SettingScreen> {
                   subtitle: Text(subTitle),
                   value: snapshot.data!,
                   onChanged: (isEnable) => _viewModel.onChangeNotificationStatus(isEnable),
-                  secondary: Icon(Icons.notifications),
+                  secondary: const Icon(Icons.notifications),
                 );
               },
             ),
@@ -67,13 +45,13 @@ class StateSettingScreen extends State<SettingScreen> {
               initialData: _settings.electricityCost,
               builder: (context, snapshot) {
                 return ListTile(
-                  leading: Icon(Icons.electrical_services),
+                  leading: const Icon(Icons.electrical_services),
                   title: Text('setting_electricity_cost'.tr()),
                   subtitle: Text('${snapshot.data?.toStringAsFixed(2)} USD'),
                   onTap: () => showBarModalBottomSheet(
                       backgroundColor: Colors.transparent,
                       context: context,
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       builder: (context) => ElectricityCostSelectorWidget(_viewModel, snapshot.data!)),
                 );
               },
@@ -95,13 +73,13 @@ class StateSettingScreen extends State<SettingScreen> {
                     break;
                 }
                 return ListTile(
-                  leading: Icon(Icons.invert_colors),
+                  leading: const Icon(Icons.invert_colors),
                   title: Text('settings_theme'.tr()),
                   subtitle: Text(subTitle),
                   onTap: () => showBarModalBottomSheet(
                       backgroundColor: Colors.transparent,
                       context: context,
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       builder: (context) => ThemeSelectorWidget(_viewModel)),
                 );
               },
@@ -120,13 +98,13 @@ class StateSettingScreen extends State<SettingScreen> {
                     break;
                 }
                 return ListTile(
-                  leading: Icon(Icons.language),
+                  leading: const Icon(Icons.language),
                   title: Text('settings_language'.tr()),
                   subtitle: Text(subTitle),
                   onTap: () => showBarModalBottomSheet(
                       backgroundColor: Colors.transparent,
                       context: context,
-                      duration: Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       builder: (context) => LanguageSelectorWidget(_viewModel)),
                 );
               },

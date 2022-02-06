@@ -5,7 +5,7 @@ import 'package:what_to_mine/src/ui/screens/settings/SettingsViewModel.dart';
 class LanguageSelectorWidget extends StatelessWidget {
   final SettingsViewModel _viewModel;
 
-  LanguageSelectorWidget(this._viewModel);
+  const LanguageSelectorWidget(this._viewModel, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class LanguageSelectorWidget extends StatelessWidget {
         children: <Widget>[
           ListTile(
             title: Text('settings_language_en'.tr()),
-            leading: Icon(Icons.language),
+            leading: const Icon(Icons.language),
             onTap: () {
               _onSwitchLanguage(context, 'en');
               Navigator.of(context).pop();
@@ -25,7 +25,7 @@ class LanguageSelectorWidget extends StatelessWidget {
           ),
           ListTile(
             title: Text('settings_language_ru'.tr()),
-            leading: Icon(Icons.language),
+            leading: const Icon(Icons.language),
             onTap: () {
               _onSwitchLanguage(context, 'ru');
               Navigator.of(context).pop();

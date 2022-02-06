@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 import '../../domain/currency/CryptoCurrency.dart';
 import 'IMinerStatClient.dart';
 
 class MinerStatClient implements IMinerStatClient {
-  final _client;
+  final Client _client;
 
-  MinerStatClient() : _client = http.Client();
+  MinerStatClient() : _client = Client();
 
   @override
   Future<List<CryptoCurrency>> getCryptoCurrenciesListFromApi() async {

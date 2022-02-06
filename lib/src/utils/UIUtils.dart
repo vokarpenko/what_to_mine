@@ -39,9 +39,10 @@ class UIUtils {
 
   static Locale getFallbackLocale() {
     String deviceLocale = Platform.localeName;
-    if (deviceLocale == 'ru_RU')
-      return Locale('ru');
-    else
-      return Locale('en');
+    if (deviceLocale == 'ru_RU') {
+      return const Locale('ru');
+    } else {
+      return const Locale('en');
+    }
   }
 }

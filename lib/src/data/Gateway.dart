@@ -79,9 +79,9 @@ class Gateway implements ICurrenciesGateway, IGpuGateway, IHashAlgorithmGateway,
     } else {
       list = await _client.getCryptoCurrenciesListFromApi();
       list = _filterCryptoCurrencies(list);
-      list.forEach((element) {
-        element.iconLink = Links.iconsLink + element.coin.toLowerCase() + '.png';
-      });
+      for (var element in list) {
+        element.iconLink = iconURL + element.coin.toLowerCase() + '.png';
+      }
       _cache.putCryptoCurrencies(list);
     }
     return list;
@@ -106,10 +106,10 @@ class Gateway implements ICurrenciesGateway, IGpuGateway, IHashAlgorithmGateway,
   @override
   Future<List<UsedGpu>> getUsedGPUList() async {
     List<UsedGpu> result = [];
-    List<UsedGpuEntity> listEntity = (await this._appDatabase.usedGpuDao.selectAll());
-    listEntity.forEach((element) {
+    List<UsedGpuEntity> listEntity = (await _appDatabase.usedGpuDao.selectAll());
+    for (var element in listEntity) {
       result.add(element.usedGpu);
-    });
+    }
     return result;
   }
 
@@ -152,16 +152,16 @@ class Gateway implements ICurrenciesGateway, IGpuGateway, IHashAlgorithmGateway,
     // Если используются кастомные хэшрейты, то просто берем их из бд
     if (useCustomHashrates != null && useCustomHashrates) {
       var userHashAlgorithms = await _appDatabase.userHashAlgorithmDao.selectAll();
-      userHashAlgorithms.forEach((entity) {
+      for (var entity in userHashAlgorithms) {
         result.add(entity.algorithm);
-      });
+      }
     } else {
       result = await _jsonReader.getHashAlgorithmsWithZeroValues();
       List<UsedGpu> usedGpus = await getUsedGPUList();
 
-      usedGpus.forEach((gpu) {
+      for (var gpu in usedGpus) {
         print(gpu.gpuData.name + " x" + gpu.quantity.toString());
-        gpu.gpuData.hashAlgorithms.forEach((element) {
+        for (var element in gpu.gpuData.hashAlgorithms) {
           if (element.hashrate != null && element.power != null) {
             int currentAlgorithmIndex = result.indexWhere((r) => r.name == element.name);
             if (currentAlgorithmIndex != -1) {
@@ -172,8 +172,8 @@ class Gateway implements ICurrenciesGateway, IGpuGateway, IHashAlgorithmGateway,
                 ..power = (currentAlgorithmPower + element.power! * gpu.quantity));
             }
           }
-        });
-      });
+        }
+      }
     }
     _cache.putEditedHashrates(result);
     return result;
@@ -189,7 +189,7 @@ class Gateway implements ICurrenciesGateway, IGpuGateway, IHashAlgorithmGateway,
     List<Earnings> result = [];
 
     //Находим монеты, по алгоритмам которых есть хэшрейты в gpu.json
-    currencies.forEach((currency) {
+    for (var currency in currencies) {
       HashAlgorithm? algorithm;
       try {
         algorithm = hashratesUsedInCalc
@@ -199,7 +199,7 @@ class Gateway implements ICurrenciesGateway, IGpuGateway, IHashAlgorithmGateway,
         Earnings earning = Earnings.create(currency, algorithm, electricityCost);
         result.add(earning);
       }
-    });
+    }
     // Фильтруем список, отбрасывая монеты, которые дают доход 0
     result = result.where((element) => element.monthEarningsMoreThan(0.0001) == true).toList();
     return result;
@@ -226,9 +226,9 @@ class Gateway implements ICurrenciesGateway, IGpuGateway, IHashAlgorithmGateway,
   // Обновить хэшрейты в БД
   @override
   Future<void> updateHashratesInDB(List<HashAlgorithm> hashrates) async {
-    hashrates.forEach((element) {
+    for (var element in hashrates) {
       _appDatabase.userHashAlgorithmDao.insert(UserHashAlgorithmEntity(element));
-    });
+    }
     _preferences.setBool(_useCustomHashratesKey, true);
     _userHashrateChanged.add(true);
   }

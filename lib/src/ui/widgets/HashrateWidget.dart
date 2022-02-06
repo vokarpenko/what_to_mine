@@ -14,16 +14,16 @@ class HashrateWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         elevation: 5,
         child: Container(
-          padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
+          padding: const EdgeInsets.only(left: 0, top: 10, bottom: 10),
           child: Flex(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             direction: Axis.horizontal,
             children: [
-              Flexible(flex: 4, child: Icon(Icons.forward)),
+              const Flexible(flex: 4, child: Icon(Icons.forward)),
               Flexible(
                 fit: FlexFit.tight,
                 flex: 5,
@@ -33,18 +33,18 @@ class HashrateWidget extends StatelessWidget {
                   fit: FlexFit.tight,
                   flex: 5,
                   child: Container(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: TextField(
                         onChanged: (value) => _onChangeHashrate(_algorithm.name, value),
                         inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,12}([.][0-9]{0,2})?'))],
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
+                          contentPadding: const EdgeInsets.only(left: 10, top: 0, bottom: 0),
                           labelText: _viewModel.getHashUnit(_algorithm),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
                           ),
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black26, width: 2),
                           ),
                         ),
@@ -56,21 +56,21 @@ class HashrateWidget extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.center,
                     //width: 100,
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: TextField(
                         onChanged: (value) => _onChangePower(_algorithm.name, value),
                         inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^([0-9]){1,10}'))],
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(left: 10, top: 0, bottom: 0),
+                          contentPadding: const EdgeInsets.only(left: 10, top: 0, bottom: 0),
                           labelText: 'W',
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 2),
                           ),
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black26, width: 2),
                           ),
-                          disabledBorder: OutlineInputBorder(
+                          disabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black12, width: 2),
                           ),
                         ),

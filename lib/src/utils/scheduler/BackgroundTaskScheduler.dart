@@ -68,9 +68,8 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
       String nowProfitableToMineMessage, String earningsTitle, String perDayText) async {
     Services.currenciesService.getMostProfitableCurrency().then((earnings) {
       if (earnings != null) {
-        String title = '$nowProfitableToMineMessage' + ' ${earnings.cryptoCurrency.name}';
-        String body =
-            '$earningsTitle' + ' ${earnings.netDayEarningInCurrency.toStringAsFixed(2)} USD ' + '$perDayText' + '!';
+        String title = nowProfitableToMineMessage + ' ${earnings.cryptoCurrency.name}';
+        String body = earningsTitle + ' ${earnings.netDayEarningInCurrency.toStringAsFixed(2)} USD ' + perDayText + '!';
         Notificator().showNotification(sendNotification, title, body);
       }
     }).catchError((Object error) {

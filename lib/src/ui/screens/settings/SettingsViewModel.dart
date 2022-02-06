@@ -11,22 +11,9 @@ class SettingsViewModel {
   final _electricityCost = StreamController<double>();
 
   Stream<bool> get notificationsIsEnable => _notificationsIsEnable.stream;
-
   Stream<ThemeMode> get themeMode => _themeMode.stream;
-
   Stream<String> get locale => _locale.stream;
-
   Stream<double> get electricityCost => _electricityCost.stream;
-
-  void onViewInitState() async {}
-
-  void onDispose() async {
-    this
-      .._notificationsIsEnable.close()
-      .._themeMode.close()
-      .._locale.close()
-      .._electricityCost.close();
-  }
 
   void onChangeNotificationStatus(bool isEnable) async {
     _notificationsIsEnable.add(isEnable);

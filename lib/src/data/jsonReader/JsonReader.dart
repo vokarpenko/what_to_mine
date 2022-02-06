@@ -24,6 +24,7 @@ class JsonReader implements IJsonReader {
   }
 
   // Получить список алгоритмов
+  @override
   Future<List<HashAlgorithm>> getHashAlgorithmsWithZeroValues() async {
     String jsonGpus = await rootBundle.loadString('assets/json/algos.json');
     List<dynamic> json = jsonDecode(jsonGpus);

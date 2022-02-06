@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
 import 'dart:math';
 
 import '../../constants.dart';
@@ -15,46 +16,51 @@ class CryptoCurrency {
   final double volume;
   String? iconLink;
 
-  CryptoCurrency({required this.id,
-    required this.coin,
-    required this.name,
-    required this.type,
-    required this.algorithm,
-    required this.price,
-    required this.reward,
-    required this.networkHashrate,
-    required this.rewardUnit,
-    required this.volume,
-    this.iconLink});
+  CryptoCurrency(
+      {required this.id,
+      required this.coin,
+      required this.name,
+      required this.type,
+      required this.algorithm,
+      required this.price,
+      required this.reward,
+      required this.networkHashrate,
+      required this.rewardUnit,
+      required this.volume,
+      this.iconLink});
 
   factory CryptoCurrency.fromJson(Map<String, dynamic> json) {
     var reward;
     if (json['reward'] != null && json['reward'] > 0) {
       reward = json['reward'].toString();
       reward = double.tryParse(reward);
-    } else
+    } else {
       reward = 0.0;
+    }
 
     var price;
     if (json['price'] != null && json['price'] > 0) {
       price = json['price'].toString();
       price = double.tryParse(price);
-    } else
+    } else {
       price = 0.0;
+    }
 
     var networkHashrate;
     if (json['network_hashrate'] != null && json['network_hashrate'] > 0) {
       networkHashrate = json['network_hashrate'].toString();
       networkHashrate = double.tryParse(networkHashrate);
-    } else
+    } else {
       networkHashrate = 0.0;
+    }
 
     var volume;
     if (json['volume'] != null && json['volume'] > 0) {
       volume = json['volume'].toString();
       volume = double.tryParse(volume);
-    } else
+    } else {
       volume = 0.0;
+    }
 
     return CryptoCurrency(
         id: json['id'],
@@ -85,46 +91,46 @@ class CryptoCurrency {
   }
 
   double calculateDayEarning(double? usedHashrate) {
-    if (reward > 0 && usedHashrate != null && usedHashrate > 0)
+    if (reward > 0 && usedHashrate != null && usedHashrate > 0) {
       return reward * usedHashrate * hoursInDay;
-    else
+    } else {
       return 0;
+    }
   }
 
   bool isCoin() {
-    return this.type == 'coin';
+    return type == 'coin';
   }
 
   bool hasPrice() {
-    return this.price != -1;
+    return price != -1;
   }
 
   bool hasReward() {
-    return this.reward != -1;
+    return reward != -1;
   }
 
   bool volumeMoreThan(double volume) {
     return this.volume > volume;
   }
 
-  bool operator ==(o) =>
-      o is CryptoCurrency &&
-      name == o.name &&
-      coin == o.coin &&
-      name == o.name &&
-      type == o.type &&
-      algorithm == o.algorithm &&
-      price == o.price &&
-      reward == o.reward &&
-      networkHashrate == o.networkHashrate &&
-      rewardUnit == o.rewardUnit &&
-      volume == o.volume &&
-      iconLink == o.iconLink;
+  @override
+  // ignore: hash_and_equals
+  bool operator ==(other) =>
+      other is CryptoCurrency &&
+      name == other.name &&
+      coin == other.coin &&
+      name == other.name &&
+      type == other.type &&
+      algorithm == other.algorithm &&
+      price == other.price &&
+      reward == other.reward &&
+      networkHashrate == other.networkHashrate &&
+      rewardUnit == other.rewardUnit &&
+      volume == other.volume &&
+      iconLink == other.iconLink;
 
   @override
   String toString() =>
       '\n{ \n id = $id \n coin = $coin \n name = $name \n type = $type \n algorithm = $algorithm \n price = $price \n reward = $reward \n networkHashrate = $networkHashrate \n rewardUnit = $rewardUnit \n volume = $volume \n iconLink = $iconLink \n}';
-
-  @override
-  int get hashCode => super.hashCode;
 }

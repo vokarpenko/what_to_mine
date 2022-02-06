@@ -7,7 +7,7 @@ import 'package:what_to_mine/src/ui/screens/hashrate/HashrateScreen.dart';
 import 'screens/prices/CurrencyPricesScreen.dart';
 
 class Home extends StatefulWidget {
-  Home();
+  const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -25,10 +25,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _earningsIconAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    _pricesIconAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    _gpusIconAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    _hashratesIconAnimationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _earningsIconAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _pricesIconAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _gpusIconAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _hashratesIconAnimationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
   }
 
   @override
@@ -45,7 +45,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        children: [EarningScreen(), CurrencyPricesScreen(), GpuListScreen(), HashrateScreen()],
+        children: const [EarningScreen(), CurrencyPricesScreen(), GpuListScreen(), HashrateScreen()],
         index: _currentIndex,
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -56,25 +56,25 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             label: 'home_earnings'.tr(),
             icon: RotationTransition(
                 turns: Tween(begin: 0.0, end: 1.0).animate(_earningsIconAnimationController),
-                child: ImageIcon(AssetImage('assets/icons/earnings_icon.png'))),
+                child: const ImageIcon(AssetImage('assets/icons/earnings_icon.png'))),
           ),
           BottomNavigationBarItem(
             label: 'home_prices'.tr(),
             icon: RotationTransition(
                 turns: Tween(begin: 0.0, end: 1.0).animate(_pricesIconAnimationController),
-                child: ImageIcon(AssetImage('assets/icons/prices_icon.png'))),
+                child: const ImageIcon(AssetImage('assets/icons/prices_icon.png'))),
           ),
           BottomNavigationBarItem(
               icon: RotationTransition(
                   turns: Tween(begin: 0.0, end: 1.0).animate(_gpusIconAnimationController),
-                  child: ImageIcon(
+                  child: const ImageIcon(
                     AssetImage('assets/icons/gpus_icon.png'),
                   )),
               label: 'home_gpus'.tr()),
           BottomNavigationBarItem(
               icon: RotationTransition(
                 turns: Tween(begin: 0.0, end: 1.0).animate(_hashratesIconAnimationController),
-                child: ImageIcon(AssetImage('assets/icons/hashrates_icon.png')),
+                child: const ImageIcon(AssetImage('assets/icons/hashrates_icon.png')),
               ),
               label: 'home_hashrate'.tr()),
         ],

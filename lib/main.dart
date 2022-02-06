@@ -8,11 +8,11 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-        supportedLocales: [Locale('en'), Locale('ru')],
+        supportedLocales: const [Locale('en'), Locale('ru')],
         path: 'assets/translations',
         saveLocale: true,
         fallbackLocale: UIUtils.getFallbackLocale(),
         useOnlyLangCode: true,
-        child: App()),
+        child: const App()),
   );
 }

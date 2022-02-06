@@ -5,7 +5,7 @@ class Notificator {
   static final Notificator _instance = Notificator._();
   FlutterLocalNotificationsPlugin? _flutterLocalNotificationsPlugin;
 
-  NotificationDetails _platformChannelSpecifics = NotificationDetails(
+  final NotificationDetails _platformChannelSpecifics = const NotificationDetails(
       android: AndroidNotificationDetails('Channel id', 'What to mine notification channel',
           channelShowBadge: true, color: AppColors.orange, importance: Importance.max, priority: Priority.max),
       iOS: IOSNotificationDetails());
@@ -18,10 +18,10 @@ class Notificator {
 
   Future<void> _initialize() async {
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    final AndroidInitializationSettings initializationSettingsAndroid =
+    const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('ic_notification');
-    final IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings();
-    final InitializationSettings initializationSettings =
+    const IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings();
+    const InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
     await _flutterLocalNotificationsPlugin!.initialize(initializationSettings);
   }

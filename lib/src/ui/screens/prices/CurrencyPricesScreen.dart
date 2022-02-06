@@ -11,19 +11,19 @@ import 'package:what_to_mine/src/utils/UIUtils.dart';
 import '../../../domain/currency/CryptoCurrency.dart';
 
 class CurrencyPricesScreen extends StatefulWidget {
-  final CurrencyPricesViewModel _viewModel = CurrencyPricesViewModel();
+  const CurrencyPricesScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return CurrencyPricesScreenState(_viewModel);
+    return CurrencyPricesScreenState();
   }
 }
 
 class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
-  final CurrencyPricesViewModel _viewModel;
+  final CurrencyPricesViewModel _viewModel = CurrencyPricesViewModel();
   StreamSubscription? _subscriptionError;
 
-  CurrencyPricesScreenState(this._viewModel);
+  CurrencyPricesScreenState();
 
   @override
   void initState() {
@@ -57,7 +57,7 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
               return SmartRefresher(
                   enablePullDown: true,
                   enablePullUp: false,
-                  header: WaterDropMaterialHeader(),
+                  header: const WaterDropMaterialHeader(),
                   controller: _refreshController,
                   onRefresh: () async {
                     await _viewModel.getData(true);
@@ -70,8 +70,9 @@ class CurrencyPricesScreenState extends State<CurrencyPricesScreen> {
                       return CryptoCurrencyWidget(ValueKey(snapshot.data![index].name), snapshot.data![index]);
                     },
                   ));
-            } else
-              return CircularProgressIndicator();
+            } else {
+              return const CircularProgressIndicator();
+            }
           },
         ),
       ),

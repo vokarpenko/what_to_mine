@@ -5,20 +5,21 @@ import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
 class UsedGPUWidget extends StatelessWidget {
   final UsedGpu _usedGPU;
 
-  UsedGPUWidget(this._usedGPU);
+  const UsedGPUWidget(this._usedGPU, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Image logo;
-    if (_usedGPU.gpuData.vendor == 'amd')
+    if (_usedGPU.gpuData.vendor == 'amd') {
       logo = Image.asset(
         'assets/images/amd_logo.png',
       );
-    else
+    } else {
       logo = Image.asset('assets/images/nvidia_logo.png');
+    }
 
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       elevation: 5,
       child: Flex(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -27,7 +28,7 @@ class UsedGPUWidget extends StatelessWidget {
           Flexible(
               flex: 1,
               child: Container(
-                margin: EdgeInsets.only(top: 10, bottom: 10),
+                margin: const EdgeInsets.only(top: 10, bottom: 10),
                 height: 70,
                 width: 70,
                 child: ClipRRect(
@@ -42,7 +43,7 @@ class UsedGPUWidget extends StatelessWidget {
                 children: [
                   Text(_usedGPU.gpuData.marketingName),
                   Padding(
-                    padding: EdgeInsets.only(top: 3),
+                    padding: const EdgeInsets.only(top: 3),
                     child: Text('gpu_quantity'.tr() + ' ${_usedGPU.quantity}'),
                   )
                 ],
