@@ -1,12 +1,12 @@
 import 'package:mockito/annotations.dart';
-import 'package:what_to_mine/src/data/Gateway.dart';
-import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
-import 'package:what_to_mine/src/data/client/MinerStatClient.dart';
-import 'package:what_to_mine/src/data/db/AppDatabase.dart';
-import 'package:what_to_mine/src/data/db/dao/UsedGpuDao.dart';
-import 'package:what_to_mine/src/data/db/dao/UserHashAlgorithmDao.dart';
-import 'package:what_to_mine/src/data/jsonReader/JsonReader.dart';
-import 'package:what_to_mine/src/utils/scheduler/BackgroundTaskScheduler.dart';
+import 'package:what_to_mine/src/data/cache/memory_storage.dart';
+import 'package:what_to_mine/src/data/client/miner_stat_client.dart';
+import 'package:what_to_mine/src/data/db/app_database.dart';
+import 'package:what_to_mine/src/data/db/dao/used_gpu_dao.dart';
+import 'package:what_to_mine/src/data/db/dao/user_hash_algorithm_dao.dart';
+import 'package:what_to_mine/src/data/gateway.dart';
+import 'package:what_to_mine/src/data/json_reader/json_reader.dart';
+import 'package:what_to_mine/src/utils/scheduler/background_task_scheduler.dart';
 
 // Все моки в одном месте, чтобы не генерировать лишних
 // Запустить build_runner для генерации

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/app.dart';
-import 'package:what_to_mine/src/utils/UIUtils.dart';
+import 'package:what_to_mine/src/utils/ui_utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,14 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:what_to_mine/src/data/Gateway.dart';
-import 'package:what_to_mine/src/data/client/MinerStatClient.dart';
-import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart';
-import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart';
-import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart';
+import 'package:what_to_mine/src/data/client/miner_stat_client.dart';
+import 'package:what_to_mine/src/data/gateway.dart';
+import 'package:what_to_mine/src/domain/algorithms/hash_algorithm.dart';
+import 'package:what_to_mine/src/domain/currency/crypto_currency.dart';
+import 'package:what_to_mine/src/domain/gpu/used_gpu.dart';
 
-import '../TestObjectsFactory.dart';
 import '../mocks.mocks.dart';
+import '../test_objects_factory.dart';
 
 Future<void> main() async {
   MockMemoryStorage mockCache = MockMemoryStorage();

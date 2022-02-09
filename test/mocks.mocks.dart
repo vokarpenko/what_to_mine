@@ -6,22 +6,22 @@ import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sqflite/sqflite.dart' as _i5;
-import 'package:what_to_mine/src/data/Gateway.dart' as _i15;
-import 'package:what_to_mine/src/data/cache/MemoryStorage.dart' as _i7;
-import 'package:what_to_mine/src/data/client/MinerStatClient.dart' as _i10;
-import 'package:what_to_mine/src/data/db/AppDatabase.dart' as _i11;
-import 'package:what_to_mine/src/data/db/dao/UsedGpuDao.dart' as _i2;
-import 'package:what_to_mine/src/data/db/dao/UserHashAlgorithmDao.dart' as _i3;
-import 'package:what_to_mine/src/data/db/entities/UsedGpuEntity.dart' as _i18;
-import 'package:what_to_mine/src/data/db/entities/UserHashAlgorithmEntity.dart' as _i19;
-import 'package:what_to_mine/src/data/jsonReader/JsonReader.dart' as _i12;
-import 'package:what_to_mine/src/domain/Settings.dart' as _i6;
-import 'package:what_to_mine/src/domain/algorithms/HashAlgorithm.dart' as _i9;
-import 'package:what_to_mine/src/domain/currency/CryptoCurrency.dart' as _i8;
-import 'package:what_to_mine/src/domain/currency/Earnings.dart' as _i17;
-import 'package:what_to_mine/src/domain/gpu/Gpu.dart' as _i13;
-import 'package:what_to_mine/src/domain/gpu/UsedGpu.dart' as _i16;
-import 'package:what_to_mine/src/utils/scheduler/BackgroundTaskScheduler.dart' as _i14;
+import 'package:what_to_mine/src/data/cache/memory_storage.dart' as _i7;
+import 'package:what_to_mine/src/data/client/miner_stat_client.dart' as _i10;
+import 'package:what_to_mine/src/data/db/app_database.dart' as _i11;
+import 'package:what_to_mine/src/data/db/dao/used_gpu_dao.dart' as _i2;
+import 'package:what_to_mine/src/data/db/dao/user_hash_algorithm_dao.dart' as _i3;
+import 'package:what_to_mine/src/data/db/entities/used_gpu_entity.dart' as _i18;
+import 'package:what_to_mine/src/data/db/entities/user_hash_algorithm_entity.dart' as _i19;
+import 'package:what_to_mine/src/data/gateway.dart' as _i15;
+import 'package:what_to_mine/src/data/json_reader/json_reader.dart' as _i12;
+import 'package:what_to_mine/src/domain/algorithms/hash_algorithm.dart' as _i9;
+import 'package:what_to_mine/src/domain/currency/crypto_currency.dart' as _i8;
+import 'package:what_to_mine/src/domain/currency/earnings.dart' as _i17;
+import 'package:what_to_mine/src/domain/gpu/gpu.dart' as _i13;
+import 'package:what_to_mine/src/domain/gpu/used_gpu.dart' as _i16;
+import 'package:what_to_mine/src/domain/settings.dart' as _i6;
+import 'package:what_to_mine/src/utils/scheduler/background_task_scheduler.dart' as _i14;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -116,16 +116,20 @@ class MockAppDatabase extends _i1.Mock implements _i11.AppDatabase {
   _i4.StreamController<String> get changeListener =>
       (super.noSuchMethod(Invocation.getter(#changeListener), returnValue: _FakeStreamController_2<String>())
           as _i4.StreamController<String>);
+
   @override
   set changeListener(_i4.StreamController<String>? _changeListener) =>
       super.noSuchMethod(Invocation.setter(#changeListener, _changeListener), returnValueForMissingStub: null);
+
   @override
   _i5.DatabaseExecutor get database =>
       (super.noSuchMethod(Invocation.getter(#database), returnValue: _FakeDatabaseExecutor_3())
           as _i5.DatabaseExecutor);
+
   @override
   set database(_i5.DatabaseExecutor? _database) =>
       super.noSuchMethod(Invocation.setter(#database, _database), returnValueForMissingStub: null);
+
   @override
   _i4.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(), returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
@@ -224,6 +228,7 @@ class MockGateway extends _i1.Mock implements _i15.Gateway {
       (super.noSuchMethod(Invocation.method(#getHashratesUsedInCalc, []),
               returnValue: Future<List<_i9.HashAlgorithm>>.value(<_i9.HashAlgorithm>[]))
           as _i4.Future<List<_i9.HashAlgorithm>>);
+
   @override
   _i4.Future<List<_i17.Earnings>> getEarningsList({bool? isNeedFresh}) =>
       (super.noSuchMethod(Invocation.method(#getEarningsList, [], {#isNeedFresh: isNeedFresh}),

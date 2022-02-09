@@ -4,27 +4,27 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:what_to_mine/src/data/Gateway.dart';
-import 'package:what_to_mine/src/data/cache/MemoryStorage.dart';
-import 'package:what_to_mine/src/data/client/IMinerStatClient.dart';
-import 'package:what_to_mine/src/data/client/MinerStatClient.dart';
-import 'package:what_to_mine/src/data/db/AppDatabase.dart';
-import 'package:what_to_mine/src/data/jsonReader/IJsonReader.dart';
-import 'package:what_to_mine/src/logic/CurrenciesService.dart';
-import 'package:what_to_mine/src/logic/GpuService.dart';
-import 'package:what_to_mine/src/logic/HashAlgorithmService.dart';
-import 'package:what_to_mine/src/logic/Services.dart';
-import 'package:what_to_mine/src/logic/SettingsService.dart';
 import 'package:what_to_mine/src/ui/Home.dart';
-import 'package:what_to_mine/src/ui/screens/ScreenRoutes.dart';
-import 'package:what_to_mine/src/ui/screens/introduction/IntroScreen.dart';
-import 'package:what_to_mine/src/ui/screens/splash/SplashScreen.dart';
-import 'package:what_to_mine/src/ui/theme/AppThemeData.dart';
-import 'package:what_to_mine/src/ui/theme/ThemeConfig.dart';
-import 'package:what_to_mine/src/utils/scheduler/BackgroundTaskScheduler.dart';
-import 'package:what_to_mine/src/utils/scheduler/IBackgroundTaskScheduler.dart';
+import 'package:what_to_mine/src/ui/screens/introduction/intro_screen.dart';
+import 'package:what_to_mine/src/ui/screens/screen_routes.dart';
+import 'package:what_to_mine/src/ui/screens/splash/splash_screen.dart';
+import 'package:what_to_mine/src/ui/theme/app_theme_data.dart';
+import 'package:what_to_mine/src/ui/theme/theme_config.dart';
+import 'package:what_to_mine/src/utils/scheduler/background_scheduler.dart';
+import 'package:what_to_mine/src/utils/scheduler/background_task_scheduler.dart';
 
-import 'data/jsonReader/JsonReader.dart';
-import 'logic/SchedulerService.dart';
+import 'data/cache/memory_storage.dart';
+import 'data/client/api_client.dart';
+import 'data/client/miner_stat_client.dart';
+import 'data/db/app_database.dart';
+import 'data/json_reader/data_reader.dart';
+import 'data/json_reader/json_reader.dart';
+import 'logic/currencies_service.dart';
+import 'logic/gpu_service.dart';
+import 'logic/hash_algorithm_service.dart';
+import 'logic/scheduler_service.dart';
+import 'logic/services.dart';
+import 'logic/settings_service.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -73,8 +73,8 @@ Future<void> initializeApp() async {
   }
 
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  IMinerStatClient minerStatClient = MinerStatClient();
-  IJsonReader jsonReader = JsonReader();
+  ApiClient minerStatClient = MinerStatClient();
+  DataReader jsonReader = JsonReader();
   MemoryStorage cache = MemoryStorage();
   AppDatabase database = await AppDatabase.create();
   IBackgroundTaskScheduler backgroundScheduler = BackgroundTaskScheduler();
