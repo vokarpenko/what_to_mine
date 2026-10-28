@@ -7,30 +7,37 @@ import 'package:what_to_mine/src/domain/currency/crypto_currency.dart';
 
 class MinerStatClient implements ApiClient {
   final Client _client;
+  final String apiKey;
 
-  MinerStatClient() : _client = Client();
+  MinerStatClient({
+    Client? client,
+    this.apiKey = const String.fromEnvironment('MINERSTAT_API_KEY'),
+  }) : _client = client ?? Client();
 
   @override
   Future<List<CryptoCurrency>> getCryptoCurrenciesListFromApi() async {
-    //SHA-256,Cuckarood29,Cuckatoo31,Cuckatoo32,CuckooCycle,Cortex,Equihash,Equihash(125,4),Equihash(144,5),BeamHash,Ethash,Etchash,MTP,KAWPOW,RandomX,Eaglesong,Autolykos2,Darkcoin
-    var url = Uri.parse('https://api.minerstat.com/v2/coins');
-    try {
-      var response = await _client.post(url);
-      print('getCryptoCurrenciesList Response status: ${response.statusCode}');
-      if (response.statusCode == 200) {
-        // Если сервер вернул 200 значит все успешно, парсим JSON.
-        List<dynamic> parsedListJson = jsonDecode(response.body);
-        List<CryptoCurrency> result = List<CryptoCurrency>.from(parsedListJson.map((i) => CryptoCurrency.fromJson(i)));
-        //_client.close();
-        return result;
-      } else {
-        //_client.close();
-        print('error_load_data'.tr());
-        throw Exception('error_load_data'.tr());
-      }
-    } on Exception catch (e) {
-      print('Exception post: ${e.toString()}');
-      return Future.error(e);
+    if (apiKey.isEmpty) {
+      throw Exception('error_minerstat_api_key'.tr());
     }
+
+    final response = await _client
+        .get(
+          Uri.parse('https://api.minerstat.com/v2/coins'),
+          headers: {'X-API-Key': apiKey},
+        )
+        .timeout(const Duration(seconds: 30));
+    if (response.statusCode == 401 || response.statusCode == 403) {
+      throw Exception('error_minerstat_api_key'.tr());
+    }
+    if (response.statusCode != 200) {
+      throw Exception(
+        '${'error_load_data'.tr()} (HTTP ${response.statusCode})',
+      );
+    }
+
+    final parsedListJson = jsonDecode(response.body) as List<dynamic>;
+    return parsedListJson
+        .map((item) => CryptoCurrency.fromJson(item as Map<String, dynamic>))
+        .toList();
   }
 }

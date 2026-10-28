@@ -45,3 +45,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /screenshots/
+
+# FVM SDK symlink (version is tracked in .fvmrc)
+.fvm/
+/android/what-to-mine-upload-keystore.jks

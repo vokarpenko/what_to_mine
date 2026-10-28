@@ -11,7 +11,7 @@ class SettingScreen extends StatelessWidget {
   final Settings _settings;
   final SettingsViewModel _viewModel = SettingsViewModel();
 
-  SettingScreen(this._settings, {Key? key}) : super(key: key);
+  SettingScreen(this._settings, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +21,10 @@ class SettingScreen extends StatelessWidget {
         title: const Text('settings_appbar_title').tr(),
       ),
       body: ListView(
-          physics: const NeverScrollableScrollPhysics(),
-          children: ListTile.divideTiles(context: context, tiles: [
+        physics: const NeverScrollableScrollPhysics(),
+        children: ListTile.divideTiles(
+          context: context,
+          tiles: [
             StreamBuilder<bool>(
               stream: _viewModel.notificationsIsEnable,
               initialData: _settings.notificationIsEnabled,
@@ -35,7 +37,8 @@ class SettingScreen extends StatelessWidget {
                   title: Text('settings_notification'.tr()),
                   subtitle: Text(subTitle),
                   value: snapshot.data!,
-                  onChanged: (isEnable) => _viewModel.onChangeNotificationStatus(isEnable),
+                  onChanged: (isEnable) =>
+                      _viewModel.onChangeNotificationStatus(isEnable),
                   secondary: const Icon(Icons.notifications),
                 );
               },
@@ -49,10 +52,14 @@ class SettingScreen extends StatelessWidget {
                   title: Text('setting_electricity_cost'.tr()),
                   subtitle: Text('${snapshot.data?.toStringAsFixed(2)} USD'),
                   onTap: () => showBarModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      duration: const Duration(milliseconds: 300),
-                      builder: (context) => ElectricityCostSelectorWidget(_viewModel, snapshot.data!)),
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    duration: const Duration(milliseconds: 300),
+                    builder: (context) => ElectricityCostSelectorWidget(
+                      _viewModel,
+                      snapshot.data!,
+                    ),
+                  ),
                 );
               },
             ),
@@ -77,10 +84,11 @@ class SettingScreen extends StatelessWidget {
                   title: Text('settings_theme'.tr()),
                   subtitle: Text(subTitle),
                   onTap: () => showBarModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      duration: const Duration(milliseconds: 300),
-                      builder: (context) => ThemeSelectorWidget(_viewModel)),
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    duration: const Duration(milliseconds: 300),
+                    builder: (context) => ThemeSelectorWidget(_viewModel),
+                  ),
                 );
               },
             ),
@@ -102,14 +110,17 @@ class SettingScreen extends StatelessWidget {
                   title: Text('settings_language'.tr()),
                   subtitle: Text(subTitle),
                   onTap: () => showBarModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      duration: const Duration(milliseconds: 300),
-                      builder: (context) => LanguageSelectorWidget(_viewModel)),
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    duration: const Duration(milliseconds: 300),
+                    builder: (context) => LanguageSelectorWidget(_viewModel),
+                  ),
                 );
               },
             ),
-          ]).toList()),
+          ],
+        ).toList(),
+      ),
     );
   }
 }

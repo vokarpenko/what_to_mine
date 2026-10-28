@@ -9,7 +9,7 @@ import 'package:what_to_mine/src/utils/ui_utils.dart';
 import 'hashrate_view_model.dart';
 
 class HashrateScreen extends StatefulWidget {
-  const HashrateScreen({Key? key}) : super(key: key);
+  const HashrateScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -26,9 +26,14 @@ class HashrateScreenState extends State<HashrateScreen> {
   @override
   void initState() {
     super.initState();
-    _subscriptionInfoMessage = _viewModel.infoMessage.listen((message) => UIUtils.showSnackBar(context, message));
-    _subscriptionError =
-        _viewModel.errorMessage.listen((error) => UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr()));
+    _subscriptionInfoMessage = _viewModel.infoMessage.listen((message) {
+      if (!mounted) return;
+      UIUtils.showSnackBar(context, message);
+    });
+    _subscriptionError = _viewModel.errorMessage.listen((error) {
+      if (!mounted) return;
+      UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr());
+    });
     _viewModel.onViewInitState();
   }
 
@@ -50,21 +55,20 @@ class HashrateScreenState extends State<HashrateScreen> {
           title: Text('hashrate_appbar_title'.tr()),
           actions: <Widget>[
             StreamBuilder<bool>(
-                initialData: false,
-                stream: _viewModel.showApplyButton,
-                builder: (context, snapshot) => (snapshot.data!)
-                    ? Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                        child: IconButton(
-                            tooltip: 'apply'.tr(),
-                            onPressed: _applyHashrateButtonClick,
-                            splashRadius: 25,
-                            icon: const Icon(
-                              Icons.check,
-                              size: 30,
-                            )),
-                      )
-                    : Container())
+              initialData: false,
+              stream: _viewModel.showApplyButton,
+              builder: (context, snapshot) => (snapshot.data!)
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: IconButton(
+                        tooltip: 'apply'.tr(),
+                        onPressed: _applyHashrateButtonClick,
+                        splashRadius: 25,
+                        icon: const Icon(Icons.check, size: 30),
+                      ),
+                    )
+                  : Container(),
+            ),
           ],
         ),
         body: Center(
@@ -82,9 +86,7 @@ class HashrateScreenState extends State<HashrateScreen> {
                       widgets.add(HashrateWidget(_viewModel, item));
                     }
                     return SingleChildScrollView(
-                      child: Column(
-                        children: widgets,
-                      ),
+                      child: Column(children: widgets),
                     );
                   } else {
                     return _buildEmptyHashrateListLabel();
@@ -103,10 +105,7 @@ class HashrateScreenState extends State<HashrateScreen> {
   }
 
   Widget _buildEmptyHashrateListLabel() {
-    return Text(
-      'empty_hashrates_message'.tr(),
-      textAlign: TextAlign.center,
-    );
+    return Text('empty_hashrates_message'.tr(), textAlign: TextAlign.center);
   }
 
   void _applyHashrateButtonClick() {

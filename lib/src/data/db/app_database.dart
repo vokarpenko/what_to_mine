@@ -12,6 +12,8 @@ import 'entities/user_hash_algorithm_entity.dart';
 
 part 'app_database.g.dart';
 
+// Floor marks the converters used by the existing database schema experimental.
+// ignore: experimental_member_use
 @TypeConverters([UsedGpuConverter, UserHashAlgorithmConverter])
 @Database(version: 1, entities: [UsedGpuEntity, UserHashAlgorithmEntity])
 abstract class AppDatabase extends FloorDatabase {

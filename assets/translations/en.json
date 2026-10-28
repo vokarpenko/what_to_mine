@@ -62,5 +62,6 @@
   "error_gpu_add": "GPU add error",
   "error_quantity_gpu_add": "There cannot be more than 1000 identical GPUs",
   "error_get_top_currency": "Error getting the most profitable coin",
-  "error_load_data": "Failed to load data"
+  "error_load_data": "Failed to load data",
+  "error_minerstat_api_key": "A valid Minerstat API key is required to load mining data. Contact the app developer to configure access."
 }

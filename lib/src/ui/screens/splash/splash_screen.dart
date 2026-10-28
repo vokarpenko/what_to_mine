@@ -6,7 +6,7 @@ import 'package:what_to_mine/src/ui/screens/splash/splash_view_model.dart';
 import 'package:what_to_mine/src/utils/ui_utils.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -23,11 +23,20 @@ class StateSplashScreen extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _subscriptionOpenNextScreen =
-        _viewModel.openNextScreen.listen((screen) => Navigator.pushNamedAndRemoveUntil(context, screen, (_) => false));
+    _subscriptionOpenNextScreen = _viewModel.openNextScreen.listen((screen) {
+      if (!mounted) return;
+      Navigator.pushNamedAndRemoveUntil(context, screen, (_) => false);
+    });
     _subscriptionError = _viewModel.errorMessage.listen((error) async {
-      await UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr(),
-          afterPopFunction: _viewModel.getData, afterPopFunctionDelay: 2);
+      if (!mounted) return;
+      await UIUtils.showAlertDialog(
+        context,
+        'error'.tr(),
+        error,
+        'ok'.tr(),
+        afterPopFunction: _viewModel.getData,
+        afterPopFunctionDelay: 2,
+      );
     });
     _viewModel.onViewInitState();
   }
@@ -47,11 +56,12 @@ class StateSplashScreen extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: Center(
-          child: SizedBox(
-        width: 200,
-        height: 200,
-        child: Image.asset('assets/images/splash_loading.gif'),
-      )),
+        child: SizedBox(
+          width: 200,
+          height: 200,
+          child: Image.asset('assets/images/splash_loading.gif'),
+        ),
+      ),
     );
   }
 }

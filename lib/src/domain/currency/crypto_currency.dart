@@ -16,18 +16,19 @@ class CryptoCurrency {
   final double volume;
   String? iconLink;
 
-  CryptoCurrency(
-      {required this.id,
-      required this.coin,
-      required this.name,
-      required this.type,
-      required this.algorithm,
-      required this.price,
-      required this.reward,
-      required this.networkHashrate,
-      required this.rewardUnit,
-      required this.volume,
-      this.iconLink});
+  CryptoCurrency({
+    required this.id,
+    required this.coin,
+    required this.name,
+    required this.type,
+    required this.algorithm,
+    required this.price,
+    required this.reward,
+    required this.networkHashrate,
+    required this.rewardUnit,
+    required this.volume,
+    this.iconLink,
+  });
 
   factory CryptoCurrency.fromJson(Map<String, dynamic> json) {
     var reward;
@@ -63,16 +64,17 @@ class CryptoCurrency {
     }
 
     return CryptoCurrency(
-        id: json['id'],
-        coin: json['coin'],
-        name: json['name'],
-        type: json['type'],
-        algorithm: json['algorithm'],
-        price: price,
-        reward: reward,
-        networkHashrate: networkHashrate,
-        rewardUnit: json['reward_unit'],
-        volume: volume);
+      id: json['id'],
+      coin: json['coin'],
+      name: json['name'],
+      type: json['type'],
+      algorithm: json['algorithm'],
+      price: price,
+      reward: reward,
+      networkHashrate: networkHashrate,
+      rewardUnit: json['reward_unit'],
+      volume: volume,
+    );
   }
 
   String getStringNetworkHashrate() {
@@ -80,14 +82,22 @@ class CryptoCurrency {
     int intHashrate = networkHashrate.toInt();
     int length = intHashrate.toString().length;
     // Ph/s
-    if (length >= 16 && length <= 18) return ((intHashrate / pow(10, 15)).toStringAsFixed(2) + ' Ph/s');
+    if (length >= 16 && length <= 18) {
+      return ('${(intHashrate / pow(10, 15)).toStringAsFixed(2)} Ph/s');
+    }
     // Th/s
-    if (length >= 13 && length <= 15) return ((intHashrate / pow(10, 12)).toStringAsFixed(2) + ' Th/s');
+    if (length >= 13 && length <= 15) {
+      return ('${(intHashrate / pow(10, 12)).toStringAsFixed(2)} Th/s');
+    }
     // Gh/s
-    if (length >= 10 && length <= 12) return ((intHashrate / pow(10, 9)).toStringAsFixed(2) + ' Gh/s');
+    if (length >= 10 && length <= 12) {
+      return ('${(intHashrate / pow(10, 9)).toStringAsFixed(2)} Gh/s');
+    }
     // Mh/s
-    if (length >= 7 && length <= 9) return ((intHashrate / pow(10, 6)).toStringAsFixed(2) + ' Mh/s');
-    return intHashrate.toString() + ' h/s';
+    if (length >= 7 && length <= 9) {
+      return ('${(intHashrate / pow(10, 6)).toStringAsFixed(2)} Mh/s');
+    }
+    return '$intHashrate h/s';
   }
 
   double calculateDayEarning(double? usedHashrate) {

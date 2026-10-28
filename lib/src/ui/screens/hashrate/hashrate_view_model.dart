@@ -5,7 +5,8 @@ import 'package:what_to_mine/src/domain/algorithms/hash_algorithm.dart';
 import 'package:what_to_mine/src/logic/services.dart';
 
 class HashrateViewModel {
-  final StreamController<List<HashAlgorithm>> _hashrate = StreamController<List<HashAlgorithm>>();
+  final StreamController<List<HashAlgorithm>> _hashrate =
+      StreamController<List<HashAlgorithm>>();
   final StreamController<String> _errorMessage = StreamController<String>();
   final StreamController<bool> _showApplyButton = StreamController<bool>();
   final StreamController<String> _infoMessage = StreamController<String>();
@@ -21,18 +22,24 @@ class HashrateViewModel {
 
   void onViewInitState() async {
     Services.gpuService.onUsedGpuChanged().listen((_) => _getData());
-    Services.hashAlgorithmService.onUserHashrateChanged().listen((_) => _getData());
+    Services.hashAlgorithmService.onUserHashrateChanged().listen(
+      (_) => _getData(),
+    );
     _getData();
   }
 
   void _getData() async {
-    Services.hashAlgorithmService.getHashratesUsedInCalc().then((hashrates) {
-      _hashrate.add(hashrates);
-    }).catchError((error) {
-      String errorMessage = 'error_get_hashrates_used_in_calc'.tr() + '.\n${error.toString()}';
-      print(errorMessage);
-      _errorMessage.add(errorMessage);
-    });
+    Services.hashAlgorithmService
+        .getHashratesUsedInCalc()
+        .then((hashrates) {
+          _hashrate.add(hashrates);
+        })
+        .catchError((error) {
+          String errorMessage =
+              '${'error_get_hashrates_used_in_calc'.tr()}.\n${error.toString()}';
+          print(errorMessage);
+          _errorMessage.add(errorMessage);
+        });
   }
 
   void onViewDispose() async {
@@ -53,10 +60,11 @@ class HashrateViewModel {
         .updateEditedHashrateInCache(name, hashrateValue)
         .then((_) => _showApplyButton.add(true))
         .catchError((error) {
-      String errorMessage = 'error_update_edited_hashrate_in_cache'.tr() + '.\n${error.toString()}';
-      print(errorMessage);
-      _errorMessage.add(errorMessage);
-    });
+          String errorMessage =
+              '${'error_update_edited_hashrate_in_cache'.tr()}.\n${error.toString()}';
+          print(errorMessage);
+          _errorMessage.add(errorMessage);
+        });
   }
 
   void onChangePower(String name, String? value) async {
@@ -67,21 +75,27 @@ class HashrateViewModel {
         .updateEditedPowerInCache(name, powerValue)
         .then((_) => _showApplyButton.add(true))
         .catchError((error) {
-      String errorMessage = 'error_update_edited_power_in_cache'.tr() + '.\n${error.toString()}';
-      print(errorMessage);
-      _errorMessage.add(errorMessage);
-    });
+          String errorMessage =
+              '${'error_update_edited_power_in_cache'.tr()}.\n${error.toString()}';
+          print(errorMessage);
+          _errorMessage.add(errorMessage);
+        });
   }
 
   void onApplyHashrate() async {
-    List<HashAlgorithm> hashrates = await Services.hashAlgorithmService.getEditedHashratesFromCache();
-    Services.hashAlgorithmService.updateHashratesInDB(hashrates).then((_) {
-      _showApplyButton.add(false);
-      _infoMessage.add('hashrates_update_message'.tr());
-    }).catchError((error) {
-      String errorMessage = 'error_update_hashrate_in_db'.tr() + '.\n${error.toString()}';
-      print(errorMessage);
-      _errorMessage.add(errorMessage);
-    });
+    List<HashAlgorithm> hashrates = await Services.hashAlgorithmService
+        .getEditedHashratesFromCache();
+    Services.hashAlgorithmService
+        .updateHashratesInDB(hashrates)
+        .then((_) {
+          _showApplyButton.add(false);
+          _infoMessage.add('hashrates_update_message'.tr());
+        })
+        .catchError((error) {
+          String errorMessage =
+              '${'error_update_hashrate_in_db'.tr()}.\n${error.toString()}';
+          print(errorMessage);
+          _errorMessage.add(errorMessage);
+        });
   }
 }

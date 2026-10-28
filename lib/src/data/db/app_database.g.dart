@@ -6,19 +6,32 @@ part of 'app_database.dart';
 // FloorGenerator
 // **************************************************************************
 
+abstract class $AppDatabaseBuilderContract {
+  /// Adds migrations to the builder.
+  $AppDatabaseBuilderContract addMigrations(List<Migration> migrations);
+
+  /// Adds a database [Callback] to the builder.
+  $AppDatabaseBuilderContract addCallback(Callback callback);
+
+  /// Creates the database and initializes it.
+  Future<AppDatabase> build();
+}
+
 // ignore: avoid_classes_with_only_static_members
 class $FloorAppDatabase {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$AppDatabaseBuilder databaseBuilder(String name) => _$AppDatabaseBuilder(name);
+  static $AppDatabaseBuilderContract databaseBuilder(String name) =>
+      _$AppDatabaseBuilder(name);
 
   /// Creates a database builder for an in memory database.
   /// Information stored in an in memory database disappears when the process is killed.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$AppDatabaseBuilder inMemoryDatabaseBuilder() => _$AppDatabaseBuilder(null);
+  static $AppDatabaseBuilderContract inMemoryDatabaseBuilder() =>
+      _$AppDatabaseBuilder(null);
 }
 
-class _$AppDatabaseBuilder {
+class _$AppDatabaseBuilder implements $AppDatabaseBuilderContract {
   _$AppDatabaseBuilder(this.name);
 
   final String? name;
@@ -27,21 +40,23 @@ class _$AppDatabaseBuilder {
 
   Callback? _callback;
 
-  /// Adds migrations to the builder.
-  _$AppDatabaseBuilder addMigrations(List<Migration> migrations) {
+  @override
+  $AppDatabaseBuilderContract addMigrations(List<Migration> migrations) {
     _migrations.addAll(migrations);
     return this;
   }
 
-  /// Adds a database [Callback] to the builder.
-  _$AppDatabaseBuilder addCallback(Callback callback) {
+  @override
+  $AppDatabaseBuilderContract addCallback(Callback callback) {
     _callback = callback;
     return this;
   }
 
-  /// Creates the database and initializes it.
+  @override
   Future<AppDatabase> build() async {
-    final path = name != null ? await sqfliteDatabaseFactory.getDatabasePath(name!) : ':memory:';
+    final path = name != null
+        ? await sqfliteDatabaseFactory.getDatabasePath(name!)
+        : ':memory:';
     final database = _$AppDatabase();
     database.database = await database.open(
       path,
@@ -61,7 +76,11 @@ class _$AppDatabase extends AppDatabase {
 
   UserHashAlgorithmDao? _userHashAlgorithmDaoInstance;
 
-  Future<sqflite.Database> open(String path, List<Migration> migrations, [Callback? callback]) async {
+  Future<sqflite.Database> open(
+    String path,
+    List<Migration> migrations, [
+    Callback? callback,
+  ]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
       version: 1,
       onConfigure: (database) async {
@@ -72,7 +91,8 @@ class _$AppDatabase extends AppDatabase {
         await callback?.onOpen?.call(database);
       },
       onUpgrade: (database, startVersion, endVersion) async {
-        await MigrationAdapter.runMigrations(database, startVersion, endVersion, migrations);
+        await MigrationAdapter.runMigrations(
+            database, startVersion, endVersion, migrations);
 
         await callback?.onUpgrade?.call(database, startVersion, endVersion);
       },
@@ -95,18 +115,23 @@ class _$AppDatabase extends AppDatabase {
 
   @override
   UserHashAlgorithmDao get userHashAlgorithmDao {
-    return _userHashAlgorithmDaoInstance ??= _$UserHashAlgorithmDao(database, changeListener);
+    return _userHashAlgorithmDaoInstance ??=
+        _$UserHashAlgorithmDao(database, changeListener);
   }
 }
 
 class _$UsedGpuDao extends UsedGpuDao {
-  _$UsedGpuDao(this.database, this.changeListener)
-      : _queryAdapter = QueryAdapter(database),
+  _$UsedGpuDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
         _usedGpuEntityInsertionAdapter = InsertionAdapter(
             database,
             'used_gpu',
-            (UsedGpuEntity item) =>
-                <String, Object?>{'id': item.id, 'usedGpu': _usedGpuConverter.encode(item.usedGpu)});
+            (UsedGpuEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'usedGpu': _usedGpuConverter.encode(item.usedGpu)
+                });
 
   final sqflite.DatabaseExecutor database;
 
@@ -119,7 +144,8 @@ class _$UsedGpuDao extends UsedGpuDao {
   @override
   Future<List<UsedGpuEntity>> selectAll() async {
     return _queryAdapter.queryList('SELECT * FROM used_gpu',
-        mapper: (Map<String, Object?> row) => UsedGpuEntity(_usedGpuConverter.decode(row['usedGpu'] as String)));
+        mapper: (Map<String, Object?> row) =>
+            UsedGpuEntity(_usedGpuConverter.decode(row['usedGpu'] as String)));
   }
 
   @override
@@ -130,29 +156,37 @@ class _$UsedGpuDao extends UsedGpuDao {
   @override
   Future<UsedGpuEntity?> selectById(String id) async {
     return _queryAdapter.query('SELECT * FROM used_gpu WHERE id = ?1',
-        mapper: (Map<String, Object?> row) => UsedGpuEntity(_usedGpuConverter.decode(row['usedGpu'] as String)),
+        mapper: (Map<String, Object?> row) =>
+            UsedGpuEntity(_usedGpuConverter.decode(row['usedGpu'] as String)),
         arguments: [id]);
   }
 
   @override
   Future<void> deleteById(String id) async {
-    await _queryAdapter.queryNoReturn('DELETE FROM used_gpu WHERE id = ?1', arguments: [id]);
+    await _queryAdapter
+        .queryNoReturn('DELETE FROM used_gpu WHERE id = ?1', arguments: [id]);
   }
 
   @override
   Future<void> insert(UsedGpuEntity entity) async {
-    await _usedGpuEntityInsertionAdapter.insert(entity, OnConflictStrategy.replace);
+    await _usedGpuEntityInsertionAdapter.insert(
+        entity, OnConflictStrategy.replace);
   }
 }
 
 class _$UserHashAlgorithmDao extends UserHashAlgorithmDao {
-  _$UserHashAlgorithmDao(this.database, this.changeListener)
-      : _queryAdapter = QueryAdapter(database),
+  _$UserHashAlgorithmDao(
+    this.database,
+    this.changeListener,
+  )   : _queryAdapter = QueryAdapter(database),
         _userHashAlgorithmEntityInsertionAdapter = InsertionAdapter(
             database,
             'user_hash_algorithm',
-            (UserHashAlgorithmEntity item) =>
-                <String, Object?>{'id': item.id, 'algorithm': _userHashAlgorithmConverter.encode(item.algorithm)});
+            (UserHashAlgorithmEntity item) => <String, Object?>{
+                  'id': item.id,
+                  'algorithm':
+                      _userHashAlgorithmConverter.encode(item.algorithm)
+                });
 
   final sqflite.DatabaseExecutor database;
 
@@ -160,13 +194,14 @@ class _$UserHashAlgorithmDao extends UserHashAlgorithmDao {
 
   final QueryAdapter _queryAdapter;
 
-  final InsertionAdapter<UserHashAlgorithmEntity> _userHashAlgorithmEntityInsertionAdapter;
+  final InsertionAdapter<UserHashAlgorithmEntity>
+      _userHashAlgorithmEntityInsertionAdapter;
 
   @override
   Future<List<UserHashAlgorithmEntity>> selectAll() async {
     return _queryAdapter.queryList('SELECT * FROM user_hash_algorithm',
-        mapper: (Map<String, Object?> row) =>
-            UserHashAlgorithmEntity(_userHashAlgorithmConverter.decode(row['algorithm'] as String)));
+        mapper: (Map<String, Object?> row) => UserHashAlgorithmEntity(
+            _userHashAlgorithmConverter.decode(row['algorithm'] as String)));
   }
 
   @override
@@ -176,20 +211,24 @@ class _$UserHashAlgorithmDao extends UserHashAlgorithmDao {
 
   @override
   Future<UserHashAlgorithmEntity?> selectById(String id) async {
-    return _queryAdapter.query('SELECT * FROM user_hash_algorithm WHERE id = ?1',
-        mapper: (Map<String, Object?> row) =>
-            UserHashAlgorithmEntity(_userHashAlgorithmConverter.decode(row['algorithm'] as String)),
+    return _queryAdapter.query(
+        'SELECT * FROM user_hash_algorithm WHERE id = ?1',
+        mapper: (Map<String, Object?> row) => UserHashAlgorithmEntity(
+            _userHashAlgorithmConverter.decode(row['algorithm'] as String)),
         arguments: [id]);
   }
 
   @override
   Future<void> deleteById(String id) async {
-    await _queryAdapter.queryNoReturn('DELETE FROM user_hash_algorithm WHERE id = ?1', arguments: [id]);
+    await _queryAdapter.queryNoReturn(
+        'DELETE FROM user_hash_algorithm WHERE id = ?1',
+        arguments: [id]);
   }
 
   @override
   Future<void> insert(UserHashAlgorithmEntity entity) async {
-    await _userHashAlgorithmEntityInsertionAdapter.insert(entity, OnConflictStrategy.replace);
+    await _userHashAlgorithmEntityInsertionAdapter.insert(
+        entity, OnConflictStrategy.replace);
   }
 }
 

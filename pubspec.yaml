@@ -6,34 +6,35 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.1+3
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: ">=3.12.0 <4.0.0"
+  flutter: ">=3.44.9"
 
 dependencies:
   flutter:
     sdk: flutter
-  connectivity: ^3.0.3
-  http: ^0.13.3
-  shared_preferences: ^2.0.7
+  connectivity_plus: ^7.0.0
+  http: ^1.5.0
+  shared_preferences: ^2.5.3
   cupertino_icons: ^1.0.2
-  built_value: ^8.0.0
-  floor: ^1.1.0
-  pull_to_refresh: ^2.0.0
-  flutter_local_notifications: ^9.1.4
-  background_fetch: ^1.0.3
-  modal_bottom_sheet: ^2.0.0
-  easy_localization: ^3.0.0
-  introduction_screen: ^2.1.0
+  built_value: ^8.9.2
+  built_collection: ^5.1.1
+  floor: ^1.5.0
+  sqflite: ^2.4.2
+  flutter_local_notifications: ^21.0.0
+  background_fetch: ^1.4.0
+  modal_bottom_sheet: ^3.0.0
+  easy_localization: ^3.0.8
+  introduction_screen: ^4.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.0
-  test:
-  build_runner: ^2.0.0
-  built_value_generator: ^8.0.0
-  floor_generator: ^1.1.0
-  flutter_launcher_icons: ^0.9.2
-  flutter_lints: ^1.0.4
+  mockito: ^5.4.4
+  build_runner: ^2.4.13
+  built_value_generator: ^8.9.2
+  floor_generator: ^1.5.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
 
 flutter:
   assets:
@@ -43,7 +44,7 @@ flutter:
     - assets/translations/
   uses-material-design: true
 
-flutter_icons:
+flutter_launcher_icons:
   android: "launcher_icon"
-  ios: true
+  ios: false
   image_path: "assets/icons/app_icon.png"

@@ -19,17 +19,15 @@ class EarningsWidget extends StatelessWidget {
         height: 35,
         child: ClipOval(
           child: FadeInImage.assetNetwork(
-              placeholderFit: BoxFit.fill,
-              fit: BoxFit.fill,
-              placeholder: 'assets/images/loading.gif',
-              image: _earnings.cryptoCurrency.iconLink!),
+            placeholderFit: BoxFit.fill,
+            fit: BoxFit.fill,
+            placeholder: 'assets/images/loading.gif',
+            image: _earnings.cryptoCurrency.iconLink!,
+          ),
         ),
       );
     } else {
-      icon = const SizedBox(
-        width: 35,
-        height: 35,
-      );
+      icon = const SizedBox(width: 35, height: 35);
     }
 
     return Card(
@@ -45,21 +43,22 @@ class EarningsWidget extends StatelessWidget {
                 direction: Axis.horizontal,
                 children: [
                   Flexible(
-                      fit: FlexFit.tight,
-                      flex: 1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(left: 3),
-                            child: icon,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(_earnings.cryptoCurrency.coin),
-                          ),
-                        ],
-                      )),
+                    fit: FlexFit.tight,
+                    flex: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(left: 3),
+                          child: icon,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(_earnings.cryptoCurrency.coin),
+                        ),
+                      ],
+                    ),
+                  ),
                   Flexible(
                     fit: FlexFit.tight,
                     flex: 1,
@@ -69,11 +68,15 @@ class EarningsWidget extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(3),
-                          child: Text('daily_volume'.tr() + ' ${_earnings.cryptoCurrency.coin}'),
+                          child: Text(
+                            '${'daily_volume'.tr()} ${_earnings.cryptoCurrency.coin}',
+                          ),
                         ),
                         Container(
                           padding: const EdgeInsets.all(3),
-                          child: Text(_earnings.cryptoCurrency.volume.toStringAsFixed(2) + ' USD'),
+                          child: Text(
+                            '${_earnings.cryptoCurrency.volume.toStringAsFixed(2)} USD',
+                          ),
                         ),
                       ],
                     ),
@@ -95,38 +98,58 @@ class EarningsWidget extends StatelessWidget {
                         ),
                         Container(
                           padding: const EdgeInsets.all(3),
-                          child: Text(_earnings.netDayEarningInCurrency.toStringAsFixed(4) + ' USD'),
+                          child: Text(
+                            '${_earnings.netDayEarningInCurrency.toStringAsFixed(4)} USD',
+                          ),
                         ),
                         Container(
-                            padding: const EdgeInsets.all(3),
-                            child: Text(
-                                _earnings.dayEarningInCrypto.toStringAsFixed(8) + ' ${_earnings.cryptoCurrency.coin}')),
+                          padding: const EdgeInsets.all(3),
+                          child: Text(
+                            '${_earnings.dayEarningInCrypto.toStringAsFixed(8)} ${_earnings.cryptoCurrency.coin}',
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   Flexible(
-                      fit: FlexFit.tight,
-                      flex: 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(left: 3, top: 3, bottom: 3),
-                            child: Text('net_income_per_month'.tr()),
+                    fit: FlexFit.tight,
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(
+                            left: 3,
+                            top: 3,
+                            bottom: 3,
                           ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 3, top: 3, bottom: 3),
-                            child: Text(_earnings.netMonthEarningInCurrency.toStringAsFixed(4) + ' USD'),
+                          child: Text('net_income_per_month'.tr()),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(
+                            left: 3,
+                            top: 3,
+                            bottom: 3,
                           ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 3, top: 3, bottom: 3),
-                            child: Text(_earnings.monthEarningInCrypto.toStringAsFixed(8) +
-                                ' ${_earnings.cryptoCurrency.coin}'),
+                          child: Text(
+                            '${_earnings.netMonthEarningInCurrency.toStringAsFixed(4)} USD',
                           ),
-                        ],
-                      ))
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(
+                            left: 3,
+                            top: 3,
+                            bottom: 3,
+                          ),
+                          child: Text(
+                            '${_earnings.monthEarningInCrypto.toStringAsFixed(8)} ${_earnings.cryptoCurrency.coin}',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -136,8 +159,9 @@ class EarningsWidget extends StatelessWidget {
 
   void _onOpenEarningsDetail(BuildContext context) {
     showBarModalBottomSheet(
-        context: context,
-        duration: const Duration(milliseconds: 300),
-        builder: (context) => EarningsDetailWidget(_earnings));
+      context: context,
+      duration: const Duration(milliseconds: 300),
+      builder: (context) => EarningsDetailWidget(_earnings),
+    );
   }
 }

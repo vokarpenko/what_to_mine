@@ -26,32 +26,39 @@ class SplashViewModel {
   void onViewInitState() async {
     await initializeApp();
     // Устанавливаем тему
-    currentTheme.switchTheme(ThemeMode.values[await Services.settingsService.getThemeIndex()]);
+    currentTheme.switchTheme(
+      ThemeMode.values[await Services.settingsService.getThemeIndex()],
+    );
     getData();
   }
 
   void getData() async {
     if (!await InternetUtils.isInternetAvailable()) {
-      String errorMessage = 'error'.tr() + ': ' + 'error_internet_is_unavailable'.tr();
+      String errorMessage =
+          '${'error'.tr()}: ${'error_internet_is_unavailable'.tr()}';
       print(errorMessage);
       _errorMessage.add(errorMessage);
       return;
     }
 
     // Получаем настройки и открываем следующий экран
-    Services.currenciesService.getCryptoCurrenciesList(true).then((list) async {
-      // Пауза для показа заставки
-      await SysUtils.delay(1);
-      if (list.isNotEmpty) {
-        (await Services.settingsService.isTheFirstRun())
-            ? _openNextScreen.add(ScreenRoutes.introScreen)
-            : _openNextScreen.add(ScreenRoutes.homeScreen);
-      }
-    }).catchError((error) {
-      String errorMessage = 'error_get_crypto_currencies_list'.tr() + '.\n${error.toString()}';
-      print(errorMessage);
-      _errorMessage.add(errorMessage);
-    });
+    Services.currenciesService
+        .getCryptoCurrenciesList(true)
+        .then((list) async {
+          // Пауза для показа заставки
+          await SysUtils.delay(1);
+          if (list.isNotEmpty) {
+            (await Services.settingsService.isTheFirstRun())
+                ? _openNextScreen.add(ScreenRoutes.introScreen)
+                : _openNextScreen.add(ScreenRoutes.homeScreen);
+          }
+        })
+        .catchError((error) {
+          String errorMessage =
+              '${'error_get_crypto_currencies_list'.tr()}.\n${error.toString()}';
+          print(errorMessage);
+          _errorMessage.add(errorMessage);
+        });
   }
 
   void onViewDispose() async {

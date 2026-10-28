@@ -5,7 +5,7 @@ import 'package:what_to_mine/src/domain/currency/earnings.dart';
 class EarningsDetailWidget extends StatelessWidget {
   final Earnings _earnings;
 
-  const EarningsDetailWidget(this._earnings, {Key? key}) : super(key: key);
+  const EarningsDetailWidget(this._earnings, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +16,15 @@ class EarningsDetailWidget extends StatelessWidget {
         height: 35,
         child: ClipOval(
           child: FadeInImage.assetNetwork(
-              placeholderFit: BoxFit.fill,
-              fit: BoxFit.fill,
-              placeholder: 'assets/images/loading.gif',
-              image: _earnings.cryptoCurrency.iconLink!),
+            placeholderFit: BoxFit.fill,
+            fit: BoxFit.fill,
+            placeholder: 'assets/images/loading.gif',
+            image: _earnings.cryptoCurrency.iconLink!,
+          ),
         ),
       );
     } else {
-      icon = const SizedBox(
-        width: 35,
-        height: 35,
-      );
+      icon = const SizedBox(width: 35, height: 35);
     }
 
     return Container(
@@ -38,71 +36,62 @@ class EarningsDetailWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                child: icon,
-              ),
-              Container(
-                width: 15,
-              ),
+              Container(child: icon),
+              Container(width: 15),
               Flexible(
-                  child: Text(
-                _earnings.cryptoCurrency.name,
-                style: Theme.of(context).textTheme.headline4?.copyWith(
-                      fontSize: 28,
-                    ),
-                textAlign: TextAlign.center,
-              )),
+                child: Text(
+                  _earnings.cryptoCurrency.name,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.headlineMedium?.copyWith(fontSize: 28),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
-          const Divider(
-            color: Colors.transparent,
+          const Divider(color: Colors.transparent),
+          Padding(
+            padding: const EdgeInsets.all(3),
+            child: Flex(
+              direction: Axis.horizontal,
+              children: [
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Text('algorithm'.tr(), textAlign: TextAlign.start),
+                ),
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Text(
+                    _earnings.cryptoCurrency.algorithm,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ],
+            ),
           ),
           Padding(
-              padding: const EdgeInsets.all(3),
-              child: Flex(
-                direction: Axis.horizontal,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      'algorithm'.tr(),
-                      textAlign: TextAlign.start,
-                    ),
+            padding: const EdgeInsets.all(3),
+            child: Flex(
+              direction: Axis.horizontal,
+              children: [
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Text('daily_volume'.tr(), textAlign: TextAlign.start),
+                ),
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Text(
+                    '${_earnings.cryptoCurrency.volume.toStringAsFixed(2)} USD',
+                    textAlign: TextAlign.start,
                   ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      _earnings.cryptoCurrency.algorithm,
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
-              )),
-          Padding(
-              padding: const EdgeInsets.all(3),
-              child: Flex(
-                direction: Axis.horizontal,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      'daily_volume'.tr(),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    fit: FlexFit.tight,
-                    child: Text(
-                      _earnings.cryptoCurrency.volume.toStringAsFixed(2) + ' USD',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(3),
             child: Flex(
@@ -143,36 +132,44 @@ class EarningsDetailWidget extends StatelessWidget {
                     ),
                     Container(
                       padding: const EdgeInsets.all(3),
-                      child: Text(_earnings.dayEarningInCurrency.toStringAsFixed(4) + ' USD'),
+                      child: Text(
+                        '${_earnings.dayEarningInCurrency.toStringAsFixed(4)} USD',
+                      ),
                     ),
                     Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text(
-                            _earnings.dayEarningInCrypto.toStringAsFixed(8) + ' ${_earnings.cryptoCurrency.coin}')),
+                      padding: const EdgeInsets.all(3),
+                      child: Text(
+                        '${_earnings.dayEarningInCrypto.toStringAsFixed(8)} ${_earnings.cryptoCurrency.coin}',
+                      ),
+                    ),
                   ],
                 ),
               ),
               Flexible(
-                  fit: FlexFit.tight,
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text('income_per_month'.tr()),
+                fit: FlexFit.tight,
+                flex: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text('income_per_month'.tr()),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text(
+                        '${_earnings.monthEarningInCurrency.toStringAsFixed(2)} USD',
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text(_earnings.monthEarningInCurrency.toStringAsFixed(2) + ' USD'),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text(
+                        '${_earnings.monthEarningInCrypto.toStringAsFixed(8)} ${_earnings.cryptoCurrency.coin}',
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text(
-                            _earnings.monthEarningInCrypto.toStringAsFixed(8) + ' ${_earnings.cryptoCurrency.coin}'),
-                      ),
-                    ],
-                  ))
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
           const Divider(),
@@ -191,27 +188,32 @@ class EarningsDetailWidget extends StatelessWidget {
                     ),
                     Container(
                       padding: const EdgeInsets.all(3),
-                      child: Text(_earnings.dayElectricityCost.toStringAsFixed(2) + ' USD'),
+                      child: Text(
+                        '${_earnings.dayElectricityCost.toStringAsFixed(2)} USD',
+                      ),
                     ),
                   ],
                 ),
               ),
               Flexible(
-                  fit: FlexFit.tight,
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text('electricity_cost_per_month'.tr()),
+                fit: FlexFit.tight,
+                flex: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text('electricity_cost_per_month'.tr()),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text(
+                        '${_earnings.monthElectricityCost.toStringAsFixed(2)} USD',
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text(_earnings.monthElectricityCost.toStringAsFixed(2) + ' USD'),
-                      ),
-                    ],
-                  ))
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
           const Divider(),
@@ -219,38 +221,44 @@ class EarningsDetailWidget extends StatelessWidget {
             direction: Axis.horizontal,
             children: [
               Flexible(
-                  fit: FlexFit.tight,
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text('net_income_per_day'.tr()),
+                fit: FlexFit.tight,
+                flex: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text('net_income_per_day'.tr()),
+                    ),
+                    // чистая прибыль за день
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text(
+                        '${_earnings.netDayEarningInCurrency.toStringAsFixed(4)} USD',
                       ),
-                      // чистая прибыль за день
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text(_earnings.netDayEarningInCurrency.toStringAsFixed(4) + ' USD'),
-                      ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
               Flexible(
-                  fit: FlexFit.tight,
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text('net_income_per_month'.tr()),
+                fit: FlexFit.tight,
+                flex: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text('net_income_per_month'.tr()),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      child: Text(
+                        '${_earnings.netMonthEarningInCurrency.toStringAsFixed(2)} USD',
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(3),
-                        child: Text(_earnings.netMonthEarningInCurrency.toStringAsFixed(2) + ' USD'),
-                      ),
-                    ],
-                  )),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ],

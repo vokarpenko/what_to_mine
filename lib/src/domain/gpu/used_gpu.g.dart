@@ -21,7 +21,8 @@ class _$UsedGpuSerializer implements StructuredSerializer<UsedGpu> {
       'gpuData',
       serializers.serialize(object.gpuData, specifiedType: const FullType(Gpu)),
       'quantity',
-      serializers.serialize(object.quantity, specifiedType: const FullType(int)),
+      serializers.serialize(object.quantity,
+          specifiedType: const FullType(int)),
     ];
 
     return result;
@@ -34,15 +35,17 @@ class _$UsedGpuSerializer implements StructuredSerializer<UsedGpu> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'gpuData':
-          result.gpuData.replace(serializers.deserialize(value, specifiedType: const FullType(Gpu))! as Gpu);
+          result.gpuData.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Gpu))! as Gpu);
           break;
         case 'quantity':
-          result.quantity = serializers.deserialize(value, specifiedType: const FullType(int)) as int;
+          result.quantity = serializers.deserialize(value,
+              specifiedType: const FullType(int))! as int;
           break;
       }
     }
@@ -57,15 +60,17 @@ class _$UsedGpu extends UsedGpu {
   @override
   final int quantity;
 
-  factory _$UsedGpu([void Function(UsedGpuBuilder)? updates]) => (new UsedGpuBuilder()..update(updates)).build();
+  factory _$UsedGpu([void Function(UsedGpuBuilder)? updates]) =>
+      (new UsedGpuBuilder()..update(updates))._build();
 
   _$UsedGpu._({required this.gpuData, required this.quantity}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(gpuData, 'UsedGpu', 'gpuData');
-    BuiltValueNullFieldError.checkNotNull(quantity, 'UsedGpu', 'quantity');
+    BuiltValueNullFieldError.checkNotNull(gpuData, r'UsedGpu', 'gpuData');
+    BuiltValueNullFieldError.checkNotNull(quantity, r'UsedGpu', 'quantity');
   }
 
   @override
-  UsedGpu rebuild(void Function(UsedGpuBuilder) updates) => (toBuilder()..update(updates)).build();
+  UsedGpu rebuild(void Function(UsedGpuBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
 
   @override
   UsedGpuBuilder toBuilder() => new UsedGpuBuilder()..replace(this);
@@ -73,17 +78,23 @@ class _$UsedGpu extends UsedGpu {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UsedGpu && gpuData == other.gpuData && quantity == other.quantity;
+    return other is UsedGpu &&
+        gpuData == other.gpuData &&
+        quantity == other.quantity;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, gpuData.hashCode), quantity.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, gpuData.hashCode);
+    _$hash = $jc(_$hash, quantity.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('UsedGpu')
+    return (newBuiltValueToStringHelper(r'UsedGpu')
           ..add('gpuData', gpuData)
           ..add('quantity', quantity))
         .toString();
@@ -125,20 +136,24 @@ class UsedGpuBuilder implements Builder<UsedGpu, UsedGpuBuilder> {
   }
 
   @override
-  _$UsedGpu build() {
+  UsedGpu build() => _build();
+
+  _$UsedGpu _build() {
     _$UsedGpu _$result;
     try {
       _$result = _$v ??
           new _$UsedGpu._(
               gpuData: gpuData.build(),
-              quantity: BuiltValueNullFieldError.checkNotNull(quantity, 'UsedGpu', 'quantity'));
+              quantity: BuiltValueNullFieldError.checkNotNull(
+                  quantity, r'UsedGpu', 'quantity'));
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'gpuData';
         gpuData.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError('UsedGpu', _$failedField, e.toString());
+        throw new BuiltValueNestedFieldError(
+            r'UsedGpu', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -147,4 +162,4 @@ class UsedGpuBuilder implements Builder<UsedGpu, UsedGpuBuilder> {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

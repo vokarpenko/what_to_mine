@@ -5,35 +5,36 @@ import 'package:what_to_mine/src/ui/screens/settings/settings_view_model.dart';
 class LanguageSelectorWidget extends StatelessWidget {
   final SettingsViewModel _viewModel;
 
-  const LanguageSelectorWidget(this._viewModel, {Key? key}) : super(key: key);
+  const LanguageSelectorWidget(this._viewModel, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: SafeArea(
-      top: false,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            title: Text('settings_language_en'.tr()),
-            leading: const Icon(Icons.language),
-            onTap: () {
-              _onSwitchLanguage(context, 'en');
-              Navigator.of(context).pop();
-            },
-          ),
-          ListTile(
-            title: Text('settings_language_ru'.tr()),
-            leading: const Icon(Icons.language),
-            onTap: () {
-              _onSwitchLanguage(context, 'ru');
-              Navigator.of(context).pop();
-            },
-          )
-        ],
+      child: SafeArea(
+        top: false,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              title: Text('settings_language_en'.tr()),
+              leading: const Icon(Icons.language),
+              onTap: () {
+                _onSwitchLanguage(context, 'en');
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              title: Text('settings_language_ru'.tr()),
+              leading: const Icon(Icons.language),
+              onTap: () {
+                _onSwitchLanguage(context, 'ru');
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   void _onSwitchLanguage(BuildContext context, String languageCode) async {

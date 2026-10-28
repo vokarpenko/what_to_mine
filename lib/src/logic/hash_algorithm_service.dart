@@ -5,7 +5,7 @@ import 'gateway/hash_algorithm_gateway.dart';
 class HashAlgorithmService {
   final IHashAlgorithmGateway _gateway;
 
-  HashAlgorithmService({required IHashAlgorithmGateway gateway}) : _gateway = gateway;
+  HashAlgorithmService({required this._gateway});
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
@@ -18,7 +18,10 @@ class HashAlgorithmService {
   }
 
   // Обновить хэшрейт в кэше
-  Future<void> updateEditedHashrateInCache(String name, double hashrateValue) async {
+  Future<void> updateEditedHashrateInCache(
+    String name,
+    double hashrateValue,
+  ) async {
     return _gateway.updateEditedHashrateInCache(name, hashrateValue);
   }
 

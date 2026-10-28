@@ -5,7 +5,7 @@ import 'gateway/settings_gateway.dart';
 class SettingsService {
   final ISettingsGateway _gateway;
 
-  SettingsService({required ISettingsGateway gateway}) : _gateway = gateway;
+  SettingsService({required this._gateway});
 
   // Получить настройки приложения
   Future<Settings> getSettings() async {

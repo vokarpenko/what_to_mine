@@ -12,36 +12,44 @@ import '../test_objects_factory.dart';
 
 Future<void> main() async {
   MockMemoryStorage mockCache = MockMemoryStorage();
-  MockBackgroundTaskScheduler mockBackgroundTaskScheduler = MockBackgroundTaskScheduler();
+  MockBackgroundTaskScheduler mockBackgroundTaskScheduler =
+      MockBackgroundTaskScheduler();
   MockAppDatabase mockAppDatabase = MockAppDatabase();
   MockJsonReader mockJsonReader = MockJsonReader();
   MinerStatClient mockMinerStatClient = MockMinerStatClient();
   MockUsedGpuDao mockUsedGpuDao = MockUsedGpuDao();
-  MockUserHashAlgorithmDao mockUserHashAlgorithmDao = MockUserHashAlgorithmDao();
+  MockUserHashAlgorithmDao mockUserHashAlgorithmDao =
+      MockUserHashAlgorithmDao();
   SharedPreferences.setMockInitialValues({});
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   late Gateway gateway;
 
   setUp(() async {
     gateway = Gateway(
-        preferences: sharedPreferences,
-        cache: mockCache,
-        backgroundScheduler: mockBackgroundTaskScheduler,
-        database: mockAppDatabase,
-        jsonReader: mockJsonReader,
-        client: mockMinerStatClient);
+      preferences: sharedPreferences,
+      cache: mockCache,
+      backgroundScheduler: mockBackgroundTaskScheduler,
+      database: mockAppDatabase,
+      jsonReader: mockJsonReader,
+      client: mockMinerStatClient,
+    );
   });
 
   tearDown(() async {});
 
   test('getCryptoCurrenciesList with refresh', () async {
-    List<CryptoCurrency> listCryptoCurrencies = TestObjectsFactory.createCryptoCurrenciesListWithFilters();
+    List<CryptoCurrency> listCryptoCurrencies =
+        TestObjectsFactory.createCryptoCurrenciesListWithFilters();
     List<CryptoCurrency> result;
 
-    when(mockMinerStatClient.getCryptoCurrenciesListFromApi())
-        .thenAnswer((_) async => TestObjectsFactory.createCryptoCurrenciesList());
-    when(mockCache.putCryptoCurrencies(TestObjectsFactory.createCryptoCurrenciesListWithFilters()))
-        .thenAnswer((_) => _);
+    when(
+      mockMinerStatClient.getCryptoCurrenciesListFromApi(),
+    ).thenAnswer((_) async => TestObjectsFactory.createCryptoCurrenciesList());
+    when(
+      mockCache.putCryptoCurrencies(
+        TestObjectsFactory.createCryptoCurrenciesListWithFilters(),
+      ),
+    ).thenAnswer((_) {});
 
     result = await gateway.getCryptoCurrenciesList(isNeedFresh: true);
 
@@ -49,10 +57,13 @@ Future<void> main() async {
   });
 
   test('getCryptoCurrenciesList without refresh with cache', () async {
-    List<CryptoCurrency> listCryptoCurrencies = TestObjectsFactory.createCryptoCurrenciesListWithFilters();
+    List<CryptoCurrency> listCryptoCurrencies =
+        TestObjectsFactory.createCryptoCurrenciesListWithFilters();
     List<CryptoCurrency> result;
 
-    when(mockCache.getCryptoCurrencies()).thenAnswer((_) => TestObjectsFactory.createCryptoCurrenciesListWithFilters());
+    when(mockCache.getCryptoCurrencies()).thenAnswer(
+      (_) => TestObjectsFactory.createCryptoCurrenciesListWithFilters(),
+    );
 
     result = await gateway.getCryptoCurrenciesList(isNeedFresh: false);
 
@@ -60,14 +71,19 @@ Future<void> main() async {
   });
 
   test('getCryptoCurrenciesList without refresh without cache', () async {
-    List<CryptoCurrency> listCryptoCurrencies = TestObjectsFactory.createCryptoCurrenciesListWithFilters();
+    List<CryptoCurrency> listCryptoCurrencies =
+        TestObjectsFactory.createCryptoCurrenciesListWithFilters();
     List<CryptoCurrency> result;
 
     when(mockCache.getCryptoCurrencies()).thenAnswer((_) => []);
-    when(mockMinerStatClient.getCryptoCurrenciesListFromApi())
-        .thenAnswer((_) async => TestObjectsFactory.createCryptoCurrenciesList());
-    when(mockCache.putCryptoCurrencies(TestObjectsFactory.createCryptoCurrenciesListWithFilters()))
-        .thenAnswer((_) => _);
+    when(
+      mockMinerStatClient.getCryptoCurrenciesListFromApi(),
+    ).thenAnswer((_) async => TestObjectsFactory.createCryptoCurrenciesList());
+    when(
+      mockCache.putCryptoCurrencies(
+        TestObjectsFactory.createCryptoCurrenciesListWithFilters(),
+      ),
+    ).thenAnswer((_) {});
 
     result = await gateway.getCryptoCurrenciesList(isNeedFresh: true);
 
@@ -79,7 +95,9 @@ Future<void> main() async {
     List<UsedGpu> result;
 
     when(mockAppDatabase.usedGpuDao).thenReturn(mockUsedGpuDao);
-    when(mockUsedGpuDao.selectAll()).thenAnswer((_) async => TestObjectsFactory.createUsedGpusEntities());
+    when(
+      mockUsedGpuDao.selectAll(),
+    ).thenAnswer((_) async => TestObjectsFactory.createUsedGpusEntities());
 
     result = await gateway.getUsedGPUList();
 
@@ -90,10 +108,12 @@ Future<void> main() async {
     UsedGpu usedGpu = TestObjectsFactory.createUsedGpuRx570(1);
 
     when(mockAppDatabase.usedGpuDao).thenReturn(mockUsedGpuDao);
-    when(mockUsedGpuDao.selectById(usedGpu.gpuData.id))
-        .thenAnswer((_) async => TestObjectsFactory.createUsedGpuEntityRx570(1));
-    when(mockUsedGpuDao.insert(TestObjectsFactory.createUsedGpuEntityRx570(2)))
-        .thenAnswer((_) async => TestObjectsFactory.createUsedGpuEntityRx570(1));
+    when(
+      mockUsedGpuDao.selectById(usedGpu.gpuData.id),
+    ).thenAnswer((_) async => TestObjectsFactory.createUsedGpuEntityRx570(1));
+    when(
+      mockUsedGpuDao.insert(TestObjectsFactory.createUsedGpuEntityRx570(2)),
+    ).thenAnswer((_) async => TestObjectsFactory.createUsedGpuEntityRx570(1));
 
     await gateway.addUsedGpu(usedGpu);
 
@@ -104,7 +124,9 @@ Future<void> main() async {
     UsedGpu usedGpu = TestObjectsFactory.createUsedGpuRx570(1);
 
     when(mockAppDatabase.usedGpuDao).thenReturn(mockUsedGpuDao);
-    when(mockUsedGpuDao.deleteById(usedGpu.gpuData.id)).thenAnswer((_) async => _);
+    when(
+      mockUsedGpuDao.deleteById(usedGpu.gpuData.id),
+    ).thenAnswer((_) async {});
 
     await gateway.deleteUsedGpu(usedGpu.gpuData.id);
 
@@ -112,24 +134,26 @@ Future<void> main() async {
   });
 
   test('getHashratesUsedInCalc with custom hashrates', () async {
-    Map<String, bool> initialValues = {
-      "h": true,
-    };
+    Map<String, bool> initialValues = {"h": true};
     SharedPreferences.setMockInitialValues(initialValues);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Gateway gateway = Gateway(
-        client: mockMinerStatClient,
-        jsonReader: mockJsonReader,
-        cache: mockCache,
-        database: mockAppDatabase,
-        preferences: sharedPreferences,
-        backgroundScheduler: mockBackgroundTaskScheduler);
+      client: mockMinerStatClient,
+      jsonReader: mockJsonReader,
+      cache: mockCache,
+      database: mockAppDatabase,
+      preferences: sharedPreferences,
+      backgroundScheduler: mockBackgroundTaskScheduler,
+    );
 
     List<HashAlgorithm> algorithms = TestObjectsFactory.createHashAlgorithms();
     List<HashAlgorithm> result;
-    when(mockAppDatabase.userHashAlgorithmDao).thenReturn(mockUserHashAlgorithmDao);
-    when(mockUserHashAlgorithmDao.selectAll())
-        .thenAnswer((_) async => TestObjectsFactory.createEntitiesHashAlgorithms());
+    when(
+      mockAppDatabase.userHashAlgorithmDao,
+    ).thenReturn(mockUserHashAlgorithmDao);
+    when(mockUserHashAlgorithmDao.selectAll()).thenAnswer(
+      (_) async => TestObjectsFactory.createEntitiesHashAlgorithms(),
+    );
 
     result = await gateway.getHashratesUsedInCalc();
 
@@ -137,27 +161,29 @@ Future<void> main() async {
   });
 
   test('getHashratesUsedInCalc without custom hashrates', () async {
-    Map<String, bool> initialValues = {
-      "h": false,
-    };
+    Map<String, bool> initialValues = {"h": false};
     SharedPreferences.setMockInitialValues(initialValues);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Gateway gateway = Gateway(
-        client: mockMinerStatClient,
-        jsonReader: mockJsonReader,
-        cache: mockCache,
-        database: mockAppDatabase,
-        preferences: sharedPreferences,
-        backgroundScheduler: mockBackgroundTaskScheduler);
+      client: mockMinerStatClient,
+      jsonReader: mockJsonReader,
+      cache: mockCache,
+      database: mockAppDatabase,
+      preferences: sharedPreferences,
+      backgroundScheduler: mockBackgroundTaskScheduler,
+    );
 
     List<HashAlgorithm> algorithms = TestObjectsFactory.createHashAlgorithms();
     List<HashAlgorithm> result;
 
     when(mockAppDatabase.usedGpuDao).thenReturn(mockUsedGpuDao);
-    when(mockUsedGpuDao.selectAll()).thenAnswer((_) async => TestObjectsFactory.createUsedGpusEntities());
+    when(
+      mockUsedGpuDao.selectAll(),
+    ).thenAnswer((_) async => TestObjectsFactory.createUsedGpusEntities());
 
-    when(mockJsonReader.getHashAlgorithmsWithZeroValues())
-        .thenAnswer((_) async => TestObjectsFactory.createHashAlgorithmsWithZeroValues());
+    when(mockJsonReader.getHashAlgorithmsWithZeroValues()).thenAnswer(
+      (_) async => TestObjectsFactory.createHashAlgorithmsWithZeroValues(),
+    );
     result = await gateway.getHashratesUsedInCalc();
 
     expect(result, equals(algorithms));

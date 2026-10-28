@@ -1,8 +1,8 @@
 import 'package:background_fetch/background_fetch.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:what_to_mine/src/constants.dart';
-import 'package:what_to_mine/src/logic/Services.dart';
-import 'package:what_to_mine/src/utils/Notificator.dart';
+import 'package:what_to_mine/src/logic/services.dart';
+import 'package:what_to_mine/src/utils/notificator.dart';
 import 'package:what_to_mine/src/utils/scheduler/background_scheduler.dart';
 
 import '../../app.dart';
@@ -18,36 +18,45 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
 
   @override
   Future<void> disable() async {
-    BackgroundFetch.stop().then((_) {
-      print('BackgroundFetch stop success');
-    });
+    await BackgroundFetch.stop();
   }
 
   Future<void> _configure(int minimumFetchInterval) async {
     // Настройка BackgroundFetch.
     await BackgroundFetch.configure(
-        BackgroundFetchConfig(
-            startOnBoot: false,
-            minimumFetchInterval: minimumFetchInterval,
-            stopOnTerminate: false,
-            enableHeadless: true,
-            requiresBatteryNotLow: false,
-            requiresCharging: false,
-            requiresStorageNotLow: false,
-            requiresDeviceIdle: false,
-            requiredNetworkType: NetworkType.NONE), (String taskId) async {
-      // Выполняется, когда приложение работает в фоне.
-      await _showNotificationsInTheBackground(
-          'now_profitable_to_mine_message'.tr(), 'earnings_appbar_title'.tr(), 'per_day'.tr());
-      BackgroundFetch.finish(taskId);
-    }, (String taskId) async {
-      // Обработчик таймаута задачи
-      print('Task timeout handler');
-      BackgroundFetch.finish(taskId);
-    });
+      BackgroundFetchConfig(
+        startOnBoot: false,
+        minimumFetchInterval: minimumFetchInterval,
+        stopOnTerminate: false,
+        enableHeadless: true,
+        requiresBatteryNotLow: false,
+        requiresCharging: false,
+        requiresStorageNotLow: false,
+        requiresDeviceIdle: false,
+        requiredNetworkType: NetworkType.NONE,
+      ),
+      (String taskId) async {
+        // Выполняется, когда приложение работает в фоне.
+        try {
+          await _showNotificationsInTheBackground(
+            'now_profitable_to_mine_message'.tr(),
+            'earnings_appbar_title'.tr(),
+            'per_day'.tr(),
+          );
+        } finally {
+          BackgroundFetch.finish(taskId);
+        }
+      },
+      (String taskId) async {
+        // Обработчик таймаута задачи
+        print('Task timeout handler');
+        BackgroundFetch.finish(taskId);
+      },
+    );
   }
 
-  static void backgroundFetchHeadlessTask(HeadlessTask task) async {
+  @pragma('vm:entry-point')
+  static void backgroundFetchHeadlessTask(HeadlessEvent task) async {
     String taskId = task.taskId;
     bool isTimeout = task.timeout;
     if (isTimeout) {
@@ -56,26 +65,32 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
       BackgroundFetch.finish(taskId);
       return;
     }
-    // Выполняется, когда приложение закрыто.
-    await initializeApp();
-    // Когда приложение закрыто нет доступа к context, поэтому уведомление выводим на английском
-    await _showNotificationsInTheBackground('It is now profitable to mine', 'Earning', 'per day');
-    print('backgroundFetchHeadlessTask');
-    BackgroundFetch.finish(taskId);
+    try {
+      await initializeApp();
+      // A headless task has no localized widget context.
+      await _showNotificationsInTheBackground(
+        'It is now profitable to mine',
+        'Earning',
+        'per day',
+      );
+    } finally {
+      BackgroundFetch.finish(taskId);
+    }
   }
 
   static Future<void> _showNotificationsInTheBackground(
-      String nowProfitableToMineMessage, String earningsTitle, String perDayText) async {
-    Services.currenciesService.getMostProfitableCurrency().then((earnings) {
-      if (earnings != null) {
-        String title = nowProfitableToMineMessage + ' ${earnings.cryptoCurrency.name}';
-        String body = earningsTitle + ' ${earnings.netDayEarningInCurrency.toStringAsFixed(2)} USD ' + perDayText + '!';
-        Notificator().showNotification(sendNotification, title, body);
-      }
-    }).catchError((Object error) {
-      String errorMessage = 'error_get_top_currency'.tr() + ': \n ${error.toString()}';
-      print(errorMessage);
-      throw Exception(errorMessage);
-    });
+    String nowProfitableToMineMessage,
+    String earningsTitle,
+    String perDayText,
+  ) async {
+    final earnings = await Services.currenciesService
+        .getMostProfitableCurrency();
+    if (earnings != null) {
+      final title =
+          '$nowProfitableToMineMessage ${earnings.cryptoCurrency.name}';
+      final body =
+          '$earningsTitle ${earnings.netDayEarningInCurrency.toStringAsFixed(2)} USD $perDayText!';
+      await Notificator().showNotification(sendNotification, title, body);
+    }
   }
 }

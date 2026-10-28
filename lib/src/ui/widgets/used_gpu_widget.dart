@@ -5,15 +5,13 @@ import 'package:what_to_mine/src/domain/gpu/used_gpu.dart';
 class UsedGpuWidget extends StatelessWidget {
   final UsedGpu _usedGPU;
 
-  const UsedGpuWidget(this._usedGPU, {Key? key}) : super(key: key);
+  const UsedGpuWidget(this._usedGPU, {super.key});
 
   @override
   Widget build(BuildContext context) {
     Image logo;
     if (_usedGPU.gpuData.vendor == 'amd') {
-      logo = Image.asset(
-        'assets/images/amd_logo.png',
-      );
+      logo = Image.asset('assets/images/amd_logo.png');
     } else {
       logo = Image.asset('assets/images/nvidia_logo.png');
     }
@@ -26,28 +24,30 @@ class UsedGpuWidget extends StatelessWidget {
         direction: Axis.horizontal,
         children: [
           Flexible(
-              flex: 1,
-              child: Container(
-                margin: const EdgeInsets.only(top: 10, bottom: 10),
-                height: 70,
-                width: 70,
-                child: ClipRRect(
-                  child: logo,
-                  borderRadius: BorderRadius.circular(40),
-                ),
-              )),
+            flex: 1,
+            child: Container(
+              margin: const EdgeInsets.only(top: 10, bottom: 10),
+              height: 70,
+              width: 70,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: logo,
+              ),
+            ),
+          ),
           Flexible(
-              fit: FlexFit.tight,
-              flex: 2,
-              child: Column(
-                children: [
-                  Text(_usedGPU.gpuData.marketingName),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 3),
-                    child: Text('gpu_quantity'.tr() + ' ${_usedGPU.quantity}'),
-                  )
-                ],
-              ))
+            fit: FlexFit.tight,
+            flex: 2,
+            child: Column(
+              children: [
+                Text(_usedGPU.gpuData.marketingName),
+                Padding(
+                  padding: const EdgeInsets.only(top: 3),
+                  child: Text('${'gpu_quantity'.tr()} ${_usedGPU.quantity}'),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

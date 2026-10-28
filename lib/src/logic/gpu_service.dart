@@ -6,7 +6,7 @@ import 'gateway/gpu_gateway.dart';
 class GpuService {
   final IGpuGateway _gateway;
 
-  GpuService({required IGpuGateway gateway}) : _gateway = gateway;
+  GpuService({required this._gateway});
 
   // Получить список всех видеокарт
   Future<List<Gpu>?> getGPUList() async {

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/logic/services.dart';
+import 'package:what_to_mine/src/utils/notificator.dart';
 import 'package:what_to_mine/src/ui/theme/theme_config.dart';
 
 class SettingsViewModel {
@@ -18,6 +19,9 @@ class SettingsViewModel {
   Stream<double> get electricityCost => _electricityCost.stream;
 
   void onChangeNotificationStatus(bool isEnable) async {
+    if (isEnable) {
+      isEnable = await Notificator().requestPermission();
+    }
     _notificationsIsEnable.add(isEnable);
     if (isEnable) {
       await Services.schedulerService.enableScheduler(120);

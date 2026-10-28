@@ -7,9 +7,10 @@ class SchedulerService {
   final ISchedulerGateway _schedulerGateway;
   final ISettingsGateway _settingsGateway;
 
-  SchedulerService({required ISchedulerGateway schedulerGateway, required ISettingsGateway settingsGateway})
-      : _schedulerGateway = schedulerGateway,
-        _settingsGateway = settingsGateway {
+  SchedulerService({
+    required this._schedulerGateway,
+    required this._settingsGateway,
+  }) {
     _initializeScheduler();
   }
 
