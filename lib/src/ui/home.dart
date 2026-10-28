@@ -1,163 +1,96 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/ui/screens/earning/earning_screen.dart';
-import 'package:what_to_mine/src/ui/screens/gpu/gpu_list_screen.dart';
-import 'package:what_to_mine/src/ui/screens/hashrate/hashrate_screen.dart';
 import 'package:what_to_mine/src/ui/screens/prices/currency_prices_screen.dart';
+import 'package:what_to_mine/src/ui/screens/rig/rig_screen.dart';
+import 'package:what_to_mine/src/ui/screens/settings/settings_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
-
   @override
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
-  late AnimationController _earningsIconAnimationController,
-      _pricesIconAnimationController,
-      _gpusIconAnimationController,
-      _hashratesIconAnimationController;
-
-  bool earningsIsSelected = true,
-      pricesIsSelected = false,
-      gpusIsSelected = false,
-      hashratesIsSelected = false;
-  int _currentIndex = 0;
-
-  final List<Widget?> _screens = [const EarningScreen(), null, null, null];
+class _HomeState extends State<Home> {
+  int _index = 0;
+  late final List<Widget?> _screens;
 
   @override
   void initState() {
     super.initState();
-    _earningsIconAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-    _pricesIconAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-    _gpusIconAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-    _hashratesIconAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    this
-      .._earningsIconAnimationController.dispose()
-      .._pricesIconAnimationController.dispose()
-      .._gpusIconAnimationController.dispose()
-      .._hashratesIconAnimationController.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens
-            .map((screen) => screen ?? const SizedBox.shrink())
-            .toList(),
+    _screens = [
+      EarningScreen(
+        onOpenSettings: () => _select(3),
+        onOpenRig: () => _select(2),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            label: 'home_earnings'.tr(),
-            icon: RotationTransition(
-              turns: Tween(
-                begin: 0.0,
-                end: 1.0,
-              ).animate(_earningsIconAnimationController),
-              child: const ImageIcon(
-                AssetImage('assets/icons/earnings_icon.png'),
-              ),
-            ),
-          ),
-          BottomNavigationBarItem(
-            label: 'home_prices'.tr(),
-            icon: RotationTransition(
-              turns: Tween(
-                begin: 0.0,
-                end: 1.0,
-              ).animate(_pricesIconAnimationController),
-              child: const ImageIcon(
-                AssetImage('assets/icons/prices_icon.png'),
-              ),
-            ),
-          ),
-          BottomNavigationBarItem(
-            icon: RotationTransition(
-              turns: Tween(
-                begin: 0.0,
-                end: 1.0,
-              ).animate(_gpusIconAnimationController),
-              child: const ImageIcon(AssetImage('assets/icons/gpus_icon.png')),
-            ),
-            label: 'home_gpus'.tr(),
-          ),
-          BottomNavigationBarItem(
-            icon: RotationTransition(
-              turns: Tween(
-                begin: 0.0,
-                end: 1.0,
-              ).animate(_hashratesIconAnimationController),
-              child: const ImageIcon(
-                AssetImage('assets/icons/hashrates_icon.png'),
-              ),
-            ),
-            label: 'home_hashrate'.tr(),
-          ),
-        ],
-        onTap: _onTap,
-      ),
-    );
+      null,
+      null,
+      null,
+    ];
   }
 
-  void _onTap(int value) {
+  void _select(int index) {
+    if (index == _index) return;
+    FocusManager.instance.primaryFocus?.unfocus();
     setState(() {
-      if (_currentIndex == value) return;
-      _currentIndex = value;
-      _screens[value] ??= switch (value) {
+      _index = index;
+      _screens[index] ??= switch (index) {
         1 => const CurrencyPricesScreen(),
-        2 => const GpuListScreen(),
-        3 => const HashrateScreen(),
-        _ => const EarningScreen(),
+        2 => const RigScreen(),
+        3 => const SettingScreen(),
+        _ => const SizedBox.shrink(),
       };
-      switch (_currentIndex) {
-        case 0:
-          earningsIsSelected = !earningsIsSelected;
-          earningsIsSelected
-              ? _earningsIconAnimationController.forward()
-              : _earningsIconAnimationController.reverse();
-          break;
-        case 1:
-          pricesIsSelected = !pricesIsSelected;
-          pricesIsSelected
-              ? _pricesIconAnimationController.forward()
-              : _pricesIconAnimationController.reverse();
-          break;
-        case 2:
-          gpusIsSelected = !gpusIsSelected;
-          gpusIsSelected
-              ? _gpusIconAnimationController.forward()
-              : _gpusIconAnimationController.reverse();
-          break;
-        case 3:
-          hashratesIsSelected = !hashratesIsSelected;
-          hashratesIsSelected
-              ? _hashratesIconAnimationController.forward()
-              : _hashratesIconAnimationController.reverse();
-          break;
-      }
     });
   }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: IndexedStack(
+      index: _index,
+      children: [
+        for (var i = 0; i < _screens.length; i++)
+          TickerMode(
+            enabled: i == _index,
+            child: _screens[i] ?? const SizedBox.shrink(),
+          ),
+      ],
+    ),
+    bottomNavigationBar: DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Theme.of(
+              context,
+            ).colorScheme.outlineVariant.withValues(alpha: .6),
+          ),
+        ),
+      ),
+      child: NavigationBar(
+        selectedIndex: _index,
+        onDestinationSelected: _select,
+        destinations: [
+          NavigationDestination(
+            icon: const Icon(Icons.space_dashboard_outlined),
+            selectedIcon: const Icon(Icons.space_dashboard_rounded),
+            label: 'home_earnings'.tr(context: context),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.candlestick_chart_outlined),
+            selectedIcon: const Icon(Icons.candlestick_chart_rounded),
+            label: 'home_prices'.tr(context: context),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.memory_outlined),
+            selectedIcon: const Icon(Icons.memory_rounded),
+            label: 'home_rig'.tr(context: context),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings_rounded),
+            label: 'settings_appbar_title'.tr(context: context),
+          ),
+        ],
+      ),
+    ),
+  );
 }

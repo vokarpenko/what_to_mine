@@ -5,241 +5,385 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/gpu/gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/used_gpu.dart';
+import 'package:what_to_mine/src/ui/design/app_ui.dart';
 import 'package:what_to_mine/src/ui/widgets/used_gpu_widget.dart';
-import 'package:what_to_mine/src/utils/ui_utils.dart';
-
 import 'gpu_list_view_model.dart';
+import 'gpu_model_picker.dart';
 
 class GpuListScreen extends StatefulWidget {
-  const GpuListScreen({super.key});
-
+  final bool embedded;
+  const GpuListScreen({this.embedded = false, super.key});
   @override
-  State<StatefulWidget> createState() {
-    return GpuListScreenState();
-  }
+  State<GpuListScreen> createState() => _GpuListScreenState();
 }
 
-class GpuListScreenState extends State<GpuListScreen>
-    with TickerProviderStateMixin {
-  final GpuListViewModel _viewModel = GpuListViewModel();
-  StreamSubscription? _subscriptionAddGpu, _subscriptionError;
-  late AnimationController _hideFabAnimation;
-
-  GpuListScreenState();
+class _GpuListScreenState extends State<GpuListScreen> {
+  final _viewModel = GpuListViewModel();
+  final _subscriptions = <StreamSubscription<dynamic>>[];
+  List<UsedGpu>? _data;
 
   @override
   void initState() {
     super.initState();
-    _hideFabAnimation = AnimationController(
-      vsync: this,
-      duration: kThemeAnimationDuration,
+    _subscriptions.add(
+      _viewModel.usedGpus.listen((data) {
+        if (mounted) setState(() => _data = data);
+      }),
     );
-    _hideFabAnimation.forward();
+    _subscriptions.add(_viewModel.addGpu.listen((_) => _addGpu()));
+    _subscriptions.add(
+      _viewModel.errorMessage.listen((error) {
+        if (mounted) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(error)));
+        }
+      }),
+    );
     _viewModel.onViewInitState();
-    _subscriptionAddGpu = _viewModel.addGpu.listen((_) => _showAddGPUDialog());
-    _subscriptionError = _viewModel.errorMessage.listen((error) {
-      if (!mounted) return;
-      UIUtils.showAlertDialog(context, 'error'.tr(), error, 'ok'.tr());
-    });
   }
 
   @override
   void dispose() {
+    for (final subscription in _subscriptions) {
+      subscription.cancel();
+    }
+    _viewModel.onViewDispose();
     super.dispose();
-    this
-      .._viewModel.onViewDispose()
-      .._hideFabAnimation.dispose()
-      .._subscriptionAddGpu?.cancel()
-      .._subscriptionError?.cancel();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('gpus_appbar_title'.tr())),
-      body: Center(
-        child: StreamBuilder<List<UsedGpu>>(
-          stream: _viewModel.usedGpus,
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              List<UsedGpu> items = [];
-              items = snapshot.data!;
-              if (snapshot.data!.isNotEmpty) {
-                int itemsCount = snapshot.data!.length;
-                if (itemsCount > 0) {
-                  return ListView.builder(
-                    padding: const EdgeInsets.only(top: 15, bottom: 15),
-                    itemCount: itemsCount,
-                    itemBuilder: (context, index) {
-                      final item = items[index];
-                      return Dismissible(
-                        onDismissed: (direction) {
-                          _viewModel.deleteUsedGpu(items[index].gpuData.id);
-                          setState(() {
-                            items.removeAt(index);
-                            itemsCount = items.length;
-                          });
-                        },
-                        key: Key(item.gpuData.id),
-                        child: UsedGpuWidget(items[index]),
-                      );
-                    },
-                  );
-                } else {
-                  return _buildEmptyGpuListWidget();
-                }
-              } else {
-                return _buildEmptyGpuListWidget();
-              }
-            } else {
-              return const CircularProgressIndicator();
-            }
-          },
-        ),
-      ),
-      floatingActionButton: ScaleTransition(
-        scale: _hideFabAnimation,
-        alignment: Alignment.bottomCenter,
-        child: FloatingActionButton(
-          heroTag: "gpuAdd",
-          onPressed: _onClickAddGPU,
-          child: const Icon(Icons.add),
-        ),
-      ),
+  Future<void> _addGpu() async {
+    if (!mounted) return;
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      showDragHandle: true,
+      builder: (_) => AddGpuSheet(viewModel: _viewModel),
     );
   }
 
-  void _onClickAddGPU() {
-    //_hideFabAnimation.reverse();
-    _viewModel.onClickAddGPU();
-  }
-
-  void _showAddGPUDialog() {
-    final vendors = _viewModel.vendors;
-    if (vendors.isEmpty) return;
-    String vendor = vendors.first;
-    List<Gpu> gpus = _viewModel.onFilterGPUListByVendor(vendor);
-    Gpu selectedGpu = gpus.first;
-
-    Future.delayed(Duration.zero, () {
-      if (!mounted) return;
-      TextEditingController controller = TextEditingController(text: '1');
-      showDialog(
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(
-            builder: (context, setState) {
-              return AlertDialog(
-                title: Text('adding_gpus'.tr()),
-                content: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      DropdownButton<String>(
-                        value: vendor,
-                        isExpanded: true,
-                        items: vendors
-                            .map(
-                              (value) => DropdownMenuItem(
-                                value: value,
-                                child: Text(value.toUpperCase()),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value) {
-                          if (value == null) return;
-                          setState(() {
-                            vendor = value;
-                            gpus = _viewModel.onFilterGPUListByVendor(vendor);
-                            selectedGpu = gpus.first;
-                          });
-                        },
-                      ),
-                      DropdownButton<Gpu>(
-                        value: selectedGpu,
-                        isExpanded: true,
-                        iconSize: 24,
-                        elevation: 16,
-                        onChanged: (Gpu? newValue) {
-                          setState(() {
-                            selectedGpu = newValue!;
-                          });
-                        },
-                        items: gpus.map<DropdownMenuItem<Gpu>>((Gpu value) {
-                          return DropdownMenuItem<Gpu>(
-                            value: value,
-                            child: Text(value.marketingName),
-                          );
-                        }).toList(),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(hintText: 'quantity'.tr()),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                            RegExp(r'^([1-9]){1}([0-9]{1,2})?'),
-                          ),
-                        ],
-                        keyboardType: TextInputType.number,
-                        controller: controller,
-                      ),
-                    ],
-                  ),
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () async {
-                      //_hideFabAnimation.forward();
-                      Navigator.pop(context);
-                    },
-                    child: Text('cancel'.tr()),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      //_hideFabAnimation.forward();
-                      Navigator.pop(context);
-                      final quantity = int.tryParse(controller.text);
-                      if (quantity != null && quantity > 0) {
-                        _viewModel.onAddGPU(selectedGpu, quantity);
-                      }
-                    },
-                    child: Text('ok'.tr()),
-                  ),
-                ],
-              );
-            },
-          );
-        },
-      );
-    });
-  }
-
-  Widget _buildEmptyGpuListWidget() {
-    Brightness brightness = Theme.of(context).brightness;
-    String imagePath = brightness == Brightness.light
-        ? 'assets/images/not_gpus.png'
-        : 'assets/images/not_gpus_bw.png';
-    return SingleChildScrollView(
-      physics: const NeverScrollableScrollPhysics(),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            imagePath,
-            fit: BoxFit.fitWidth,
-            width: MediaQuery.of(context).size.width * 0.6,
+  Future<void> _delete(UsedGpu used) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('remove_gpu'.tr(context: context)),
+        content: Text(
+          'remove_gpu_message'.tr(args: [used.gpuData.marketingName]),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text('cancel'.tr(context: context)),
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 30, left: 5, right: 5),
-            child: Text(
-              'empty_gpus_message'.tr(),
-              textAlign: TextAlign.center,
-              style: Theme.of(
-                context,
-              ).textTheme.headlineMedium?.copyWith(fontSize: 20),
-            ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text('remove'.tr(context: context)),
           ),
         ],
       ),
     );
+    if (confirmed == true) _viewModel.deleteUsedGpu(used.gpuData.id);
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final count = (_data ?? []).fold(0, (sum, gpu) => sum + gpu.quantity);
+    return Scaffold(
+      appBar: widget.embedded
+          ? null
+          : AppBar(title: Text('home_gpus'.tr(context: context))),
+      floatingActionButton: FloatingActionButton.extended(
+        key: const ValueKey('add_gpu'),
+        onPressed: _viewModel.onClickAddGPU,
+        icon: const Icon(Icons.add_rounded),
+        label: Text('add_gpu'.tr(context: context)),
+      ),
+      body: _data == null
+          ? const Center(child: CircularProgressIndicator())
+          : ListView(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 100),
+              children: [
+                if (_data!.isNotEmpty) ...[
+                  Container(
+                    padding: const EdgeInsets.all(22),
+                    decoration: BoxDecoration(
+                      color: colors.primaryContainer.withValues(alpha: .45),
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '$count',
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineLarge,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'gpu_units'.tr(context: context),
+                                style: TextStyle(
+                                  color: colors.onSurfaceVariant,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 1,
+                          height: 42,
+                          color: colors.outlineVariant,
+                        ),
+                        const SizedBox(width: 26),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${_data!.length}',
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineLarge,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'gpu_models'.tr(context: context),
+                                style: TextStyle(
+                                  color: colors.onSurfaceVariant,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 22),
+                  Text(
+                    'your_hardware'.tr(context: context).toUpperCase(),
+                    style: TextStyle(
+                      color: colors.onSurfaceVariant,
+                      fontSize: 10,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  for (final used in _data!)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: UsedGpuWidget(
+                        used,
+                        key: ValueKey('gpu_${used.gpuData.id}'),
+                        onDelete: () => _delete(used),
+                      ),
+                    ),
+                ] else
+                  EmptyContent(
+                    icon: Icons.memory_rounded,
+                    title: 'build_your_rig'.tr(context: context),
+                    message: 'empty_gpus_message'.tr(context: context),
+                  ),
+              ],
+            ),
+    );
+  }
+}
+
+class AddGpuSheet extends StatefulWidget {
+  final GpuListViewModel viewModel;
+  const AddGpuSheet({required this.viewModel, super.key});
+  @override
+  State<AddGpuSheet> createState() => _AddGpuSheetState();
+}
+
+class _AddGpuSheetState extends State<AddGpuSheet> {
+  final _form = GlobalKey<FormState>();
+  final _quantity = TextEditingController(text: '1');
+  late Gpu _gpu;
+  bool _busy = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _gpu = widget.viewModel.catalog.first;
+  }
+
+  @override
+  void dispose() {
+    _quantity.dispose();
+    super.dispose();
+  }
+
+  Future<void> _selectModel() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    final model = await showModalBottomSheet<Gpu>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      showDragHandle: true,
+      builder: (_) =>
+          GpuModelPicker(gpus: widget.viewModel.catalog, selected: _gpu),
+    );
+    if (mounted && model != null) setState(() => _gpu = model);
+  }
+
+  Future<void> _save() async {
+    if (!_form.currentState!.validate() || _busy) return;
+    setState(() => _busy = true);
+    final added = await widget.viewModel.onAddGPU(
+      _gpu,
+      int.parse(_quantity.text),
+    );
+    if (!mounted) return;
+    if (added) {
+      Navigator.pop(context);
+    } else {
+      setState(() => _busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => SingleChildScrollView(
+    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+    child: Padding(
+      padding: EdgeInsets.fromLTRB(
+        24,
+        4,
+        24,
+        24 +
+            MediaQuery.viewInsetsOf(context).bottom +
+            MediaQuery.paddingOf(context).bottom,
+      ),
+      child: Form(
+        key: _form,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'add_gpu'.tr(context: context),
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'add_gpu_hint'.tr(context: context),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 22),
+            LabeledField(
+              label: 'gpu_model'.tr(context: context),
+              child: SurfaceCard(
+                key: const ValueKey('select_gpu_model'),
+                padding: const EdgeInsets.all(16),
+                onTap: _busy ? null : _selectModel,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.memory_rounded,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _gpu.vendor.toUpperCase(),
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            _gpu.marketingName,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            'change_gpu_model'.tr(context: context),
+                            style: TextStyle(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurfaceVariant,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(Icons.chevron_right_rounded),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            LabeledField(
+              label: 'quantity'.tr(context: context),
+              child: Row(
+                children: [
+                  IconButton.filledTonal(
+                    onPressed: () {
+                      final value = int.tryParse(_quantity.text) ?? 1;
+                      _quantity.text = '${(value - 1).clamp(1, 1000)}';
+                    },
+                    icon: const Icon(Icons.remove_rounded),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _quantity,
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(4),
+                      ],
+                      textInputAction: TextInputAction.done,
+                      validator: (value) {
+                        final count = int.tryParse(value ?? '');
+                        return count == null || count < 1 || count > 1000
+                            ? 'invalid_quantity'.tr(context: context)
+                            : null;
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  IconButton.filledTonal(
+                    onPressed: () {
+                      final value = int.tryParse(_quantity.text) ?? 1;
+                      _quantity.text = '${(value + 1).clamp(1, 1000)}';
+                    },
+                    icon: const Icon(Icons.add_rounded),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 26),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: _busy ? null : _save,
+                icon: const Icon(Icons.add_rounded),
+                label: Text('add_to_rig'.tr(context: context)),
+              ),
+            ),
+            const SizedBox(height: 4),
+          ],
+        ),
+      ),
+    ),
+  );
 }

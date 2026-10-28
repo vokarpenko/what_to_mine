@@ -15,7 +15,7 @@ class ThemeSelectorWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              title: Text('settings_theme_system'.tr()),
+              title: Text('settings_theme_system'.tr(context: context)),
               leading: const Icon(Icons.build),
               onTap: () {
                 _onSwitchTheme(ThemeMode.system);
@@ -23,7 +23,7 @@ class ThemeSelectorWidget extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('settings_theme_light'.tr()),
+              title: Text('settings_theme_light'.tr(context: context)),
               leading: const ImageIcon(
                 AssetImage('assets/icons/light_theme_icon.png'),
                 size: 27,
@@ -34,7 +34,7 @@ class ThemeSelectorWidget extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('settings_theme_dark'.tr()),
+              title: Text('settings_theme_dark'.tr(context: context)),
               leading: const ImageIcon(
                 AssetImage('assets/icons/dark_theme_icon.png'),
               ),

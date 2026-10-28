@@ -20,10 +20,16 @@ class HashrateViewModel {
 
   HashrateViewModel();
 
+  final List<StreamSubscription<dynamic>> _subscriptions = [];
+
   void onViewInitState() async {
-    Services.gpuService.onUsedGpuChanged().listen((_) => _getData());
-    Services.hashAlgorithmService.onUserHashrateChanged().listen(
-      (_) => _getData(),
+    _subscriptions.add(
+      Services.gpuService.onUsedGpuChanged().listen((_) => _getData()),
+    );
+    _subscriptions.add(
+      Services.hashAlgorithmService.onUserHashrateChanged().listen(
+        (_) => _getData(),
+      ),
     );
     _getData();
   }
@@ -32,20 +38,25 @@ class HashrateViewModel {
     Services.hashAlgorithmService
         .getHashratesUsedInCalc()
         .then((hashrates) {
-          _hashrate.add(hashrates);
+          if (!_hashrate.isClosed) _hashrate.add(hashrates);
         })
         .catchError((error) {
           String errorMessage =
               '${'error_get_hashrates_used_in_calc'.tr()}.\n${error.toString()}';
           print(errorMessage);
-          _errorMessage.add(errorMessage);
+          if (!_errorMessage.isClosed) _errorMessage.add(errorMessage);
         });
   }
 
   void onViewDispose() async {
+    for (final subscription in _subscriptions) {
+      await subscription.cancel();
+    }
     this
       .._hashrate.close()
-      .._errorMessage.close();
+      .._errorMessage.close()
+      .._showApplyButton.close()
+      .._infoMessage.close();
   }
 
   String getHashUnit(HashAlgorithm algorithm) {
@@ -58,12 +69,14 @@ class HashrateViewModel {
     hashrateValue = double.parse(value);
     Services.hashAlgorithmService
         .updateEditedHashrateInCache(name, hashrateValue)
-        .then((_) => _showApplyButton.add(true))
+        .then((_) {
+          if (!_showApplyButton.isClosed) _showApplyButton.add(true);
+        })
         .catchError((error) {
           String errorMessage =
               '${'error_update_edited_hashrate_in_cache'.tr()}.\n${error.toString()}';
           print(errorMessage);
-          _errorMessage.add(errorMessage);
+          if (!_errorMessage.isClosed) _errorMessage.add(errorMessage);
         });
   }
 
@@ -73,12 +86,14 @@ class HashrateViewModel {
     powerValue = int.parse(value);
     Services.hashAlgorithmService
         .updateEditedPowerInCache(name, powerValue)
-        .then((_) => _showApplyButton.add(true))
+        .then((_) {
+          if (!_showApplyButton.isClosed) _showApplyButton.add(true);
+        })
         .catchError((error) {
           String errorMessage =
               '${'error_update_edited_power_in_cache'.tr()}.\n${error.toString()}';
           print(errorMessage);
-          _errorMessage.add(errorMessage);
+          if (!_errorMessage.isClosed) _errorMessage.add(errorMessage);
         });
   }
 
@@ -88,14 +103,16 @@ class HashrateViewModel {
     Services.hashAlgorithmService
         .updateHashratesInDB(hashrates)
         .then((_) {
-          _showApplyButton.add(false);
-          _infoMessage.add('hashrates_update_message'.tr());
+          if (!_showApplyButton.isClosed) _showApplyButton.add(false);
+          if (!_infoMessage.isClosed) {
+            _infoMessage.add('hashrates_update_message'.tr());
+          }
         })
         .catchError((error) {
           String errorMessage =
               '${'error_update_hashrate_in_db'.tr()}.\n${error.toString()}';
           print(errorMessage);
-          _errorMessage.add(errorMessage);
+          if (!_errorMessage.isClosed) _errorMessage.add(errorMessage);
         });
   }
 }

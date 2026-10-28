@@ -18,9 +18,10 @@ class GpuListViewModel {
   Stream<List<UsedGpu>> get usedGpus => _usedGpus.stream;
 
   List<Gpu>? _listOfAllGpu;
+  StreamSubscription<dynamic>? _changes;
 
   void onViewInitState() async {
-    Services.gpuService.onUsedGpuChanged().listen((_) => _getData());
+    _changes = Services.gpuService.onUsedGpuChanged().listen((_) => _getData());
     _getData();
   }
 
@@ -36,6 +37,7 @@ class GpuListViewModel {
   }
 
   void onViewDispose() async {
+    await _changes?.cancel();
     this
       .._errorMessage.close()
       .._addGpu.close()
@@ -63,6 +65,8 @@ class GpuListViewModel {
   List<String> get vendors =>
       (_listOfAllGpu ?? []).map((gpu) => gpu.vendor).toSet().toList()..sort();
 
+  List<Gpu> get catalog => List.unmodifiable(_listOfAllGpu ?? []);
+
   List<Gpu> onFilterGPUListByVendor(String vendor) {
     List<Gpu> result = _listOfAllGpu!
         .where((element) => element.vendor == vendor.toLowerCase())
@@ -70,17 +74,21 @@ class GpuListViewModel {
     return result;
   }
 
-  void onAddGPU(Gpu gpu, int quantity) async {
-    UsedGpu newUsedGpu =
-        (UsedGpuBuilder()
-              ..gpuData = gpu.toBuilder()
-              ..quantity = quantity)
-            .build();
-    Services.gpuService.addUsedGpu(newUsedGpu).then((value) => null).catchError(
-      (Object error) {
-        _errorMessage.add('${'error_gpu_add'.tr()}.\n${error.toString()}');
-      },
+  Future<bool> onAddGPU(Gpu gpu, int quantity) async {
+    final used = UsedGpu(
+      (builder) => builder
+        ..gpuData = gpu.toBuilder()
+        ..quantity = quantity,
     );
+    try {
+      await Services.gpuService.addUsedGpu(used);
+      return true;
+    } catch (error) {
+      if (!_errorMessage.isClosed) {
+        _errorMessage.add('${'error_gpu_add'.tr()}.\n$error');
+      }
+      return false;
+    }
   }
 
   void deleteUsedGpu(String id) async {

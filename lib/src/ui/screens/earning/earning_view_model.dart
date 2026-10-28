@@ -2,57 +2,49 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:what_to_mine/src/domain/currency/earnings.dart';
-import 'package:what_to_mine/src/domain/settings.dart';
 import 'package:what_to_mine/src/logic/services.dart';
 
 class EarningViewModel {
-  final StreamController<List<Earnings>> _earnings =
-      StreamController<List<Earnings>>();
-  final StreamController<String> _errorMessage = StreamController<String>();
-  final StreamController<Settings> _openSettingsScreen =
-      StreamController<Settings>();
+  final _earnings = StreamController<List<Earnings>>();
+  final _errorMessage = StreamController<String>();
+  final List<StreamSubscription<dynamic>> _subscriptions = [];
+  int _request = 0;
 
   Stream<List<Earnings>> get earnings => _earnings.stream;
-
   Stream<String> get errorMessage => _errorMessage.stream;
 
-  Stream<Settings> get openSettingsScreen => _openSettingsScreen.stream;
-
-  EarningViewModel();
-
-  void onViewInitState() async {
-    Services.gpuService.onUsedGpuChanged().listen((_) => getData(false));
-    Services.hashAlgorithmService.onUserHashrateChanged().listen(
-      (_) => getData(false),
-    );
-    Services.settingsService.onElectricityCostChanged().listen(
-      (_) => getData(false),
-    );
+  void onViewInitState() {
+    _subscriptions.addAll([
+      Services.gpuService.onUsedGpuChanged().listen((_) => getData(false)),
+      Services.hashAlgorithmService.onUserHashrateChanged().listen(
+        (_) => getData(false),
+      ),
+      Services.settingsService.onElectricityCostChanged().listen(
+        (_) => getData(false),
+      ),
+    ]);
     getData(false);
   }
 
   Future<void> getData(bool isNeedFresh) async {
-    await Services.currenciesService
-        .getEarningsList(isNeedFresh)
-        .then((earnings) {
-          _earnings.add(earnings);
-        })
-        .catchError((error) {
-          String errorMessage =
-              '${'error_get_earnings_list'.tr()}.\n${error.toString()}';
-          print(errorMessage);
-          _errorMessage.add(errorMessage);
-        });
+    final request = ++_request;
+    try {
+      final result = await Services.currenciesService.getEarningsList(
+        isNeedFresh,
+      );
+      if (!_earnings.isClosed && request == _request) _earnings.add(result);
+    } catch (error) {
+      if (!_errorMessage.isClosed && request == _request) {
+        _errorMessage.add('${'error_get_earnings_list'.tr()}.\n$error');
+      }
+    }
   }
 
-  void onViewDispose() async {
-    this
-      .._earnings.close()
-      .._errorMessage.close();
-  }
-
-  void openSettingScreen() async {
-    Settings settings = await Services.settingsService.getSettings();
-    _openSettingsScreen.add(settings);
+  void onViewDispose() {
+    for (final subscription in _subscriptions) {
+      subscription.cancel();
+    }
+    _earnings.close();
+    _errorMessage.close();
   }
 }

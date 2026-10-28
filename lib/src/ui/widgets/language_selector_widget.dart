@@ -16,7 +16,7 @@ class LanguageSelectorWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              title: Text('settings_language_en'.tr()),
+              title: Text('settings_language_en'.tr(context: context)),
               leading: const Icon(Icons.language),
               onTap: () {
                 _onSwitchLanguage(context, 'en');
@@ -24,7 +24,7 @@ class LanguageSelectorWidget extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('settings_language_ru'.tr()),
+              title: Text('settings_language_ru'.tr(context: context)),
               leading: const Icon(Icons.language),
               onTap: () {
                 _onSwitchLanguage(context, 'ru');

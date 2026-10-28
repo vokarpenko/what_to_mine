@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../design/app_ui.dart';
 import 'package:what_to_mine/src/ui/screens/splash/splash_view_model.dart';
 import 'package:what_to_mine/src/utils/ui_utils.dart';
 
@@ -31,9 +32,9 @@ class StateSplashScreen extends State<SplashScreen> {
       if (!mounted) return;
       await UIUtils.showAlertDialog(
         context,
-        'error'.tr(),
+        'error'.tr(context: context),
         error,
-        'ok'.tr(),
+        'ok'.tr(context: context),
         afterPopFunction: _viewModel.getData,
         afterPopFunctionDelay: 2,
       );
@@ -47,19 +48,46 @@ class StateSplashScreen extends State<SplashScreen> {
     this
       .._viewModel.onViewDispose()
       .._subscriptionOpenNextScreen?.cancel()
-      .._subscriptionError?.cancel()
       .._subscriptionError?.cancel();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
-        child: SizedBox(
-          width: 200,
-          height: 200,
-          child: Image.asset('assets/images/splash_loading.gif'),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 88,
+              height: 88,
+              decoration: BoxDecoration(
+                color: ink,
+                borderRadius: BorderRadius.circular(28),
+              ),
+              child: const Icon(Icons.bolt_rounded, size: 48, color: mint),
+            ),
+            const SizedBox(height: 26),
+            Text(
+              'What to mine',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'loading_markets'.tr(context: context),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 32),
+            const SizedBox(
+              width: 90,
+              child: LinearProgressIndicator(
+                minHeight: 3,
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+              ),
+            ),
+          ],
         ),
       ),
     );

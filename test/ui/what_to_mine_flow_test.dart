@@ -12,11 +12,17 @@ import 'package:what_to_mine/src/data/client/what_to_mine_client.dart';
 import 'package:what_to_mine/src/data/client/btc_usd_rate_client.dart';
 import 'package:what_to_mine/src/data/db/entities/used_gpu_entity.dart';
 import 'package:what_to_mine/src/domain/settings.dart';
+import 'package:what_to_mine/src/logic/favorites_store.dart';
+import 'package:what_to_mine/src/logic/services.dart';
+import 'package:what_to_mine/src/ui/widgets/earnings_widget.dart';
+import 'package:what_to_mine/src/ui/widgets/hashrate_widget.dart';
+import 'package:what_to_mine/src/ui/widgets/crypto_currency_widget.dart';
 
 import '../fixtures/what_to_mine_fixtures.dart';
 import '../mocks.mocks.dart';
 import '../test_objects_factory.dart';
 import 'package:what_to_mine/src/ui/screens/gpu/gpu_list_screen.dart';
+import 'package:what_to_mine/src/ui/screens/gpu/gpu_model_picker.dart';
 import 'package:what_to_mine/src/ui/screens/hashrate/hashrate_screen.dart';
 
 void main() {
@@ -28,7 +34,7 @@ void main() {
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
       SharedPreferences.setMockInitialValues({
-        's': Settings(isFirstRun: false).toJsonString(),
+        's': Settings(isFirstRun: false, themeIndex: 1).toJsonString(),
       });
       await EasyLocalization.ensureInitialized();
       final preferences = await SharedPreferences.getInstance();
@@ -42,7 +48,17 @@ void main() {
             'gpus' => wtmGpus,
             'coins' => wtmCoins,
             'algorithms' => wtmAlgorithms,
-            'calculate' => wtmCalculation,
+            'calculate' => [
+              ...wtmCalculation,
+              {
+                'id': 162,
+                'tag': 'ETC',
+                'name': 'Ethereum Classic',
+                'estimated_rewards': '0.01',
+                'revenue': '0.1',
+                'profit': '-0.2',
+              },
+            ],
             _ => throw StateError('Unexpected endpoint'),
           };
           return http.Response(jsonEncode(data), 200);
@@ -92,8 +108,8 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(seconds: 2));
       await tester.pumpAndSettle();
-      expect(find.text('-0.0900 USD'), findsOneWidget);
-      expect(find.text('-2.7000 USD'), findsOneWidget);
+      expect(find.text('−\$0.09'), findsWidgets);
+      expect(find.text('−\$2.70'), findsWidgets);
       expect(tester.takeException(), isNull);
 
       expect(requests, 2); // coins + calculate; no eager catalogs
@@ -106,39 +122,185 @@ void main() {
       final callsAfterStartup = requests;
       await tester.tap(find.text('Prices'));
       await tester.pumpAndSettle();
-      expect(find.text('Cryptocurrency prices (USD)'), findsOneWidget);
+      expect(find.text('USD'), findsOneWidget);
       expect(find.text(r'$0.0100'), findsOneWidget);
       expect(exchangeRequests, 1);
       expect(find.text('Ravencoin'), findsOneWidget);
       expect(requests, callsAfterStartup);
 
-      await tester.tap(find.text('GPUs'));
+      // Favorites pin above the alphabetic order; search stays local.
+      expect(
+        tester
+            .widgetList<CryptoCurrencyWidget>(find.byType(CryptoCurrencyWidget))
+            .map((card) => card.currency.coin),
+        ['ETC', 'RVN'],
+      );
+      await tester.tap(find.byKey(const ValueKey('favorite_prices_234')));
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widgetList<CryptoCurrencyWidget>(find.byType(CryptoCurrencyWidget))
+            .map((card) => card.currency.coin),
+        ['RVN', 'ETC'],
+      );
+      expect(preferences.getStringList('favorites.v1.prices'), ['234']);
+      expect(Services.favorites.ids(FavoriteList.earnings), isEmpty);
+      final search = find.byKey(const ValueKey('coin_search'));
+      await tester.enterText(search, 'eThErEuM');
+      await tester.pumpAndSettle();
+      expect(find.byType(CryptoCurrencyWidget), findsOneWidget);
+      expect(find.text('Ethereum Classic'), findsOneWidget);
+      await tester.tap(find.widgetWithText(ChoiceChip, 'Favorites · 1'));
+      await tester.pumpAndSettle();
+      expect(find.byType(CryptoCurrencyWidget), findsNothing);
+      await tester.enterText(search, 'kawpow');
+      await tester.pumpAndSettle();
+      expect(find.byType(CryptoCurrencyWidget), findsOneWidget);
+      await tester.tap(find.byTooltip('Clear search'));
+      await tester.pumpAndSettle();
+      expect(requests, callsAfterStartup);
+      expect(exchangeRequests, 1);
+
+      await tester.tap(find.widgetWithText(NavigationDestination, 'Earnings'));
+      await tester.pumpAndSettle();
+      await tester.scrollUntilVisible(
+        find.byKey(const ValueKey('favorite_earnings_162')),
+        250,
+        scrollable: find.byType(Scrollable).hitTestable().first,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('favorite_earnings_162')));
+      await tester.pumpAndSettle();
+      final cards = tester.widgetList<EarningsWidget>(
+        find.byType(EarningsWidget),
+      );
+      expect(cards.first.earnings.cryptoCurrency.coin, 'ETC');
+      expect(preferences.getStringList('favorites.v1.earnings'), ['162']);
+      await tester.ensureVisible(search);
+      await tester.enterText(search, 'RVN');
+      await tester.pumpAndSettle();
+      expect(find.byType(EarningsWidget), findsOneWidget);
+      expect(
+        tester
+            .widget<EarningsWidget>(find.byType(EarningsWidget))
+            .earnings
+            .cryptoCurrency
+            .coin,
+        'RVN',
+      );
+      await tester.tap(find.widgetWithText(ChoiceChip, 'Favorites · 1'));
+      await tester.pumpAndSettle();
+      expect(find.byType(EarningsWidget), findsNothing);
+      expect(requests, callsAfterStartup);
+
+      await tester.tap(find.widgetWithText(NavigationDestination, 'My rig'));
       await tester.pumpAndSettle();
       expect(find.text('nvidea gtx 1080'), findsOneWidget);
       expect(requests, callsAfterStartup);
-      await tester.tap(find.byIcon(Icons.add));
+      await tester.tap(find.byKey(const ValueKey('add_gpu')));
       await tester.pumpAndSettle();
-      expect(find.text('Adding GPUs'), findsOneWidget);
+      expect(find.byType(AddGpuSheet), findsOneWidget);
+      expect(requests, callsAfterStartup + 1);
+      await tester.tap(find.byKey(const ValueKey('select_gpu_model')));
+      await tester.pumpAndSettle();
+      expect(find.byType(GpuModelPicker), findsOneWidget);
       expect(find.text('AMD'), findsOneWidget);
       expect(find.text('OTHER'), findsNothing);
+      await tester.enterText(
+        find.byKey(const ValueKey('gpu_model_search')),
+        '7900',
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('no_matches'.tr()), findsOneWidget);
+      await tester.tap(find.widgetWithText(ChoiceChip, 'AMD'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('gpu_option_wtm:gpu:2')));
+      await tester.pumpAndSettle();
+      expect(find.byType(GpuModelPicker), findsNothing);
+      expect(find.text('Radeon RX 7900 XTX'), findsOneWidget);
+      // Closing the picker without choosing preserves the current model.
+      await tester.tap(find.byKey(const ValueKey('select_gpu_model')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byTooltip('Close'));
+      await tester.pumpAndSettle();
+      expect(find.text('Radeon RX 7900 XTX'), findsOneWidget);
       expect(requests, callsAfterStartup + 1);
-      await tester.tap(find.text('AMD'));
-      await tester.pumpAndSettle();
-      expect(find.text('NVIDIA'), findsOneWidget);
-      await tester.tap(find.text('NVIDIA'));
-      await tester.pumpAndSettle();
-      expect(find.text('GeForce RTX 4090'), findsOneWidget);
-      await tester.tap(find.text('Cancel'));
+      Navigator.of(tester.element(find.byType(AddGpuSheet))).pop();
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('Hashrates'));
       await tester.pumpAndSettle();
       expect(find.text('KawPow'), findsWidgets);
+      final inputs = find.descendant(
+        of: find.byType(HashrateWidget).first,
+        matching: find.byType(TextField),
+      );
+      await tester.enterText(inputs.first, '12.5');
+      await tester.pumpAndSettle();
+      await tester.enterText(inputs.last, '200');
+      await tester.pumpAndSettle();
+      expect(tester.widget<TextField>(inputs.first).controller!.text, '12.5');
+      expect(tester.widget<TextField>(inputs.last).controller!.text, '200');
+      expect(find.text('Save changes'), findsOneWidget);
+      expect(tester.widget<TextField>(inputs.last).focusNode!.hasFocus, isTrue);
+      await tester.tapAt(
+        tester.getTopLeft(find.byType(HashrateWidget).first) +
+            const Offset(12, 12),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<TextField>(inputs.last).focusNode!.hasFocus,
+        isFalse,
+      );
+      expect(tester.testTextInput.isVisible, isFalse);
+      expect(tester.widget<TextField>(inputs.last).controller!.text, '200');
       expect(requests, callsAfterStartup + 1);
-      await tester.tap(find.text('Prices'));
+      await tester.tap(find.widgetWithText(NavigationDestination, 'Prices'));
       await tester.pumpAndSettle();
       expect(exchangeRequests, 1);
       expect(find.text(r'$0.0100'), findsOneWidget);
+      expect(find.widgetWithText(ChoiceChip, 'Favorites · 1'), findsOneWidget);
+
+      // All screens also fit a compact device, dark theme, Russian and larger text.
+      tester.view.physicalSize = const Size(360, 800);
+      tester.platformDispatcher.textScaleFactorTestValue = 1.3;
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      await tester.tap(find.widgetWithText(NavigationDestination, 'Settings'));
+      await tester.pumpAndSettle();
+      await tester.ensureVisible(find.text('Dark'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Dark'));
+      await tester.pumpAndSettle();
+      await tester
+          .element(find.byType(NavigationBar))
+          .setLocale(const Locale('ru'));
+      await tester.runAsync(
+        () async => Future<void>.delayed(const Duration(milliseconds: 50)),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        Theme.of(tester.element(find.byType(NavigationBar))).brightness,
+        Brightness.dark,
+      );
+      for (var index = 0; index < 4; index++) {
+        await tester.tap(find.byType(NavigationDestination).at(index));
+        await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
+      }
+      // The GPU picker remains usable with a keyboard on a compact Russian screen.
+      await tester.tap(find.byType(NavigationDestination).at(2));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('home_gpus'.tr()));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('add_gpu')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('select_gpu_model')));
+      await tester.pumpAndSettle();
+      tester.view.viewInsets = const FakeViewPadding(bottom: 280);
+      addTearDown(tester.view.resetViewInsets);
+      await tester.showKeyboard(find.byKey(const ValueKey('gpu_model_search')));
+      await tester.pumpAndSettle();
+      expect(find.byType(GpuModelPicker), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
   );

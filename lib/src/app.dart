@@ -19,6 +19,7 @@ import 'data/client/btc_usd_rate_client.dart';
 import 'data/client/what_to_mine_client.dart';
 import 'data/db/app_database.dart';
 import 'logic/currencies_service.dart';
+import 'logic/favorites_store.dart';
 import 'logic/gpu_service.dart';
 import 'logic/hash_algorithm_service.dart';
 import 'logic/scheduler_service.dart';
@@ -59,6 +60,18 @@ class _AppState extends State<App> {
       themeMode: currentTheme.currentTheme(),
       theme: AppThemeData.lightTheme,
       darkTheme: AppThemeData.darkTheme,
+      builder: (context, child) => Actions(
+        actions: {
+          EditableTextTapOutsideIntent:
+              CallbackAction<EditableTextTapOutsideIntent>(
+                onInvoke: (intent) {
+                  intent.focusNode.unfocus();
+                  return null;
+                },
+              ),
+        },
+        child: child ?? const SizedBox.shrink(),
+      ),
       initialRoute: ScreenRoutes.splashScreen,
       routes: {
         ScreenRoutes.splashScreen: (BuildContext context) =>
@@ -110,6 +123,7 @@ Future<void> initializeApp({
 
   Services.initialize(
     currenciesService: currenciesService,
+    favorites: FavoritesStore(preferences: preferences),
     gpuService: gpuService,
     hashAlgorithmService: algorithmService,
     settingsService: settingsService,
