@@ -8,7 +8,23 @@ import '../design/app_ui.dart';
 class HashrateWidget extends StatefulWidget {
   final HashrateViewModel viewModel;
   final HashAlgorithm algorithm;
-  const HashrateWidget(this.viewModel, this.algorithm, {super.key});
+  final bool favorite;
+  final VoidCallback onFavorite;
+  final String? initialHashrate;
+  final String? initialPower;
+  final ValueChanged<String> onHashrateChanged;
+  final ValueChanged<String> onPowerChanged;
+  const HashrateWidget(
+    this.viewModel,
+    this.algorithm, {
+    required this.favorite,
+    required this.onFavorite,
+    required this.onHashrateChanged,
+    required this.onPowerChanged,
+    this.initialHashrate,
+    this.initialPower,
+    super.key,
+  });
   @override
   State<HashrateWidget> createState() => _HashrateWidgetState();
 }
@@ -25,9 +41,13 @@ class _HashrateWidgetState extends State<HashrateWidget>
   void initState() {
     super.initState();
     _hashrate = TextEditingController(
-      text: (widget.algorithm.hashrate ?? 0).toStringAsFixed(2),
+      text:
+          widget.initialHashrate ??
+          (widget.algorithm.hashrate ?? 0).toStringAsFixed(2),
     );
-    _power = TextEditingController(text: '${widget.algorithm.power ?? 0}');
+    _power = TextEditingController(
+      text: widget.initialPower ?? '${widget.algorithm.power ?? 0}',
+    );
   }
 
   @override
@@ -54,6 +74,7 @@ class _HashrateWidgetState extends State<HashrateWidget>
   Widget build(BuildContext context) {
     super.build(context);
     return SurfaceCard(
+      borderColor: widget.favorite ? favoriteGold.withValues(alpha: .45) : null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -70,6 +91,12 @@ class _HashrateWidgetState extends State<HashrateWidget>
                   widget.algorithm.name,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
+              ),
+              FavoriteButton(
+                selected: widget.favorite,
+                onTap: widget.onFavorite,
+                coinId: widget.algorithm.name.trim().toLowerCase(),
+                list: 'hashrates',
               ),
             ],
           ),
@@ -93,6 +120,7 @@ class _HashrateWidgetState extends State<HashrateWidget>
                       suffixText: widget.algorithm.getHashUnit(),
                     ),
                     onChanged: (value) {
+                      widget.onHashrateChanged(value);
                       if (double.tryParse(value.replaceAll(',', '.')) != null ||
                           value.isEmpty) {
                         widget.viewModel.onChangeHashrate(
@@ -115,10 +143,13 @@ class _HashrateWidgetState extends State<HashrateWidget>
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(suffixText: 'W'),
-                    onChanged: (value) => widget.viewModel.onChangePower(
-                      widget.algorithm.name,
-                      value,
-                    ),
+                    onChanged: (value) {
+                      widget.onPowerChanged(value);
+                      widget.viewModel.onChangePower(
+                        widget.algorithm.name,
+                        value,
+                      );
+                    },
                   ),
                 ),
               ),

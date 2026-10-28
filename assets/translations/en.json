@@ -143,5 +143,8 @@
   "change_gpu_model": "Tap to choose another model",
   "search_gpu_models": "Search GPU models",
   "all_gpu_vendors": "All",
-  "close_picker": "Close"
+  "close_picker": "Close",
+  "search_hashrates": "Search algorithms",
+  "all_hashrates": "All algorithms",
+  "hashrate_favorites_hint": "Tap the star on an algorithm to pin it here."
 }

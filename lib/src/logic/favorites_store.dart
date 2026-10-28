@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum FavoriteList { earnings, prices }
+enum FavoriteList { earnings, prices, hashrates }
 
 class FavoritesStore extends ChangeNotifier {
   final SharedPreferences _preferences;

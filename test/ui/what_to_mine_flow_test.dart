@@ -11,6 +11,7 @@ import 'package:what_to_mine/src/app.dart';
 import 'package:what_to_mine/src/data/client/what_to_mine_client.dart';
 import 'package:what_to_mine/src/data/client/btc_usd_rate_client.dart';
 import 'package:what_to_mine/src/data/db/entities/used_gpu_entity.dart';
+import 'package:what_to_mine/src/data/db/entities/user_hash_algorithm_entity.dart';
 import 'package:what_to_mine/src/domain/settings.dart';
 import 'package:what_to_mine/src/logic/favorites_store.dart';
 import 'package:what_to_mine/src/logic/services.dart';
@@ -69,6 +70,17 @@ void main() {
       final gpuDao = MockUsedGpuDao();
       when(database.usedGpuDao).thenReturn(gpuDao);
       when(gpuDao.selectAll()).thenAnswer((_) async => [UsedGpuEntity(used)]);
+      final hashDao = MockUserHashAlgorithmDao();
+      final savedHashes = <String, UserHashAlgorithmEntity>{};
+      when(database.userHashAlgorithmDao).thenReturn(hashDao);
+      when(
+        hashDao.selectAll(),
+      ).thenAnswer((_) async => savedHashes.values.toList());
+      when(hashDao.insert(any)).thenAnswer((call) async {
+        final entity =
+            call.positionalArguments.single as UserHashAlgorithmEntity;
+        savedHashes[entity.id] = entity;
+      });
       var exchangeRequests = 0;
       final exchangeRates = BtcUsdRateClient(
         preferences: preferences,
@@ -230,11 +242,12 @@ void main() {
 
       await tester.tap(find.text('Hashrates'));
       await tester.pumpAndSettle();
-      expect(find.text('KawPow'), findsWidgets);
+      expect(find.byKey(const ValueKey('hashrate_search')), findsOneWidget);
       final inputs = find.descendant(
-        of: find.byType(HashrateWidget).first,
+        of: find.byKey(const ValueKey('hashrate_Etchash')),
         matching: find.byType(TextField),
       );
+      await tester.ensureVisible(inputs.first);
       await tester.enterText(inputs.first, '12.5');
       await tester.pumpAndSettle();
       await tester.enterText(inputs.last, '200');
@@ -244,7 +257,7 @@ void main() {
       expect(find.text('Save changes'), findsOneWidget);
       expect(tester.widget<TextField>(inputs.last).focusNode!.hasFocus, isTrue);
       await tester.tapAt(
-        tester.getTopLeft(find.byType(HashrateWidget).first) +
+        tester.getTopLeft(find.byKey(const ValueKey('hashrate_Etchash'))) +
             const Offset(12, 12),
       );
       await tester.pumpAndSettle();
@@ -255,6 +268,80 @@ void main() {
       expect(tester.testTextInput.isVisible, isFalse);
       expect(tester.widget<TextField>(inputs.last).controller!.text, '200');
       expect(requests, callsAfterStartup + 1);
+      final hashSearch = find.byKey(const ValueKey('hashrate_search'));
+      await tester.scrollUntilVisible(
+        hashSearch,
+        -250,
+        scrollable: find.byType(Scrollable).hitTestable().first,
+      );
+      await tester.pumpAndSettle();
+      await tester.enterText(hashSearch, 'kaWPoW');
+      await tester.pumpAndSettle();
+      expect(find.byType(HashrateWidget), findsOneWidget);
+      final kawpowInputs = find.descendant(
+        of: find.byKey(const ValueKey('hashrate_KawPow')),
+        matching: find.byType(TextField),
+      );
+      await tester.ensureVisible(kawpowInputs.first);
+      await tester.enterText(kawpowInputs.first, '7.25');
+      await tester.enterText(kawpowInputs.last, '120');
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('favorite_hashrates_kawpow')));
+      await tester.pumpAndSettle();
+      expect(preferences.getStringList('favorites.v1.hashrates'), ['kawpow']);
+      expect(Services.favorites.ids(FavoriteList.earnings), {'162'});
+      await tester.scrollUntilVisible(
+        hashSearch,
+        -250,
+        scrollable: find.byType(Scrollable).hitTestable().first,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.byTooltip('Clear search'));
+      await tester.pumpAndSettle();
+      expect(
+        tester
+            .widgetList<HashrateWidget>(find.byType(HashrateWidget))
+            .first
+            .algorithm
+            .name,
+        'KawPow',
+      );
+      await tester.tap(find.widgetWithText(ChoiceChip, 'Favorites · 1'));
+      await tester.pumpAndSettle();
+      expect(find.byType(HashrateWidget), findsOneWidget);
+      await tester.enterText(hashSearch, 'Etchash');
+      await tester.pumpAndSettle();
+      expect(find.byType(HashrateWidget), findsNothing);
+      await tester.tap(find.widgetWithText(ChoiceChip, 'All algorithms'));
+      await tester.pumpAndSettle();
+      expect(tester.widget<TextField>(inputs.first).controller!.text, '12.5');
+      expect(tester.widget<TextField>(inputs.last).controller!.text, '200');
+      await tester.enterText(hashSearch, 'nonexistent');
+      await tester.pumpAndSettle();
+      expect(find.byType(HashrateWidget), findsNothing);
+      await tester.enterText(hashSearch, 'KawPow');
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<TextField>(kawpowInputs.first).controller!.text,
+        '7.25',
+      );
+      expect(
+        tester.widget<TextField>(kawpowInputs.last).controller!.text,
+        '120',
+      );
+      expect(
+        requests,
+        callsAfterStartup + 1,
+      ); // every local filter and star is free
+      // Saving a filtered list must also save edits to algorithms that are hidden.
+      await tester.tap(find.text('Save changes'));
+      await tester.pumpAndSettle();
+      expect(savedHashes['Etchash']!.algorithm.hashrate, 12.5);
+      expect(savedHashes['Etchash']!.algorithm.power, 200);
+      expect(savedHashes['KawPow']!.algorithm.hashrate, 7.25);
+      expect(savedHashes['KawPow']!.algorithm.power, 120);
+      await tester.tap(find.byTooltip('Clear search'));
+      await tester.pumpAndSettle();
       await tester.tap(find.widgetWithText(NavigationDestination, 'Prices'));
       await tester.pumpAndSettle();
       expect(exchangeRequests, 1);

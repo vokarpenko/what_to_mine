@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:what_to_mine/src/domain/gpu/gpu.dart';
+import 'package:what_to_mine/src/domain/gpu/gpu_catalog_order.dart';
 import 'package:what_to_mine/src/domain/gpu/used_gpu.dart';
 import 'package:what_to_mine/src/logic/services.dart';
 
@@ -65,7 +66,7 @@ class GpuListViewModel {
   List<String> get vendors =>
       (_listOfAllGpu ?? []).map((gpu) => gpu.vendor).toSet().toList()..sort();
 
-  List<Gpu> get catalog => List.unmodifiable(_listOfAllGpu ?? []);
+  List<Gpu> get catalog => [...?_listOfAllGpu]..sort(compareGpuByRecency);
 
   List<Gpu> onFilterGPUListByVendor(String vendor) {
     List<Gpu> result = _listOfAllGpu!

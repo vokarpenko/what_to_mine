@@ -12,9 +12,11 @@ void main() {
       final store = FavoritesStore(preferences: preferences);
       await store.toggle(FavoriteList.earnings, '162');
       await store.toggle(FavoriteList.prices, '234');
+      await store.toggle(FavoriteList.hashrates, 'kawpow');
       final restored = FavoritesStore(preferences: preferences);
       expect(restored.ids(FavoriteList.earnings), {'162'});
       expect(restored.ids(FavoriteList.prices), {'234'});
+      expect(restored.ids(FavoriteList.hashrates), {'kawpow'});
       await restored.toggle(FavoriteList.earnings, '162');
       expect(restored.ids(FavoriteList.earnings), isEmpty);
       expect(restored.ids(FavoriteList.prices), {'234'});

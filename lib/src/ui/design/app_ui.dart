@@ -131,6 +131,9 @@ class SearchAndFavorites extends StatelessWidget {
   final int favoriteCount;
   final ValueChanged<String> onSearch;
   final ValueChanged<bool> onFilter;
+  final String searchHint;
+  final String allLabel;
+  final String searchKey;
 
   const SearchAndFavorites({
     required this.controller,
@@ -138,6 +141,9 @@ class SearchAndFavorites extends StatelessWidget {
     required this.favoriteCount,
     required this.onSearch,
     required this.onFilter,
+    this.searchHint = 'search_coins',
+    this.allLabel = 'all_coins',
+    this.searchKey = 'coin_search',
     super.key,
   });
 
@@ -146,13 +152,13 @@ class SearchAndFavorites extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       TextField(
-        key: const ValueKey('coin_search'),
+        key: ValueKey(searchKey),
         controller: controller,
         textInputAction: TextInputAction.search,
         onChanged: onSearch,
         onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
         decoration: InputDecoration(
-          hintText: 'search_coins'.tr(context: context),
+          hintText: searchHint.tr(context: context),
           prefixIcon: const Icon(Icons.search_rounded, size: 22),
           suffixIcon: controller.text.isEmpty
               ? null
@@ -172,7 +178,7 @@ class SearchAndFavorites extends StatelessWidget {
         runSpacing: 4,
         children: [
           ChoiceChip(
-            label: Text('all_coins'.tr(context: context)),
+            label: Text(allLabel.tr(context: context)),
             selected: !favoritesOnly,
             showCheckmark: false,
             onSelected: (_) => onFilter(false),

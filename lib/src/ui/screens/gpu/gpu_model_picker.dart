@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/domain/gpu/gpu.dart';
+import 'package:what_to_mine/src/domain/gpu/gpu_catalog_order.dart';
 import '../../design/app_ui.dart';
 
 class GpuModelPicker extends StatefulWidget {
@@ -32,7 +33,7 @@ class _GpuModelPickerState extends State<GpuModelPicker> {
       final text = '${gpu.vendor} ${gpu.marketingName}'.toLowerCase();
       return (_vendor == null || gpu.vendor == _vendor) &&
           terms.every(text.contains);
-    }).toList()..sort((a, b) => a.marketingName.compareTo(b.marketingName));
+    }).toList()..sort(compareGpuByRecency);
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * .85,
       child: Padding(

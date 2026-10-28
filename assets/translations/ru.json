@@ -143,5 +143,8 @@
   "change_gpu_model": "Нажмите, чтобы выбрать другую модель",
   "search_gpu_models": "Поиск видеокарты",
   "all_gpu_vendors": "Все",
-  "close_picker": "Закрыть"
+  "close_picker": "Закрыть",
+  "search_hashrates": "Поиск алгоритмов",
+  "all_hashrates": "Все алгоритмы",
+  "hashrate_favorites_hint": "Нажмите на звёздочку алгоритма, чтобы закрепить его здесь."
 }
