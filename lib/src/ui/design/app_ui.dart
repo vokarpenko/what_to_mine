@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 const ink = Color(0xFF142733);
 const emerald = Color(0xFF00856A);
 const mint = Color(0xFFBDF1D6);
-const favoriteGold = Color(0xFFD59921);
+const favoriteGold = Color(0xFFfac73a);
 const numberFeatures = [FontFeature.tabularFigures()];
-
 class LabeledField extends StatelessWidget {
   final String label;
   final Widget child;

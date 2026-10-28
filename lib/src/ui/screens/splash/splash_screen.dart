@@ -1,12 +1,16 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/ui/screens/splash/splash_view_model.dart';
 import 'package:what_to_mine/src/utils/ui_utils.dart';
+import 'splash_coin_toss.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final SplashViewModel? viewModel;
+
+  const SplashScreen({this.viewModel, super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -14,13 +18,18 @@ class SplashScreen extends StatefulWidget {
   }
 }
 
-class StateSplashScreen extends State<SplashScreen> {
+class StateSplashScreen extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   // Та же монета и тот же размер, что и на нативном сплэше
   // (@drawable/splash_coin, @dimen/splash_coin_size)
   static const _coin = AssetImage('assets/images/splash_coin.png');
   static const _coinSize = 128.0;
 
-  final SplashViewModel _viewModel = SplashViewModel();
+  late final SplashViewModel _viewModel = widget.viewModel ?? SplashViewModel();
+  late final AnimationController _toss;
+  String? _readyScreen;
+  bool _animationFinished = false;
+  bool _navigating = false;
   StreamSubscription? _subscriptionOpenNextScreen, _subscriptionError;
   bool _coinPrecached = false;
 
@@ -29,12 +38,21 @@ class StateSplashScreen extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    _toss = AnimationController(vsync: this, duration: SplashCoinToss.duration)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _animationFinished = true;
+          _openWhenReady();
+        }
+      });
     _subscriptionOpenNextScreen = _viewModel.openNextScreen.listen((screen) {
       if (!mounted) return;
-      Navigator.pushNamedAndRemoveUntil(context, screen, (_) => false);
+      _readyScreen = screen;
+      _openWhenReady();
     });
     _subscriptionError = _viewModel.errorMessage.listen((error) async {
       if (!mounted) return;
+      _readyScreen = null;
       await UIUtils.showAlertDialog(
         context,
         'error'.tr(context: context),
@@ -55,19 +73,40 @@ class StateSplashScreen extends State<SplashScreen> {
     // Нативный сплэш висит до первого кадра Flutter: придерживаем кадр,
     // пока монета не декодирована, иначе мелькнёт экран без неё
     WidgetsBinding.instance.deferFirstFrame();
-    precacheImage(
-      _coin,
-      context,
-    ).whenComplete(WidgetsBinding.instance.allowFirstFrame);
+    precacheImage(_coin, context).whenComplete(() {
+      WidgetsBinding.instance.allowFirstFrame();
+      if (!mounted) return;
+      // Start only after Flutter has painted the same static coin as Android.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        if (MediaQuery.disableAnimationsOf(context)) {
+          _toss.value = 1;
+        } else {
+          _toss.forward();
+        }
+      });
+      WidgetsBinding.instance.ensureVisualUpdate();
+    });
+  }
+
+  void _openWhenReady() {
+    if (!mounted ||
+        _navigating ||
+        !_animationFinished ||
+        _readyScreen == null) {
+      return;
+    }
+    _navigating = true;
+    Navigator.pushNamedAndRemoveUntil(context, _readyScreen!, (_) => false);
   }
 
   @override
   void dispose() {
+    _subscriptionOpenNextScreen?.cancel();
+    _subscriptionError?.cancel();
+    _toss.dispose();
+    _viewModel.onViewDispose();
     super.dispose();
-    this
-      .._viewModel.onViewDispose()
-      .._subscriptionOpenNextScreen?.cancel()
-      .._subscriptionError?.cancel();
   }
 
   @override
@@ -78,17 +117,26 @@ class StateSplashScreen extends State<SplashScreen> {
           final centerY =
               constraints.maxHeight / 2 +
               _navigationBarCompensation(context, constraints.maxHeight);
+          final rise = math.min(
+            140.0,
+            math.max(
+              0.0,
+              centerY - _coinSize / 2 - MediaQuery.paddingOf(context).top - 24,
+            ),
+          );
           return Stack(
+            clipBehavior: Clip.none,
             children: [
               Positioned(
                 top: centerY - _coinSize / 2,
                 left: 0,
                 right: 0,
-                child: const Center(
-                  child: Image(
+                child: Center(
+                  child: SplashCoinToss(
+                    animation: _toss,
                     image: _coin,
-                    width: _coinSize,
-                    height: _coinSize,
+                    size: _coinSize,
+                    maxRise: rise,
                   ),
                 ),
               ),
@@ -115,13 +163,6 @@ class StateSplashScreen extends State<SplashScreen> {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      const SizedBox(
-                        width: 90,
-                        child: LinearProgressIndicator(
-                          minHeight: 3,
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                        ),
-                      ),
                     ],
                   ),
                 ),

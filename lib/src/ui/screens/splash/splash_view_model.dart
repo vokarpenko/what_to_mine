@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/logic/services.dart';
 import 'package:what_to_mine/src/ui/theme/theme_config.dart';
-import 'package:what_to_mine/src/utils/sys_utils.dart';
 
 import '../../../app.dart';
 import '../screen_routes.dart';
@@ -22,41 +21,48 @@ class SplashViewModel {
 
   SplashViewModel();
 
+  bool _disposed = false;
+  int _attempt = 0;
+
   void onViewInitState() async {
-    await initializeApp();
-    // Устанавливаем тему
-    currentTheme.switchTheme(
-      ThemeMode.values[await Services.settingsService.getThemeIndex()],
-    );
-    getData();
+    try {
+      await initializeApp();
+      if (_disposed) return;
+      final themeIndex = await Services.settingsService.getThemeIndex();
+      if (_disposed) return;
+      currentTheme.switchTheme(ThemeMode.values[themeIndex]);
+      getData();
+    } catch (error) {
+      _reportError(error);
+    }
   }
 
   void getData() async {
-
-    // Получаем настройки и открываем следующий экран
-    Services.currenciesService
-        .getCryptoCurrenciesList(false)
-        .then((list) async {
-          // Пауза для показа заставки
-          await SysUtils.delay(1);
-          if (!_openNextScreen.isClosed) {
-            (await Services.settingsService.isTheFirstRun())
-                ? _openNextScreen.add(ScreenRoutes.introScreen)
-                : _openNextScreen.add(ScreenRoutes.homeScreen);
-          }
-        })
-        .catchError((error) {
-          String errorMessage =
-              '${'error_get_crypto_currencies_list'.tr()}.\n${error.toString()}';
-          print(errorMessage);
-          _errorMessage.add(errorMessage);
-        });
+    if (_disposed) return;
+    final attempt = ++_attempt;
+    try {
+      await Services.currenciesService.getCryptoCurrenciesList(false);
+      if (_disposed || attempt != _attempt) return;
+      final firstRun = await Services.settingsService.isTheFirstRun();
+      if (_disposed || attempt != _attempt) return;
+      _openNextScreen.add(
+        firstRun ? ScreenRoutes.introScreen : ScreenRoutes.homeScreen,
+      );
+    } catch (error) {
+      if (attempt == _attempt) _reportError(error);
+    }
   }
 
-  void onViewDispose() async {
-    this
-      .._loading.close()
-      .._errorMessage.close()
-      .._openNextScreen.close();
+  void _reportError(Object error) {
+    if (_disposed) return;
+    _errorMessage.add('${'error_get_crypto_currencies_list'.tr()}.\n$error');
+  }
+
+  void onViewDispose() {
+    _disposed = true;
+    _attempt++;
+    _loading.close();
+    _errorMessage.close();
+    _openNextScreen.close();
   }
 }

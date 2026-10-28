@@ -25,6 +25,7 @@ import '../test_objects_factory.dart';
 import 'package:what_to_mine/src/ui/screens/gpu/gpu_list_screen.dart';
 import 'package:what_to_mine/src/ui/screens/gpu/gpu_model_picker.dart';
 import 'package:what_to_mine/src/ui/screens/hashrate/hashrate_screen.dart';
+import 'package:what_to_mine/src/ui/screens/splash/splash_screen.dart';
 
 void main() {
   testWidgets(
@@ -113,10 +114,19 @@ void main() {
           child: const App(),
         ),
       );
-      // Asset loading uses real I/O; the splash also has an intentional 1s delay.
+      // Localization and image decoding use real I/O. Finish the native-to-
+      // Flutter image handoff before advancing the toss's simulated clock.
       await tester.runAsync(
         () async => Future<void>.delayed(const Duration(milliseconds: 100)),
       );
+      await tester.pump();
+      await tester.runAsync(
+        () => precacheImage(
+          const AssetImage('assets/images/splash_coin.png'),
+          tester.element(find.byType(SplashScreen)),
+        ),
+      );
+      await tester.pump();
       await tester.pump();
       await tester.pump(const Duration(seconds: 2));
       await tester.pumpAndSettle();
