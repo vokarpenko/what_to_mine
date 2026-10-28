@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'coin_icon.dart';
 import 'package:what_to_mine/src/domain/currency/crypto_currency.dart';
 
 class CryptoCurrencyWidget extends StatelessWidget {
@@ -8,24 +9,10 @@ class CryptoCurrencyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget icon;
-    if (_cryptoCurrency.iconLink != null) {
-      icon = Container(
-        margin: const EdgeInsets.all(20),
-        width: 35,
-        height: 35,
-        child: ClipOval(
-          child: FadeInImage.assetNetwork(
-            placeholderFit: BoxFit.fill,
-            fit: BoxFit.fill,
-            placeholder: 'assets/images/loading.gif',
-            image: _cryptoCurrency.iconLink!,
-          ),
-        ),
-      );
-    } else {
-      icon = Container(margin: const EdgeInsets.all(10), width: 50, height: 50);
-    }
+    final icon = Padding(
+      padding: const EdgeInsets.all(12),
+      child: CoinIcon(_cryptoCurrency.coin, coinId: _cryptoCurrency.id),
+    );
     return Card(
       margin: const EdgeInsets.all(10),
       elevation: 5,
@@ -53,9 +40,7 @@ class CryptoCurrencyWidget extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.all(5),
-                    child: Text(
-                      '${_cryptoCurrency.price.toStringAsFixed(5)} \$',
-                    ),
+                    child: Text(_cryptoCurrency.formattedPrice),
                   ),
                 ],
               ),

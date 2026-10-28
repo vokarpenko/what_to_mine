@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:what_to_mine/src/domain/currency/crypto_currency.dart';
 import 'package:what_to_mine/src/logic/services.dart';
-import 'package:what_to_mine/src/utils/internet_utils.dart';
 
 class CurrencyPricesViewModel {
   final StreamController<List<CryptoCurrency>> _currencyList =
@@ -21,13 +20,6 @@ class CurrencyPricesViewModel {
   }
 
   Future<void> getData(bool isNeedFresh) async {
-    if (!await InternetUtils.isInternetAvailable()) {
-      String errorMessage =
-          '${'error'.tr()}: ${'error_internet_is_unavailable'.tr()}';
-      print(errorMessage);
-      _errorMessage.add(errorMessage);
-      return;
-    }
 
     await Services.currenciesService
         .getCryptoCurrenciesList(isNeedFresh)

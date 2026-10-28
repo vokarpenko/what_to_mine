@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'coin_icon.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:what_to_mine/src/domain/currency/earnings.dart';
 
@@ -12,23 +13,10 @@ class EarningsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget icon;
-    if (_earnings.cryptoCurrency.iconLink != null) {
-      icon = SizedBox(
-        width: 35,
-        height: 35,
-        child: ClipOval(
-          child: FadeInImage.assetNetwork(
-            placeholderFit: BoxFit.fill,
-            fit: BoxFit.fill,
-            placeholder: 'assets/images/loading.gif',
-            image: _earnings.cryptoCurrency.iconLink!,
-          ),
-        ),
-      );
-    } else {
-      icon = const SizedBox(width: 35, height: 35);
-    }
+    final icon = CoinIcon(
+      _earnings.cryptoCurrency.coin,
+      coinId: _earnings.cryptoCurrency.id,
+    );
 
     return Card(
       margin: const EdgeInsets.all(10),
@@ -74,9 +62,7 @@ class EarningsWidget extends StatelessWidget {
                         ),
                         Container(
                           padding: const EdgeInsets.all(3),
-                          child: Text(
-                            '${_earnings.cryptoCurrency.volume.toStringAsFixed(2)} USD',
-                          ),
+                          child: Text(_earnings.cryptoCurrency.formattedVolume),
                         ),
                       ],
                     ),

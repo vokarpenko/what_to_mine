@@ -124,9 +124,6 @@ class TestObjectsFactory {
     var etc = createEtc();
     var rvn = createRvn();
 
-    eth.iconLink = '$iconURL${eth.coin.toLowerCase()}.png';
-    etc.iconLink = '$iconURL${etc.coin.toLowerCase()}.png';
-    rvn.iconLink = '$iconURL${rvn.coin.toLowerCase()}.png';
 
     result.add(eth);
     result.add(etc);

@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:what_to_mine/src/domain/currency/earnings.dart';
 import 'package:what_to_mine/src/domain/settings.dart';
 import 'package:what_to_mine/src/logic/services.dart';
-import 'package:what_to_mine/src/utils/internet_utils.dart';
 
 class EarningViewModel {
   final StreamController<List<Earnings>> _earnings =
@@ -33,13 +32,6 @@ class EarningViewModel {
   }
 
   Future<void> getData(bool isNeedFresh) async {
-    if (!await InternetUtils.isInternetAvailable()) {
-      String errorMessage =
-          '${'error'.tr()}: ${'error_internet_is_unavailable'.tr()}';
-      print(errorMessage);
-      _errorMessage.add(errorMessage);
-      return;
-    }
     await Services.currenciesService
         .getEarningsList(isNeedFresh)
         .then((earnings) {

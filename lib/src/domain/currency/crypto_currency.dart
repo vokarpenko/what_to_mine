@@ -10,6 +10,7 @@ class CryptoCurrency {
   final String type;
   final String algorithm;
   final double price;
+  final String quoteCurrency;
   final double reward;
   final double networkHashrate;
   final String rewardUnit;
@@ -23,6 +24,7 @@ class CryptoCurrency {
     required this.type,
     required this.algorithm,
     required this.price,
+    this.quoteCurrency = 'USD',
     required this.reward,
     required this.networkHashrate,
     required this.rewardUnit,
@@ -76,6 +78,12 @@ class CryptoCurrency {
       volume: volume,
     );
   }
+
+  String get formattedPrice =>
+      price < 0 ? '—' : '${price.toStringAsPrecision(6)} $quoteCurrency';
+
+  String get formattedVolume =>
+      '${volume.toStringAsFixed(quoteCurrency == 'BTC' ? 8 : 2)} $quoteCurrency';
 
   String getStringNetworkHashrate() {
     if (networkHashrate == 0.0) return '';
@@ -134,6 +142,7 @@ class CryptoCurrency {
       type == other.type &&
       algorithm == other.algorithm &&
       price == other.price &&
+      quoteCurrency == other.quoteCurrency &&
       reward == other.reward &&
       networkHashrate == other.networkHashrate &&
       rewardUnit == other.rewardUnit &&

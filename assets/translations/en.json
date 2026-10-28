@@ -15,10 +15,10 @@
   "adding_gpus": "Adding GPUs",
   "gpus_appbar_title": "GPUs",
   "hashrate_appbar_title": "Hashrates",
-  "prices_appbar_title": "Cryptocurrency prices",
+  "prices_appbar_title": "Cryptocurrency prices (BTC)",
   "settings_appbar_title": "Settings",
   "settings_notification": "Push-notification",
-  "settings_notification_enable_subtitle": "Notification is enable",
+  "settings_notification_enable_subtitle": "Profitability check once a day. Uses the API request quota.",
   "settings_notification_disable_subtitle": "Notification is disable",
   "settings_theme": "App theme",
   "settings_theme_system": "System theme",
@@ -63,5 +63,12 @@
   "error_quantity_gpu_add": "There cannot be more than 1000 identical GPUs",
   "error_get_top_currency": "Error getting the most profitable coin",
   "error_load_data": "Failed to load data",
-  "error_minerstat_api_key": "A valid Minerstat API key is required to load mining data. Contact the app developer to configure access."
+  "error_wtm_api_key": "A valid WhatToMine API token is required to load mining data.",
+  "error_wtm_quota": "The WhatToMine request limit has been reached. Check your plan or try again later.",
+  "error_wtm_network": "Could not connect to WhatToMine. Please try again later.",
+  "error_wtm_service": "WhatToMine is temporarily unavailable. Please try again later.",
+  "error_wtm_response": "WhatToMine returned an unsupported response. Please update the app.",
+  "error_wtm_invalid_settings": "Check the hashrates, power consumption, and electricity cost.",
+  "error_wtm_unsupported_algorithms": "WhatToMine does not support the selected algorithms. Select a GPU from the current catalog or update your hashrates.",
+  "error_wtm_access": "WhatToMine denied access. Check the API token and subscription permissions."
 }

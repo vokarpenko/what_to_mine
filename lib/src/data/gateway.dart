@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:what_to_mine/src/constants.dart';
+import 'package:what_to_mine/src/domain/algorithms/algorithm_names.dart';
 import 'package:what_to_mine/src/domain/algorithms/hash_algorithm.dart';
 import 'package:what_to_mine/src/domain/currency/crypto_currency.dart';
 import 'package:what_to_mine/src/domain/currency/earnings.dart';
@@ -14,7 +14,6 @@ import 'package:what_to_mine/src/logic/gateway/gpu_gateway.dart';
 import 'package:what_to_mine/src/logic/gateway/hash_algorithm_gateway.dart';
 import 'package:what_to_mine/src/logic/gateway/scheduler_gateway.dart';
 import 'package:what_to_mine/src/logic/gateway/settings_gateway.dart';
-import 'package:what_to_mine/src/utils/extensions.dart';
 import 'package:what_to_mine/src/utils/scheduler/background_scheduler.dart';
 
 import 'cache/memory_storage.dart';
@@ -22,7 +21,6 @@ import 'client/api_client.dart';
 import 'db/app_database.dart';
 import 'db/entities/used_gpu_entity.dart';
 import 'db/entities/user_hash_algorithm_entity.dart';
-import 'json_reader/data_reader.dart';
 
 class Gateway
     implements
@@ -32,7 +30,6 @@ class Gateway
         ISchedulerGateway,
         ISettingsGateway {
   final ApiClient _client;
-  final DataReader _jsonReader;
   final MemoryStorage _cache;
   final AppDatabase _appDatabase;
   final SharedPreferences _preferences;
@@ -42,7 +39,6 @@ class Gateway
 
   Gateway({
     required this._client,
-    required this._jsonReader,
     required this._cache,
     required database,
     required this._preferences,
@@ -76,42 +72,15 @@ class Gateway
   Future<List<CryptoCurrency>> getCryptoCurrenciesList({
     required bool isNeedFresh,
   }) async {
-    List<CryptoCurrency> list;
-    List<CryptoCurrency>? listInCache;
-    if (!isNeedFresh) listInCache = _cache.getCryptoCurrencies();
-
-    if (listInCache != null && listInCache.isNotEmpty && !isNeedFresh) {
-      list = listInCache;
-    } else {
-      list = await _client.getCryptoCurrenciesListFromApi();
-      list = _filterCryptoCurrencies(list);
-      for (var element in list) {
-        element.iconLink = '$iconURL${element.coin.toLowerCase()}.png';
-      }
-      _cache.putCryptoCurrencies(list);
-    }
-    return list;
+    final currencies = await _client.getCryptoCurrenciesListFromApi(
+      forceRefresh: isNeedFresh,
+    );
+    _cache.putCryptoCurrencies(currencies);
+    return currencies;
   }
 
-  // Фильтруем только подходящие криптовалюты
-  List<CryptoCurrency> _filterCryptoCurrencies(List<CryptoCurrency> list) {
-    list = list
-        .where(
-          (element) =>
-              element.isCoin() &&
-              element.hasPrice() &&
-              element.hasReward() &&
-              element.volumeMoreThan(100),
-        )
-        .toList();
-    return list.unique((x) => x.name);
-  }
-
-  // Получить список видеокарт
   @override
-  Future<List<Gpu>?> getGPUList() async {
-    return _jsonReader.getGPUList();
-  }
+  Future<List<Gpu>?> getGPUList() => _client.getGPUListFromApi();
 
   // Получить список используемых в расчетах видеокарт
   @override
@@ -143,102 +112,79 @@ class Gateway
                 ..gpuData = usedGpu.gpuData.toBuilder())
               .build();
       await _appDatabase.usedGpuDao.insert(UsedGpuEntity(newUsedGpu));
-      _usedGpuChanged.add(true);
     } else {
       await _appDatabase.usedGpuDao.insert(UsedGpuEntity(usedGpu));
-      _usedGpuChanged.add(true);
     }
-    _preferences.setBool(_useCustomHashratesKey, false);
+    await _preferences.setBool(_useCustomHashratesKey, false);
+    _usedGpuChanged.add(true);
   }
 
   // Удалить используемую в расчетах видеокарту
   @override
   Future<void> deleteUsedGpu(String id) async {
     await _appDatabase.usedGpuDao.deleteById(id);
+    await _preferences.setBool(_useCustomHashratesKey, false);
     _usedGpuChanged.add(true);
-    _preferences.setBool(_useCustomHashratesKey, false);
   }
 
   // Получить список суммарных хэшрейтов используемых в расчетах видеокарт
   @override
   Future<List<HashAlgorithm>> getHashratesUsedInCalc() async {
-    List<HashAlgorithm> result = [];
-
-    bool? useCustomHashrates = _preferences.getBool(_useCustomHashratesKey);
-
-    // Если используются кастомные хэшрейты, то просто берем их из бд
-    if (useCustomHashrates != null && useCustomHashrates) {
-      var userHashAlgorithms = await _appDatabase.userHashAlgorithmDao
-          .selectAll();
-      for (var entity in userHashAlgorithms) {
-        result.add(entity.algorithm);
-      }
+    List<HashAlgorithm> result;
+    if (_preferences.getBool(_useCustomHashratesKey) ?? false) {
+      final entities = await _appDatabase.userHashAlgorithmDao.selectAll();
+      result = entities.map((entity) => entity.algorithm).toList();
     } else {
-      result = await _jsonReader.getHashAlgorithmsWithZeroValues();
-      List<UsedGpu> usedGpus = await getUsedGPUList();
-
-      for (var gpu in usedGpus) {
-        print("${gpu.gpuData.name} x${gpu.quantity}");
-        for (var element in gpu.gpuData.hashAlgorithms) {
-          if (element.hashrate != null && element.power != null) {
-            int currentAlgorithmIndex = result.indexWhere(
-              (r) => r.name == element.name,
-            );
-            if (currentAlgorithmIndex != -1) {
-              double currentAlgorithmHashrate =
-                  result[currentAlgorithmIndex].hashrate!;
-              int currentAlgorithmPower = result[currentAlgorithmIndex].power!;
-              result[currentAlgorithmIndex] = element.rebuild(
-                (b) => b
-                  ..hashrate =
-                      (currentAlgorithmHashrate +
-                      element.hashrate! * gpu.quantity)
-                  ..power =
-                      (currentAlgorithmPower + element.power! * gpu.quantity),
-              );
-            }
-          }
+      final registered = await _client.getHashAlgorithmsFromApi();
+      final names = {
+        for (final algorithm in registered)
+          algorithmKey(algorithm.name): algorithm.name,
+      };
+      final hashes = <String, double>{};
+      final powers = <String, int>{};
+      for (final used in await getUsedGPUList()) {
+        for (final algorithm in used.gpuData.hashAlgorithms) {
+          if (algorithm.hashrate == null || algorithm.power == null) continue;
+          final key = algorithmKey(algorithm.name);
+          names.putIfAbsent(key, () => algorithm.name);
+          hashes[key] =
+              (hashes[key] ?? 0) +
+              (algorithm.hashrate ?? 0) *
+                  algorithm.hashrateCoefficient *
+                  used.quantity;
+          powers[key] =
+              (powers[key] ?? 0) + (algorithm.power ?? 0) * used.quantity;
         }
       }
+      result = names.entries.map((entry) {
+        final hashesPerSecond = hashes[entry.key] ?? 0;
+        final coefficient = hashCoefficient(hashesPerSecond);
+        return HashAlgorithm(
+          (builder) => builder
+            ..name = entry.value
+            ..hashrate = hashesPerSecond / coefficient
+            ..hashrateCoefficient = coefficient
+            ..power = powers[entry.key] ?? 0,
+        );
+      }).toList();
     }
     _cache.putEditedHashrates(result);
     return result;
   }
 
-  // Получить доход по всем криптовалютам
   @override
   Future<List<Earnings>> getEarningsList({required bool isNeedFresh}) async {
-    double electricityCost = (await getSettings()).electricityCost;
-    List<CryptoCurrency> currencies = await getCryptoCurrenciesList(
-      isNeedFresh: isNeedFresh,
-    );
-    currencies = _filterCryptoCurrencies(currencies);
-    List<HashAlgorithm?> hashratesUsedInCalc = await getHashratesUsedInCalc();
-    List<Earnings> result = [];
-
-    //Находим монеты, по алгоритмам которых есть хэшрейты в gpu.json
-    for (var currency in currencies) {
-      HashAlgorithm? algorithm;
-      try {
-        algorithm = hashratesUsedInCalc.singleWhere(
-          (element) =>
-              element!.name.toLowerCase() == currency.algorithm.toLowerCase(),
-        );
-      } on StateError catch (_) {}
-      if (algorithm != null) {
-        Earnings earning = Earnings.create(
-          currency,
-          algorithm,
-          electricityCost,
-        );
-        result.add(earning);
-      }
+    if (!(_preferences.getBool(_useCustomHashratesKey) ?? false) &&
+        (await getUsedGPUList()).isEmpty) {
+      return [];
     }
-    // Фильтруем список, отбрасывая монеты, которые дают доход 0
-    result = result
-        .where((element) => element.monthEarningsMoreThan(0.0001) == true)
-        .toList();
-    return result;
+    final settings = await getSettings();
+    final algorithms = await getHashratesUsedInCalc();
+    return _client.calculateEarningsFromApi(
+      algorithms: algorithms,
+      electricityCost: settings.electricityCost,
+      forceRefresh: isNeedFresh,
+    );
   }
 
   // Получить хэшрейты из кэша
@@ -266,11 +212,11 @@ class Gateway
   @override
   Future<void> updateHashratesInDB(List<HashAlgorithm> hashrates) async {
     for (var element in hashrates) {
-      _appDatabase.userHashAlgorithmDao.insert(
+      await _appDatabase.userHashAlgorithmDao.insert(
         UserHashAlgorithmEntity(element),
       );
     }
-    _preferences.setBool(_useCustomHashratesKey, true);
+    await _preferences.setBool(_useCustomHashratesKey, true);
     _userHashrateChanged.add(true);
   }
 

@@ -15,10 +15,10 @@
   "adding_gpus": "Добаление видеокарт",
   "gpus_appbar_title": "Видеокарты",
   "hashrate_appbar_title": "Хэшрейты",
-  "prices_appbar_title": "Курсы криптовалют",
+  "prices_appbar_title": "Курсы криптовалют (BTC)",
   "settings_appbar_title": "Настройки",
   "settings_notification": "Пуш-уведомления",
-  "settings_notification_enable_subtitle": "Уведомления включены",
+  "settings_notification_enable_subtitle": "Проверка доходности раз в сутки. Расходует квоту API.",
   "settings_notification_disable_subtitle": "Уведомления отключены",
   "settings_theme": "Тема приложения",
   "settings_theme_system": "Системная тема",
@@ -63,5 +63,12 @@
   "error_quantity_gpu_add": "Одинаковых видеокарт не может быть больше 1000",
   "error_get_top_currency": "Ошибка при получения самой прибыльной монеты",
   "error_load_data": "Не удалось загрузить данные",
-  "error_minerstat_api_key": "Для загрузки данных нужен действующий API-ключ Minerstat. Обратитесь к разработчику приложения для настройки доступа."
+  "error_wtm_api_key": "Для загрузки данных нужен действующий API-токен WhatToMine.",
+  "error_wtm_quota": "Лимит запросов WhatToMine исчерпан. Проверьте тариф или повторите позже.",
+  "error_wtm_network": "Не удалось подключиться к WhatToMine. Повторите позже.",
+  "error_wtm_service": "Сервис WhatToMine временно недоступен. Повторите позже.",
+  "error_wtm_response": "WhatToMine вернул неподдерживаемый ответ. Обновите приложение.",
+  "error_wtm_invalid_settings": "Проверьте хэшрейты, энергопотребление и стоимость электричества.",
+  "error_wtm_unsupported_algorithms": "WhatToMine не поддерживает выбранные алгоритмы. Выберите видеокарту из актуального каталога или измените хэшрейты.",
+  "error_wtm_access": "WhatToMine отказал в доступе. Проверьте API-токен и разрешения тарифа."
 }

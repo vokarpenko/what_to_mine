@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:what_to_mine/src/domain/gpu/gpu.dart';
 import 'package:what_to_mine/src/domain/gpu/used_gpu.dart';
-import 'package:what_to_mine/src/ui/constants.dart';
 import 'package:what_to_mine/src/ui/widgets/used_gpu_widget.dart';
 import 'package:what_to_mine/src/utils/ui_utils.dart';
 
@@ -116,10 +115,9 @@ class GpuListScreenState extends State<GpuListScreen>
   }
 
   void _showAddGPUDialog() {
-    // Switch
-    bool switchValueIsNvidia = true;
-    String vendor = "Nvidia";
-    // DropdownButton
+    final vendors = _viewModel.vendors;
+    if (vendors.isEmpty) return;
+    String vendor = vendors.first;
     List<Gpu> gpus = _viewModel.onFilterGPUListByVendor(vendor);
     Gpu selectedGpu = gpus.first;
 
@@ -137,52 +135,31 @@ class GpuListScreenState extends State<GpuListScreen>
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Flex(
-                        direction: Axis.horizontal,
-                        children: [
-                          Flexible(
-                            flex: 1,
-                            fit: FlexFit.tight,
-                            child: Text(vendor, textAlign: TextAlign.end),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Switch(
-                              activeThumbColor: Colors.green,
-                              activeTrackColor: AppColors.lightGreen,
-                              inactiveTrackColor: AppColors.lightRed,
-                              inactiveThumbColor: Colors.red,
-                              value: switchValueIsNvidia,
-                              onChanged: (bool isNvidia) {
-                                setState(() {
-                                  switchValueIsNvidia = isNvidia;
-                                  isNvidia ? vendor = "Nvidia" : vendor = "AMD";
-                                  gpus = _viewModel.onFilterGPUListByVendor(
-                                    vendor,
-                                  );
-                                  selectedGpu = gpus.first;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
+                      DropdownButton<String>(
+                        value: vendor,
+                        isExpanded: true,
+                        items: vendors
+                            .map(
+                              (value) => DropdownMenuItem(
+                                value: value,
+                                child: Text(value.toUpperCase()),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          if (value == null) return;
+                          setState(() {
+                            vendor = value;
+                            gpus = _viewModel.onFilterGPUListByVendor(vendor);
+                            selectedGpu = gpus.first;
+                          });
+                        },
                       ),
                       DropdownButton<Gpu>(
                         value: selectedGpu,
                         isExpanded: true,
                         iconSize: 24,
                         elevation: 16,
-                        style: TextStyle(
-                          color: switchValueIsNvidia
-                              ? Colors.green
-                              : Colors.red,
-                        ),
-                        underline: Container(
-                          height: 1,
-                          color: switchValueIsNvidia
-                              ? Colors.green
-                              : Colors.red /*Theme.of(context).accentColor*/,
-                        ),
                         onChanged: (Gpu? newValue) {
                           setState(() {
                             selectedGpu = newValue!;
@@ -220,10 +197,10 @@ class GpuListScreenState extends State<GpuListScreen>
                     onPressed: () async {
                       //_hideFabAnimation.forward();
                       Navigator.pop(context);
-                      _viewModel.onAddGPU(
-                        selectedGpu,
-                        int.parse(controller.value.text),
-                      );
+                      final quantity = int.tryParse(controller.text);
+                      if (quantity != null && quantity > 0) {
+                        _viewModel.onAddGPU(selectedGpu, quantity);
+                      }
                     },
                     child: Text('ok'.tr()),
                   ),

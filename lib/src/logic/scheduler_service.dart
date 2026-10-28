@@ -4,6 +4,7 @@ import 'gateway/scheduler_gateway.dart';
 import 'gateway/settings_gateway.dart';
 
 class SchedulerService {
+  static const refreshIntervalMinutes = 24 * 60;
   final ISchedulerGateway _schedulerGateway;
   final ISettingsGateway _settingsGateway;
 
@@ -27,7 +28,7 @@ class SchedulerService {
   void _initializeScheduler() async {
     Settings settings = await _settingsGateway.getSettings();
     if (settings.notificationIsEnabled) {
-      enableScheduler(15);
+      await enableScheduler(refreshIntervalMinutes);
     }
   }
 }

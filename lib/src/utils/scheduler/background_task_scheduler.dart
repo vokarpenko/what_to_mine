@@ -1,5 +1,7 @@
 import 'package:background_fetch/background_fetch.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'daily_profitability_check.dart';
 import 'package:what_to_mine/src/constants.dart';
 import 'package:what_to_mine/src/logic/services.dart';
 import 'package:what_to_mine/src/utils/notificator.dart';
@@ -38,11 +40,13 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
       (String taskId) async {
         // Выполняется, когда приложение работает в фоне.
         try {
-          await _showNotificationsInTheBackground(
+          await _runDailyCheck(
             'now_profitable_to_mine_message'.tr(),
             'earnings_appbar_title'.tr(),
             'per_day'.tr(),
           );
+        } catch (error) {
+          print('Background profitability check failed: $error');
         } finally {
           BackgroundFetch.finish(taskId);
         }
@@ -68,14 +72,27 @@ class BackgroundTaskScheduler implements IBackgroundTaskScheduler {
     try {
       await initializeApp();
       // A headless task has no localized widget context.
-      await _showNotificationsInTheBackground(
+      await _runDailyCheck(
         'It is now profitable to mine',
         'Earning',
         'per day',
       );
+    } catch (error) {
+      print('Headless profitability check failed: $error');
     } finally {
       BackgroundFetch.finish(taskId);
     }
+  }
+
+  static Future<void> _runDailyCheck(
+    String message,
+    String title,
+    String perDay,
+  ) async {
+    final preferences = await SharedPreferences.getInstance();
+    await DailyProfitabilityCheck(
+      preferences: preferences,
+    ).run(() => _showNotificationsInTheBackground(message, title, perDay));
   }
 
   static Future<void> _showNotificationsInTheBackground(

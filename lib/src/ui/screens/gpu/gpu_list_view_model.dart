@@ -25,22 +25,14 @@ class GpuListViewModel {
   }
 
   void _getData() async {
-    _listOfAllGpu = await Services.gpuService.getGPUList();
-    Services.gpuService
-        .getUsedGPUList()
-        .then((usedGpuList) {
-          if (usedGpuList != null) {
-            _usedGpus.add(usedGpuList);
-          } else {
-            _usedGpus.add([]);
-          }
-        })
-        .catchError((error) {
-          String errorMessage =
-              '${'error_get_gpu_list'.tr()}.\n${error.toString()}';
-          print(errorMessage);
-          _errorMessage.add(errorMessage);
-        });
+    try {
+      final used = await Services.gpuService.getUsedGPUList();
+      if (!_usedGpus.isClosed) _usedGpus.add(used ?? []);
+    } catch (error) {
+      if (!_errorMessage.isClosed) {
+        _errorMessage.add('${'error_get_gpu_list'.tr()}.\n$error');
+      }
+    }
   }
 
   void onViewDispose() async {
@@ -50,9 +42,26 @@ class GpuListViewModel {
       .._usedGpus.close();
   }
 
+  bool _catalogLoading = false;
+
   void onClickAddGPU() async {
-    _addGpu.add('');
+    if (_catalogLoading) return;
+    _catalogLoading = true;
+    try {
+      _listOfAllGpu = await Services.gpuService.getGPUList();
+      if (_listOfAllGpu == null || _listOfAllGpu!.isEmpty) {
+        throw StateError('error_get_gpu_list'.tr());
+      }
+      if (!_addGpu.isClosed) _addGpu.add('');
+    } catch (error) {
+      if (!_errorMessage.isClosed) _errorMessage.add('$error');
+    } finally {
+      _catalogLoading = false;
+    }
   }
+
+  List<String> get vendors =>
+      (_listOfAllGpu ?? []).map((gpu) => gpu.vendor).toSet().toList()..sort();
 
   List<Gpu> onFilterGPUListByVendor(String vendor) {
     List<Gpu> result = _listOfAllGpu!

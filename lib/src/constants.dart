@@ -10,4 +10,3 @@ const int daysInWeek = 7;
 const int daysInMonth = 30;
 const int wattInKiloWatt = 1000;
 const int sendNotification = 0;
-const String iconURL = 'https://static-ssl.minerstat.farm/32/';

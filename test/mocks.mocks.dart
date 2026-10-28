@@ -6,23 +6,22 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i11;
 import 'package:sqflite/sqflite.dart' as _i5;
 import 'package:what_to_mine/src/data/cache/memory_storage.dart' as _i7;
-import 'package:what_to_mine/src/data/client/miner_stat_client.dart' as _i10;
-import 'package:what_to_mine/src/data/db/app_database.dart' as _i12;
+import 'package:what_to_mine/src/data/client/api_client.dart' as _i10;
+import 'package:what_to_mine/src/data/db/app_database.dart' as _i13;
 import 'package:what_to_mine/src/data/db/dao/used_gpu_dao.dart' as _i2;
 import 'package:what_to_mine/src/data/db/dao/user_hash_algorithm_dao.dart'
     as _i3;
-import 'package:what_to_mine/src/data/db/entities/used_gpu_entity.dart' as _i19;
+import 'package:what_to_mine/src/data/db/entities/used_gpu_entity.dart' as _i18;
 import 'package:what_to_mine/src/data/db/entities/user_hash_algorithm_entity.dart'
-    as _i20;
+    as _i19;
 import 'package:what_to_mine/src/data/gateway.dart' as _i16;
-import 'package:what_to_mine/src/data/json_reader/json_reader.dart' as _i13;
+import 'package:what_to_mine/src/data/json_reader/json_reader.dart' as _i14;
 import 'package:what_to_mine/src/domain/algorithms/hash_algorithm.dart' as _i9;
 import 'package:what_to_mine/src/domain/currency/crypto_currency.dart' as _i8;
-import 'package:what_to_mine/src/domain/currency/earnings.dart' as _i18;
-import 'package:what_to_mine/src/domain/gpu/gpu.dart' as _i14;
+import 'package:what_to_mine/src/domain/currency/earnings.dart' as _i12;
+import 'package:what_to_mine/src/domain/gpu/gpu.dart' as _i11;
 import 'package:what_to_mine/src/domain/gpu/used_gpu.dart' as _i17;
 import 'package:what_to_mine/src/domain/settings.dart' as _i6;
 import 'package:what_to_mine/src/utils/scheduler/background_task_scheduler.dart'
@@ -182,39 +181,71 @@ class MockMemoryStorage extends _i1.Mock implements _i7.MemoryStorage {
       );
 }
 
-/// A class which mocks [MinerStatClient].
+/// A class which mocks [ApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMinerStatClient extends _i1.Mock implements _i10.MinerStatClient {
-  MockMinerStatClient() {
+class MockApiClient extends _i1.Mock implements _i10.ApiClient {
+  MockApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  String get apiKey => (super.noSuchMethod(
-        Invocation.getter(#apiKey),
-        returnValue: _i11.dummyValue<String>(
-          this,
-          Invocation.getter(#apiKey),
-        ),
-      ) as String);
-
-  @override
-  _i4.Future<List<_i8.CryptoCurrency>> getCryptoCurrenciesListFromApi() =>
+  _i4.Future<List<_i8.CryptoCurrency>> getCryptoCurrenciesListFromApi(
+          {bool? forceRefresh = false}) =>
       (super.noSuchMethod(
         Invocation.method(
           #getCryptoCurrenciesListFromApi,
           [],
+          {#forceRefresh: forceRefresh},
         ),
         returnValue:
             _i4.Future<List<_i8.CryptoCurrency>>.value(<_i8.CryptoCurrency>[]),
       ) as _i4.Future<List<_i8.CryptoCurrency>>);
+
+  @override
+  _i4.Future<List<_i11.Gpu>> getGPUListFromApi() => (super.noSuchMethod(
+        Invocation.method(
+          #getGPUListFromApi,
+          [],
+        ),
+        returnValue: _i4.Future<List<_i11.Gpu>>.value(<_i11.Gpu>[]),
+      ) as _i4.Future<List<_i11.Gpu>>);
+
+  @override
+  _i4.Future<List<_i9.HashAlgorithm>> getHashAlgorithmsFromApi() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getHashAlgorithmsFromApi,
+          [],
+        ),
+        returnValue:
+            _i4.Future<List<_i9.HashAlgorithm>>.value(<_i9.HashAlgorithm>[]),
+      ) as _i4.Future<List<_i9.HashAlgorithm>>);
+
+  @override
+  _i4.Future<List<_i12.Earnings>> calculateEarningsFromApi({
+    required List<_i9.HashAlgorithm>? algorithms,
+    required double? electricityCost,
+    bool? forceRefresh = false,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #calculateEarningsFromApi,
+          [],
+          {
+            #algorithms: algorithms,
+            #electricityCost: electricityCost,
+            #forceRefresh: forceRefresh,
+          },
+        ),
+        returnValue: _i4.Future<List<_i12.Earnings>>.value(<_i12.Earnings>[]),
+      ) as _i4.Future<List<_i12.Earnings>>);
 }
 
 /// A class which mocks [AppDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppDatabase extends _i1.Mock implements _i12.AppDatabase {
+class MockAppDatabase extends _i1.Mock implements _i13.AppDatabase {
   MockAppDatabase() {
     _i1.throwOnMissingStub(this);
   }
@@ -288,19 +319,19 @@ class MockAppDatabase extends _i1.Mock implements _i12.AppDatabase {
 /// A class which mocks [JsonReader].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockJsonReader extends _i1.Mock implements _i13.JsonReader {
+class MockJsonReader extends _i1.Mock implements _i14.JsonReader {
   MockJsonReader() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<List<_i14.Gpu>?> getGPUList() => (super.noSuchMethod(
+  _i4.Future<List<_i11.Gpu>?> getGPUList() => (super.noSuchMethod(
         Invocation.method(
           #getGPUList,
           [],
         ),
-        returnValue: _i4.Future<List<_i14.Gpu>?>.value(),
-      ) as _i4.Future<List<_i14.Gpu>?>);
+        returnValue: _i4.Future<List<_i11.Gpu>?>.value(),
+      ) as _i4.Future<List<_i11.Gpu>?>);
 
   @override
   _i4.Future<List<_i9.HashAlgorithm>> getHashAlgorithmsWithZeroValues() =>
@@ -403,13 +434,13 @@ class MockGateway extends _i1.Mock implements _i16.Gateway {
       ) as _i4.Future<List<_i8.CryptoCurrency>>);
 
   @override
-  _i4.Future<List<_i14.Gpu>?> getGPUList() => (super.noSuchMethod(
+  _i4.Future<List<_i11.Gpu>?> getGPUList() => (super.noSuchMethod(
         Invocation.method(
           #getGPUList,
           [],
         ),
-        returnValue: _i4.Future<List<_i14.Gpu>?>.value(),
-      ) as _i4.Future<List<_i14.Gpu>?>);
+        returnValue: _i4.Future<List<_i11.Gpu>?>.value(),
+      ) as _i4.Future<List<_i11.Gpu>?>);
 
   @override
   _i4.Future<List<_i17.UsedGpu>> getUsedGPUList() => (super.noSuchMethod(
@@ -452,7 +483,7 @@ class MockGateway extends _i1.Mock implements _i16.Gateway {
       ) as _i4.Future<List<_i9.HashAlgorithm>>);
 
   @override
-  _i4.Future<List<_i18.Earnings>> getEarningsList(
+  _i4.Future<List<_i12.Earnings>> getEarningsList(
           {required bool? isNeedFresh}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -460,8 +491,8 @@ class MockGateway extends _i1.Mock implements _i16.Gateway {
           [],
           {#isNeedFresh: isNeedFresh},
         ),
-        returnValue: _i4.Future<List<_i18.Earnings>>.value(<_i18.Earnings>[]),
-      ) as _i4.Future<List<_i18.Earnings>>);
+        returnValue: _i4.Future<List<_i12.Earnings>>.value(<_i12.Earnings>[]),
+      ) as _i4.Future<List<_i12.Earnings>>);
 
   @override
   _i4.Future<List<_i9.HashAlgorithm>> getEditedHashratesFromCache() =>
@@ -584,14 +615,14 @@ class MockUsedGpuDao extends _i1.Mock implements _i2.UsedGpuDao {
   }
 
   @override
-  _i4.Future<List<_i19.UsedGpuEntity>> selectAll() => (super.noSuchMethod(
+  _i4.Future<List<_i18.UsedGpuEntity>> selectAll() => (super.noSuchMethod(
         Invocation.method(
           #selectAll,
           [],
         ),
         returnValue:
-            _i4.Future<List<_i19.UsedGpuEntity>>.value(<_i19.UsedGpuEntity>[]),
-      ) as _i4.Future<List<_i19.UsedGpuEntity>>);
+            _i4.Future<List<_i18.UsedGpuEntity>>.value(<_i18.UsedGpuEntity>[]),
+      ) as _i4.Future<List<_i18.UsedGpuEntity>>);
 
   @override
   _i4.Future<void> deleteAll() => (super.noSuchMethod(
@@ -604,7 +635,7 @@ class MockUsedGpuDao extends _i1.Mock implements _i2.UsedGpuDao {
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> insert(_i19.UsedGpuEntity? entity) => (super.noSuchMethod(
+  _i4.Future<void> insert(_i18.UsedGpuEntity? entity) => (super.noSuchMethod(
         Invocation.method(
           #insert,
           [entity],
@@ -614,13 +645,13 @@ class MockUsedGpuDao extends _i1.Mock implements _i2.UsedGpuDao {
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<_i19.UsedGpuEntity?> selectById(String? id) => (super.noSuchMethod(
+  _i4.Future<_i18.UsedGpuEntity?> selectById(String? id) => (super.noSuchMethod(
         Invocation.method(
           #selectById,
           [id],
         ),
-        returnValue: _i4.Future<_i19.UsedGpuEntity?>.value(),
-      ) as _i4.Future<_i19.UsedGpuEntity?>);
+        returnValue: _i4.Future<_i18.UsedGpuEntity?>.value(),
+      ) as _i4.Future<_i18.UsedGpuEntity?>);
 
   @override
   _i4.Future<void> deleteById(String? id) => (super.noSuchMethod(
@@ -643,15 +674,15 @@ class MockUserHashAlgorithmDao extends _i1.Mock
   }
 
   @override
-  _i4.Future<List<_i20.UserHashAlgorithmEntity>> selectAll() =>
+  _i4.Future<List<_i19.UserHashAlgorithmEntity>> selectAll() =>
       (super.noSuchMethod(
         Invocation.method(
           #selectAll,
           [],
         ),
-        returnValue: _i4.Future<List<_i20.UserHashAlgorithmEntity>>.value(
-            <_i20.UserHashAlgorithmEntity>[]),
-      ) as _i4.Future<List<_i20.UserHashAlgorithmEntity>>);
+        returnValue: _i4.Future<List<_i19.UserHashAlgorithmEntity>>.value(
+            <_i19.UserHashAlgorithmEntity>[]),
+      ) as _i4.Future<List<_i19.UserHashAlgorithmEntity>>);
 
   @override
   _i4.Future<void> deleteAll() => (super.noSuchMethod(
@@ -664,7 +695,7 @@ class MockUserHashAlgorithmDao extends _i1.Mock
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> insert(_i20.UserHashAlgorithmEntity? entity) =>
+  _i4.Future<void> insert(_i19.UserHashAlgorithmEntity? entity) =>
       (super.noSuchMethod(
         Invocation.method(
           #insert,
@@ -675,14 +706,14 @@ class MockUserHashAlgorithmDao extends _i1.Mock
       ) as _i4.Future<void>);
 
   @override
-  _i4.Future<_i20.UserHashAlgorithmEntity?> selectById(String? id) =>
+  _i4.Future<_i19.UserHashAlgorithmEntity?> selectById(String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #selectById,
           [id],
         ),
-        returnValue: _i4.Future<_i20.UserHashAlgorithmEntity?>.value(),
-      ) as _i4.Future<_i20.UserHashAlgorithmEntity?>);
+        returnValue: _i4.Future<_i19.UserHashAlgorithmEntity?>.value(),
+      ) as _i4.Future<_i19.UserHashAlgorithmEntity?>);
 
   @override
   _i4.Future<void> deleteById(String? id) => (super.noSuchMethod(

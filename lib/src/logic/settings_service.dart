@@ -55,10 +55,10 @@ class SettingsService {
 
   // Сохранить стоимость электроэнергии
   Future<void> setElectricityCost(double cost) async {
-    _gateway.onElectricityCostChanged();
     Settings settings = await getSettings();
     settings.electricityCost = cost;
-    return setSettings(settings);
+    await setSettings(settings);
+    await _gateway.onElectricityCostChanged();
   }
 
   // Получить стоимость электроэнергии

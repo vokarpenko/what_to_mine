@@ -24,6 +24,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       hashratesIsSelected = false;
   int _currentIndex = 0;
 
+  final List<Widget?> _screens = [const EarningScreen(), null, null, null];
+
   @override
   void initState() {
     super.initState();
@@ -60,12 +62,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return Scaffold(
       body: IndexedStack(
         index: _currentIndex,
-        children: const [
-          EarningScreen(),
-          CurrencyPricesScreen(),
-          GpuListScreen(),
-          HashrateScreen(),
-        ],
+        children: _screens
+            .map((screen) => screen ?? const SizedBox.shrink())
+            .toList(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -127,6 +126,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     setState(() {
       if (_currentIndex == value) return;
       _currentIndex = value;
+      _screens[value] ??= switch (value) {
+        1 => const CurrencyPricesScreen(),
+        2 => const GpuListScreen(),
+        3 => const HashrateScreen(),
+        _ => const EarningScreen(),
+      };
       switch (_currentIndex) {
         case 0:
           earningsIsSelected = !earningsIsSelected;

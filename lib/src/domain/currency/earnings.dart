@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_initializing_formals
 
-import 'package:what_to_mine/src/domain/algorithms/hash_algorithm.dart';
-
 import '../../constants.dart';
 import 'crypto_currency.dart';
 
@@ -24,38 +22,40 @@ class Earnings {
 
   final CryptoCurrency cryptoCurrency;
 
-  Earnings._(
-      {required double dayEarningInCrypto,
-      required double dayEarningInCurrency,
-      required double netDayEarningInCurrency,
-      required double dayElectricityCost,
-      required CryptoCurrency cryptoCurrency})
-      : dayEarningInCrypto = dayEarningInCrypto,
-        weekEarningInCrypto = dayEarningInCrypto * daysInWeek,
-        monthEarningInCrypto = dayEarningInCrypto * daysInMonth,
-        dayEarningInCurrency = dayEarningInCurrency,
-        weekEarningInCurrency = dayEarningInCurrency * daysInWeek,
-        monthEarningInCurrency = dayEarningInCurrency * daysInMonth,
-        netDayEarningInCurrency = netDayEarningInCurrency,
-        netWeekEarningInCurrency = netDayEarningInCurrency * daysInWeek,
-        netMonthEarningInCurrency = netDayEarningInCurrency * daysInMonth,
-        dayElectricityCost = dayElectricityCost,
-        weekElectricityCost = dayElectricityCost * daysInWeek,
-        monthElectricityCost = dayElectricityCost * daysInMonth,
-        cryptoCurrency = cryptoCurrency;
+  Earnings._({
+    required double dayEarningInCrypto,
+    required double dayEarningInCurrency,
+    required double netDayEarningInCurrency,
+    required double dayElectricityCost,
+    required CryptoCurrency cryptoCurrency,
+  }) : dayEarningInCrypto = dayEarningInCrypto,
+       weekEarningInCrypto = dayEarningInCrypto * daysInWeek,
+       monthEarningInCrypto = dayEarningInCrypto * daysInMonth,
+       dayEarningInCurrency = dayEarningInCurrency,
+       weekEarningInCurrency = dayEarningInCurrency * daysInWeek,
+       monthEarningInCurrency = dayEarningInCurrency * daysInMonth,
+       netDayEarningInCurrency = netDayEarningInCurrency,
+       netWeekEarningInCurrency = netDayEarningInCurrency * daysInWeek,
+       netMonthEarningInCurrency = netDayEarningInCurrency * daysInMonth,
+       dayElectricityCost = dayElectricityCost,
+       weekElectricityCost = dayElectricityCost * daysInWeek,
+       monthElectricityCost = dayElectricityCost * daysInMonth,
+       cryptoCurrency = cryptoCurrency;
 
-  static Earnings create(CryptoCurrency currency, HashAlgorithm algorithm, double electricityCost) {
-    double dayEarningInCrypto = currency.calculateDayEarning((algorithm.hashrate ?? 0) * algorithm.hashrateCoefficient);
-    double dayEarningInCurrency = dayEarningInCrypto * currency.price;
-    double dayElectricityCost = (algorithm.power ?? 0) * electricityCost * hoursInDay / wattInKiloWatt;
-    double netDayEarningInCurrency = dayEarningInCurrency - dayElectricityCost;
-    return Earnings._(
-        cryptoCurrency: currency,
-        dayEarningInCurrency: dayEarningInCurrency,
-        dayEarningInCrypto: dayEarningInCrypto,
-        dayElectricityCost: dayElectricityCost,
-        netDayEarningInCurrency: netDayEarningInCurrency);
-  }
+  // WhatToMine calculates daily rewards and revenue after its default coin fee.
+  // Electricity is already deducted from profit: do not subtract it again.
+  factory Earnings.fromCalculation({
+    required CryptoCurrency currency,
+    required double dayEarningInCrypto,
+    required double dayEarningInCurrency,
+    required double netDayEarningInCurrency,
+  }) => Earnings._(
+    cryptoCurrency: currency,
+    dayEarningInCrypto: dayEarningInCrypto,
+    dayEarningInCurrency: dayEarningInCurrency,
+    netDayEarningInCurrency: netDayEarningInCurrency,
+    dayElectricityCost: dayEarningInCurrency - netDayEarningInCurrency,
+  );
 
   bool monthEarningsMoreThan(double value) {
     return monthEarningInCurrency > value;

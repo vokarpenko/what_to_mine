@@ -15,10 +15,8 @@ import 'package:what_to_mine/src/utils/scheduler/background_task_scheduler.dart'
 
 import 'data/cache/memory_storage.dart';
 import 'data/client/api_client.dart';
-import 'data/client/miner_stat_client.dart';
+import 'data/client/what_to_mine_client.dart';
 import 'data/db/app_database.dart';
-import 'data/json_reader/data_reader.dart';
-import 'data/json_reader/json_reader.dart';
 import 'logic/currencies_service.dart';
 import 'logic/gpu_service.dart';
 import 'logic/hash_algorithm_service.dart';
@@ -71,21 +69,22 @@ class _AppState extends State<App> {
   }
 }
 
-Future<void> initializeApp() async {
+Future<void> initializeApp({
+  ApiClient? client,
+  AppDatabase? appDatabase,
+}) async {
   if (Services.isInitialized()) {
     print('Application initialized already');
     return;
   }
 
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  ApiClient minerStatClient = MinerStatClient();
-  DataReader jsonReader = JsonReader();
+  ApiClient apiClient = client ?? WhatToMineClient(preferences: preferences);
   MemoryStorage cache = MemoryStorage();
-  AppDatabase database = await AppDatabase.create();
+  AppDatabase database = appDatabase ?? await AppDatabase.create();
   IBackgroundTaskScheduler backgroundScheduler = BackgroundTaskScheduler();
   Gateway gateway = Gateway(
-    client: minerStatClient,
-    jsonReader: jsonReader,
+    client: apiClient,
     cache: cache,
     database: database,
     preferences: preferences,

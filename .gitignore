@@ -49,3 +49,7 @@ app.*.map.json
 # FVM SDK symlink (version is tracked in .fvmrc)
 .fvm/
 /android/what-to-mine-upload-keystore.jks
+
+# Local WhatToMine API token
+what-to-mine-api.local.json
+/what-to-mine-api.local.json
