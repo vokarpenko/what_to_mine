@@ -15,6 +15,7 @@ import 'package:what_to_mine/src/domain/currency/earnings.dart';
 import 'package:what_to_mine/src/domain/gpu/gpu.dart';
 
 import 'api_client.dart';
+import 'what_to_mine_api_keys.dart';
 
 class WhatToMineException implements Exception {
   final String messageKey;
@@ -37,24 +38,78 @@ class WhatToMineClient implements ApiClient {
   final http.Client _client;
   final SharedPreferences _preferences;
   final DateTime Function() _now;
-  final String apiKey;
+  final String? _configuredApiKey;
+  final List<String>? _configuredApiKeys;
   final Map<String, Future<List<Map<String, dynamic>>>> _inFlight = {};
+  Future<void> _networkQueue = Future.value();
 
   WhatToMineClient({
     required this._preferences,
     http.Client? client,
     DateTime Function()? now,
-    this.apiKey = const String.fromEnvironment('WHAT_TO_MINE_API_KEY'),
+    String? apiKey,
+    List<String>? apiKeys,
   }) : _client = client ?? http.Client(),
-       _now = now ?? DateTime.now;
+       _now = now ?? DateTime.now,
+       _configuredApiKey = apiKey,
+       _configuredApiKeys = apiKeys == null ? null : List.of(apiKeys);
 
-  // Cache namespaces use a hash, never the token itself. A new token has its
-  // own cache and quota state; tokens are only sent in the Authorization header.
-  String get _namespace => 'wtm.v1.${sha256.convert(utf8.encode(apiKey))}';
+  // Quotas and responses retain their old per-token hashed namespaces. A pool
+  // can reuse a fresh response from any of its tokens, including after adding
+  // a backup key. Removing every previous token cannot expose its cached data.
+  late final List<String> _apiKeys = _readApiKeys();
+  late final List<String> _namespaces = _apiKeys
+      .map((key) => 'wtm.v1.${sha256.convert(utf8.encode(key))}')
+      .toList();
+  late final String _selectionKey = _poolSelectionKey();
+
+  List<String> _readApiKeys() {
+    try {
+      if (_configuredApiKeys != null) {
+        return normalizeWhatToMineApiKeys(_configuredApiKeys);
+      }
+      if (_configuredApiKey != null) {
+        return normalizeWhatToMineApiKeys([_configuredApiKey]);
+      }
+      const keys = String.fromEnvironment('WHAT_TO_MINE_API_KEYS');
+      return keys.trim().isNotEmpty
+          ? parseWhatToMineApiKeys(keys)
+          : normalizeWhatToMineApiKeys([
+              const String.fromEnvironment('WHAT_TO_MINE_API_KEY'),
+            ]);
+    } on FormatException {
+      throw const WhatToMineException('error_wtm_api_keys_config');
+    }
+  }
+
+  String _poolSelectionKey() {
+    final sorted = [..._namespaces]..sort();
+    return 'wtm.pool.v1.${sha256.convert(utf8.encode(jsonEncode(sorted)))}.active';
+  }
+
+  int get _preferredIndex {
+    final index = _namespaces.indexOf(
+      _preferences.getString(_selectionKey) ?? '',
+    );
+    return index < 0 ? 0 : index;
+  }
+
+  // Retained for single-key callers; this is the most recently selected token.
+  String get apiKey => _apiKeys.isEmpty ? '' : _apiKeys[_preferredIndex];
 
   Map<String, dynamic>? get rateLimit {
-    final stored = _preferences.getString('$_namespace.usage');
-    return stored == null ? null : jsonDecode(stored) as Map<String, dynamic>;
+    if (_apiKeys.isEmpty) return null;
+    final stored = _preferences.getString(
+      '${_namespaces[_preferredIndex]}.usage',
+    );
+    if (stored == null) return null;
+    try {
+      return jsonDecode(stored) as Map<String, dynamic>;
+    } on FormatException {
+      return null;
+    } on TypeError {
+      return null;
+    }
   }
 
   @override
@@ -266,25 +321,54 @@ class WhatToMineClient implements ApiClient {
     bool forceRefresh = false,
     Map<String, dynamic>? body,
   }) async {
-    if (apiKey.trim().isEmpty) {
+    if (_apiKeys.isEmpty) {
       throw const WhatToMineException('error_wtm_api_key');
     }
-    // Background isolates may have written a fresher response since this
-    // instance last read the legacy SharedPreferences cache.
+    // Background isolates may have written fresher responses or quota state.
     await _preferences.reload();
     final payload = body == null ? '' : jsonEncode(body);
-    final key = '$_namespace.$endpoint.${sha256.convert(utf8.encode(payload))}';
-    final stored = _preferences.getString(key);
-    if (stored != null) {
+    final requestKey = '$endpoint.${sha256.convert(utf8.encode(payload))}';
+    final maxAge = forceRefresh ? minimumRefreshInterval : ttl;
+    final cached = await _cachedResponse(requestKey, maxAge);
+    if (cached != null) return cached;
+    final existing = _inFlight[requestKey];
+    if (existing != null) return existing;
+    // Serialize actual HTTP requests within this client so concurrent endpoints
+    // cannot all consume the same token's last known request before rotating.
+    final future = _networkQueue.then(
+      (_) => _perform(endpoint, requestKey, body, payload),
+    );
+    _networkQueue = future.then<void>(
+      (_) {},
+      onError: (Object _, StackTrace _) {},
+    );
+    _inFlight[requestKey] = future;
+    try {
+      return await future;
+    } finally {
+      _inFlight.remove(requestKey);
+    }
+  }
+
+  Future<List<Map<String, dynamic>>?> _cachedResponse(
+    String requestKey,
+    Duration maxAge,
+  ) async {
+    List<Map<String, dynamic>>? result;
+    int? newest;
+    for (final namespace in _namespaces) {
+      final key = '$namespace.$requestKey';
+      final stored = _preferences.getString(key);
+      if (stored == null) continue;
       try {
         final cached = jsonDecode(stored) as Map<String, dynamic>;
-        final timestamp = DateTime.fromMillisecondsSinceEpoch(
-          cached['at'] as int,
-        );
-        final age = _now().difference(timestamp);
+        final at = cached['at'] as int;
+        final age = _now().difference(DateTime.fromMillisecondsSinceEpoch(at));
         if (!age.isNegative &&
-            age < (forceRefresh ? minimumRefreshInterval : ttl)) {
-          return _objects(cached['data']);
+            age < maxAge &&
+            (newest == null || at > newest)) {
+          result = _objects(cached['data']);
+          newest = at;
         }
       } on FormatException {
         await _preferences.remove(key);
@@ -292,122 +376,142 @@ class WhatToMineClient implements ApiClient {
         await _preferences.remove(key);
       }
     }
-    final existing = _inFlight[key];
-    if (existing != null) return existing;
-    final future = _perform(endpoint, key, body, payload);
-    _inFlight[key] = future;
-    try {
-      return await future;
-    } finally {
-      _inFlight.remove(key);
-    }
+    return result;
   }
 
   Future<List<Map<String, dynamic>>> _perform(
     String endpoint,
-    String key,
+    String requestKey,
     Map<String, dynamic>? body,
     String payload,
   ) async {
-    final blockedUntil = _preferences.getInt('$_namespace.blockedUntil');
-    if (blockedUntil != null && _now().millisecondsSinceEpoch < blockedUntil) {
-      throw const WhatToMineException('error_wtm_quota', statusCode: 429);
+    await _preferences.reload();
+    final start = _preferredIndex;
+    // Each token is considered at most once per logical request. Persisted
+    // cooldowns are also respected after foreground/headless restarts.
+    for (var offset = 0; offset < _apiKeys.length; offset++) {
+      await _preferences.reload();
+      final index = (start + offset) % _apiKeys.length;
+      final namespace = _namespaces[index];
+      final blockedUntil = _preferences.getInt('$namespace.blockedUntil');
+      if (blockedUntil != null &&
+          _now().millisecondsSinceEpoch < blockedUntil) {
+        continue;
+      }
+
+      final response = await _send(endpoint, _apiKeys[index], body, payload);
+      final usage = <String, dynamic>{'at': _now().toUtc().toIso8601String()};
+      for (final name in ['limit', 'used', 'remaining']) {
+        final value = int.tryParse(response.headers['x-ratelimit-$name'] ?? '');
+        if (value != null) usage[name] = value;
+      }
+      if (usage.length > 1) {
+        await _preferences.setString('$namespace.usage', jsonEncode(usage));
+      }
+      if (response.statusCode == 401) {
+        throw const WhatToMineException('error_wtm_api_key', statusCode: 401);
+      }
+      if (response.statusCode == 403) {
+        throw const WhatToMineException('error_wtm_access', statusCode: 403);
+      }
+      if (response.statusCode == 429) {
+        await _blockToken(namespace, response);
+        continue;
+      }
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        throw WhatToMineException(
+          'error_wtm_service',
+          statusCode: response.statusCode,
+        );
+      }
+      await _preferences.setString(_selectionKey, namespace);
+      // A successful last request remains valid. Rotate on the next request,
+      // rather than asking another token for the same response again.
+      final remaining = usage['remaining'] as int?;
+      final limit = usage['limit'] as int?;
+      final used = usage['used'] as int?;
+      if (remaining != null
+          ? remaining <= 0
+          : limit != null && limit > 0 && used != null && used >= limit) {
+        await _blockToken(namespace, response);
+      }
+      List<Map<String, dynamic>> data;
+      try {
+        data = _objects(jsonDecode(response.body));
+      } on FormatException {
+        throw const WhatToMineException('error_wtm_response');
+      }
+      await _preferences.setString(
+        '$namespace.$requestKey',
+        jsonEncode({'at': _now().millisecondsSinceEpoch, 'data': data}),
+      );
+      if (endpoint == 'calculate') {
+        final keys = _preferences
+            .getKeys()
+            .where((entry) => entry.startsWith('$namespace.calculate.'))
+            .toList();
+        keys.sort((a, b) => _cacheTimestamp(b).compareTo(_cacheTimestamp(a)));
+        for (final old in keys.skip(20)) {
+          await _preferences.remove(old);
+        }
+      }
+      return data;
     }
+    throw const WhatToMineException('error_wtm_quota', statusCode: 429);
+  }
+
+  Future<http.Response> _send(
+    String endpoint,
+    String token,
+    Map<String, dynamic>? body,
+    String payload,
+  ) async {
     final headers = {
-      'Authorization': 'Token ${apiKey.trim()}',
+      'Authorization': 'Token $token',
       'Accept': 'application/json',
     };
     final url = Uri.parse('$_baseUrl/$endpoint');
-    http.Response response;
     if (kDebugMode) {
       debugPrint('WhatToMine API: ${body == null ? 'GET' : 'POST'} /$endpoint');
     }
     try {
-      response =
-          await (body == null
-                  ? _client.get(url, headers: headers)
-                  : _client.post(
-                      url,
-                      headers: {...headers, 'Content-Type': 'application/json'},
-                      body: payload,
-                    ))
-              .timeout(const Duration(seconds: 30));
+      return await (body == null
+              ? _client.get(url, headers: headers)
+              : _client.post(
+                  url,
+                  headers: {...headers, 'Content-Type': 'application/json'},
+                  body: payload,
+                ))
+          .timeout(const Duration(seconds: 30));
     } on TimeoutException {
       throw const WhatToMineException('error_wtm_network');
     } on http.ClientException {
       throw const WhatToMineException('error_wtm_network');
     }
-    final usage = <String, dynamic>{'at': _now().toUtc().toIso8601String()};
-    for (final name in ['limit', 'used', 'remaining']) {
-      final value = int.tryParse(response.headers['x-ratelimit-$name'] ?? '');
-      if (value != null) usage[name] = value;
-    }
-    if (usage.length > 1) {
-      await _preferences.setString('$_namespace.usage', jsonEncode(usage));
-    }
-    if (response.statusCode == 401) {
-      throw WhatToMineException(
-        'error_wtm_api_key',
-        statusCode: response.statusCode,
-      );
-    }
-    if (response.statusCode == 403) {
-      throw const WhatToMineException('error_wtm_access', statusCode: 403);
-    }
-    if (response.statusCode == 429) {
-      // The monthly reset date is not documented. Honor Retry-After if given;
-      // otherwise back off for a day, including after app/headless restarts.
-      final retry = response.headers['retry-after'];
-      final seconds = int.tryParse(retry ?? '');
-      DateTime? retryDate;
-      if (seconds == null && retry != null) {
-        // HTTP dates are handled by the SDK without interpreting a billing cycle.
-        try {
-          retryDate = HttpDate.parse(retry);
-        } on HttpException {
-          /* use fallback */
-        }
+  }
+
+  Future<void> _blockToken(String namespace, http.Response response) async {
+    // The service documents monthly limits but no reset timestamp. Honor an
+    // HTTP Retry-After if supplied; otherwise recheck this token after a day.
+    final retry = response.headers['retry-after'];
+    final seconds = int.tryParse(retry ?? '');
+    DateTime? retryDate;
+    if (seconds == null && retry != null) {
+      try {
+        retryDate = HttpDate.parse(retry);
+      } on HttpException {
+        /* use fallback */
       }
-      final until = seconds != null && seconds > 0
-          ? _now().add(Duration(seconds: seconds))
-          : retryDate != null && retryDate.isAfter(_now())
-          ? retryDate
-          : _now().add(const Duration(days: 1));
-      await _preferences.setInt(
-        '$_namespace.blockedUntil',
-        until.millisecondsSinceEpoch,
-      );
-      throw const WhatToMineException('error_wtm_quota', statusCode: 429);
     }
-    if (response.statusCode < 200 || response.statusCode >= 300) {
-      throw WhatToMineException(
-        'error_wtm_service',
-        statusCode: response.statusCode,
-      );
-    }
-    List<Map<String, dynamic>> data;
-    try {
-      data = _objects(jsonDecode(response.body));
-    } on FormatException {
-      throw const WhatToMineException('error_wtm_response');
-    }
-    await _preferences.setString(
-      key,
-      jsonEncode({'at': _now().millisecondsSinceEpoch, 'data': data}),
+    final until = seconds != null && seconds > 0
+        ? _now().add(Duration(seconds: seconds))
+        : retryDate != null && retryDate.isAfter(_now())
+        ? retryDate
+        : _now().add(const Duration(days: 1));
+    await _preferences.setInt(
+      '$namespace.blockedUntil',
+      until.millisecondsSinceEpoch,
     );
-    // Bound the number of cached configurations; changes to a rig need a new
-    // calculation, but old combinations should not accumulate indefinitely.
-    if (endpoint == 'calculate') {
-      final keys = _preferences
-          .getKeys()
-          .where((entry) => entry.startsWith('$_namespace.calculate.'))
-          .toList();
-      keys.sort((a, b) => _cacheTimestamp(b).compareTo(_cacheTimestamp(a)));
-      for (final old in keys.skip(20)) {
-        await _preferences.remove(old);
-      }
-    }
-    return data;
   }
 
   int _cacheTimestamp(String key) {
