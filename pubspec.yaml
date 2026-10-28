@@ -48,4 +48,7 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: false
-  image_path: "assets/icons/app_icon.png"
+  # Та же монета, что на сплэше. С inset 16% по умолчанию она занимает ~73dp из 108dp
+  image_path: "assets/images/splash_coin.png"
+  adaptive_icon_background: "#F8B828"               # цвет внешнего ободка монеты
+  adaptive_icon_foreground: "assets/images/splash_coin.png"

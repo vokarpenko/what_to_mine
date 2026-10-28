@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The system scales the splash icon to 288dp (no icon background).
+     Inset (288 - 128) / 2 / 288 = 27.78% leaves a coin of @dimen/splash_coin_size. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/splash_coin"
+    android:inset="27.78%" />

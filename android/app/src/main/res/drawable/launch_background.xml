@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Modify this file to customize your launch splash screen -->
+<!-- Splash before Android 12. Android 12+ uses windowSplashScreen* from values-v31 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/white"/>
-
-    <!-- You can insert your own image assets here -->
-    <!-- <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/launch_image" />
-    </item> -->
+    <item android:drawable="@color/splash_background" />
+    <item
+        android:width="@dimen/splash_coin_size"
+        android:height="@dimen/splash_coin_size"
+        android:drawable="@drawable/splash_coin"
+        android:gravity="center" />
 </layer-list>

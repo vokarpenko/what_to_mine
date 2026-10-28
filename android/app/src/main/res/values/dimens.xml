@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Must match _coinSize in lib/src/ui/screens/splash/splash_screen.dart -->
+    <dimen name="splash_coin_size">128dp</dimen>
+</resources>
