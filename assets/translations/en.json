@@ -15,7 +15,7 @@
   "adding_gpus": "Adding GPUs",
   "gpus_appbar_title": "GPUs",
   "hashrate_appbar_title": "Hashrates",
-  "prices_appbar_title": "Cryptocurrency prices (BTC)",
+  "prices_appbar_title": "Cryptocurrency prices (USD)",
   "settings_appbar_title": "Settings",
   "settings_notification": "Push-notification",
   "settings_notification_enable_subtitle": "Profitability check once a day. Uses the API request quota.",
@@ -70,5 +70,6 @@
   "error_wtm_response": "WhatToMine returned an unsupported response. Please update the app.",
   "error_wtm_invalid_settings": "Check the hashrates, power consumption, and electricity cost.",
   "error_wtm_unsupported_algorithms": "WhatToMine does not support the selected algorithms. Select a GPU from the current catalog or update your hashrates.",
-  "error_wtm_access": "WhatToMine denied access. Check the API token and subscription permissions."
+  "error_wtm_access": "WhatToMine denied access. Check the API token and subscription permissions.",
+  "error_btc_usd_rate": "Could not load the BTC/USD exchange rate. Please try again later."
 }

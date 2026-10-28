@@ -1,4 +1,5 @@
 import 'package:what_to_mine/src/domain/currency/crypto_currency.dart';
+import 'package:what_to_mine/src/data/client/btc_usd_rate_client.dart';
 import 'package:what_to_mine/src/domain/currency/earnings.dart';
 
 import 'gateway/currencies_gateway.dart';
@@ -6,7 +7,38 @@ import 'gateway/currencies_gateway.dart';
 class CurrenciesService {
   final ICurrenciesGateway _gateway;
 
-  CurrenciesService({required this._gateway});
+  final BtcUsdRateClient? _exchangeRates;
+
+  CurrenciesService({required this._gateway, this._exchangeRates});
+
+  Future<List<CryptoCurrency>> pricesInUsd(
+    List<CryptoCurrency> coins, {
+    bool forceRefresh = false,
+  }) async {
+    final needsRate = coins.any(
+      (coin) => coin.quoteCurrency == 'BTC' && coin.price >= 0,
+    );
+    final double? rate;
+    if (needsRate) {
+      if (_exchangeRates == null) throw const BtcUsdRateException();
+      rate = await _exchangeRates.getRate(forceRefresh: forceRefresh);
+    } else {
+      rate = null;
+    }
+    return coins
+        .map(
+          (coin) => coin.withUsdPrice(
+            coin.price < 0
+                ? null
+                : coin.quoteCurrency == 'USD'
+                ? coin.price
+                : coin.quoteCurrency == 'BTC' && rate != null
+                ? coin.price * rate
+                : null,
+          ),
+        )
+        .toList();
+  }
 
   // Получить список криптовалют
   Future<List<CryptoCurrency>> getCryptoCurrenciesList(bool isNeedFresh) async {

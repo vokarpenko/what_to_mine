@@ -15,6 +15,7 @@ import 'package:what_to_mine/src/utils/scheduler/background_task_scheduler.dart'
 
 import 'data/cache/memory_storage.dart';
 import 'data/client/api_client.dart';
+import 'data/client/btc_usd_rate_client.dart';
 import 'data/client/what_to_mine_client.dart';
 import 'data/db/app_database.dart';
 import 'logic/currencies_service.dart';
@@ -72,6 +73,7 @@ class _AppState extends State<App> {
 Future<void> initializeApp({
   ApiClient? client,
   AppDatabase? appDatabase,
+  BtcUsdRateClient? exchangeRates,
 }) async {
   if (Services.isInitialized()) {
     print('Application initialized already');
@@ -92,7 +94,10 @@ Future<void> initializeApp({
   );
 
   // Сервисы
-  CurrenciesService currenciesService = CurrenciesService(gateway: gateway);
+  CurrenciesService currenciesService = CurrenciesService(
+    gateway: gateway,
+    exchangeRates: exchangeRates ?? BtcUsdRateClient(preferences: preferences),
+  );
   GpuService gpuService = GpuService(gateway: gateway);
   HashAlgorithmService algorithmService = HashAlgorithmService(
     gateway: gateway,

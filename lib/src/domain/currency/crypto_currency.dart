@@ -10,6 +10,7 @@ class CryptoCurrency {
   final String type;
   final String algorithm;
   final double price;
+  final double? usdPrice;
   final String quoteCurrency;
   final double reward;
   final double networkHashrate;
@@ -24,6 +25,7 @@ class CryptoCurrency {
     required this.type,
     required this.algorithm,
     required this.price,
+    this.usdPrice,
     this.quoteCurrency = 'USD',
     required this.reward,
     required this.networkHashrate,
@@ -81,6 +83,34 @@ class CryptoCurrency {
 
   String get formattedPrice =>
       price < 0 ? '—' : '${price.toStringAsPrecision(6)} $quoteCurrency';
+
+  // Preserve source prices and BTC volumes; only the price tab uses this quote.
+  CryptoCurrency withUsdPrice(double? value) => CryptoCurrency(
+    id: id,
+    coin: coin,
+    name: name,
+    type: type,
+    algorithm: algorithm,
+    price: price,
+    quoteCurrency: quoteCurrency,
+    usdPrice: value,
+    reward: reward,
+    networkHashrate: networkHashrate,
+    rewardUnit: rewardUnit,
+    volume: volume,
+    iconLink: iconLink,
+  );
+
+  String get formattedUsdPrice {
+    final value = usdPrice ?? (quoteCurrency == 'USD' ? price : null);
+    if (value == null || !value.isFinite || value < 0) return '—';
+    if (value == 0) return r'$0.00';
+    if (value < 0.000000000001) return r'<$0.000000000001';
+    final digits = value >= 1
+        ? 2
+        : (2 - (log(value) / ln10).floor()).clamp(2, 12).toInt();
+    return '\$${value.toStringAsFixed(digits)}';
+  }
 
   String get formattedVolume =>
       '${volume.toStringAsFixed(quoteCurrency == 'BTC' ? 8 : 2)} $quoteCurrency';
@@ -142,6 +172,7 @@ class CryptoCurrency {
       type == other.type &&
       algorithm == other.algorithm &&
       price == other.price &&
+      usdPrice == other.usdPrice &&
       quoteCurrency == other.quoteCurrency &&
       reward == other.reward &&
       networkHashrate == other.networkHashrate &&

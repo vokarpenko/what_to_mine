@@ -20,18 +20,25 @@ class CurrencyPricesViewModel {
   }
 
   Future<void> getData(bool isNeedFresh) async {
-
-    await Services.currenciesService
-        .getCryptoCurrenciesList(isNeedFresh)
-        .then((list) {
-          _currencyList.add(list);
-        })
-        .catchError((error) {
-          String errorMessage =
-              '${'error_get_crypto_currencies_list'.tr()}.\n${error.toString()}';
-          print(errorMessage);
-          _errorMessage.add(errorMessage);
-        });
+    try {
+      final coins = await Services.currenciesService.getCryptoCurrenciesList(
+        isNeedFresh,
+      );
+      if (_currencyList.isClosed) return;
+      // Names and missing-price markers are available while the USD rate loads.
+      _currencyList.add(coins);
+      final prices = await Services.currenciesService.pricesInUsd(
+        coins,
+        forceRefresh: isNeedFresh,
+      );
+      if (!_currencyList.isClosed) _currencyList.add(prices);
+    } catch (error) {
+      if (!_errorMessage.isClosed) {
+        _errorMessage.add(
+          '${'error_get_crypto_currencies_list'.tr()}.\n$error',
+        );
+      }
+    }
   }
 
   void onViewDispose() async {

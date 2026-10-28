@@ -9,6 +9,7 @@ import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:what_to_mine/src/app.dart';
 import 'package:what_to_mine/src/data/client/what_to_mine_client.dart';
+import 'package:what_to_mine/src/data/client/btc_usd_rate_client.dart';
 import 'package:what_to_mine/src/data/db/entities/used_gpu_entity.dart';
 import 'package:what_to_mine/src/domain/settings.dart';
 
@@ -20,7 +21,7 @@ import 'package:what_to_mine/src/ui/screens/hashrate/hashrate_screen.dart';
 
 void main() {
   testWidgets(
-    'saved rig opens earnings, BTC prices, current GPU catalog, and hashrates',
+    'saved rig opens earnings, USD prices, current GPU catalog, and hashrates',
     (tester) async {
       tester.view.physicalSize = const Size(412, 915);
       tester.view.devicePixelRatio = 1;
@@ -52,7 +53,28 @@ void main() {
       final gpuDao = MockUsedGpuDao();
       when(database.usedGpuDao).thenReturn(gpuDao);
       when(gpuDao.selectAll()).thenAnswer((_) async => [UsedGpuEntity(used)]);
-      await initializeApp(client: api, appDatabase: database);
+      var exchangeRequests = 0;
+      final exchangeRates = BtcUsdRateClient(
+        preferences: preferences,
+        client: MockClient((request) async {
+          exchangeRequests++;
+          expect(request.url.host, 'api.coinbase.com');
+          return http.Response(
+            jsonEncode({
+              'data': {
+                'currency': 'BTC',
+                'rates': {'USD': '100000'},
+              },
+            }),
+            200,
+          );
+        }),
+      );
+      await initializeApp(
+        client: api,
+        appDatabase: database,
+        exchangeRates: exchangeRates,
+      );
 
       await tester.pumpWidget(
         EasyLocalization(
@@ -77,11 +99,16 @@ void main() {
       expect(requests, 2); // coins + calculate; no eager catalogs
       expect(find.byType(GpuListScreen), findsNothing);
       expect(find.byType(HashrateScreen), findsNothing);
+      expect(
+        exchangeRequests,
+        0,
+      ); // no exchange-rate request until Prices opens
       final callsAfterStartup = requests;
       await tester.tap(find.text('Prices'));
       await tester.pumpAndSettle();
-      expect(find.text('Cryptocurrency prices (BTC)'), findsOneWidget);
-      expect(find.textContaining('BTC'), findsWidgets);
+      expect(find.text('Cryptocurrency prices (USD)'), findsOneWidget);
+      expect(find.text(r'$0.0100'), findsOneWidget);
+      expect(exchangeRequests, 1);
       expect(find.text('Ravencoin'), findsOneWidget);
       expect(requests, callsAfterStartup);
 
@@ -108,6 +135,10 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('KawPow'), findsWidgets);
       expect(requests, callsAfterStartup + 1);
+      await tester.tap(find.text('Prices'));
+      await tester.pumpAndSettle();
+      expect(exchangeRequests, 1);
+      expect(find.text(r'$0.0100'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
   );

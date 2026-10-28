@@ -15,7 +15,7 @@
   "adding_gpus": "Добаление видеокарт",
   "gpus_appbar_title": "Видеокарты",
   "hashrate_appbar_title": "Хэшрейты",
-  "prices_appbar_title": "Курсы криптовалют (BTC)",
+  "prices_appbar_title": "Курсы криптовалют (USD)",
   "settings_appbar_title": "Настройки",
   "settings_notification": "Пуш-уведомления",
   "settings_notification_enable_subtitle": "Проверка доходности раз в сутки. Расходует квоту API.",
@@ -70,5 +70,6 @@
   "error_wtm_response": "WhatToMine вернул неподдерживаемый ответ. Обновите приложение.",
   "error_wtm_invalid_settings": "Проверьте хэшрейты, энергопотребление и стоимость электричества.",
   "error_wtm_unsupported_algorithms": "WhatToMine не поддерживает выбранные алгоритмы. Выберите видеокарту из актуального каталога или измените хэшрейты.",
-  "error_wtm_access": "WhatToMine отказал в доступе. Проверьте API-токен и разрешения тарифа."
+  "error_wtm_access": "WhatToMine отказал в доступе. Проверьте API-токен и разрешения тарифа.",
+  "error_btc_usd_rate": "Не удалось получить курс BTC/USD. Повторите позже."
 }

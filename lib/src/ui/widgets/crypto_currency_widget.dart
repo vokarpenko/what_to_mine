@@ -40,7 +40,7 @@ class CryptoCurrencyWidget extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.all(5),
-                    child: Text(_cryptoCurrency.formattedPrice),
+                    child: Text(_cryptoCurrency.formattedUsdPrice),
                   ),
                 ],
               ),
