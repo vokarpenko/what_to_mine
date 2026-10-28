@@ -8,6 +8,7 @@ class AppTheme with ChangeNotifier {
   }
 
   void switchTheme(ThemeMode theme) {
+    if (_theme == theme) return;
     _theme = theme;
     notifyListeners();
   }

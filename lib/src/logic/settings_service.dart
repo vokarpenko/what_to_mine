@@ -1,4 +1,5 @@
 import 'package:what_to_mine/src/domain/settings.dart';
+import 'package:what_to_mine/src/platform/native_theme_sync.dart';
 
 import 'gateway/settings_gateway.dart';
 
@@ -31,9 +32,11 @@ class SettingsService {
 
   // Сохранить индекс темы
   Future<void> setThemeIndex(int index) async {
+    if (index < 0 || index > 2) throw ArgumentError.value(index, 'index');
     Settings settings = await _gateway.getSettings();
     settings.themeIndex = index;
-    return setSettings(settings);
+    await setSettings(settings);
+    await NativeThemeSync.apply(index);
   }
 
   // Получить индекс темы

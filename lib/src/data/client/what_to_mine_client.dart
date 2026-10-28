@@ -130,6 +130,8 @@ class WhatToMineClient implements ApiClient {
           ..sort(
             (a, b) => _number(b['volume']).compareTo(_number(a['volume'])),
           );
+    final topPrice = priced.isEmpty ? -1.0 : _number(priced.first['price']);
+    final isBitcoin = _text(coin['tag']) == 'BTC';
     return CryptoCurrency(
       id: _text(coin['id']),
       coin: _text(coin['tag']),
@@ -137,8 +139,11 @@ class WhatToMineClient implements ApiClient {
       type: 'coin',
       algorithm: _text(coin['algorithm']),
       // Exchange rates and volumes are quoted in BTC, unlike calculate's USD
-      // revenue/profit. Keep the unit explicit throughout the UI.
-      price: priced.isEmpty ? -1 : _number(priced.first['price']),
+      // revenue/profit. Keep the unit explicit throughout the UI. Bitcoin's
+      // own exchange prices are BTC/USD: it is priced at 1 BTC, and its USD
+      // price converts the other coins from the same response.
+      price: isBitcoin ? 1 : topPrice,
+      usdPrice: isBitcoin && topPrice > 0 ? topPrice : null,
       quoteCurrency: 'BTC',
       reward: -1,
       rewardUnit: _text(coin['tag']),

@@ -9,7 +9,7 @@ class Settings {
   bool isFirstRun;
   double electricityCost;
 
-  Settings({int themeIndex = 1, bool notificationIsEnabled = false, bool isFirstRun = true, double electricityCost = 0.1})
+  Settings({int themeIndex = 0, bool notificationIsEnabled = false, bool isFirstRun = true, double electricityCost = 0.1})
       : themeIndex = themeIndex,
         notificationIsEnabled = notificationIsEnabled,
         isFirstRun = isFirstRun,

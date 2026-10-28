@@ -88,6 +88,33 @@ void main() {
     },
   );
 
+  test('prices Bitcoin at 1 BTC and keeps its USD quote', () async {
+    final coins = await client(
+      httpClient: MockClient(
+        (_) async => http.Response(
+          jsonEncode([
+            {
+              'id': 1,
+              'tag': 'BTC',
+              'name': 'Bitcoin',
+              'algorithm': 'SHA-256',
+              'nethash': 1,
+              'exchanges': [
+                {'name': 'Bitfinex', 'price': 81177.0, 'volume': 120.5},
+                {'name': 'MEXC', 'price': 81173.69, 'volume': 3839.8},
+              ],
+            },
+          ]),
+          200,
+        ),
+      ),
+    ).getCryptoCurrenciesListFromApi();
+    expect(coins.single.price, 1);
+    expect(coins.single.usdPrice, 81173.69);
+    expect(coins.single.quoteCurrency, 'BTC');
+    expect(coins.single.formattedVolume, '3960.30000000 BTC');
+  });
+
   test(
     'loads GPU hashrates in H/s and converts them to display units',
     () async {

@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:what_to_mine/src/logic/services.dart';
-import 'package:what_to_mine/src/ui/theme/theme_config.dart';
 
 import '../../../app.dart';
 import '../screen_routes.dart';
@@ -28,9 +26,6 @@ class SplashViewModel {
     try {
       await initializeApp();
       if (_disposed) return;
-      final themeIndex = await Services.settingsService.getThemeIndex();
-      if (_disposed) return;
-      currentTheme.switchTheme(ThemeMode.values[themeIndex]);
       getData();
     } catch (error) {
       _reportError(error);

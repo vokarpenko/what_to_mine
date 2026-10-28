@@ -6,6 +6,7 @@ const emerald = Color(0xFF00856A);
 const mint = Color(0xFFBDF1D6);
 const favoriteGold = Color(0xFFfac73a);
 const numberFeatures = [FontFeature.tabularFigures()];
+
 class LabeledField extends StatelessWidget {
   final String label;
   final Widget child;
@@ -32,10 +33,14 @@ class LabeledField extends StatelessWidget {
   );
 }
 
+final _usdWithThousands = NumberFormat('#,##0.00', 'en_US');
+
 String usd(double value) {
   final absolute = value.abs();
-  final decimals = absolute > 0 && absolute < 0.01 ? 4 : 2;
-  return '${value < 0 ? '−' : ''}\$${absolute.toStringAsFixed(decimals)}';
+  final amount = absolute > 0 && absolute < 0.01
+      ? absolute.toStringAsFixed(4)
+      : _usdWithThousands.format(absolute);
+  return '${value < 0 ? '−' : ''}\$$amount';
 }
 
 class PageHeading extends StatelessWidget {

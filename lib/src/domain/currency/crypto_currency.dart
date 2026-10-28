@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart' show NumberFormat;
+
 import '../../constants.dart';
+
+final _usdWithThousands = NumberFormat('#,##0.00', 'en_US');
 
 class CryptoCurrency {
   final String id;
@@ -106,9 +110,8 @@ class CryptoCurrency {
     if (value == null || !value.isFinite || value < 0) return '—';
     if (value == 0) return r'$0.00';
     if (value < 0.000000000001) return r'<$0.000000000001';
-    final digits = value >= 1
-        ? 2
-        : (2 - (log(value) / ln10).floor()).clamp(2, 12).toInt();
+    if (value >= 1) return '\$${_usdWithThousands.format(value)}';
+    final digits = (2 - (log(value) / ln10).floor()).clamp(2, 12).toInt();
     return '\$${value.toStringAsFixed(digits)}';
   }
 

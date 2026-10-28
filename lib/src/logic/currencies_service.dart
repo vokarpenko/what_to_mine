@@ -18,12 +18,15 @@ class CurrenciesService {
     final needsRate = coins.any(
       (coin) => coin.quoteCurrency == 'BTC' && coin.price >= 0,
     );
-    final double? rate;
+    double? rate;
     if (needsRate) {
-      if (_exchangeRates == null) throw const BtcUsdRateException();
-      rate = await _exchangeRates.getRate(forceRefresh: forceRefresh);
-    } else {
-      rate = null;
+      // Bitcoin's USD price from the same /coins response keeps all prices
+      // from one moment; Coinbase is only a fallback when it is missing.
+      rate = _btcUsdFrom(coins);
+      if (rate == null) {
+        if (_exchangeRates == null) throw const BtcUsdRateException();
+        rate = await _exchangeRates.getRate(forceRefresh: forceRefresh);
+      }
     }
     return coins
         .map(
@@ -38,6 +41,16 @@ class CurrenciesService {
           ),
         )
         .toList();
+  }
+
+  static double? _btcUsdFrom(List<CryptoCurrency> coins) {
+    for (final coin in coins) {
+      final usd = coin.usdPrice;
+      if (coin.coin == 'BTC' && usd != null && usd.isFinite && usd > 0) {
+        return usd;
+      }
+    }
+    return null;
   }
 
   // Получить список криптовалют
